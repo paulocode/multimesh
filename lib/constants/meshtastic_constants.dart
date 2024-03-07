@@ -1,0 +1,1 @@
+const MESHTASTIC_MAX_CHANNELS = 8;

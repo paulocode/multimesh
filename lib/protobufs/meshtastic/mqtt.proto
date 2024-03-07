@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package meshtastic;
+
+import "meshtastic/mesh.proto";
+
+option csharp_namespace = "Meshtastic.Protobufs";
+option go_package = "github.com/meshtastic/go/generated";
+option java_outer_classname = "MQTTProtos";
+option java_package = "com.geeksville.mesh";
+option swift_prefix = "";
+
+/*
+ * This message wraps a MeshPacket with extra metadata about the sender and how it arrived.
+ */
+message ServiceEnvelope {
+  /*
+   * The (probably encrypted) packet
+   */
+  MeshPacket packet = 1;
+
+  /*
+   * The global channel ID it was sent on
+   */
+  string channel_id = 2;
+
+  /*
+   * The sending gateway node ID. Can we use this to authenticate/prevent fake
+   * nodeid impersonation for senders? - i.e. use gateway/mesh id (which is authenticated) + local node id as
+   * the globally trusted nodenum
+   */
+  string gateway_id = 3;
+}
