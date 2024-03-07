@@ -9,8 +9,8 @@ import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:meshx/providers/ble/radio_writer.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
 import 'package:meshx/providers/services/radio_config_service.dart';
-import 'package:meshx/providers/services/text_message_notifier_service.dart';
 import 'package:meshx/providers/services/text_message_sender_service.dart';
+import 'package:meshx/providers/services/text_message_stream_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -21,25 +21,25 @@ import 'text_message_sender_service.mocks.dart';
   RadioWriter,
   RadioConfigService,
   TextMessageRepository,
-  TextMessageNotifierService,
+  TextMessageStreamService,
 ])
 void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioWriter radioWriter;
-  late MockTextMessageNotifierService textMessageNotifierService;
+  late MockTextMessageStreamService textMessageStreamService;
   late ProviderContainer container;
 
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
     radioWriter = MockRadioWriter();
-    textMessageNotifierService = MockTextMessageNotifierService();
+    textMessageStreamService = MockTextMessageStreamService();
     container = createContainer(
       overrides: [
         textMessageRepositoryProvider
             .overrideWith((ref) => textMessageRepository),
         radioWriterProvider.overrideWith((ref) => radioWriter),
-        textMessageNotifierServiceProvider(channel: 1)
-            .overrideWith((ref) => textMessageNotifierService),
+        textMessageStreamServiceProvider(channel: 1)
+            .overrideWith((ref) => textMessageStreamService),
       ],
     );
 
@@ -57,7 +57,7 @@ void main() {
     ).thenAnswer((realInvocation) => Future.value(1));
 
     when(
-      textMessageNotifierService.onNewMessage(any),
+      textMessageStreamService.onNewMessage(any),
     ).thenAnswer((realInvocation) => Future<void>.value());
 
     container.read(radioConfigServiceProvider.notifier).setMyNodeNum(31415);
@@ -108,7 +108,7 @@ void main() {
       ),
     ).captured.first as TextMessage;
     final broadcastedMessage = verify(
-      textMessageNotifierService.onNewMessage(
+      textMessageStreamService.onNewMessage(
         captureAny,
       ),
     ).captured.first as TextMessage;

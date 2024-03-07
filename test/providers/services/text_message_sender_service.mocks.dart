@@ -15,7 +15,7 @@ import 'package:meshx/providers/ble/radio_writer.dart' as _i4;
 import 'package:meshx/providers/repository/text_message_repository.dart'
     as _i11;
 import 'package:meshx/providers/services/radio_config_service.dart' as _i8;
-import 'package:meshx/providers/services/text_message_notifier_service.dart'
+import 'package:meshx/providers/services/text_message_stream_service.dart'
     as _i13;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
@@ -330,12 +330,12 @@ class MockTextMessageRepository extends _i1.Mock
       ) as _i5.Future<int>);
 }
 
-/// A class which mocks [TextMessageNotifierService].
+/// A class which mocks [TextMessageStreamService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTextMessageNotifierService extends _i1.Mock
-    implements _i13.TextMessageNotifierService {
-  MockTextMessageNotifierService() {
+class MockTextMessageStreamService extends _i1.Mock
+    implements _i13.TextMessageStreamService {
+  MockTextMessageStreamService() {
     _i1.throwOnMissingStub(this);
   }
 

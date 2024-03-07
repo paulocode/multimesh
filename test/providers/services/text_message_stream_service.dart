@@ -3,20 +3,20 @@ import 'package:meshx/constants/app_constants.dart';
 import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
-import 'package:meshx/providers/services/text_message_notifier_service.dart';
 import 'package:meshx/providers/services/text_message_receiver_service.dart';
+import 'package:meshx/providers/services/text_message_stream_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../mock_stream.dart';
-import 'text_message_notifier_service.mocks.dart';
+import 'text_message_stream_service.mocks.dart';
 
 @GenerateMocks([
   TextMessageRepository,
   TextMessageReceiverService,
 ])
 void main() {
-  late TextMessageNotifierService textMessageNotifierService;
+  late TextMessageStreamService textMessageStreamService;
   late MockTextMessageRepository textMessageRepository;
   late MockTextMessageReceiverService textMessageReceiverService;
   late MockStream<TextMessage> messageStream;
@@ -60,7 +60,7 @@ void main() {
       return messageStream.listen(listener);
     });
 
-    textMessageNotifierService = TextMessageNotifierService(
+    textMessageStreamService = TextMessageStreamService(
       channel: 1,
       nodeNum: 123,
       textMessageRepository: textMessageRepository,
@@ -70,7 +70,7 @@ void main() {
   });
 
   test('load initial messages', () {
-    final messages = textMessageNotifierService.getMessages();
+    final messages = textMessageStreamService.getMessages();
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD));
     expect(messages[0].text, equals('0'));
   });
@@ -86,13 +86,13 @@ void main() {
       ),
     );
 
-    final messages = textMessageNotifierService.getMessages();
+    final messages = textMessageStreamService.getMessages();
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD + 1));
     expect(messages.last.text, equals('new'));
   });
 
   test('emit remote message to stream', () async {
-    final messagesFuture = textMessageNotifierService.stream.first;
+    final messagesFuture = textMessageStreamService.stream.first;
 
     await messageStream.emit(
       TextMessage(
@@ -110,7 +110,7 @@ void main() {
   });
 
   test('onNewMessage', () async {
-    await textMessageNotifierService.onNewMessage(
+    await textMessageStreamService.onNewMessage(
       TextMessage(
         text: 'new',
         from: 0,
@@ -120,15 +120,15 @@ void main() {
       ),
     );
 
-    final messages = textMessageNotifierService.getMessages();
+    final messages = textMessageStreamService.getMessages();
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD + 1));
     expect(messages.last.text, equals('new'));
   });
 
   test('onNewMessage to stream', () async {
-    final messagesFuture = textMessageNotifierService.stream.first;
+    final messagesFuture = textMessageStreamService.stream.first;
 
-    await textMessageNotifierService.onNewMessage(
+    await textMessageStreamService.onNewMessage(
       TextMessage(
         text: 'new',
         from: 0,
@@ -144,7 +144,7 @@ void main() {
   });
 
   test('loadOlderMessages', () async {
-    final messagesFuture = textMessageNotifierService.stream.first;
+    final messagesFuture = textMessageStreamService.stream.first;
     when(
       textMessageRepository.getBy(
         nodeNum: 123,
@@ -157,7 +157,7 @@ void main() {
           Future.value(_generateMessages(offset: BATCH_NUM_MESSAGES_TO_LOAD)),
     );
 
-    await textMessageNotifierService.loadOlderMessages();
+    await textMessageStreamService.loadOlderMessages();
 
     final messages = await messagesFuture;
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD * 2));
@@ -178,9 +178,9 @@ void main() {
           Future.value(_generateMessages(offset: BATCH_NUM_MESSAGES_TO_LOAD)),
     );
 
-    textMessageNotifierService.disposeOldMessages();
+    textMessageStreamService.disposeOldMessages();
 
-    final messages = textMessageNotifierService.getMessages();
+    final messages = textMessageStreamService.getMessages();
 
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD));
     expect(messages[0].text, equals('0'));

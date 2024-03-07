@@ -8,7 +8,7 @@ import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ble/radio_writer.dart';
 import '../repository/text_message_repository.dart';
 import 'radio_config_service.dart';
-import 'text_message_notifier_service.dart';
+import 'text_message_stream_service.dart';
 
 part 'text_message_sender_service.g.dart';
 
@@ -22,8 +22,8 @@ Future<void> sendTextMessage(
   final myNodeNum =
       ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum));
   final textMessageRepository = ref.watch(textMessageRepositoryProvider);
-  final textMessageNotifierService =
-      ref.watch(textMessageNotifierServiceProvider(channel: channel));
+  final textMessageStreamService =
+      ref.watch(textMessageStreamServiceProvider(channel: channel));
 
   final message = TextMessage(
     text: text,
@@ -41,5 +41,5 @@ Future<void> sendTextMessage(
   );
   final messageWithPacketId = message.copyWith(packetId: packetId);
   await textMessageRepository.add(textMessage: messageWithPacketId);
-  await textMessageNotifierService.onNewMessage(messageWithPacketId);
+  await textMessageStreamService.onNewMessage(messageWithPacketId);
 }

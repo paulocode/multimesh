@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RadioScanState {
   bool get scanning => throw _privateConstructorUsedError;
-
   List<MeshRadio> get meshRadios => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +29,6 @@ abstract class $RadioScanStateCopyWith<$Res> {
   factory $RadioScanStateCopyWith(
           RadioScanState value, $Res Function(RadioScanState) then) =
       _$RadioScanStateCopyWithImpl<$Res, RadioScanState>;
-
   @useResult
   $Res call({bool scanning, List<MeshRadio> meshRadios});
 }
@@ -42,7 +40,6 @@ class _$RadioScanStateCopyWithImpl<$Res, $Val extends RadioScanState>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -71,7 +68,6 @@ abstract class _$$RadioScanStateImplCopyWith<$Res>
   factory _$$RadioScanStateImplCopyWith(_$RadioScanStateImpl value,
           $Res Function(_$RadioScanStateImpl) then) =
       __$$RadioScanStateImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({bool scanning, List<MeshRadio> meshRadios});
@@ -116,7 +112,6 @@ class _$RadioScanStateImpl extends _RadioScanState {
   @JsonKey()
   final bool scanning;
   final List<MeshRadio> _meshRadios;
-
   @override
   @JsonKey()
   List<MeshRadio> get meshRadios {
@@ -157,15 +152,12 @@ abstract class _RadioScanState extends RadioScanState {
   const factory _RadioScanState(
       {final bool scanning,
       final List<MeshRadio> meshRadios}) = _$RadioScanStateImpl;
-
   const _RadioScanState._() : super._();
 
   @override
   bool get scanning;
-
   @override
   List<MeshRadio> get meshRadios;
-
   @override
   @JsonKey(ignore: true)
   _$$RadioScanStateImplCopyWith<_$RadioScanStateImpl> get copyWith =>

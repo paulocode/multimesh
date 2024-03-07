@@ -9,7 +9,7 @@ import '../models/radio_configuration.dart';
 import '../models/text_message.dart';
 import '../providers/services/node_service.dart';
 import '../providers/services/radio_config_service.dart';
-import '../providers/services/text_message_notifier_service.dart';
+import '../providers/services/text_message_stream_service.dart';
 import 'message_bubble.dart';
 import 'scroll_button.dart';
 
@@ -27,7 +27,7 @@ class MessageList extends ConsumerStatefulWidget {
 
 class _MessageListState extends ConsumerState<MessageList> {
   late RadioConfiguration _radioConfig;
-  late TextMessageNotifierService _textMessageNotifierService;
+  late TextMessageStreamService _textMessageStreamService;
   final _scrollController = ScrollController();
   bool _showScrollButton = false;
   bool _showNewMessageAlert = false;
@@ -63,8 +63,8 @@ class _MessageListState extends ConsumerState<MessageList> {
 
   @override
   Widget build(BuildContext context) {
-    _textMessageNotifierService =
-        ref.watch(textMessageNotifierServiceProvider(channel: widget.channel));
+    _textMessageStreamService =
+        ref.watch(textMessageStreamServiceProvider(channel: widget.channel));
     _radioConfig = ref.watch(radioConfigServiceProvider);
 
     return Expanded(
@@ -79,8 +79,8 @@ class _MessageListState extends ConsumerState<MessageList> {
 
   Widget _buildStreamBuilder(BuildContext context) {
     return StreamBuilder<List<TextMessage>>(
-      stream: _textMessageNotifierService.stream,
-      initialData: _textMessageNotifierService.getMessages(),
+      stream: _textMessageStreamService.stream,
+      initialData: _textMessageStreamService.getMessages(),
       builder: (ctx, snapshot) {
         if (snapshot.hasData) {
           final textMessages = snapshot.data!.reversed.toList();
@@ -123,7 +123,7 @@ class _MessageListState extends ConsumerState<MessageList> {
   @override
   void dispose() {
     _scrollController.dispose();
-    _textMessageNotifierService.disposeOldMessages();
+    _textMessageStreamService.disposeOldMessages();
     super.dispose();
   }
 
@@ -242,7 +242,7 @@ class _MessageListState extends ConsumerState<MessageList> {
       EasyThrottle.throttle(
         'load-older-messages-throttler',
         const Duration(milliseconds: 200),
-        _textMessageNotifierService.loadOlderMessages,
+        _textMessageStreamService.loadOlderMessages,
       );
     }
   }

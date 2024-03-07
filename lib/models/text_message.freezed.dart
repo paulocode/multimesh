@@ -17,17 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TextMessage {
   int get packetId => throw _privateConstructorUsedError;
-
   String get text => throw _privateConstructorUsedError;
-
   int get from => throw _privateConstructorUsedError;
-
   int get to => throw _privateConstructorUsedError;
-
   int get channel => throw _privateConstructorUsedError;
-
   DateTime get time => throw _privateConstructorUsedError;
-
   TextMessageStatus get state => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,7 +34,6 @@ abstract class $TextMessageCopyWith<$Res> {
   factory $TextMessageCopyWith(
           TextMessage value, $Res Function(TextMessage) then) =
       _$TextMessageCopyWithImpl<$Res, TextMessage>;
-
   @useResult
   $Res call(
       {int packetId,
@@ -59,7 +52,6 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -113,7 +105,6 @@ abstract class _$$TextMessageImplCopyWith<$Res>
   factory _$$TextMessageImplCopyWith(
           _$TextMessageImpl value, $Res Function(_$TextMessageImpl) then) =
       __$$TextMessageImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -248,30 +239,22 @@ abstract class _TextMessage extends TextMessage {
       required final int channel,
       required final DateTime time,
       final TextMessageStatus state}) = _$TextMessageImpl;
-
   const _TextMessage._() : super._();
 
   @override
   int get packetId;
-
   @override
   String get text;
-
   @override
   int get from;
-
   @override
   int get to;
-
   @override
   int get channel;
-
   @override
   DateTime get time;
-
   @override
   TextMessageStatus get state;
-
   @override
   @JsonKey(ignore: true)
   _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>

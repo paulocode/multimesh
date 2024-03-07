@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'text_message_notifier_service.dart';
+part of 'text_message_stream_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$textMessageNotifierServiceHash() =>
-    r'3adbc337aeeebed73cbf5d9693b32e12d023dd4e';
+String _$textMessageStreamServiceHash() =>
+    r'c661304b78a6baddf45658efa279353b850c97d5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,28 +30,27 @@ class _SystemHash {
   }
 }
 
-/// See also [textMessageNotifierService].
-@ProviderFor(textMessageNotifierService)
-const textMessageNotifierServiceProvider = TextMessageNotifierServiceFamily();
+/// See also [textMessageStreamService].
+@ProviderFor(textMessageStreamService)
+const textMessageStreamServiceProvider = TextMessageStreamServiceFamily();
 
-/// See also [textMessageNotifierService].
-class TextMessageNotifierServiceFamily
-    extends Family<TextMessageNotifierService> {
-  /// See also [textMessageNotifierService].
-  const TextMessageNotifierServiceFamily();
+/// See also [textMessageStreamService].
+class TextMessageStreamServiceFamily extends Family<TextMessageStreamService> {
+  /// See also [textMessageStreamService].
+  const TextMessageStreamServiceFamily();
 
-  /// See also [textMessageNotifierService].
-  TextMessageNotifierServiceProvider call({
+  /// See also [textMessageStreamService].
+  TextMessageStreamServiceProvider call({
     required int channel,
   }) {
-    return TextMessageNotifierServiceProvider(
+    return TextMessageStreamServiceProvider(
       channel: channel,
     );
   }
 
   @override
-  TextMessageNotifierServiceProvider getProviderOverride(
-    covariant TextMessageNotifierServiceProvider provider,
+  TextMessageStreamServiceProvider getProviderOverride(
+    covariant TextMessageStreamServiceProvider provider,
   ) {
     return call(
       channel: provider.channel,
@@ -70,33 +69,33 @@ class TextMessageNotifierServiceFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'textMessageNotifierServiceProvider';
+  String? get name => r'textMessageStreamServiceProvider';
 }
 
-/// See also [textMessageNotifierService].
-class TextMessageNotifierServiceProvider
-    extends AutoDisposeProvider<TextMessageNotifierService> {
-  /// See also [textMessageNotifierService].
-  TextMessageNotifierServiceProvider({
+/// See also [textMessageStreamService].
+class TextMessageStreamServiceProvider
+    extends AutoDisposeProvider<TextMessageStreamService> {
+  /// See also [textMessageStreamService].
+  TextMessageStreamServiceProvider({
     required int channel,
   }) : this._internal(
-          (ref) => textMessageNotifierService(
-            ref as TextMessageNotifierServiceRef,
+          (ref) => textMessageStreamService(
+            ref as TextMessageStreamServiceRef,
             channel: channel,
           ),
-          from: textMessageNotifierServiceProvider,
-          name: r'textMessageNotifierServiceProvider',
+          from: textMessageStreamServiceProvider,
+          name: r'textMessageStreamServiceProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$textMessageNotifierServiceHash,
-          dependencies: TextMessageNotifierServiceFamily._dependencies,
+                  : _$textMessageStreamServiceHash,
+          dependencies: TextMessageStreamServiceFamily._dependencies,
           allTransitiveDependencies:
-              TextMessageNotifierServiceFamily._allTransitiveDependencies,
+              TextMessageStreamServiceFamily._allTransitiveDependencies,
           channel: channel,
         );
 
-  TextMessageNotifierServiceProvider._internal(
+  TextMessageStreamServiceProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -110,13 +109,13 @@ class TextMessageNotifierServiceProvider
 
   @override
   Override overrideWith(
-    TextMessageNotifierService Function(TextMessageNotifierServiceRef provider)
+    TextMessageStreamService Function(TextMessageStreamServiceRef provider)
         create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: TextMessageNotifierServiceProvider._internal(
-        (ref) => create(ref as TextMessageNotifierServiceRef),
+      override: TextMessageStreamServiceProvider._internal(
+        (ref) => create(ref as TextMessageStreamServiceRef),
         from: from,
         name: null,
         dependencies: null,
@@ -128,13 +127,13 @@ class TextMessageNotifierServiceProvider
   }
 
   @override
-  AutoDisposeProviderElement<TextMessageNotifierService> createElement() {
-    return _TextMessageNotifierServiceProviderElement(this);
+  AutoDisposeProviderElement<TextMessageStreamService> createElement() {
+    return _TextMessageStreamServiceProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is TextMessageNotifierServiceProvider &&
+    return other is TextMessageStreamServiceProvider &&
         other.channel == channel;
   }
 
@@ -147,19 +146,19 @@ class TextMessageNotifierServiceProvider
   }
 }
 
-mixin TextMessageNotifierServiceRef
-    on AutoDisposeProviderRef<TextMessageNotifierService> {
+mixin TextMessageStreamServiceRef
+    on AutoDisposeProviderRef<TextMessageStreamService> {
   /// The parameter `channel` of this provider.
   int get channel;
 }
 
-class _TextMessageNotifierServiceProviderElement
-    extends AutoDisposeProviderElement<TextMessageNotifierService>
-    with TextMessageNotifierServiceRef {
-  _TextMessageNotifierServiceProviderElement(super.provider);
+class _TextMessageStreamServiceProviderElement
+    extends AutoDisposeProviderElement<TextMessageStreamService>
+    with TextMessageStreamServiceRef {
+  _TextMessageStreamServiceProviderElement(super.provider);
 
   @override
-  int get channel => (origin as TextMessageNotifierServiceProvider).channel;
+  int get channel => (origin as TextMessageStreamServiceProvider).channel;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

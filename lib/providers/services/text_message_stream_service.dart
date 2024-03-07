@@ -9,14 +9,14 @@ import '../repository/text_message_repository.dart';
 import 'radio_config_service.dart';
 import 'text_message_receiver_service.dart';
 
-part 'text_message_notifier_service.g.dart';
+part 'text_message_stream_service.g.dart';
 
 @riverpod
-TextMessageNotifierService textMessageNotifierService(
-  TextMessageNotifierServiceRef ref, {
+TextMessageStreamService textMessageStreamService(
+  TextMessageStreamServiceRef ref, {
   required int channel,
 }) {
-  return TextMessageNotifierService(
+  return TextMessageStreamService(
     channel: channel,
     nodeNum: ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
     textMessageRepository: ref.watch(textMessageRepositoryProvider),
@@ -25,8 +25,8 @@ TextMessageNotifierService textMessageNotifierService(
   );
 }
 
-class TextMessageNotifierService {
-  TextMessageNotifierService({
+class TextMessageStreamService {
+  TextMessageStreamService({
     required int channel,
     required int nodeNum,
     required TextMessageRepository textMessageRepository,

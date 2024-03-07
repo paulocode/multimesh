@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/services/channel_service.dart';
 import '../providers/services/node_service.dart';
-import '../providers/services/text_message_notifier_service.dart';
+import '../providers/services/text_message_stream_service.dart';
 import '../widgets/channel_card.dart';
 
 class ChannelListScreen extends ConsumerWidget {
@@ -24,11 +24,11 @@ class ChannelListScreen extends ConsumerWidget {
           if (!channel.used) {
             return Container();
           }
-          final textMessageNotifierService =
-              ref.watch(textMessageNotifierServiceProvider(channel: index));
+          final textMessageStreamService =
+              ref.watch(textMessageStreamServiceProvider(channel: index));
           return StreamBuilder(
-            stream: textMessageNotifierService.stream,
-            initialData: textMessageNotifierService.getMessages(),
+            stream: textMessageStreamService.stream,
+            initialData: textMessageStreamService.getMessages(),
             builder: (context, snapshot) {
               final lastMessage = snapshot.data!.lastOrNull;
               final lastSender =

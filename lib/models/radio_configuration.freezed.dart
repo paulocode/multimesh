@@ -17,15 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RadioConfiguration {
   String get shortName => throw _privateConstructorUsedError;
-
   String get longName => throw _privateConstructorUsedError;
-
   int get myNodeNum => throw _privateConstructorUsedError;
-
   HardwareModel get hwModel => throw _privateConstructorUsedError;
-
   Config_LoRaConfig_RegionCode get region => throw _privateConstructorUsedError;
-
   bool get configDownloaded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,7 +33,6 @@ abstract class $RadioConfigurationCopyWith<$Res> {
   factory $RadioConfigurationCopyWith(
           RadioConfiguration value, $Res Function(RadioConfiguration) then) =
       _$RadioConfigurationCopyWithImpl<$Res, RadioConfiguration>;
-
   @useResult
   $Res call(
       {String shortName,
@@ -56,7 +50,6 @@ class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -105,7 +98,6 @@ abstract class _$$RadioConfigurationImplCopyWith<$Res>
   factory _$$RadioConfigurationImplCopyWith(_$RadioConfigurationImpl value,
           $Res Function(_$RadioConfigurationImpl) then) =
       __$$RadioConfigurationImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -237,27 +229,20 @@ abstract class _RadioConfiguration extends RadioConfiguration {
       final HardwareModel hwModel,
       final Config_LoRaConfig_RegionCode region,
       final bool configDownloaded}) = _$RadioConfigurationImpl;
-
   const _RadioConfiguration._() : super._();
 
   @override
   String get shortName;
-
   @override
   String get longName;
-
   @override
   int get myNodeNum;
-
   @override
   HardwareModel get hwModel;
-
   @override
   Config_LoRaConfig_RegionCode get region;
-
   @override
   bool get configDownloaded;
-
   @override
   @JsonKey(ignore: true)
   _$$RadioConfigurationImplCopyWith<_$RadioConfigurationImpl> get copyWith =>
