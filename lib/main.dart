@@ -28,7 +28,9 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _initForegroundTask();
     FlutterForegroundTask.startService(
-        notificationTitle: 'Meshtastic', notificationText: 'Tap to view');
+      notificationTitle: 'Meshtastic',
+      notificationText: 'Tap to view',
+    );
   }
 
   @override

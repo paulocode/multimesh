@@ -150,7 +150,11 @@ void main() {
       ),
     );
 
-    verify(radioConfigService.setRegion(Config_LoRaConfig_RegionCode.US,
-        upload: false));
+    verify(
+      radioConfigService.setRegion(
+        Config_LoRaConfig_RegionCode.US,
+        upload: false,
+      ),
+    );
   });
 }

@@ -40,14 +40,16 @@ void main() {
 
   test('add channel from radio', () async {
     await stream.emit(
-        FromRadio(channel: Channel(index: 0, role: Channel_Role.PRIMARY)));
+      FromRadio(channel: Channel(index: 0, role: Channel_Role.PRIMARY)),
+    );
     final channels = container.read(channelServiceProvider);
     expect(channels[0].name, equals('LONG_FAST'));
   });
 
   test('add multiple channels from radio', () async {
     await stream.emit(
-        FromRadio(channel: Channel(index: 0, role: Channel_Role.PRIMARY)));
+      FromRadio(channel: Channel(index: 0, role: Channel_Role.PRIMARY)),
+    );
     await stream.emit(
       FromRadio(
         channel: Channel(

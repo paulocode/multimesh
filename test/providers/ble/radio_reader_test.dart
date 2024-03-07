@@ -41,7 +41,9 @@ void main() {
     );
 
     radioReaderService = RadioReader(
-        radioConnectorState: connectionState, onDispose: diposers.add);
+      radioConnectorState: connectionState,
+      onDispose: diposers.add,
+    );
   });
 
   tearDown(diposers.clear);
