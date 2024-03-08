@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../providers/services/radio_config_service.dart';
 
@@ -11,7 +12,6 @@ class ConnectedRadio extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
-    //Navigator.of(context).popUntil((route) => route.)
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
@@ -88,9 +88,7 @@ class ConnectedRadio extends ConsumerWidget {
                       padding: const EdgeInsets.all(12),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        '/config',
-                      );
+                      context.push('/radioConfig');
                     },
                     child: const Icon(
                       Icons.settings,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../models/mesh_channel.dart';
 import '../models/text_message.dart';
-import '../screens/chat.dart';
 
 class ChannelCard extends StatelessWidget {
   const ChannelCard({
@@ -26,10 +26,9 @@ class ChannelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute<ChatScreen>(
-            builder: (ctx) => ChatScreen(channel: _index),
-          ),
+        context.push(
+          Uri(path: '/chat', queryParameters: {'channel': _index.toString()})
+              .toString(),
         );
       },
       child: Card(

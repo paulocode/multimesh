@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../protobufs/generated/meshtastic/config.pb.dart';
-import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
-import '../utils/pop_to_home_if_disconnected.dart';
 
 class RadioConfigScreen extends ConsumerStatefulWidget {
   const RadioConfigScreen({super.key});
@@ -18,13 +16,7 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
 
   @override
   Widget build(BuildContext context) {
-    popToHomeIfDisconnected(context, ref.watch(radioConnectorProvider));
     final radioConfig = ref.watch(radioConfigServiceProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!radioConfig.configDownloaded) {
-        Navigator.of(context).pop();
-      }
-    });
     return Scaffold(
       appBar: AppBar(
         title: Text('${radioConfig.longName} Config'),

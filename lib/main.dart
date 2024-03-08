@@ -3,26 +3,25 @@ import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'providers/repository/sqflite.dart';
+import 'providers/router/router.dart';
 import 'providers/services/channel_service.dart';
 import 'providers/services/node_service.dart';
 import 'providers/services/radio_config_downloader_service.dart';
 import 'providers/services/text_message_receiver_service.dart';
-import 'screens/radio_config.dart';
-import 'screens/tab_parent.dart';
 import 'theme.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
@@ -38,15 +37,11 @@ class _MyAppState extends State<MyApp> {
     return WithForegroundTask(
       child: _EagerInitialization(
         child: SafeArea(
-          child: MaterialApp(
+          child: MaterialApp.router(
             title: 'Meshtastic',
             theme: theme,
             darkTheme: darkTheme,
-            initialRoute: '/',
-            routes: {
-              '/': (context) => const TabParent(),
-              '/config': (context) => const RadioConfigScreen(),
-            },
+            routerConfig: ref.watch(goRouterProvider),
           ),
         ),
       ),
