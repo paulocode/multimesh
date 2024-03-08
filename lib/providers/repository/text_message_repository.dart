@@ -104,7 +104,7 @@ class TextMessageRepository {
       where: '(toNode = ? OR toNode = ?) AND channel = ?',
       whereArgs: [nodeNum, TO_CHANNEL, channel],
       offset: offset,
-      orderBy: 'id DESC',
+      orderBy: 'id ASC',
       limit: limit,
     );
 
@@ -127,7 +127,7 @@ class TextMessageRepository {
           time: DateTime.fromMillisecondsSinceEpoch(time),
           state: TextMessageStatus.values[state],
         ),
-    ].reversed.toList();
+    ];
   }
 
   Future<int> count({required int channel, required int nodeNum}) async {
