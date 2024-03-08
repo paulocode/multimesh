@@ -203,15 +203,16 @@ class _MessageListState extends ConsumerState<MessageList> {
         textMessage.from != textMessages[index + 1].from ||
         from == null;
     final needDate = isFirstMessage ||
+        showSenderBubble ||
         textMessages[index + 1].time.day != textMessages[index].time.day;
     return MessageBubble(
       text: textMessage.text,
       src: from?.shortName ?? '',
       longName: from?.longName ?? '',
       isSender: textMessage.from == _radioConfig.myNodeNum,
-      showSenderBubble: showSenderBubble,
+      showSenderAvatar: showSenderBubble,
       time: textMessage.time,
-      needDate: needDate,
+      showDate: needDate,
       packetId: textMessage.packetId,
     );
   }

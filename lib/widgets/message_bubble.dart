@@ -1,7 +1,7 @@
 import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:meshx/widgets/text_message_status_indicator.dart';
+import 'text_message_status_indicator.dart';
 
 class MessageBubble extends StatefulWidget {
   const MessageBubble({
@@ -10,9 +10,9 @@ class MessageBubble extends StatefulWidget {
     required this.src,
     required this.longName,
     required this.isSender,
-    required this.showSenderBubble,
+    required this.showSenderAvatar,
     required this.time,
-    required this.needDate,
+    required this.showDate,
     required this.packetId,
   });
 
@@ -20,9 +20,9 @@ class MessageBubble extends StatefulWidget {
   final String src;
   final String longName;
   final bool isSender;
-  final bool showSenderBubble;
+  final bool showSenderAvatar;
   final DateTime? time;
-  final bool needDate;
+  final bool showDate;
   final int packetId;
 
   @override
@@ -32,30 +32,29 @@ class MessageBubble extends StatefulWidget {
 class _MessageBubbleState extends State<MessageBubble> {
   @override
   Widget build(BuildContext context) {
-    final needAvatar = widget.showSenderBubble || widget.needDate;
     final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment:
           widget.isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
-        if (widget.needDate)
+        if (widget.showDate)
           Center(
             child: Text(
               DateFormat.yMMMd().format(widget.time ?? DateTime.now()),
               style: theme.textTheme.bodyLarge,
             ),
           ),
-        if (widget.needDate)
+        if (widget.showDate)
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Divider(),
           ),
-        if (needAvatar)
+        if (widget.showSenderAvatar)
           const SizedBox(
             height: 16,
           ),
-        if (needAvatar)
+        if (widget.showSenderAvatar)
           Padding(
             padding: const EdgeInsets.only(
               left: 50,
@@ -72,7 +71,7 @@ class _MessageBubbleState extends State<MessageBubble> {
         Stack(
           clipBehavior: Clip.none,
           children: [
-            if (needAvatar)
+            if (widget.showSenderAvatar)
               Positioned(
                 top: -20,
                 right: widget.isSender ? 0 : null,
@@ -99,7 +98,7 @@ class _MessageBubbleState extends State<MessageBubble> {
                     ? theme.colorScheme.primary
                     : theme.colorScheme.tertiary,
                 isSender: widget.isSender,
-                tail: needAvatar,
+                tail: widget.showSenderAvatar,
                 textStyle: theme.textTheme.bodyLarge!.copyWith(
                   color: widget.isSender
                       ? theme.colorScheme.onPrimary
