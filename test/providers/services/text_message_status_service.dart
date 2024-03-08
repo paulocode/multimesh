@@ -23,7 +23,7 @@ void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> mockStream;
-
+  late ProviderSubscription<AsyncValue<TextMessageStatus>> sub;
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
     when(textMessageRepository.getByPacketId(packetId: 123)).thenAnswer(
@@ -48,11 +48,22 @@ void main() {
         radioReaderProvider.overrideWith((ref) => radioReader),
       ],
     );
+    sub = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 123,
+      ),
+      (_, __) {},
+    );
   });
 
   test('initial state', () async {
     await expectLater(
-      container.read(textMessageStatusServiceProvider(packetId: 123).future),
+      container.read(
+        textMessageStatusServiceProvider(
+          packetId: 123,
+          timeout: const Duration(seconds: 5),
+        ).future,
+      ),
       completion(TextMessageStatus.SENDING),
     );
   });
@@ -79,13 +90,6 @@ void main() {
   });
 
   test('acknowledged', () async {
-    final sub = container.listen(
-      textMessageStatusServiceProvider(
-        packetId: 123,
-      ),
-      (_, __) {},
-    );
-
     await untilCalled(radioReader.onPacketReceived())
         .timeout(const Duration(seconds: 1));
     await mockStream.emit(
@@ -113,13 +117,6 @@ void main() {
   });
 
   test('acknowledged', () async {
-    final sub = container.listen(
-      textMessageStatusServiceProvider(
-        packetId: 123,
-      ),
-      (_, __) {},
-    );
-
     await untilCalled(radioReader.onPacketReceived())
         .timeout(const Duration(seconds: 1));
     await mockStream.emit(
@@ -145,13 +142,6 @@ void main() {
   });
 
   test('ignore acknowledge of different packet', () async {
-    final sub = container.listen(
-      textMessageStatusServiceProvider(
-        packetId: 123,
-      ),
-      (_, __) {},
-    );
-
     await untilCalled(radioReader.onPacketReceived())
         .timeout(const Duration(seconds: 1));
     await mockStream.emit(
@@ -179,13 +169,6 @@ void main() {
   });
 
   test('max retransmit', () async {
-    final sub = container.listen(
-      textMessageStatusServiceProvider(
-        packetId: 123,
-      ),
-      (_, __) {},
-    );
-
     await untilCalled(radioReader.onPacketReceived())
         .timeout(const Duration(seconds: 1));
     await mockStream.emit(
@@ -213,13 +196,6 @@ void main() {
   });
 
   test('all other error cases', () async {
-    final sub = container.listen(
-      textMessageStatusServiceProvider(
-        packetId: 123,
-      ),
-      (_, __) {},
-    );
-
     await untilCalled(radioReader.onPacketReceived())
         .timeout(const Duration(seconds: 1));
     await mockStream.emit(
