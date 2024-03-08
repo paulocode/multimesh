@@ -14,15 +14,12 @@ part 'radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioWriter radioWriter(RadioWriterRef ref) {
-  final connectorListener =
-      ref.listen(radioConnectorProvider, (previous, next) {
+  final sub = ref.listen(radioConnectorProvider, (_, next) {
     if (next is Connected) {
       ref.invalidateSelf();
     }
   });
-  ref.onDispose(connectorListener.close);
-
-  final radioConnectorState = ref.read(radioConnectorProvider);
+  final radioConnectorState = sub.read();
   return RadioWriter(
     toRadio: radioConnectorState is Connected
         ? radioConnectorState.bleCharacteristics.toRadio
@@ -32,12 +29,12 @@ RadioWriter radioWriter(RadioWriterRef ref) {
 
 class RadioWriter {
   RadioWriter({
-    this.toRadio,
-  }) {
+    BluetoothCharacteristic? toRadio,
+  }) : _toRadio = toRadio {
     _currentPacketId = _random.nextInt(0xffffffff);
   }
 
-  final BluetoothCharacteristic? toRadio;
+  final BluetoothCharacteristic? _toRadio;
   final _logger = Logger();
   final _random = Random();
   int _currentPacketId = 0;
@@ -62,14 +59,14 @@ class RadioWriter {
       ),
     );
     _logger.i('Sending MeshPacket...\n$meshPacket');
-    await toRadio?.write(ToRadio(packet: meshPacket).writeToBuffer());
+    await _toRadio?.write(ToRadio(packet: meshPacket).writeToBuffer());
     return id;
   }
 
   Future<void> sendWantConfig({required int wantConfigId}) async {
     final packet = ToRadio(wantConfigId: wantConfigId);
     _logger.i('Requesting config...\n$packet');
-    await toRadio?.write(packet.writeToBuffer());
+    await _toRadio?.write(packet.writeToBuffer());
   }
 
   int _generatePacketId() {

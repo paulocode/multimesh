@@ -11,15 +11,13 @@ part 'radio_reader.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioReader radioReader(RadioReaderRef ref) {
-  final connectorListener =
-      ref.listen(radioConnectorProvider, (previous, next) {
+  final sub = ref.listen(radioConnectorProvider, (_, next) {
     if (next is Connected) {
       ref.invalidateSelf();
     }
   });
-  ref.onDispose(connectorListener.close);
   return RadioReader(
-    radioConnectorState: ref.read(radioConnectorProvider),
+    radioConnectorState: sub.read(),
     onDispose: ref.onDispose,
   );
 }
