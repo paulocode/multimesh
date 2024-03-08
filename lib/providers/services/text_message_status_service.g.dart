@@ -7,7 +7,7 @@ part of 'text_message_status_service.dart';
 // **************************************************************************
 
 String _$textMessageStatusServiceHash() =>
-    r'e12316fbdd92e18f76ec2b73471e28b919d3e03f';
+    r'3f8cd923b797b406c5ed5cd096b9d52f0282fff5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -33,9 +33,11 @@ class _SystemHash {
 abstract class _$TextMessageStatusService
     extends BuildlessAutoDisposeAsyncNotifier<TextMessageStatus> {
   late final int packetId;
+  late final Duration timeout;
 
   FutureOr<TextMessageStatus> build({
     required int packetId,
+    Duration timeout = const Duration(minutes: 1),
   });
 }
 
@@ -52,9 +54,11 @@ class TextMessageStatusServiceFamily
   /// See also [TextMessageStatusService].
   TextMessageStatusServiceProvider call({
     required int packetId,
+    Duration timeout = const Duration(minutes: 1),
   }) {
     return TextMessageStatusServiceProvider(
       packetId: packetId,
+      timeout: timeout,
     );
   }
 
@@ -64,6 +68,7 @@ class TextMessageStatusServiceFamily
   ) {
     return call(
       packetId: provider.packetId,
+      timeout: provider.timeout,
     );
   }
 
@@ -89,8 +94,11 @@ class TextMessageStatusServiceProvider
   /// See also [TextMessageStatusService].
   TextMessageStatusServiceProvider({
     required int packetId,
+    Duration timeout = const Duration(minutes: 1),
   }) : this._internal(
-          () => TextMessageStatusService()..packetId = packetId,
+          () => TextMessageStatusService()
+            ..packetId = packetId
+            ..timeout = timeout,
           from: textMessageStatusServiceProvider,
           name: r'textMessageStatusServiceProvider',
           debugGetCreateSourceHash:
@@ -101,6 +109,7 @@ class TextMessageStatusServiceProvider
           allTransitiveDependencies:
               TextMessageStatusServiceFamily._allTransitiveDependencies,
           packetId: packetId,
+          timeout: timeout,
         );
 
   TextMessageStatusServiceProvider._internal(
@@ -111,9 +120,11 @@ class TextMessageStatusServiceProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.packetId,
+    required this.timeout,
   }) : super.internal();
 
   final int packetId;
+  final Duration timeout;
 
   @override
   FutureOr<TextMessageStatus> runNotifierBuild(
@@ -121,6 +132,7 @@ class TextMessageStatusServiceProvider
   ) {
     return notifier.build(
       packetId: packetId,
+      timeout: timeout,
     );
   }
 
@@ -129,13 +141,16 @@ class TextMessageStatusServiceProvider
     return ProviderOverride(
       origin: this,
       override: TextMessageStatusServiceProvider._internal(
-        () => create()..packetId = packetId,
+        () => create()
+          ..packetId = packetId
+          ..timeout = timeout,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         packetId: packetId,
+        timeout: timeout,
       ),
     );
   }
@@ -149,13 +164,15 @@ class TextMessageStatusServiceProvider
   @override
   bool operator ==(Object other) {
     return other is TextMessageStatusServiceProvider &&
-        other.packetId == packetId;
+        other.packetId == packetId &&
+        other.timeout == timeout;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, packetId.hashCode);
+    hash = _SystemHash.combine(hash, timeout.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -165,6 +182,9 @@ mixin TextMessageStatusServiceRef
     on AutoDisposeAsyncNotifierProviderRef<TextMessageStatus> {
   /// The parameter `packetId` of this provider.
   int get packetId;
+
+  /// The parameter `timeout` of this provider.
+  Duration get timeout;
 }
 
 class _TextMessageStatusServiceProviderElement
@@ -174,6 +194,8 @@ class _TextMessageStatusServiceProviderElement
 
   @override
   int get packetId => (origin as TextMessageStatusServiceProvider).packetId;
+  @override
+  Duration get timeout => (origin as TextMessageStatusServiceProvider).timeout;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

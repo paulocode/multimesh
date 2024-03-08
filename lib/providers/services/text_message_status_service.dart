@@ -18,12 +18,13 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   late TextMessage _textMessage;
   late KeepAliveLink _link;
   late StreamSubscription<FromRadio> _packetListener;
-  late Timer _timeout;
+  late Timer _timer;
   late int _packetId;
 
   @override
   Future<TextMessageStatus> build({
     required int packetId,
+    Duration timeout = const Duration(minutes: 1),
   }) async {
     _packetId = packetId;
     _textMessageRepository = ref.watch(textMessageRepositoryProvider);
@@ -33,15 +34,15 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       return _textMessage.state;
     }
 
+    _link = ref.keepAlive();
     _listenToStatusUpdates();
-    _setTimeout();
+    _setTimeout(timeout);
 
     return _textMessage.state;
   }
 
-  void _setTimeout() {
-    _link = ref.keepAlive();
-    _timeout = Timer(const Duration(minutes: 1), () async {
+  void _setTimeout(Duration timeout) {
+    _timer = Timer(timeout, () async {
       await _packetListener.cancel();
       _link.close();
       state = const AsyncValue.data(TextMessageStatus.RADIO_ERROR);
@@ -50,7 +51,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
         status: TextMessageStatus.RADIO_ERROR,
       );
     });
-    ref.onDispose(_timeout.cancel);
+    ref.onDispose(_timer.cancel);
   }
 
   void _listenToStatusUpdates() {
@@ -72,7 +73,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
         status: status,
       );
       _link.close();
-      _timeout.cancel();
+      _timer.cancel();
     });
     ref.onDispose(_packetListener.cancel);
   }
