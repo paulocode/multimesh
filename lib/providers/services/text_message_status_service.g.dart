@@ -7,7 +7,7 @@ part of 'text_message_status_service.dart';
 // **************************************************************************
 
 String _$textMessageStatusServiceHash() =>
-    r'610aabc55c787fe06852481763f6e95e12baec67';
+    r'e12316fbdd92e18f76ec2b73471e28b919d3e03f';
 
 /// Copied from Dart SDK
 class _SystemHash {
