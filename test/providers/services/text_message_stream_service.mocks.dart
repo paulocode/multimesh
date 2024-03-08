@@ -3,12 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i2;
+import 'dart:async' as _i3;
 
-import 'package:meshx/models/text_message.dart' as _i4;
-import 'package:meshx/providers/repository/text_message_repository.dart' as _i3;
+import 'package:meshx/models/text_message.dart' as _i2;
+import 'package:meshx/models/text_message_status.dart' as _i5;
+import 'package:meshx/providers/repository/text_message_repository.dart' as _i4;
 import 'package:meshx/providers/services/text_message_receiver_service.dart'
-    as _i5;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -24,9 +25,19 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeStreamSubscription_0<T> extends _i1.SmartFake
-    implements _i2.StreamSubscription<T> {
-  _FakeStreamSubscription_0(
+class _FakeTextMessage_0 extends _i1.SmartFake implements _i2.TextMessage {
+  _FakeTextMessage_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamSubscription_1<T> extends _i1.SmartFake
+    implements _i3.StreamSubscription<T> {
+  _FakeStreamSubscription_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -39,34 +50,70 @@ class _FakeStreamSubscription_0<T> extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTextMessageRepository extends _i1.Mock
-    implements _i3.TextMessageRepository {
+    implements _i4.TextMessageRepository {
   MockTextMessageRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.Future<List<List<_i4.TextMessage>>> getByNodeNum() => (super.noSuchMethod(
+  _i3.Future<List<List<_i2.TextMessage>>> getByNodeNum() => (super.noSuchMethod(
         Invocation.method(
           #getByNodeNum,
           [],
         ),
-        returnValue: _i2.Future<List<List<_i4.TextMessage>>>.value(
-            <List<_i4.TextMessage>>[]),
-      ) as _i2.Future<List<List<_i4.TextMessage>>>);
+        returnValue: _i3.Future<List<List<_i2.TextMessage>>>.value(
+            <List<_i2.TextMessage>>[]),
+      ) as _i3.Future<List<List<_i2.TextMessage>>>);
 
   @override
-  _i2.Future<int> add({required _i4.TextMessage? textMessage}) =>
+  _i3.Future<int> add({required _i2.TextMessage? textMessage}) =>
       (super.noSuchMethod(
         Invocation.method(
           #add,
           [],
           {#textMessage: textMessage},
         ),
-        returnValue: _i2.Future<int>.value(0),
-      ) as _i2.Future<int>);
+        returnValue: _i3.Future<int>.value(0),
+      ) as _i3.Future<int>);
 
   @override
-  _i2.Future<List<_i4.TextMessage>> getBy({
+  _i3.Future<void> updateStatusByPacketId({
+    required _i5.TextMessageStatus? status,
+    required int? packetId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateStatusByPacketId,
+          [],
+          {
+            #status: status,
+            #packetId: packetId,
+          },
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<_i2.TextMessage> getByPacketId({required int? packetId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getByPacketId,
+          [],
+          {#packetId: packetId},
+        ),
+        returnValue: _i3.Future<_i2.TextMessage>.value(_FakeTextMessage_0(
+          this,
+          Invocation.method(
+            #getByPacketId,
+            [],
+            {#packetId: packetId},
+          ),
+        )),
+      ) as _i3.Future<_i2.TextMessage>);
+
+  @override
+  _i3.Future<List<_i2.TextMessage>> getBy({
     required int? nodeNum,
     required int? channel,
     required int? limit,
@@ -84,11 +131,11 @@ class MockTextMessageRepository extends _i1.Mock
           },
         ),
         returnValue:
-            _i2.Future<List<_i4.TextMessage>>.value(<_i4.TextMessage>[]),
-      ) as _i2.Future<List<_i4.TextMessage>>);
+            _i3.Future<List<_i2.TextMessage>>.value(<_i2.TextMessage>[]),
+      ) as _i3.Future<List<_i2.TextMessage>>);
 
   @override
-  _i2.Future<int> count({
+  _i3.Future<int> count({
     required int? channel,
     required int? nodeNum,
   }) =>
@@ -101,23 +148,23 @@ class MockTextMessageRepository extends _i1.Mock
             #nodeNum: nodeNum,
           },
         ),
-        returnValue: _i2.Future<int>.value(0),
-      ) as _i2.Future<int>);
+        returnValue: _i3.Future<int>.value(0),
+      ) as _i3.Future<int>);
 }
 
 /// A class which mocks [TextMessageReceiverService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTextMessageReceiverService extends _i1.Mock
-    implements _i5.TextMessageReceiverService {
+    implements _i6.TextMessageReceiverService {
   MockTextMessageReceiverService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.StreamSubscription<_i4.TextMessage> addMessageListener({
+  _i3.StreamSubscription<_i2.TextMessage> addMessageListener({
     required int? channel,
-    required void Function(_i4.TextMessage)? listener,
+    required void Function(_i2.TextMessage)? listener,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -128,7 +175,7 @@ class MockTextMessageReceiverService extends _i1.Mock
             #listener: listener,
           },
         ),
-        returnValue: _FakeStreamSubscription_0<_i4.TextMessage>(
+        returnValue: _FakeStreamSubscription_1<_i2.TextMessage>(
           this,
           Invocation.method(
             #addMessageListener,
@@ -139,5 +186,5 @@ class MockTextMessageReceiverService extends _i1.Mock
             },
           ),
         ),
-      ) as _i2.StreamSubscription<_i4.TextMessage>);
+      ) as _i3.StreamSubscription<_i2.TextMessage>);
 }

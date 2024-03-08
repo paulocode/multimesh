@@ -1,6 +1,10 @@
 import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+
+import '../models/text_message_status.dart';
+import '../providers/services/text_message_status_service.dart';
 
 class MessageBubble extends StatefulWidget {
   const MessageBubble({
@@ -12,6 +16,7 @@ class MessageBubble extends StatefulWidget {
     required this.showSenderBubble,
     required this.time,
     required this.needDate,
+    required this.packetId,
   });
 
   final String text;
@@ -21,6 +26,7 @@ class MessageBubble extends StatefulWidget {
   final bool showSenderBubble;
   final DateTime? time;
   final bool needDate;
+  final int packetId;
 
   @override
   State<MessageBubble> createState() => _MessageBubbleState();
@@ -105,13 +111,8 @@ class _MessageBubbleState extends State<MessageBubble> {
               ),
             ),
             if (widget.isSender)
-              const Positioned(
-                top: 24,
-                right: 40,
-                child: Icon(
-                  Icons.check_circle_outline,
-                  size: 15,
-                ),
+              TextMessageStatusIndicator(
+                packetId: widget.packetId,
               ),
           ],
         ),
@@ -127,6 +128,38 @@ class _MessageBubbleState extends State<MessageBubble> {
           height: 8,
         ),
       ],
+    );
+  }
+}
+
+class TextMessageStatusIndicator extends ConsumerWidget {
+  const TextMessageStatusIndicator({super.key, required int packetId})
+      : _packetId = packetId;
+
+  final int _packetId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final status = ref.watch(
+      textMessageStatusServiceProvider(packetId: _packetId),
+    );
+    final icon = switch (status) {
+      AsyncValue(:final valueOrNull?) => switch (valueOrNull) {
+          TextMessageStatus.SENDING => Icons.check_circle_outline,
+          TextMessageStatus.RADIO_ERROR => Icons.error_outline,
+          TextMessageStatus.MAX_RETRANSMIT => Icons.group_off_outlined,
+          TextMessageStatus.OK => Icons.check_circle,
+        },
+      _ => Icons.check_circle_outline,
+    };
+
+    return Positioned(
+      top: 24,
+      right: 40,
+      child: Icon(
+        icon,
+        size: 15,
+      ),
     );
   }
 }

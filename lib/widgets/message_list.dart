@@ -212,6 +212,7 @@ class _MessageListState extends ConsumerState<MessageList> {
       showSenderBubble: showSenderBubble,
       time: textMessage.time,
       needDate: needDate,
+      packetId: textMessage.packetId,
     );
   }
 

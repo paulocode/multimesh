@@ -6,7 +6,7 @@ part of 'text_message_sender_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sendTextMessageHash() => r'dc39bed1b3910cd79052611c2450511890a2cb1a';
+String _$sendTextMessageHash() => r'392a5c9e4a164ccd3761ff3b94290da0f7b04806';
 
 /// Copied from Dart SDK
 class _SystemHash {

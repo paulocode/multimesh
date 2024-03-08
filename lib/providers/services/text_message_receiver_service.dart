@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/meshtastic_constants.dart';
@@ -70,7 +69,6 @@ class TextMessageReceiverService {
     MESHTASTIC_MAX_CHANNELS,
     (_) => StreamController.broadcast(),
   );
-  final _logger = Logger();
 
   void _listenToPackets() {
     final subscription = _radioReader.onPacketReceived().listen(_processPacket);
@@ -98,9 +96,6 @@ class TextMessageReceiverService {
         time: DateTime.now(),
       );
       await _saveAndBroadcastMessage(channel, message);
-    } else if (decoded.portnum == PortNum.ROUTING_APP) {
-      final routing = Routing.fromBuffer(decoded.payload);
-      _logger.i(routing.toString());
     }
   }
 

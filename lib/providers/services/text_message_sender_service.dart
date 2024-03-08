@@ -8,6 +8,7 @@ import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ble/radio_writer.dart';
 import '../repository/text_message_repository.dart';
 import 'radio_config_service.dart';
+import 'text_message_status_service.dart';
 import 'text_message_stream_service.dart';
 
 part 'text_message_sender_service.g.dart';
@@ -42,4 +43,6 @@ Future<void> sendTextMessage(
   final messageWithPacketId = message.copyWith(packetId: packetId);
   await textMessageRepository.add(textMessage: messageWithPacketId);
   await textMessageStreamService.onNewMessage(messageWithPacketId);
+  // start the service to receive updates
+  ref.read(textMessageStatusServiceProvider(packetId: packetId));
 }

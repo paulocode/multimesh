@@ -1,1 +1,1 @@
-enum TextMessageStatus { SENDING, RADIO_TIMEOUT, MAX_RETRANSMIT, OK }
+enum TextMessageStatus { SENDING, RADIO_ERROR, MAX_RETRANSMIT, OK }

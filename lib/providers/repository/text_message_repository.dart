@@ -48,6 +48,51 @@ class TextMessageRepository {
     );
   }
 
+  Future<void> updateStatusByPacketId({
+    required TextMessageStatus status,
+    required int packetId,
+  }) async {
+    await _database.update(
+      'text_messages',
+      {'state': status.index},
+      where: 'packetId = ?',
+      whereArgs: [packetId],
+    );
+    return;
+  }
+
+  Future<TextMessage> getByPacketId({
+    required int packetId,
+  }) async {
+    final result = await _database.query(
+      'text_messages',
+      where: 'packetId = ?',
+      whereArgs: [packetId],
+      orderBy: 'id ASC',
+    );
+
+    return [
+      for (final {
+            'packetId': packetId as int,
+            'text': text as String,
+            'toNode': to as int,
+            'fromNode': from as int,
+            'channel': channel as int,
+            'time': time as int,
+            'state': state as int
+          } in result)
+        TextMessage(
+          packetId: packetId,
+          text: text,
+          from: from,
+          to: to,
+          channel: channel,
+          time: DateTime.fromMillisecondsSinceEpoch(time),
+          state: TextMessageStatus.values[state],
+        ),
+    ].last;
+  }
+
   Future<List<TextMessage>> getBy({
     required int nodeNum,
     required int channel,
