@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/radio_connector_state.dart';
+import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
 
 class ConnectedRadio extends ConsumerWidget {
@@ -12,6 +14,7 @@ class ConnectedRadio extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
+    final radioConnectorState = ref.watch(radioConnectorProvider);
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
@@ -26,14 +29,12 @@ class ConnectedRadio extends ConsumerWidget {
             child: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               radius: 40,
-              child: radioConfig.configDownloaded
+              child: radioConfig.configDownloaded &&
+                      radioConnectorState is Connected
                   ? Text(radioConfig.shortName)
                   : Icon(
-                      Icons.not_interested,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onPrimaryContainer
-                          .withOpacity(.38),
+                      Icons.cloud_off,
+                      color: Theme.of(context).colorScheme.error,
                       size: 40,
                     ),
             ),

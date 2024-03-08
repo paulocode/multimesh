@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/radio_connector_state.dart';
 import '../protobufs/generated/meshtastic/config.pb.dart';
+import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
 
 class RadioConfigScreen extends ConsumerStatefulWidget {
@@ -17,9 +19,24 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
   @override
   Widget build(BuildContext context) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
+    final radioConnectorState = ref.watch(radioConnectorProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${radioConfig.longName} Config'),
+        title: Text('${radioConfig.longName} ⚙️'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: radioConnectorState is Connected
+                ? Icon(
+                    Icons.cloud_done_outlined,
+                    color: Theme.of(context).colorScheme.primary,
+                  )
+                : Icon(
+                    Icons.cloud_off,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

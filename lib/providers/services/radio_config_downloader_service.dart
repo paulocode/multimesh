@@ -17,10 +17,18 @@ part 'radio_config_downloader_service.g.dart';
 RadioConfigDownloaderService radioConfigDownloaderService(
   RadioConfigDownloaderServiceRef ref,
 ) {
+  final connectorListener =
+      ref.listen(radioConnectorProvider, (previous, next) {
+    if (next is Connected) {
+      ref.invalidateSelf();
+    }
+  });
+  ref.onDispose(connectorListener.close);
+
   return RadioConfigDownloaderService(
     radioWriter: ref.watch(radioWriterProvider),
     radioReader: ref.watch(radioReaderProvider),
-    radioConnectorState: ref.watch(radioConnectorProvider),
+    radioConnectorState: ref.read(radioConnectorProvider),
     // riverpod requires us to read the notifier
     radioConfigServiceProvider: () =>
         ref.read(radioConfigServiceProvider.notifier),

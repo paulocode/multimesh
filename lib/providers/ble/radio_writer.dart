@@ -14,7 +14,15 @@ part 'radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioWriter radioWriter(RadioWriterRef ref) {
-  final radioConnectorState = ref.watch(radioConnectorProvider);
+  final connectorListener =
+      ref.listen(radioConnectorProvider, (previous, next) {
+    if (next is Connected) {
+      ref.invalidateSelf();
+    }
+  });
+  ref.onDispose(connectorListener.close);
+
+  final radioConnectorState = ref.read(radioConnectorProvider);
   return RadioWriter(
     toRadio: radioConnectorState is Connected
         ? radioConnectorState.bleCharacteristics.toRadio

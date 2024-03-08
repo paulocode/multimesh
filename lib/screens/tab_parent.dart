@@ -29,7 +29,7 @@ class TabParent extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.primary,
                     )
                   : Icon(
-                      Icons.cloud_off_outlined,
+                      Icons.cloud_off,
                       color: Theme.of(context).colorScheme.error,
                     ),
             ),
