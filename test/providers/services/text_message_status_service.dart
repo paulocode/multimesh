@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/models/text_message_status.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
+import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:meshx/providers/ble/radio_reader.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
 import 'package:meshx/providers/services/text_message_status_service.dart';
@@ -71,6 +72,174 @@ void main() {
         textMessageStatusServiceProvider(
           packetId: 123,
           timeout: const Duration(seconds: 5),
+        ).future,
+      ),
+      completion(TextMessageStatus.RADIO_ERROR),
+    );
+  });
+
+  test('acknowledged', () async {
+    final sub = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 123,
+      ),
+      (_, __) {},
+    );
+
+    await untilCalled(radioReader.onPacketReceived())
+        .timeout(const Duration(seconds: 1));
+    await mockStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          decoded: Data(
+            requestId: 123,
+            portnum: PortNum.ROUTING_APP,
+            payload: Routing(
+              errorReason: Routing_Error.NONE,
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(
+      container.read(
+        textMessageStatusServiceProvider(
+          packetId: 123,
+        ).future,
+      ),
+      completion(TextMessageStatus.OK),
+    );
+  });
+
+  test('acknowledged', () async {
+    final sub = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 123,
+      ),
+      (_, __) {},
+    );
+
+    await untilCalled(radioReader.onPacketReceived())
+        .timeout(const Duration(seconds: 1));
+    await mockStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          decoded: Data(
+            requestId: 123,
+            portnum: PortNum.ROUTING_APP,
+            payload: Routing(
+              errorReason: Routing_Error.NONE,
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    verify(
+      textMessageRepository.updateStatusByPacketId(
+        status: TextMessageStatus.OK,
+        packetId: 123,
+      ),
+    );
+  });
+
+  test('ignore acknowledge of different packet', () async {
+    final sub = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 123,
+      ),
+      (_, __) {},
+    );
+
+    await untilCalled(radioReader.onPacketReceived())
+        .timeout(const Duration(seconds: 1));
+    await mockStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          decoded: Data(
+            requestId: 1234,
+            portnum: PortNum.ROUTING_APP,
+            payload: Routing(
+              errorReason: Routing_Error.NONE,
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(
+      container.read(
+        textMessageStatusServiceProvider(
+          packetId: 123,
+        ).future,
+      ),
+      completion(TextMessageStatus.SENDING),
+    );
+  });
+
+  test('max retransmit', () async {
+    final sub = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 123,
+      ),
+      (_, __) {},
+    );
+
+    await untilCalled(radioReader.onPacketReceived())
+        .timeout(const Duration(seconds: 1));
+    await mockStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          decoded: Data(
+            requestId: 123,
+            portnum: PortNum.ROUTING_APP,
+            payload: Routing(
+              errorReason: Routing_Error.MAX_RETRANSMIT,
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(
+      container.read(
+        textMessageStatusServiceProvider(
+          packetId: 123,
+        ).future,
+      ),
+      completion(TextMessageStatus.MAX_RETRANSMIT),
+    );
+  });
+
+  test('all other error cases', () async {
+    final sub = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 123,
+      ),
+      (_, __) {},
+    );
+
+    await untilCalled(radioReader.onPacketReceived())
+        .timeout(const Duration(seconds: 1));
+    await mockStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          decoded: Data(
+            requestId: 123,
+            portnum: PortNum.ROUTING_APP,
+            payload: Routing(
+              errorReason: Routing_Error.BAD_REQUEST,
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(
+      container.read(
+        textMessageStatusServiceProvider(
+          packetId: 123,
         ).future,
       ),
       completion(TextMessageStatus.RADIO_ERROR),

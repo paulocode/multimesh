@@ -15,6 +15,7 @@ part 'text_message_status_service.g.dart';
 @riverpod
 class TextMessageStatusService extends _$TextMessageStatusService {
   late TextMessageRepository _textMessageRepository;
+  late RadioReader _radioReader;
   late TextMessage _textMessage;
   late KeepAliveLink _link;
   late StreamSubscription<FromRadio> _packetListener;
@@ -26,17 +27,19 @@ class TextMessageStatusService extends _$TextMessageStatusService {
     required int packetId,
     Duration timeout = const Duration(minutes: 1),
   }) async {
-    _packetId = packetId;
+    _radioReader = ref.watch(radioReaderProvider);
     _textMessageRepository = ref.watch(textMessageRepositoryProvider);
+    _packetId = packetId;
     _textMessage =
         await _textMessageRepository.getByPacketId(packetId: packetId);
+
     if (_textMessage.state != TextMessageStatus.SENDING) {
       return _textMessage.state;
     }
 
     _link = ref.keepAlive();
-    _listenToStatusUpdates();
     _setTimeout(timeout);
+    _listenToStatusUpdates();
 
     return _textMessage.state;
   }
@@ -55,10 +58,12 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   }
 
   void _listenToStatusUpdates() {
-    _packetListener =
-        ref.watch(radioReaderProvider).onPacketReceived().listen((event) async {
+    _packetListener = _radioReader.onPacketReceived().listen((event) async {
       final decoded = event.packet.decoded;
       if (decoded.portnum != PortNum.ROUTING_APP) {
+        return;
+      }
+      if (decoded.requestId != packetId) {
         return;
       }
       final routing = Routing.fromBuffer(decoded.payload);
