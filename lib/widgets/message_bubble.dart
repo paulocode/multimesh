@@ -1,6 +1,7 @@
 import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'text_message_status_indicator.dart';
 
 class MessageBubble extends StatefulWidget {
