@@ -17,10 +17,10 @@ class TextMessageStatusIndicator extends ConsumerWidget {
     );
     final icon = switch (status) {
       AsyncValue(:final valueOrNull?) => switch (valueOrNull) {
-        TextMessageStatus.SENDING => Icons.check_circle_outline,
         TextMessageStatus.RADIO_ERROR => Icons.error_outline,
         TextMessageStatus.MAX_RETRANSMIT => Icons.group_off_outlined,
         TextMessageStatus.OK => Icons.check_circle,
+        _ => Icons.check_circle_outline,
       },
       _ => Icons.check_circle_outline,
     };
