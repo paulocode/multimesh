@@ -30,6 +30,7 @@ class NodeService extends _$NodeService {
         nodeNum: node.num,
         longName: user.longName,
         shortName: user.shortName,
+        channel: node.channel,
       );
       state = {node.num: meshNode, ...state};
       _logger.i('Added node');
