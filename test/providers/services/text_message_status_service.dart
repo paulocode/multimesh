@@ -23,7 +23,7 @@ void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> mockStream;
-  late ProviderSubscription<AsyncValue<TextMessageStatus>> statusSubscription;
+  late ProviderSubscription<Future<TextMessageStatus>> statusSubscription;
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
     when(textMessageRepository.getByPacketId(packetId: 123)).thenAnswer(
@@ -51,31 +51,31 @@ void main() {
     statusSubscription = container.listen(
       textMessageStatusServiceProvider(
         packetId: 123,
-      ),
+      ).future,
       (_, __) {},
     );
   });
 
   test('initial state', () async {
-    expect(
-      statusSubscription.read().requireValue,
-      equals(TextMessageStatus.SENDING),
+    await expectLater(
+      statusSubscription.read(),
+      completion(TextMessageStatus.SENDING),
     );
   });
 
   test('timeout', () async {
-    final sub = container.listen(
+    final timedSubscription = container.listen(
       textMessageStatusServiceProvider(
         packetId: 123,
         timeout: const Duration(seconds: 5),
-      ),
+      ).future,
       (_, __) {},
     );
 
     await Future<void>.delayed(const Duration(seconds: 6));
-    expect(
-      sub.read().requireValue,
-      equals(TextMessageStatus.RADIO_ERROR),
+    await expectLater(
+      timedSubscription.read(),
+      completion(TextMessageStatus.RADIO_ERROR),
     );
   });
 
@@ -96,9 +96,9 @@ void main() {
       ),
     );
 
-    expect(
-      statusSubscription.read().requireValue,
-      equals(TextMessageStatus.OK),
+    await expectLater(
+      statusSubscription.read(),
+      completion(TextMessageStatus.OK),
     );
   });
 
@@ -144,9 +144,9 @@ void main() {
       ),
     );
 
-    expect(
-      statusSubscription.read().requireValue,
-      equals(TextMessageStatus.SENDING),
+    await expectLater(
+      statusSubscription.read(),
+      completion(TextMessageStatus.SENDING),
     );
   });
 
@@ -167,9 +167,9 @@ void main() {
       ),
     );
 
-    expect(
-      statusSubscription.read().requireValue,
-      equals(TextMessageStatus.MAX_RETRANSMIT),
+    await expectLater(
+      statusSubscription.read(),
+      completion(TextMessageStatus.MAX_RETRANSMIT),
     );
   });
 
@@ -190,9 +190,9 @@ void main() {
       ),
     );
 
-    expect(
-      statusSubscription.read().requireValue,
-      equals(TextMessageStatus.RADIO_ERROR),
+    await expectLater(
+      statusSubscription.read(),
+      completion(TextMessageStatus.RADIO_ERROR),
     );
   });
 }
