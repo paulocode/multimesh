@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -103,7 +104,7 @@ class TextMessageReceiverService {
       final channel = packet.channel;
       final message = TextMessage(
         packetId: packet.id,
-        text: String.fromCharCodes(decoded.payload),
+        text: utf8.decode(decoded.payload),
         from: packet.from,
         to: packet.to,
         channel: packet.channel,

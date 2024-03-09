@@ -89,6 +89,33 @@ void main() {
     );
   });
 
+  test('emoji decoding', () async {
+    final textMessageReceiverService = init();
+    final messageCompleter = Completer<TextMessage>();
+    textMessageReceiverService.addMessageListener(
+      chatType: const ChannelChat(channel: 1),
+      listener: messageCompleter.complete,
+    );
+
+    await packetStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          id: 123,
+          channel: 1,
+          from: 789,
+          to: TO_CHANNEL,
+          decoded: Data(
+            portnum: PortNum.TEXT_MESSAGE_APP,
+            payload: utf8.encode('abc😊'),
+          ),
+        ),
+      ),
+    );
+
+    final message = await messageCompleter.future;
+    expect(message.text, equals('abc😊'));
+  });
+
   test(
     'channel 2 not receive channel 1 message',
     () async {
