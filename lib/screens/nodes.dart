@@ -24,27 +24,30 @@ class NodesScreen extends ConsumerWidget {
             return Container();
           }
           return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: ListTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                title: Text(nodes[index].longName),
-                leading: CircleAvatar(
-                  radius: 40,
-                  child: Text(nodes[index].shortName),
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.mail)),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.chevron_right),
-                    ),
-                  ],
-                ),
+            child: ListTile(
+              contentPadding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              title: Text(
+                node.longName,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              leading: CircleAvatar(
+                radius: 40,
+                child: Text(nodes[index].shortName),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.mail)),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.chevron_right),
+                  ),
+                ],
               ),
             ),
           );
