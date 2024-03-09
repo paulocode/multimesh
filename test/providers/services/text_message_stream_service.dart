@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/constants/app_constants.dart';
 import 'package:meshx/constants/ble_constants.dart';
+import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
 import 'package:meshx/providers/services/text_message_receiver_service.dart';
@@ -43,7 +44,7 @@ void main() {
 
     when(
       textMessageRepository.getBy(
-        nodeNum: 123,
+        toNode: 123,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
       ),
@@ -51,7 +52,7 @@ void main() {
 
     when(
       textMessageReceiverService.addMessageListener(
-        channel: 1,
+        chatType: const ChannelChat(channel: 1),
         listener: anyNamed('listener'),
       ),
     ).thenAnswer((realInvocation) {
@@ -61,8 +62,8 @@ void main() {
     });
 
     textMessageStreamService = TextMessageStreamService(
-      channel: 1,
-      nodeNum: 123,
+      chatType: const ChannelChat(channel: 1),
+      myNodeNum: 123,
       textMessageRepository: textMessageRepository,
       textMessageReceiverService: textMessageReceiverService,
       onDispose: (_) {},
@@ -147,7 +148,7 @@ void main() {
     final messagesFuture = textMessageStreamService.stream.first;
     when(
       textMessageRepository.getBy(
-        nodeNum: 123,
+        toNode: 123,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
@@ -168,7 +169,7 @@ void main() {
   test('disposeOldMessages', () async {
     when(
       textMessageRepository.getBy(
-        nodeNum: 123,
+        toNode: 123,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,

@@ -4,6 +4,8 @@ import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/app_constants.dart';
+import '../../constants/ble_constants.dart';
+import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
 import '../repository/text_message_repository.dart';
 import 'radio_config_service.dart';
@@ -14,11 +16,12 @@ part 'text_message_stream_service.g.dart';
 @riverpod
 TextMessageStreamService textMessageStreamService(
   TextMessageStreamServiceRef ref, {
-  required int channel,
+  required ChatType chatType,
 }) {
   return TextMessageStreamService(
-    channel: channel,
-    nodeNum: ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
+    chatType: chatType,
+    myNodeNum:
+        ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
     textMessageRepository: ref.watch(textMessageRepositoryProvider),
     textMessageReceiverService: ref.watch(textMessageReceiverServiceProvider),
     onDispose: ref.onDispose,
@@ -27,13 +30,13 @@ TextMessageStreamService textMessageStreamService(
 
 class TextMessageStreamService {
   TextMessageStreamService({
-    required int channel,
-    required int nodeNum,
+    required ChatType chatType,
+    required int myNodeNum,
     required TextMessageRepository textMessageRepository,
     required TextMessageReceiverService textMessageReceiverService,
     required void Function(void Function()) onDispose,
-  })  : _channel = channel,
-        _nodeNum = nodeNum,
+  })  : _chatType = chatType,
+        _myNodeNum = myNodeNum,
         _onDispose = onDispose,
         _textMessageRepository = textMessageRepository,
         _textMessageReceiverService = textMessageReceiverService {
@@ -42,23 +45,32 @@ class TextMessageStreamService {
     _onDispose(_streamController.close);
   }
 
-  Future<void> _loadInitialMessagesFromLocal() async {
-    _currentStreamState = await _textMessageRepository.getBy(
-      nodeNum: _nodeNum,
-      channel: _channel,
-      limit: BATCH_NUM_MESSAGES_TO_LOAD,
-    );
-    _logger.i('Loaded initial messages: ${_currentStreamState.length}');
-    _streamController.add(_currentStreamState);
-  }
-
-  final int _channel;
-  final int _nodeNum;
+  final ChatType _chatType;
+  final int _myNodeNum;
   final TextMessageRepository _textMessageRepository;
   final TextMessageReceiverService _textMessageReceiverService;
   final void Function(void Function() cb) _onDispose;
   List<TextMessage> _currentStreamState = [];
   final _logger = Logger();
+
+  Future<void> _loadInitialMessagesFromLocal() async {
+    _currentStreamState = switch (_chatType) {
+      DirectMessageChat() => await _textMessageRepository.getBy(
+          toNode: _myNodeNum,
+          fromNode: _chatType.dmNode,
+          channel: _chatType.channel,
+          limit: BATCH_NUM_MESSAGES_TO_LOAD,
+        ),
+      ChannelChat() => _currentStreamState = await _textMessageRepository.getBy(
+          toNode: TO_CHANNEL,
+          channel: _chatType.channel,
+          limit: BATCH_NUM_MESSAGES_TO_LOAD,
+        ),
+    };
+
+    _logger.i('Loaded initial messages: ${_currentStreamState.length}');
+    _streamController.add(_currentStreamState);
+  }
 
   final _streamController = StreamController<List<TextMessage>>.broadcast();
 
@@ -67,21 +79,42 @@ class TextMessageStreamService {
   }
 
   Future<bool> get allMessagesLoaded async {
-    final totalSavedMessages = await _textMessageRepository.count(
-      channel: _channel,
-      nodeNum: _nodeNum,
-    );
+    late final int totalSavedMessages;
+
+    switch (_chatType) {
+      case DirectMessageChat():
+        totalSavedMessages = await _textMessageRepository.count(
+          toNode: _myNodeNum,
+          fromNode: _chatType.dmNode,
+          channel: _chatType.channel,
+        );
+      case ChannelChat():
+        totalSavedMessages = await _textMessageRepository.count(
+          toNode: TO_CHANNEL,
+          channel: _chatType.channel,
+        );
+    }
+
     return _currentStreamState.length == totalSavedMessages;
   }
 
   Future<void> loadOlderMessages() async {
     final prevLen = _currentStreamState.length;
-    final oldMessages = await _textMessageRepository.getBy(
-      nodeNum: _nodeNum,
-      offset: prevLen,
-      channel: _channel,
-      limit: BATCH_NUM_MESSAGES_TO_LOAD,
-    );
+    final oldMessages = switch (_chatType) {
+      DirectMessageChat() => await _textMessageRepository.getBy(
+          toNode: _myNodeNum,
+          fromNode: _chatType.dmNode,
+          channel: _chatType.channel,
+          limit: BATCH_NUM_MESSAGES_TO_LOAD,
+          offset: prevLen,
+        ),
+      ChannelChat() => await _textMessageRepository.getBy(
+          toNode: TO_CHANNEL,
+          channel: _chatType.channel,
+          limit: BATCH_NUM_MESSAGES_TO_LOAD,
+          offset: prevLen,
+        )
+    };
     _currentStreamState = [
       ...oldMessages,
       ..._currentStreamState,
@@ -100,7 +133,7 @@ class TextMessageStreamService {
 
   void _listenToRemoteMessages() {
     final subscription = _textMessageReceiverService.addMessageListener(
-      channel: _channel,
+      chatType: _chatType,
       listener: onNewMessage,
     );
     _onDispose(subscription.cancel);

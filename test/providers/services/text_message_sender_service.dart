@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/constants/ble_constants.dart';
+import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:meshx/providers/ble/radio_writer.dart';
@@ -38,8 +39,9 @@ void main() {
         textMessageRepositoryProvider
             .overrideWith((ref) => textMessageRepository),
         radioWriterProvider.overrideWith((ref) => radioWriter),
-        textMessageStreamServiceProvider(channel: 1)
-            .overrideWith((ref) => textMessageStreamService),
+        textMessageStreamServiceProvider(
+          chatType: const ChannelChat(channel: 1),
+        ).overrideWith((ref) => textMessageStreamService),
       ],
     );
 
@@ -64,8 +66,12 @@ void main() {
   });
 
   test('broadcast', () async {
-    await container
-        .read(sendTextMessageProvider(channel: 1, text: 'abc').future);
+    await container.read(
+      sendTextMessageProvider(
+        chatType: const ChannelChat(channel: 1),
+        text: 'abc',
+      ).future,
+    );
 
     final text = verify(
       radioWriter.sendMeshPacket(
@@ -80,8 +86,12 @@ void main() {
   });
 
   test('save', () async {
-    await container
-        .read(sendTextMessageProvider(channel: 1, text: 'abc').future);
+    await container.read(
+      sendTextMessageProvider(
+        chatType: const ChannelChat(channel: 1),
+        text: 'abc',
+      ).future,
+    );
 
     final repositorySavedMessage = verify(
       textMessageRepository.add(
@@ -99,8 +109,12 @@ void main() {
   });
 
   test('notify locally', () async {
-    await container
-        .read(sendTextMessageProvider(channel: 1, text: 'abc').future);
+    await container.read(
+      sendTextMessageProvider(
+        chatType: const ChannelChat(channel: 1),
+        text: 'abc',
+      ).future,
+    );
 
     final repositorySavedMessage = verify(
       textMessageRepository.add(

@@ -5,6 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:meshx/models/chat_type.dart' as _i7;
 import 'package:meshx/models/text_message.dart' as _i2;
 import 'package:meshx/models/text_message_status.dart' as _i5;
 import 'package:meshx/providers/repository/text_message_repository.dart' as _i4;
@@ -114,7 +115,8 @@ class MockTextMessageRepository extends _i1.Mock
 
   @override
   _i3.Future<List<_i2.TextMessage>> getBy({
-    required int? nodeNum,
+    required int? toNode,
+    int? fromNode,
     required int? channel,
     required int? limit,
     int? offset = 0,
@@ -124,7 +126,8 @@ class MockTextMessageRepository extends _i1.Mock
           #getBy,
           [],
           {
-            #nodeNum: nodeNum,
+            #toNode: toNode,
+            #fromNode: fromNode,
             #channel: channel,
             #limit: limit,
             #offset: offset,
@@ -137,7 +140,8 @@ class MockTextMessageRepository extends _i1.Mock
   @override
   _i3.Future<int> count({
     required int? channel,
-    required int? nodeNum,
+    required int? toNode,
+    int? fromNode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -145,7 +149,8 @@ class MockTextMessageRepository extends _i1.Mock
           [],
           {
             #channel: channel,
-            #nodeNum: nodeNum,
+            #toNode: toNode,
+            #fromNode: fromNode,
           },
         ),
         returnValue: _i3.Future<int>.value(0),
@@ -163,8 +168,7 @@ class MockTextMessageReceiverService extends _i1.Mock
 
   @override
   _i3.StreamSubscription<_i2.TextMessage> addMessageListener({
-    required int? channel,
-    int? fromNode,
+    required _i7.ChatType? chatType,
     required void Function(_i2.TextMessage)? listener,
   }) =>
       (super.noSuchMethod(
@@ -172,8 +176,7 @@ class MockTextMessageReceiverService extends _i1.Mock
           #addMessageListener,
           [],
           {
-            #channel: channel,
-            #fromNode: fromNode,
+            #chatType: chatType,
             #listener: listener,
           },
         ),
@@ -183,8 +186,7 @@ class MockTextMessageReceiverService extends _i1.Mock
             #addMessageListener,
             [],
             {
-              #channel: channel,
-              #fromNode: fromNode,
+              #chatType: chatType,
               #listener: listener,
             },
           ),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
 import '../constants/app_constants.dart';
+import '../models/chat_type.dart';
 import '../models/mesh_node.dart';
 import '../models/radio_configuration.dart';
 import '../models/text_message.dart';
@@ -16,10 +17,10 @@ import 'scroll_button.dart';
 class MessageList extends ConsumerStatefulWidget {
   const MessageList({
     super.key,
-    required this.channel,
+    required this.chatType,
   });
 
-  final int channel;
+  final ChatType chatType;
 
   @override
   ConsumerState<MessageList> createState() => _MessageListState();
@@ -64,7 +65,7 @@ class _MessageListState extends ConsumerState<MessageList> {
   @override
   Widget build(BuildContext context) {
     _textMessageStreamService =
-        ref.watch(textMessageStreamServiceProvider(channel: widget.channel));
+        ref.watch(textMessageStreamServiceProvider(chatType: widget.chatType));
     _radioConfig = ref.watch(radioConfigServiceProvider);
 
     return Expanded(

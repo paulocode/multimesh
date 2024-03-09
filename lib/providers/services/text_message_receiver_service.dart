@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../constants/ble_constants.dart';
+import '../../models/chat_type.dart';
 import '../../models/mesh_node.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
@@ -24,6 +26,8 @@ TextMessageReceiverService textMessageReceiverService(
     nodes: ref.watch(nodeServiceProvider),
     configDownloaded: ref
         .watch(radioConfigServiceProvider.select((it) => it.configDownloaded)),
+    myNodeNum:
+        ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
     showNotification: (title, text, callbackValue) async {
       ref.read(showNotificationProvider(title, text, callbackValue));
     },
@@ -37,13 +41,15 @@ class TextMessageReceiverService {
     required RadioReader radioReader,
     required Map<int, MeshNode> nodes,
     required bool configDownloaded,
+    required int myNodeNum,
     required Future<void> Function(String, String, String) showNotification,
     required void Function(void Function()) onDispose,
   })  : _onDispose = onDispose,
         _radioReader = radioReader,
         _textMessageRepository = textMessageRepository,
         _nodes = nodes,
-        _showNotification = showNotification {
+        _showNotification = showNotification,
+        _myNodeNum = myNodeNum {
     _onDispose(_streamController.close);
 
     if (!configDownloaded) {
@@ -58,6 +64,7 @@ class TextMessageReceiverService {
   final Map<int, MeshNode> _nodes;
   final void Function(void Function() cb) _onDispose;
   final Future<void> Function(String, String, String) _showNotification;
+  final int _myNodeNum;
 
   final StreamController<TextMessage> _streamController =
       StreamController.broadcast();
@@ -68,16 +75,24 @@ class TextMessageReceiverService {
   }
 
   StreamSubscription<TextMessage> addMessageListener({
-    required int channel,
-    int? fromNode,
+    required ChatType chatType,
     required void Function(TextMessage) listener,
   }) {
-    final stream =
-        _streamController.stream.where((event) => event.channel == channel);
-    if (fromNode != null) {
-      return stream.where((event) => event.from == fromNode).listen(listener);
-    } else {
-      return stream.listen(listener);
+    final stream = _streamController.stream.where(
+      (event) => event.channel == chatType.channel,
+    );
+    switch (chatType) {
+      case DirectMessageChat():
+        return stream
+            .where(
+              (event) =>
+                  event.from == chatType.dmNode &&
+                  event.channel == chatType.channel &&
+                  event.to == _myNodeNum,
+            )
+            .listen(listener);
+      case ChannelChat():
+        return stream.where((event) => event.to == TO_CHANNEL).listen(listener);
     }
   }
 

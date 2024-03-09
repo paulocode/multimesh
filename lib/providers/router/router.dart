@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../models/chat_type.dart';
 import '../../screens/chat.dart';
 import '../../screens/radio_config.dart';
 import '../../screens/tab_parent.dart';
@@ -27,8 +28,19 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: '/chat',
         builder: (context, state) {
+          late final ChatType chatType;
+          final dmNodeStr = state.uri.queryParameters['dmNode'];
+          final channel = int.parse(state.uri.queryParameters['channel']!);
+          if (dmNodeStr != null) {
+            chatType = DirectMessageChat(
+              dmNode: int.parse(dmNodeStr),
+              channel: channel,
+            );
+          } else {
+            chatType = ChannelChat(channel: channel);
+          }
           return ChatScreen(
-            channel: int.parse(state.uri.queryParameters['channel']!),
+            chatType: chatType,
           );
         },
       ),

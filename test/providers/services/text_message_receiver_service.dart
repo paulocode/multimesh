@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pbserver.dart';
@@ -28,11 +29,12 @@ void main() {
     return TextMessageReceiverService(
       textMessageRepository: textMessageRepository,
       radioReader: radioReader,
+      // TODO
       nodes: {},
-      // TODO
       configDownloaded: configDownloaded,
-      showNotification: (title, text, callbackValue) async {},
+      myNodeNum: 111,
       // TODO
+      showNotification: (title, text, callbackValue) async {},
       onDispose: (_) {},
     );
   }
@@ -50,7 +52,7 @@ void main() {
     final textMessageReceiverService = init();
     final messageCompleter = Completer<TextMessage>();
     textMessageReceiverService.addMessageListener(
-      channel: 1,
+      chatType: const ChannelChat(channel: 1),
       listener: messageCompleter.complete,
     );
 
@@ -92,7 +94,7 @@ void main() {
       final textMessageReceiverService = init();
       final messageCompleter = Completer<TextMessage>();
       textMessageReceiverService.addMessageListener(
-        channel: 2,
+        chatType: const ChannelChat(channel: 2),
         listener: messageCompleter.complete,
       );
 

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/chat_type.dart';
 import '../providers/services/text_message_sender_service.dart';
 
 class MessageInput extends ConsumerStatefulWidget {
   const MessageInput({
-    required this.channel,
+    required this.chatType,
     super.key,
   });
 
-  final int channel;
+  final ChatType chatType;
 
   @override
   ConsumerState<MessageInput> createState() => _MessageInputState();
@@ -35,7 +36,7 @@ class _MessageInputState extends ConsumerState<MessageInput> {
             if (text.isNotEmpty) {
               ref.read(
                 sendTextMessageProvider(
-                  channel: widget.channel,
+                  chatType: widget.chatType,
                   text: text,
                 ),
               );

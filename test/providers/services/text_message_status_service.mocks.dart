@@ -103,7 +103,8 @@ class MockTextMessageRepository extends _i1.Mock
 
   @override
   _i4.Future<List<_i2.TextMessage>> getBy({
-    required int? nodeNum,
+    required int? toNode,
+    int? fromNode,
     required int? channel,
     required int? limit,
     int? offset = 0,
@@ -113,7 +114,8 @@ class MockTextMessageRepository extends _i1.Mock
           #getBy,
           [],
           {
-            #nodeNum: nodeNum,
+            #toNode: toNode,
+            #fromNode: fromNode,
             #channel: channel,
             #limit: limit,
             #offset: offset,
@@ -126,7 +128,8 @@ class MockTextMessageRepository extends _i1.Mock
   @override
   _i4.Future<int> count({
     required int? channel,
-    required int? nodeNum,
+    required int? toNode,
+    int? fromNode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -134,7 +137,8 @@ class MockTextMessageRepository extends _i1.Mock
           [],
           {
             #channel: channel,
-            #nodeNum: nodeNum,
+            #toNode: toNode,
+            #fromNode: fromNode,
           },
         ),
         returnValue: _i4.Future<int>.value(0),

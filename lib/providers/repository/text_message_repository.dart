@@ -94,15 +94,24 @@ class TextMessageRepository {
   }
 
   Future<List<TextMessage>> getBy({
-    required int nodeNum,
+    required int toNode,
+    int? fromNode,
     required int channel,
     required int limit,
     int offset = 0,
   }) async {
+    var where = 'toNode = ? AND channel = ?';
+    final whereArgs = [toNode, channel];
+
+    if (fromNode != null) {
+      where += ' AND fromNode = ?';
+      whereArgs.add(fromNode);
+    }
+
     final result = await _database.query(
       'text_messages',
-      where: '(toNode = ? OR toNode = ?) AND channel = ?',
-      whereArgs: [nodeNum, TO_CHANNEL, channel],
+      where: where,
+      whereArgs: whereArgs,
       offset: offset,
       orderBy: 'id ASC',
       limit: limit,
@@ -130,17 +139,29 @@ class TextMessageRepository {
     ];
   }
 
-  Future<int> count({required int channel, required int nodeNum}) async {
+  Future<int> count({
+    required int channel,
+    required int toNode,
+    int? fromNode,
+  }) async {
+    var where = 'toNode = ? AND channel = ?';
+    final whereArgs = [toNode, channel];
+
+    if (fromNode != null) {
+      where += ' AND fromNode = ?';
+      whereArgs.add(fromNode);
+    }
+
     final result = await _database.rawQuery(
-      'SELECT COUNT(*) FROM text_messages WHERE (toNode = ? OR toNode = ?) AND channel = ?',
-      [nodeNum, TO_CHANNEL, channel],
+      'SELECT COUNT(*) FROM text_messages WHERE $where',
+      whereArgs,
     );
 
     return Sqflite.firstIntValue(result) ?? 0;
   }
 
   Future<void> _createDummyData() async {
-    final messagesExist = await count(channel: 0, nodeNum: 3806486552) > 0;
+    final messagesExist = await count(channel: 0, toNode: 3806486552) > 0;
     if (messagesExist) {
       return;
     }

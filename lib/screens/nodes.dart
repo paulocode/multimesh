@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../providers/services/node_service.dart';
 import '../providers/services/radio_config_service.dart';
@@ -42,7 +43,20 @@ class NodesScreen extends ConsumerWidget {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.mail)),
+                  IconButton(
+                    onPressed: () {
+                      context.push(
+                        Uri(
+                          path: '/chat',
+                          queryParameters: {
+                            'channel': node.channel.toString(),
+                            'dmNode': node.nodeNum.toString(),
+                          },
+                        ).toString(),
+                      );
+                    },
+                    icon: const Icon(Icons.mail),
+                  ),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.chevron_right),

@@ -6,7 +6,7 @@ part of 'text_message_sender_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sendTextMessageHash() => r'392a5c9e4a164ccd3761ff3b94290da0f7b04806';
+String _$sendTextMessageHash() => r'bc86c939a53ab4906d9a0c90058a898e28a26096';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -40,11 +40,11 @@ class SendTextMessageFamily extends Family<AsyncValue<void>> {
 
   /// See also [sendTextMessage].
   SendTextMessageProvider call({
-    required int channel,
+    required ChatType chatType,
     required String text,
   }) {
     return SendTextMessageProvider(
-      channel: channel,
+      chatType: chatType,
       text: text,
     );
   }
@@ -54,7 +54,7 @@ class SendTextMessageFamily extends Family<AsyncValue<void>> {
     covariant SendTextMessageProvider provider,
   ) {
     return call(
-      channel: provider.channel,
+      chatType: provider.chatType,
       text: provider.text,
     );
   }
@@ -78,12 +78,12 @@ class SendTextMessageFamily extends Family<AsyncValue<void>> {
 class SendTextMessageProvider extends AutoDisposeFutureProvider<void> {
   /// See also [sendTextMessage].
   SendTextMessageProvider({
-    required int channel,
+    required ChatType chatType,
     required String text,
   }) : this._internal(
           (ref) => sendTextMessage(
             ref as SendTextMessageRef,
-            channel: channel,
+            chatType: chatType,
             text: text,
           ),
           from: sendTextMessageProvider,
@@ -95,7 +95,7 @@ class SendTextMessageProvider extends AutoDisposeFutureProvider<void> {
           dependencies: SendTextMessageFamily._dependencies,
           allTransitiveDependencies:
               SendTextMessageFamily._allTransitiveDependencies,
-          channel: channel,
+          chatType: chatType,
           text: text,
         );
 
@@ -106,11 +106,11 @@ class SendTextMessageProvider extends AutoDisposeFutureProvider<void> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.channel,
+    required this.chatType,
     required this.text,
   }) : super.internal();
 
-  final int channel;
+  final ChatType chatType;
   final String text;
 
   @override
@@ -126,7 +126,7 @@ class SendTextMessageProvider extends AutoDisposeFutureProvider<void> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        channel: channel,
+        chatType: chatType,
         text: text,
       ),
     );
@@ -140,14 +140,14 @@ class SendTextMessageProvider extends AutoDisposeFutureProvider<void> {
   @override
   bool operator ==(Object other) {
     return other is SendTextMessageProvider &&
-        other.channel == channel &&
+        other.chatType == chatType &&
         other.text == text;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, channel.hashCode);
+    hash = _SystemHash.combine(hash, chatType.hashCode);
     hash = _SystemHash.combine(hash, text.hashCode);
 
     return _SystemHash.finish(hash);
@@ -155,8 +155,8 @@ class SendTextMessageProvider extends AutoDisposeFutureProvider<void> {
 }
 
 mixin SendTextMessageRef on AutoDisposeFutureProviderRef<void> {
-  /// The parameter `channel` of this provider.
-  int get channel;
+  /// The parameter `chatType` of this provider.
+  ChatType get chatType;
 
   /// The parameter `text` of this provider.
   String get text;
@@ -167,7 +167,7 @@ class _SendTextMessageProviderElement
   _SendTextMessageProviderElement(super.provider);
 
   @override
-  int get channel => (origin as SendTextMessageProvider).channel;
+  ChatType get chatType => (origin as SendTextMessageProvider).chatType;
   @override
   String get text => (origin as SendTextMessageProvider).text;
 }

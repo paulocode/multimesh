@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/chat_type.dart';
 import '../providers/services/channel_service.dart';
 import '../providers/services/node_service.dart';
 import '../providers/services/text_message_stream_service.dart';
@@ -24,8 +25,11 @@ class ChannelListScreen extends ConsumerWidget {
           if (!channel.used) {
             return Container();
           }
-          final textMessageStreamService =
-              ref.watch(textMessageStreamServiceProvider(channel: index));
+          final textMessageStreamService = ref.watch(
+            textMessageStreamServiceProvider(
+              chatType: ChannelChat(channel: index),
+            ),
+          );
           return StreamBuilder(
             stream: textMessageStreamService.stream,
             initialData: textMessageStreamService.getMessages(),

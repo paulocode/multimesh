@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/ble_constants.dart';
+import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ble/radio_writer.dart';
@@ -16,7 +17,7 @@ part 'text_message_sender_service.g.dart';
 @riverpod
 Future<void> sendTextMessage(
   SendTextMessageRef ref, {
-  required int channel,
+  required ChatType chatType,
   required String text,
 }) async {
   final radioWriter = ref.watch(radioWriterProvider);
@@ -24,18 +25,18 @@ Future<void> sendTextMessage(
       ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum));
   final textMessageRepository = ref.watch(textMessageRepositoryProvider);
   final textMessageStreamService =
-      ref.watch(textMessageStreamServiceProvider(channel: channel));
+      ref.watch(textMessageStreamServiceProvider(chatType: chatType));
 
   final message = TextMessage(
     text: text,
     from: myNodeNum,
-    to: TO_CHANNEL,
-    channel: channel,
+    to: chatType is DirectMessageChat ? chatType.dmNode : TO_CHANNEL,
+    channel: chatType.channel,
     time: DateTime.now(),
   );
 
   final packetId = await radioWriter.sendMeshPacket(
-    channel: channel,
+    channel: chatType.channel,
     to: message.to,
     portNum: PortNum.TEXT_MESSAGE_APP,
     payload: utf8.encode(text),

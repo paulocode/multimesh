@@ -7,7 +7,7 @@ part of 'text_message_stream_service.dart';
 // **************************************************************************
 
 String _$textMessageStreamServiceHash() =>
-    r'c661304b78a6baddf45658efa279353b850c97d5';
+    r'03594938df0c733b5aa6268032a879e193cd1f2c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,10 +41,10 @@ class TextMessageStreamServiceFamily extends Family<TextMessageStreamService> {
 
   /// See also [textMessageStreamService].
   TextMessageStreamServiceProvider call({
-    required int channel,
+    required ChatType chatType,
   }) {
     return TextMessageStreamServiceProvider(
-      channel: channel,
+      chatType: chatType,
     );
   }
 
@@ -53,7 +53,7 @@ class TextMessageStreamServiceFamily extends Family<TextMessageStreamService> {
     covariant TextMessageStreamServiceProvider provider,
   ) {
     return call(
-      channel: provider.channel,
+      chatType: provider.chatType,
     );
   }
 
@@ -77,11 +77,11 @@ class TextMessageStreamServiceProvider
     extends AutoDisposeProvider<TextMessageStreamService> {
   /// See also [textMessageStreamService].
   TextMessageStreamServiceProvider({
-    required int channel,
+    required ChatType chatType,
   }) : this._internal(
           (ref) => textMessageStreamService(
             ref as TextMessageStreamServiceRef,
-            channel: channel,
+            chatType: chatType,
           ),
           from: textMessageStreamServiceProvider,
           name: r'textMessageStreamServiceProvider',
@@ -92,7 +92,7 @@ class TextMessageStreamServiceProvider
           dependencies: TextMessageStreamServiceFamily._dependencies,
           allTransitiveDependencies:
               TextMessageStreamServiceFamily._allTransitiveDependencies,
-          channel: channel,
+          chatType: chatType,
         );
 
   TextMessageStreamServiceProvider._internal(
@@ -102,10 +102,10 @@ class TextMessageStreamServiceProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.channel,
+    required this.chatType,
   }) : super.internal();
 
-  final int channel;
+  final ChatType chatType;
 
   @override
   Override overrideWith(
@@ -121,7 +121,7 @@ class TextMessageStreamServiceProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        channel: channel,
+        chatType: chatType,
       ),
     );
   }
@@ -134,13 +134,13 @@ class TextMessageStreamServiceProvider
   @override
   bool operator ==(Object other) {
     return other is TextMessageStreamServiceProvider &&
-        other.channel == channel;
+        other.chatType == chatType;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, channel.hashCode);
+    hash = _SystemHash.combine(hash, chatType.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -148,8 +148,8 @@ class TextMessageStreamServiceProvider
 
 mixin TextMessageStreamServiceRef
     on AutoDisposeProviderRef<TextMessageStreamService> {
-  /// The parameter `channel` of this provider.
-  int get channel;
+  /// The parameter `chatType` of this provider.
+  ChatType get chatType;
 }
 
 class _TextMessageStreamServiceProviderElement
@@ -158,7 +158,8 @@ class _TextMessageStreamServiceProviderElement
   _TextMessageStreamServiceProviderElement(super.provider);
 
   @override
-  int get channel => (origin as TextMessageStreamServiceProvider).channel;
+  ChatType get chatType =>
+      (origin as TextMessageStreamServiceProvider).chatType;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
