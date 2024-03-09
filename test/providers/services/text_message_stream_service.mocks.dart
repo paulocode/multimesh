@@ -164,6 +164,7 @@ class MockTextMessageReceiverService extends _i1.Mock
   @override
   _i3.StreamSubscription<_i2.TextMessage> addMessageListener({
     required int? channel,
+    int? fromNode,
     required void Function(_i2.TextMessage)? listener,
   }) =>
       (super.noSuchMethod(
@@ -172,6 +173,7 @@ class MockTextMessageReceiverService extends _i1.Mock
           [],
           {
             #channel: channel,
+            #fromNode: fromNode,
             #listener: listener,
           },
         ),
@@ -182,6 +184,7 @@ class MockTextMessageReceiverService extends _i1.Mock
             [],
             {
               #channel: channel,
+              #fromNode: fromNode,
               #listener: listener,
             },
           ),

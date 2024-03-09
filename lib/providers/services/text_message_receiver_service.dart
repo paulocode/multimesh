@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../constants/meshtastic_constants.dart';
 import '../../models/mesh_node.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
@@ -45,11 +44,7 @@ class TextMessageReceiverService {
         _textMessageRepository = textMessageRepository,
         _nodes = nodes,
         _showNotification = showNotification {
-    _onDispose(() {
-      for (final element in _streamControllers) {
-        element.close();
-      }
-    });
+    _onDispose(_streamController.close);
 
     if (!configDownloaded) {
       return;
@@ -64,11 +59,8 @@ class TextMessageReceiverService {
   final void Function(void Function() cb) _onDispose;
   final Future<void> Function(String, String, String) _showNotification;
 
-  late final List<StreamController<TextMessage>> _streamControllers =
-      List.generate(
-    MESHTASTIC_MAX_CHANNELS,
-    (_) => StreamController.broadcast(),
-  );
+  final StreamController<TextMessage> _streamController =
+      StreamController.broadcast();
 
   void _listenToPackets() {
     final subscription = _radioReader.onPacketReceived().listen(_processPacket);
@@ -77,9 +69,16 @@ class TextMessageReceiverService {
 
   StreamSubscription<TextMessage> addMessageListener({
     required int channel,
+    int? fromNode,
     required void Function(TextMessage) listener,
   }) {
-    return _streamControllers[channel].stream.listen(listener);
+    final stream =
+        _streamController.stream.where((event) => event.channel == channel);
+    if (fromNode != null) {
+      return stream.where((event) => event.from == fromNode).listen(listener);
+    } else {
+      return stream.listen(listener);
+    }
   }
 
   Future<void> _processPacket(FromRadio event) async {
@@ -104,7 +103,7 @@ class TextMessageReceiverService {
     TextMessage message,
   ) async {
     await _textMessageRepository.add(textMessage: message);
-    _streamControllers[channel].add(message);
+    _streamController.add(message);
     final node = _nodes[message.from];
     await _showNotification(
       node?.longName ?? '',
