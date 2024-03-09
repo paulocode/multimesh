@@ -57,14 +57,9 @@ void main() {
   });
 
   test('initial state', () async {
-    await expectLater(
-      container.read(
-        textMessageStatusServiceProvider(
-          packetId: 123,
-          timeout: const Duration(seconds: 5),
-        ).future,
-      ),
-      completion(TextMessageStatus.SENDING),
+    expect(
+      sub.read(),
+      equals(const AsyncData(TextMessageStatus.SENDING)),
     );
   });
 
@@ -78,14 +73,9 @@ void main() {
     );
 
     await Future<void>.delayed(const Duration(seconds: 6));
-    await expectLater(
-      container.read(
-        textMessageStatusServiceProvider(
-          packetId: 123,
-          timeout: const Duration(seconds: 5),
-        ).future,
-      ),
-      completion(TextMessageStatus.RADIO_ERROR),
+    expect(
+      sub.read(),
+      equals(const AsyncData(TextMessageStatus.RADIO_ERROR)),
     );
   });
 
@@ -106,13 +96,9 @@ void main() {
       ),
     );
 
-    await expectLater(
-      container.read(
-        textMessageStatusServiceProvider(
-          packetId: 123,
-        ).future,
-      ),
-      completion(TextMessageStatus.OK),
+    expect(
+      sub.read(),
+      equals(const AsyncData(TextMessageStatus.OK)),
     );
   });
 
@@ -158,13 +144,9 @@ void main() {
       ),
     );
 
-    await expectLater(
-      container.read(
-        textMessageStatusServiceProvider(
-          packetId: 123,
-        ).future,
-      ),
-      completion(TextMessageStatus.SENDING),
+    expect(
+      sub.read(),
+      equals(const AsyncData(TextMessageStatus.SENDING)),
     );
   });
 
@@ -185,13 +167,9 @@ void main() {
       ),
     );
 
-    await expectLater(
-      container.read(
-        textMessageStatusServiceProvider(
-          packetId: 123,
-        ).future,
-      ),
-      completion(TextMessageStatus.MAX_RETRANSMIT),
+    expect(
+      sub.read(),
+      equals(const AsyncData(TextMessageStatus.MAX_RETRANSMIT)),
     );
   });
 
@@ -212,13 +190,9 @@ void main() {
       ),
     );
 
-    await expectLater(
-      container.read(
-        textMessageStatusServiceProvider(
-          packetId: 123,
-        ).future,
-      ),
-      completion(TextMessageStatus.RADIO_ERROR),
+    expect(
+      sub.read(),
+      equals(const AsyncData(TextMessageStatus.RADIO_ERROR)),
     );
   });
 }
