@@ -58,8 +58,8 @@ void main() {
 
   test('initial state', () async {
     expect(
-      statusSubscription.read(),
-      equals(const AsyncData(TextMessageStatus.SENDING)),
+      statusSubscription.read().requireValue,
+      equals(TextMessageStatus.SENDING),
     );
   });
 
@@ -74,8 +74,8 @@ void main() {
 
     await Future<void>.delayed(const Duration(seconds: 6));
     expect(
-      sub.read(),
-      equals(const AsyncData(TextMessageStatus.RADIO_ERROR)),
+      sub.read().requireValue,
+      equals(TextMessageStatus.RADIO_ERROR),
     );
   });
 
@@ -97,8 +97,8 @@ void main() {
     );
 
     expect(
-      statusSubscription.read(),
-      equals(const AsyncData(TextMessageStatus.OK)),
+      statusSubscription.read().requireValue,
+      equals(TextMessageStatus.OK),
     );
   });
 
@@ -145,8 +145,8 @@ void main() {
     );
 
     expect(
-      statusSubscription.read(),
-      equals(const AsyncData(TextMessageStatus.SENDING)),
+      statusSubscription.read().requireValue,
+      equals(TextMessageStatus.SENDING),
     );
   });
 
@@ -168,8 +168,8 @@ void main() {
     );
 
     expect(
-      statusSubscription.read(),
-      equals(const AsyncData(TextMessageStatus.MAX_RETRANSMIT)),
+      statusSubscription.read().requireValue,
+      equals(TextMessageStatus.MAX_RETRANSMIT),
     );
   });
 
@@ -191,8 +191,8 @@ void main() {
     );
 
     expect(
-      statusSubscription.read(),
-      equals(const AsyncData(TextMessageStatus.RADIO_ERROR)),
+      statusSubscription.read().requireValue,
+      equals(TextMessageStatus.RADIO_ERROR),
     );
   });
 }
