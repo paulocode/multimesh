@@ -23,7 +23,7 @@ void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> mockStream;
-  late ProviderSubscription<AsyncValue<TextMessageStatus>> sub;
+  late ProviderSubscription<AsyncValue<TextMessageStatus>> statusSubscription;
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
     when(textMessageRepository.getByPacketId(packetId: 123)).thenAnswer(
@@ -48,7 +48,7 @@ void main() {
         radioReaderProvider.overrideWith((ref) => radioReader),
       ],
     );
-    sub = container.listen(
+    statusSubscription = container.listen(
       textMessageStatusServiceProvider(
         packetId: 123,
       ),
@@ -58,7 +58,7 @@ void main() {
 
   test('initial state', () async {
     expect(
-      sub.read(),
+      statusSubscription.read(),
       equals(const AsyncData(TextMessageStatus.SENDING)),
     );
   });
@@ -97,7 +97,7 @@ void main() {
     );
 
     expect(
-      sub.read(),
+      statusSubscription.read(),
       equals(const AsyncData(TextMessageStatus.OK)),
     );
   });
@@ -145,7 +145,7 @@ void main() {
     );
 
     expect(
-      sub.read(),
+      statusSubscription.read(),
       equals(const AsyncData(TextMessageStatus.SENDING)),
     );
   });
@@ -168,7 +168,7 @@ void main() {
     );
 
     expect(
-      sub.read(),
+      statusSubscription.read(),
       equals(const AsyncData(TextMessageStatus.MAX_RETRANSMIT)),
     );
   });
@@ -191,7 +191,7 @@ void main() {
     );
 
     expect(
-      sub.read(),
+      statusSubscription.read(),
       equals(const AsyncData(TextMessageStatus.RADIO_ERROR)),
     );
   });
