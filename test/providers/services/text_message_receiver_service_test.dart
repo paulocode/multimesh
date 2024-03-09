@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
@@ -14,7 +15,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../mock_stream.dart';
-import 'text_message_receiver_service.mocks.dart';
+import 'text_message_receiver_service_test.mocks.dart';
 
 @GenerateMocks([
   TextMessageRepository,
@@ -24,6 +25,15 @@ void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> packetStream;
+
+  setUp(() {
+    packetStream = MockStream();
+    textMessageRepository = MockTextMessageRepository();
+    when(textMessageRepository.add(textMessage: anyNamed('textMessage')))
+        .thenAnswer((realInvocation) => Future.value(456));
+    radioReader = MockRadioReader();
+    when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
+  });
 
   TextMessageReceiverService init({bool configDownloaded = true}) {
     return TextMessageReceiverService(
@@ -39,15 +49,6 @@ void main() {
     );
   }
 
-  setUp(() {
-    packetStream = MockStream();
-    textMessageRepository = MockTextMessageRepository();
-    when(textMessageRepository.add(textMessage: anyNamed('textMessage')))
-        .thenAnswer((realInvocation) => Future.value(456));
-    radioReader = MockRadioReader();
-    when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
-  });
-
   test('receive channel message and save', () async {
     final textMessageReceiverService = init();
     final messageCompleter = Completer<TextMessage>();
@@ -62,7 +63,7 @@ void main() {
           id: 123,
           channel: 1,
           from: 789,
-          to: 111,
+          to: TO_CHANNEL,
           decoded: Data(
             portnum: PortNum.TEXT_MESSAGE_APP,
             payload: utf8.encode('abc'),
@@ -76,7 +77,7 @@ void main() {
     expect(message.packetId, equals(123));
     expect(message.channel, equals(1));
     expect(message.from, equals(789));
-    expect(message.to, equals(111));
+    expect(message.to, equals(TO_CHANNEL));
     expect(
       message.time.difference(DateTime.now()).inSeconds.abs() < 10,
       isTrue,
@@ -103,6 +104,7 @@ void main() {
           packet: MeshPacket(
             id: 123,
             channel: 1,
+            to: TO_CHANNEL,
             decoded: Data(
               portnum: PortNum.TEXT_MESSAGE_APP,
               payload: utf8.encode('abc'),

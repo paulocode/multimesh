@@ -16,7 +16,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../common.dart';
-import 'text_message_sender_service.mocks.dart';
+import 'text_message_sender_service_test.mocks.dart';
 
 @GenerateMocks([
   RadioWriter,

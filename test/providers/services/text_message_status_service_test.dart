@@ -12,7 +12,7 @@ import 'package:mockito/mockito.dart';
 
 import '../../common.dart';
 import '../../mock_stream.dart';
-import 'text_message_status_service.mocks.dart';
+import 'text_message_status_service_test.mocks.dart';
 
 @GenerateMocks([
   TextMessageRepository,

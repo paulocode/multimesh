@@ -11,7 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../mock_stream.dart';
-import 'radio_config_downloader_service.mocks.dart';
+import 'radio_config_downloader_service_test.mocks.dart';
 
 @GenerateMocks([
   RadioWriter,

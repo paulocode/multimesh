@@ -10,7 +10,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../mock_stream.dart';
-import 'text_message_stream_service.mocks.dart';
+import 'text_message_stream_service_test.mocks.dart';
 
 @GenerateMocks([
   TextMessageRepository,
@@ -44,7 +44,7 @@ void main() {
 
     when(
       textMessageRepository.getBy(
-        toNode: 123,
+        toNode: TO_CHANNEL,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
       ),
@@ -148,7 +148,7 @@ void main() {
     final messagesFuture = textMessageStreamService.stream.first;
     when(
       textMessageRepository.getBy(
-        toNode: 123,
+        toNode: TO_CHANNEL,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
