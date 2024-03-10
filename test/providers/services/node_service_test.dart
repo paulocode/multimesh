@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
+import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:meshx/providers/ble/radio_reader.dart';
 import 'package:meshx/providers/services/node_service.dart';
 import 'package:mockito/annotations.dart';
@@ -39,8 +40,10 @@ void main() {
     await stream.emit(
       FromRadio(
         nodeInfo: NodeInfo(
+          channel: 3,
           num: 123,
           user: User(
+            id: '!123',
             longName: 'XYZ node',
             shortName: 'XYZ',
           ),
@@ -49,17 +52,58 @@ void main() {
     );
 
     final nodes = container.read(nodeServiceProvider);
-    await expectLater(nodes[123]?.nodeNum, equals(123));
+    expect(nodes[123]?.nodeNum, equals(123));
     expect(nodes[123]?.shortName, equals('XYZ'));
     expect(nodes[123]?.longName, equals('XYZ node'));
+    expect(nodes[123]?.channel, equals(3));
+  });
+
+  test('add node from NODEINFO_APP', () async {
+    await stream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          channel: 1,
+          from: 123,
+          decoded: Data(
+            portnum: PortNum.NODEINFO_APP,
+            payload: User(
+              id: '!123',
+              longName: 'XYZ node',
+              shortName: 'XYZ',
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    final nodes = container.read(nodeServiceProvider);
+    expect(nodes[123]?.nodeNum, equals(123));
+    expect(nodes[123]?.shortName, equals('XYZ'));
+    expect(nodes[123]?.longName, equals('XYZ node'));
+    expect(nodes[123]?.channel, equals(1));
+  });
+
+  test('ignore blank node', () async {
+    await stream.emit(
+      FromRadio(
+        nodeInfo: NodeInfo(
+          num: 123,
+        ),
+      ),
+    );
+
+    final nodes = container.read(nodeServiceProvider);
+    expect(nodes.length, equals(0));
   });
 
   test('add 2 nodes', () async {
     await stream.emit(
       FromRadio(
         nodeInfo: NodeInfo(
+          channel: 1,
           num: 123,
           user: User(
+            id: '!123',
             longName: 'XYZ node',
             shortName: 'XYZ',
           ),
@@ -70,8 +114,10 @@ void main() {
     await stream.emit(
       FromRadio(
         nodeInfo: NodeInfo(
+          channel: 2,
           num: 456,
           user: User(
+            id: '!123',
             longName: 'UVW node',
             shortName: 'UVW',
           ),
@@ -83,8 +129,10 @@ void main() {
     expect(nodes[123]?.nodeNum, equals(123));
     expect(nodes[123]?.shortName, equals('XYZ'));
     expect(nodes[123]?.longName, equals('XYZ node'));
+    expect(nodes[123]?.channel, equals(1));
     expect(nodes[456]?.nodeNum, equals(456));
     expect(nodes[456]?.shortName, equals('UVW'));
     expect(nodes[456]?.longName, equals('UVW node'));
+    expect(nodes[456]?.channel, equals(2));
   });
 }
