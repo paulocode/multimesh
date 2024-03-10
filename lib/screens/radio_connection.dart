@@ -18,18 +18,23 @@ class RadioConnectionScreen extends ConsumerWidget {
           title: const Text('Radio Connection'),
         ),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const ConnectedRadio(),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: const ConnectedRadio(),
+            ),
             Expanded(
-              child: ListView.builder(
-                itemCount: meshRadios.length,
-                itemBuilder: (context, index) {
-                  final radio = meshRadios[index];
-                  return RadioChoiceTile(
-                    radio: radio,
-                  );
-                },
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: ListView.builder(
+                  itemCount: meshRadios.length,
+                  itemBuilder: (context, index) {
+                    final radio = meshRadios[index];
+                    return RadioChoiceTile(
+                      radio: radio,
+                    );
+                  },
+                ),
               ),
             ),
           ],
