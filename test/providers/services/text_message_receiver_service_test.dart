@@ -185,4 +185,44 @@ void main() {
       await expectLater(messageCompleter.future, doesNotComplete);
     },
   );
+
+  test('receive DM', () async {
+    final textMessageReceiverService = init();
+    final messageCompleter = Completer<TextMessage>();
+    textMessageReceiverService.addMessageListener(
+      chatType: const DirectMessageChat(dmNode: 777, channel: 1),
+      listener: messageCompleter.complete,
+    );
+
+    await packetStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          id: 222,
+          channel: 1,
+          from: 777,
+          to: 111,
+          decoded: Data(
+            portnum: PortNum.TEXT_MESSAGE_APP,
+            payload: utf8.encode('xyz'),
+          ),
+        ),
+      ),
+    );
+
+    final message = await messageCompleter.future;
+    expect(message.text, equals('xyz'));
+    expect(message.packetId, equals(222));
+    expect(message.channel, equals(1));
+    expect(message.from, equals(777));
+    expect(message.to, equals(111));
+    expect(
+      message.time.difference(DateTime.now()).inSeconds.abs() < 10,
+      isTrue,
+    );
+    verify(
+      textMessageRepository.add(
+        textMessage: argThat(equals(message), named: 'textMessage'),
+      ),
+    );
+  });
 }
