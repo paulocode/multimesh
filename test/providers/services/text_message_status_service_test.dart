@@ -63,6 +63,33 @@ void main() {
     );
   });
 
+  test('finished states must return the same state', () async {
+    when(textMessageRepository.getByPacketId(packetId: 456)).thenAnswer(
+      (realInvocation) => Future.value(
+        TextMessage(
+          text: '',
+          channel: 0,
+          time: DateTime.now(),
+          from: 0,
+          to: 0,
+          packetId: 456,
+          state: TextMessageStatus.OK,
+        ),
+      ),
+    );
+
+    final subscription = container.listen(
+      textMessageStatusServiceProvider(
+        packetId: 456,
+      ).future,
+      (_, __) {},
+    );
+    await expectLater(
+      subscription.read(),
+      completion(TextMessageStatus.OK),
+    );
+  });
+
   test('timeout', () async {
     final timedSubscription = container.listen(
       textMessageStatusServiceProvider(
