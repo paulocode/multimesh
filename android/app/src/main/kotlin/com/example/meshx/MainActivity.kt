@@ -1,4 +1,4 @@
-package com.example.meshx
+package xyz.paulocode.meshx
 
 import io.flutter.embedding.android.FlutterActivity
 
