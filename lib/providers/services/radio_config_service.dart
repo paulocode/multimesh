@@ -37,6 +37,13 @@ class RadioConfigService extends _$RadioConfigService {
     }
   }
 
+  Future<void> setModemPreset(
+    Config_LoRaConfig_ModemPreset modemPreset, {
+    bool upload = true,
+  }) async {
+    state = state.copyWith(modemPreset: modemPreset);
+  }
+
   Future<void> setMyNodeNum(
     int myNodeNum, {
     bool upload = true,

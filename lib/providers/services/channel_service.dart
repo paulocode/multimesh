@@ -6,6 +6,7 @@ import '../../models/mesh_channel.dart';
 import '../../protobufs/generated/meshtastic/channel.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../ble/radio_reader.dart';
+import 'radio_config_service.dart';
 
 part 'channel_service.g.dart';
 
@@ -32,8 +33,9 @@ class ChannelService extends _$ChannelService {
       if (channel.index < 0) {
         return;
       }
-      final channelName =
-          channel.settings.name.isEmpty ? 'LONG_FAST' : channel.settings.name;
+      final channelName = channel.settings.name.isEmpty
+          ? ref.read(radioConfigServiceProvider).modemPreset.toString()
+          : channel.settings.name;
       final meshChannel = MeshChannel(
         name: channelName,
         used: channel.role != Channel_Role.DISABLED,

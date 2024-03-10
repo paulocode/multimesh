@@ -21,6 +21,8 @@ mixin _$RadioConfiguration {
   int get myNodeNum => throw _privateConstructorUsedError;
   HardwareModel get hwModel => throw _privateConstructorUsedError;
   Config_LoRaConfig_RegionCode get region => throw _privateConstructorUsedError;
+  Config_LoRaConfig_ModemPreset get modemPreset =>
+      throw _privateConstructorUsedError;
   bool get configDownloaded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,6 +42,7 @@ abstract class $RadioConfigurationCopyWith<$Res> {
       int myNodeNum,
       HardwareModel hwModel,
       Config_LoRaConfig_RegionCode region,
+      Config_LoRaConfig_ModemPreset modemPreset,
       bool configDownloaded});
 }
 
@@ -61,6 +64,7 @@ class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
     Object? myNodeNum = null,
     Object? hwModel = null,
     Object? region = null,
+    Object? modemPreset = null,
     Object? configDownloaded = null,
   }) {
     return _then(_value.copyWith(
@@ -84,6 +88,10 @@ class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as Config_LoRaConfig_RegionCode,
+      modemPreset: null == modemPreset
+          ? _value.modemPreset
+          : modemPreset // ignore: cast_nullable_to_non_nullable
+              as Config_LoRaConfig_ModemPreset,
       configDownloaded: null == configDownloaded
           ? _value.configDownloaded
           : configDownloaded // ignore: cast_nullable_to_non_nullable
@@ -106,6 +114,7 @@ abstract class _$$RadioConfigurationImplCopyWith<$Res>
       int myNodeNum,
       HardwareModel hwModel,
       Config_LoRaConfig_RegionCode region,
+      Config_LoRaConfig_ModemPreset modemPreset,
       bool configDownloaded});
 }
 
@@ -125,6 +134,7 @@ class __$$RadioConfigurationImplCopyWithImpl<$Res>
     Object? myNodeNum = null,
     Object? hwModel = null,
     Object? region = null,
+    Object? modemPreset = null,
     Object? configDownloaded = null,
   }) {
     return _then(_$RadioConfigurationImpl(
@@ -148,6 +158,10 @@ class __$$RadioConfigurationImplCopyWithImpl<$Res>
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
               as Config_LoRaConfig_RegionCode,
+      modemPreset: null == modemPreset
+          ? _value.modemPreset
+          : modemPreset // ignore: cast_nullable_to_non_nullable
+              as Config_LoRaConfig_ModemPreset,
       configDownloaded: null == configDownloaded
           ? _value.configDownloaded
           : configDownloaded // ignore: cast_nullable_to_non_nullable
@@ -165,6 +179,7 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
       this.myNodeNum = 0,
       this.hwModel = HardwareModel.UNSET,
       this.region = Config_LoRaConfig_RegionCode.UNSET,
+      this.modemPreset = Config_LoRaConfig_ModemPreset.LONG_FAST,
       this.configDownloaded = false})
       : super._();
 
@@ -185,11 +200,14 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
   final Config_LoRaConfig_RegionCode region;
   @override
   @JsonKey()
+  final Config_LoRaConfig_ModemPreset modemPreset;
+  @override
+  @JsonKey()
   final bool configDownloaded;
 
   @override
   String toString() {
-    return 'RadioConfiguration(shortName: $shortName, longName: $longName, myNodeNum: $myNodeNum, hwModel: $hwModel, region: $region, configDownloaded: $configDownloaded)';
+    return 'RadioConfiguration(shortName: $shortName, longName: $longName, myNodeNum: $myNodeNum, hwModel: $hwModel, region: $region, modemPreset: $modemPreset, configDownloaded: $configDownloaded)';
   }
 
   @override
@@ -205,13 +223,15 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
                 other.myNodeNum == myNodeNum) &&
             (identical(other.hwModel, hwModel) || other.hwModel == hwModel) &&
             (identical(other.region, region) || other.region == region) &&
+            (identical(other.modemPreset, modemPreset) ||
+                other.modemPreset == modemPreset) &&
             (identical(other.configDownloaded, configDownloaded) ||
                 other.configDownloaded == configDownloaded));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, shortName, longName, myNodeNum,
-      hwModel, region, configDownloaded);
+      hwModel, region, modemPreset, configDownloaded);
 
   @JsonKey(ignore: true)
   @override
@@ -228,6 +248,7 @@ abstract class _RadioConfiguration extends RadioConfiguration {
       final int myNodeNum,
       final HardwareModel hwModel,
       final Config_LoRaConfig_RegionCode region,
+      final Config_LoRaConfig_ModemPreset modemPreset,
       final bool configDownloaded}) = _$RadioConfigurationImpl;
   const _RadioConfiguration._() : super._();
 
@@ -241,6 +262,8 @@ abstract class _RadioConfiguration extends RadioConfiguration {
   HardwareModel get hwModel;
   @override
   Config_LoRaConfig_RegionCode get region;
+  @override
+  Config_LoRaConfig_ModemPreset get modemPreset;
   @override
   bool get configDownloaded;
   @override

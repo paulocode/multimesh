@@ -176,6 +176,21 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i6.Future<void>);
 
   @override
+  _i6.Future<void> setModemPreset(
+    _i10.Config_LoRaConfig_ModemPreset? modemPreset, {
+    bool? upload = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setModemPreset,
+          [modemPreset],
+          {#upload: upload},
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
   _i6.Future<void> setMyNodeNum(
     int? myNodeNum, {
     bool? upload = true,

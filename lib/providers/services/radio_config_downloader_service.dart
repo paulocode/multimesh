@@ -96,6 +96,7 @@ class RadioConfigDownloaderService {
     if (payloadVariant == Config_PayloadVariant.lora) {
       final lora = config.lora;
       await _radioConfigService.setRegion(lora.region, upload: false);
+      await _radioConfigService.setModemPreset(lora.modemPreset, upload: false);
     }
   }
 

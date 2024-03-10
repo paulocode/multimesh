@@ -14,6 +14,8 @@ class RadioConfiguration with _$RadioConfiguration {
     @Default(HardwareModel.UNSET) HardwareModel hwModel,
     @Default(Config_LoRaConfig_RegionCode.UNSET)
     Config_LoRaConfig_RegionCode region,
+    @Default(Config_LoRaConfig_ModemPreset.LONG_FAST)
+    Config_LoRaConfig_ModemPreset modemPreset,
     @Default(false) bool configDownloaded,
   }) = _RadioConfiguration;
 
