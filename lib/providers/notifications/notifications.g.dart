@@ -24,7 +24,7 @@ final flutterLocalNotificationsPluginProvider =
 
 typedef FlutterLocalNotificationsPluginRef
     = FutureProviderRef<FlutterLocalNotificationsPlugin>;
-String _$showNotificationHash() => r'7c7221112f4a61be1ccd1d165293fcdc268e20f8';
+String _$showNotificationHash() => r'd3acfa3ffc7053f168c88d0b9a707b1f7ae4df46';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -57,15 +57,15 @@ class ShowNotificationFamily extends Family<AsyncValue<void>> {
   const ShowNotificationFamily();
 
   /// See also [showNotification].
-  ShowNotificationProvider call(
-    String title,
-    String text,
-    String callbackValue,
-  ) {
+  ShowNotificationProvider call({
+    required String title,
+    required String text,
+    required String callbackValue,
+  }) {
     return ShowNotificationProvider(
-      title,
-      text,
-      callbackValue,
+      title: title,
+      text: text,
+      callbackValue: callbackValue,
     );
   }
 
@@ -74,9 +74,9 @@ class ShowNotificationFamily extends Family<AsyncValue<void>> {
     covariant ShowNotificationProvider provider,
   ) {
     return call(
-      provider.title,
-      provider.text,
-      provider.callbackValue,
+      title: provider.title,
+      text: provider.text,
+      callbackValue: provider.callbackValue,
     );
   }
 
@@ -98,16 +98,16 @@ class ShowNotificationFamily extends Family<AsyncValue<void>> {
 /// See also [showNotification].
 class ShowNotificationProvider extends FutureProvider<void> {
   /// See also [showNotification].
-  ShowNotificationProvider(
-    String title,
-    String text,
-    String callbackValue,
-  ) : this._internal(
+  ShowNotificationProvider({
+    required String title,
+    required String text,
+    required String callbackValue,
+  }) : this._internal(
           (ref) => showNotification(
             ref as ShowNotificationRef,
-            title,
-            text,
-            callbackValue,
+            title: title,
+            text: text,
+            callbackValue: callbackValue,
           ),
           from: showNotificationProvider,
           name: r'showNotificationProvider',

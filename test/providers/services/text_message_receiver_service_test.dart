@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/models/chat_type.dart';
+import 'package:meshx/models/mesh_node.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pbserver.dart';
@@ -14,17 +15,20 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../common.dart';
 import '../../mock_stream.dart';
 import 'text_message_receiver_service_test.mocks.dart';
 
 @GenerateMocks([
   TextMessageRepository,
   RadioReader,
+  ShowNotification,
 ])
 void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> packetStream;
+  late MockShowNotification mockShowNotification;
 
   setUp(() {
     packetStream = MockStream();
@@ -32,6 +36,7 @@ void main() {
     when(textMessageRepository.add(textMessage: anyNamed('textMessage')))
         .thenAnswer((realInvocation) => Future.value(456));
     radioReader = MockRadioReader();
+    mockShowNotification = MockShowNotification();
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
   });
 
@@ -39,12 +44,23 @@ void main() {
     return TextMessageReceiverService(
       textMessageRepository: textMessageRepository,
       radioReader: radioReader,
-      // TODO
-      nodes: {},
+      nodes: {
+        123241: MeshNode(
+          channel: 1,
+          shortName: 'abc',
+          longName: 'ABC DEF',
+          nodeNum: 999,
+        ),
+      },
       configDownloaded: configDownloaded,
       myNodeNum: 111,
-      // TODO
-      showNotification: (title, text, callbackValue) async {},
+      showNotification: (title, text, callbackValue) async {
+        await mockShowNotification.showNotification(
+          title: title,
+          text: text,
+          callbackValue: callbackValue,
+        );
+      },
       onDispose: (_) {},
     );
   }
@@ -85,6 +101,32 @@ void main() {
     verify(
       textMessageRepository.add(
         textMessage: argThat(equals(message), named: 'textMessage'),
+      ),
+    );
+  });
+
+  test('notification', () async {
+    init();
+    await packetStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          id: 789,
+          channel: 1,
+          from: 123241,
+          to: TO_CHANNEL,
+          decoded: Data(
+            portnum: PortNum.TEXT_MESSAGE_APP,
+            payload: utf8.encode('abc'),
+          ),
+        ),
+      ),
+    );
+
+    verify(
+      mockShowNotification.showNotification(
+        title: argThat(equals('ABC DEF'), named: 'title'),
+        text: argThat(equals('abc'), named: 'text'),
+        callbackValue: argThat(equals('789'), named: 'callbackValue'),
       ),
     );
   });

@@ -16,3 +16,11 @@ ProviderContainer createContainer({
 
   return container;
 }
+
+abstract class ShowNotification {
+  Future<void> showNotification({
+    required String title,
+    required String text,
+    required String callbackValue,
+  });
+}

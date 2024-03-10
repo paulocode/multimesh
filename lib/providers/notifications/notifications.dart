@@ -29,11 +29,11 @@ Future<FlutterLocalNotificationsPlugin> flutterLocalNotificationsPlugin(
 
 @Riverpod(keepAlive: true)
 Future<void> showNotification(
-  ShowNotificationRef ref,
-  String title,
-  String text,
-  String callbackValue,
-) async {
+  ShowNotificationRef ref, {
+  required String title,
+  required String text,
+  required String callbackValue,
+}) async {
   final flutterLocalNotificationsPlugin =
       await ref.read(flutterLocalNotificationsPluginProvider.future);
   const androidNotificationDetails = AndroidNotificationDetails(

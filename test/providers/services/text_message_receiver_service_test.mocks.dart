@@ -12,6 +12,8 @@ import 'package:meshx/providers/ble/radio_reader.dart' as _i6;
 import 'package:meshx/providers/repository/text_message_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
+import '../../common.dart' as _i8;
+
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -170,4 +172,33 @@ class MockRadioReader extends _i1.Mock implements _i6.RadioReader {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [ShowNotification].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockShowNotification extends _i1.Mock implements _i8.ShowNotification {
+  MockShowNotification() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<void> showNotification({
+    required String? title,
+    required String? text,
+    required String? callbackValue,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #showNotification,
+          [],
+          {
+            #title: title,
+            #text: text,
+            #callbackValue: callbackValue,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

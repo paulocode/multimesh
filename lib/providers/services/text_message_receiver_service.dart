@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/ble_constants.dart';
@@ -30,7 +31,13 @@ TextMessageReceiverService textMessageReceiverService(
     myNodeNum:
         ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
     showNotification: (title, text, callbackValue) async {
-      ref.read(showNotificationProvider(title, text, callbackValue));
+      ref.read(
+        showNotificationProvider(
+          title: title,
+          text: text,
+          callbackValue: callbackValue,
+        ),
+      );
     },
     onDispose: ref.onDispose,
   );
@@ -66,6 +73,7 @@ class TextMessageReceiverService {
   final void Function(void Function() cb) _onDispose;
   final Future<void> Function(String, String, String) _showNotification;
   final int _myNodeNum;
+  final _logger = Logger();
 
   final StreamController<TextMessage> _streamController =
       StreamController.broadcast();
@@ -110,6 +118,7 @@ class TextMessageReceiverService {
         channel: packet.channel,
         time: DateTime.now(),
       );
+      _logger.i('Received text message from ${packet.from}');
       await _saveAndBroadcastMessage(channel, message);
     }
   }
