@@ -55,11 +55,17 @@ class ChannelCard extends StatelessWidget {
                 const Text('No messages'),
             ],
           ),
-          trailing: (_lastMessage != null)
-              ? Text(
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_lastMessage != null)
+                Text(
                   DateFormat.yMd().add_Hm().format(_lastMessage.time),
-                )
-              : const SizedBox(),
+                ),
+              const SizedBox(width: 20),
+              const Icon(Icons.chevron_right),
+            ],
+          ),
         ),
       ),
     );

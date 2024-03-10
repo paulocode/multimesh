@@ -12,33 +12,50 @@ class RadioConnectionScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final radioScanner = ref.watch(radioScannerProvider);
     final meshRadios = radioScanner.meshRadios;
+    final height = MediaQuery.of(context).size.height;
+    late final Widget body;
+
+    final connectedRadio = ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 500),
+      child: const ConnectedRadio(),
+    );
+
+    final scanList = ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 500),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 20),
+        child: Scrollbar(
+          child: ListView.builder(
+            itemCount: meshRadios.length,
+            itemBuilder: (context, index) {
+              final radio = meshRadios[index];
+              return RadioChoiceTile(
+                radio: radio,
+              );
+            },
+          ),
+        ),
+      ),
+    );
+
+    if (height < 500) {
+      body = Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [Flexible(child: connectedRadio), Flexible(child: scanList)],
+      );
+    } else {
+      body = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [connectedRadio, Expanded(child: scanList)],
+      );
+    }
+
     return ScaffoldMessenger(
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Radio Connection'),
         ),
-        body: Column(
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: const ConnectedRadio(),
-            ),
-            Expanded(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 500),
-                child: ListView.builder(
-                  itemCount: meshRadios.length,
-                  itemBuilder: (context, index) {
-                    final radio = meshRadios[index];
-                    return RadioChoiceTile(
-                      radio: radio,
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
+        body: body,
         floatingActionButton: CircleAvatar(
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           radius: 50,

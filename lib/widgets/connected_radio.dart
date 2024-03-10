@@ -41,6 +41,7 @@ class ConnectedRadio extends ConsumerWidget {
           ),
           if (radioConfig.configDownloaded)
             Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(radioConfig.longName),
