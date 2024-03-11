@@ -73,4 +73,18 @@ void main() {
     final channels = container.read(channelServiceProvider);
     expect(channels.every((element) => !element.used), isTrue);
   });
+
+  test('valid QR', () async {
+    final isValid = container
+        .read(channelServiceProvider.notifier)
+        .validateQr('https://meshtastic.org/e/#kasldjaslkdjaslkdjaslkdjaslkd');
+    expect(isValid, isTrue);
+  });
+
+  test('invalid QR', () async {
+    final isValid = container
+        .read(channelServiceProvider.notifier)
+        .validateQr('example.com');
+    expect(isValid, isFalse);
+  });
 }

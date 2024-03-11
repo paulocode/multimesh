@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/radio_connector_state.dart';
 import '../protobufs/generated/meshtastic/config.pb.dart';
@@ -14,8 +15,6 @@ class RadioConfigScreen extends ConsumerStatefulWidget {
 }
 
 class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
@@ -38,86 +37,128 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              Column(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          enabled: false,
-                          initialValue: radioConfig.longName,
-                          decoration: const InputDecoration(
-                            label: Text('Radio Name'),
+                  Card(
+                    child: ListTile(
+                      style: ListTileStyle.list,
+                      onTap: () {
+                        context.push('/channelQrScanner');
+                      },
+                      title: const Text('Channels (Scan QR)'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: DropdownButtonFormField(
+                      value: Config_LoRaConfig_RegionCode.values
+                          .indexOf(radioConfig.region),
+                      items: [
+                        for (final region
+                            in Config_LoRaConfig_RegionCode.values)
+                          DropdownMenuItem(
+                            value: region.value,
+                            child: Text(region.name),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Expanded(
-                        child: DropdownButtonFormField(
-                          value: Config_LoRaConfig_RegionCode.values
-                              .indexOf(radioConfig.region),
-                          items: [
-                            for (final region
-                                in Config_LoRaConfig_RegionCode.values)
-                              DropdownMenuItem(
-                                value: region.value,
-                                child: Text(region.name),
-                              ),
-                          ],
-                          onChanged: (value) {
-                            ref
-                                .read(radioConfigServiceProvider.notifier)
-                                .setRegion(
-                                  Config_LoRaConfig_RegionCode.values[value!],
-                                );
-                          },
-                          decoration:
-                              const InputDecoration(label: Text('Region')),
-                        ),
-                      ),
-                    ],
+                      ],
+                      onChanged: (value) {
+                        ref.read(radioConfigServiceProvider.notifier).setRegion(
+                              Config_LoRaConfig_RegionCode.values[value!],
+                            );
+                      },
+                      decoration: const InputDecoration(label: Text('Region')),
+                    ),
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 32,
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('LoRa'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('User'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('Bluetooth'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('Device'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('Display'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('Network'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('Position'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      onTap: () {},
+                      title: const Text('Power'),
+                      trailing: const Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            ElevatedButton.icon(
-              onPressed: null,
-              label: const Text('Save'),
-              icon: const Icon(Icons.save),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton.icon(
-                  onPressed: null,
-                  label: const Text('Power Off'),
-                  icon: const Icon(Icons.power_settings_new_rounded),
-                ),
-                OutlinedButton.icon(
-                  onPressed: null,
-                  label: const Text('Reboot'),
-                  icon: const Icon(Icons.restart_alt),
-                ),
-              ],
-            ),
-          ],
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: null,
+                    label: const Text('Power Off'),
+                    icon: const Icon(Icons.power_settings_new_rounded),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: null,
+                    label: const Text('Reboot'),
+                    icon: const Icon(Icons.restart_alt),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

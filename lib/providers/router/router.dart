@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/chat_type.dart';
 import '../../screens/chat.dart';
+import '../../screens/config/channel_qr_scanner.dart';
 import '../../screens/radio_config.dart';
 import '../../screens/tab_parent.dart';
 
@@ -23,6 +24,12 @@ GoRouter goRouter(GoRouterRef ref) {
         path: '/radioConfig',
         builder: (context, state) {
           return const RadioConfigScreen();
+        },
+      ),
+      GoRoute(
+        path: '/channelQrScanner',
+        builder: (context, state) {
+          return const ChannelQrScanner();
         },
       ),
       GoRoute(

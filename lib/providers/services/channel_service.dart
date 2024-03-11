@@ -48,4 +48,8 @@ class ChannelService extends _$ChannelService {
       _logger.i('Added channel');
     }
   }
+
+  bool validateQr(String? qrValue) {
+    return qrValue?.startsWith('https://meshtastic.org/e/#') ?? false;
+  }
 }
