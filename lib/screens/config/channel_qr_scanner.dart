@@ -35,12 +35,13 @@ class _ChannelQrScannerState extends ConsumerState<ChannelQrScanner> {
               await controller.stop();
               // ignore: use_build_context_synchronously
               final confirmed = await _showConfirmationDialog(context);
-              if (!context.mounted) {
-                return;
-              }
               if (confirmed ?? false) {
-                ref.read(channelServiceProvider.notifier).processQr(qrValue);
-                context.pop();
+                await ref
+                    .read(channelServiceProvider.notifier)
+                    .processQr(qrValue);
+                if (context.mounted) {
+                  context.pop();
+                }
               } else {
                 await controller.start();
               }
