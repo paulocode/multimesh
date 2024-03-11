@@ -27,7 +27,8 @@ class _ChannelQrScannerState extends ConsumerState<ChannelQrScanner> {
         onDetect: (capture) async {
           final barcodes = capture.barcodes;
           for (final barcode in barcodes) {
-            debugPrint('Scanned QR ${barcode.rawValue}');
+            qrValue = barcode.rawValue;
+            debugPrint('Scanned QR $qrValue');
             final isValid =
                 ref.read(channelServiceProvider.notifier).validateQr(qrValue);
             if (isValid) {
