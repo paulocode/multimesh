@@ -41,6 +41,10 @@ class RadioConnector extends _$RadioConnector {
     if (state is Connecting) {
       return;
     }
+    
+    // there doesn't seem to be a way to "test" if BT is on so just attempt call turnOn()
+    // if failure an exception is thrown, if already on it just returns.
+    await FlutterBluePlus.turnOn();
 
     final device = radio.device;
     final radioId = device.remoteId.str;
