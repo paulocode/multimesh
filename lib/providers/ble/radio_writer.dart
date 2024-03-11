@@ -42,6 +42,7 @@ class RadioWriter {
   Future<int> sendMeshPacket({
     required int to,
     int channel = 0,
+    bool wantAck = false,
     required PortNum portNum,
     required Uint8List payload,
   }) async {
@@ -50,7 +51,7 @@ class RadioWriter {
       to: to,
       hopLimit: 3,
       id: id,
-      wantAck: true,
+      wantAck: wantAck,
       priority: MeshPacket_Priority.RELIABLE,
       channel: channel,
       decoded: Data(

@@ -124,27 +124,37 @@ void main() {
       ),
     );
 
-    final setChannel0 = AdminMessage.fromBuffer(verification.captured[0] as List<int>).setChannel;
+    final setChannel0 =
+        AdminMessage.fromBuffer(verification.captured[0] as List<int>)
+            .setChannel;
     expect(setChannel0.index, equals(0));
     expect(setChannel0.role, equals(Channel_Role.PRIMARY));
-    expect(base64.encode(setChannel0.settings.psk), equals('isDhHrNpJPlGX3GBJBX6kjuK7KQNp4Z0M7OTDpnX5N4='));
+    expect(
+      base64.encode(setChannel0.settings.psk),
+      equals('isDhHrNpJPlGX3GBJBX6kjuK7KQNp4Z0M7OTDpnX5N4='),
+    );
     expect(setChannel0.settings.name, equals('private'));
 
-    final setChannel1 = AdminMessage.fromBuffer(verification.captured[1] as List<int>).setChannel;
+    final setChannel1 =
+        AdminMessage.fromBuffer(verification.captured[1] as List<int>)
+            .setChannel;
     expect(setChannel1.index, equals(1));
     expect(setChannel1.role, equals(Channel_Role.SECONDARY));
     expect(setChannel1.settings.psk, equals([1]));
     expect(setChannel1.settings.name, equals(''));
 
-    for (var i=2; i<MESHTASTIC_MAX_CHANNELS; i++) {
-      final setChanneln = AdminMessage
-          .fromBuffer(verification.captured[i] as List<int>)
-          .setChannel;
+    for (var i = 2; i < MESHTASTIC_MAX_CHANNELS; i++) {
+      final setChanneln =
+          AdminMessage.fromBuffer(verification.captured[i] as List<int>)
+              .setChannel;
       expect(setChanneln.index, equals(i));
       expect(setChanneln.role, equals(Channel_Role.DISABLED));
     }
 
-    final lora = AdminMessage.fromBuffer(verification.captured.last as List<int>).setConfig.lora;
+    final lora =
+        AdminMessage.fromBuffer(verification.captured.last as List<int>)
+            .setConfig
+            .lora;
     expect(lora.usePreset, isTrue);
     expect(lora.region, equals(Config_LoRaConfig_RegionCode.US));
     expect(lora.hopLimit, equals(3));

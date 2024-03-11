@@ -49,6 +49,7 @@ void main() {
       radioWriter.sendMeshPacket(
         to: TO_CHANNEL,
         channel: 1,
+        wantAck: true,
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: anyNamed('payload'),
       ),
@@ -77,6 +78,7 @@ void main() {
       radioWriter.sendMeshPacket(
         to: TO_CHANNEL,
         channel: 1,
+        wantAck: true,
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: captureAnyNamed('payload'),
       ),

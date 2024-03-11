@@ -90,6 +90,7 @@ class MockRadioWriter extends _i1.Mock implements _i7.RadioWriter {
   _i5.Future<int> sendMeshPacket({
     required int? to,
     int? channel = 0,
+    bool? wantAck = false,
     required _i8.PortNum? portNum,
     required _i9.Uint8List? payload,
   }) =>
@@ -100,6 +101,7 @@ class MockRadioWriter extends _i1.Mock implements _i7.RadioWriter {
           {
             #to: to,
             #channel: channel,
+            #wantAck: wantAck,
             #portNum: portNum,
             #payload: payload,
           },

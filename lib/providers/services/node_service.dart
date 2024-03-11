@@ -43,7 +43,6 @@ class NodeService extends _$NodeService {
       return;
     }
 
-
     late final MeshNode meshNode;
 
     if (user.id.trim().isEmpty) {

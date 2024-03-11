@@ -38,6 +38,7 @@ Future<void> sendTextMessage(
   final packetId = await radioWriter.sendMeshPacket(
     channel: chatType.channel,
     to: message.to,
+    wantAck: true,
     portNum: PortNum.TEXT_MESSAGE_APP,
     payload: utf8.encode(text),
   );

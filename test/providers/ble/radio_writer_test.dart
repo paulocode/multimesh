@@ -48,7 +48,7 @@ void main() {
     expect(capturedPacket.id, equals(id));
     expect(capturedPacket.channel, equals(456));
     expect(capturedPacket.hopLimit, equals(3));
-    expect(capturedPacket.wantAck, isTrue);
+    expect(capturedPacket.wantAck, isFalse);
     expect(capturedPacket.priority, MeshPacket_Priority.RELIABLE);
     expect(capturedPacket.decoded.portnum, PortNum.ADMIN_APP);
     expect(capturedPacket.decoded.payload, equals([1, 2, 3]));
