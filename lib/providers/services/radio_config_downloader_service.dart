@@ -88,7 +88,7 @@ class RadioConfigDownloaderService {
 
   Future<void> _processMyInfo(MyNodeInfo myInfo) async {
     _myNodeNum = myInfo.myNodeNum;
-    await _radioConfigService.setMyNodeNum(myInfo.myNodeNum, upload: false);
+    await _radioConfigService.setMyNodeNum(myInfo.myNodeNum);
   }
 
   Future<void> _processConfigPacket(Config config) async {

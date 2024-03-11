@@ -44,10 +44,7 @@ class RadioConfigService extends _$RadioConfigService {
     state = state.copyWith(modemPreset: modemPreset);
   }
 
-  Future<void> setMyNodeNum(
-    int myNodeNum, {
-    bool upload = true,
-  }) async {
+  Future<void> setMyNodeNum(int myNodeNum) async {
     state = state.copyWith(myNodeNum: myNodeNum);
   }
 

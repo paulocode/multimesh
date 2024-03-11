@@ -80,7 +80,7 @@ void main() {
 
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
 
-    await untilCalled(radioConfigService.setMyNodeNum(123, upload: false))
+    await untilCalled(radioConfigService.setMyNodeNum(123))
         .timeout(const Duration(seconds: 1));
   });
 

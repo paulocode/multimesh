@@ -191,15 +191,10 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> setMyNodeNum(
-    int? myNodeNum, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
+  _i6.Future<void> setMyNodeNum(int? myNodeNum) => (super.noSuchMethod(
         Invocation.method(
           #setMyNodeNum,
           [myNodeNum],
-          {#upload: upload},
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

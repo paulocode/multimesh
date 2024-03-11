@@ -82,15 +82,25 @@ class ChannelService extends _$ChannelService {
     _logger.i(channelSet);
 
     final settings = channelSet.settings;
-    for (final setting in settings) {
-      final index = settings.indexOf(setting);
-      final adminMessage = AdminMessage(
-        setChannel: Channel(
-          settings: setting,
-          index: setting.id,
-          role: index == 0 ? Channel_Role.PRIMARY : Channel_Role.SECONDARY,
-        ),
-      );
+    for (var i = 0; i < MESHTASTIC_MAX_CHANNELS; i++) {
+      late final AdminMessage adminMessage;
+      if (i < settings.length) {
+        final setting = settings[i];
+        adminMessage = AdminMessage(
+          setChannel: Channel(
+            settings: setting,
+            index: i,
+            role: i == 0 ? Channel_Role.PRIMARY : Channel_Role.SECONDARY,
+          ),
+        );
+      } else {
+        adminMessage = AdminMessage(
+          setChannel: Channel(
+            index: i,
+            role: Channel_Role.DISABLED,
+          ),
+        );
+      }
 
       await _radioWriter.sendMeshPacket(
         to: _myNodeNum,
