@@ -39,6 +39,7 @@ class _ChannelQrScannerState extends ConsumerState<ChannelQrScanner> {
                 return;
               }
               if (confirmed ?? false) {
+                ref.read(channelServiceProvider.notifier).processQr(qrValue);
                 context.pop();
               } else {
                 await controller.start();
