@@ -83,17 +83,21 @@ void main() {
     expect(nodes[123]?.channel, equals(1));
   });
 
-  test('ignore blank node', () async {
+  test('blank node', () async {
     await stream.emit(
       FromRadio(
         nodeInfo: NodeInfo(
           num: 123,
+          channel: 2,
         ),
       ),
     );
 
     final nodes = container.read(nodeServiceProvider);
-    expect(nodes.length, equals(0));
+    expect(nodes[123]?.nodeNum, equals(123));
+    expect(nodes[123]?.shortName, equals('?????'));
+    expect(nodes[123]?.longName, equals('?????'));
+    expect(nodes[123]?.channel, equals(2));
   });
 
   test('add 2 nodes', () async {

@@ -43,16 +43,26 @@ class NodeService extends _$NodeService {
       return;
     }
 
+
+    late final MeshNode meshNode;
+
     if (user.id.trim().isEmpty) {
-      _logger.i('Skipping blank node');
-      return;
+      meshNode = MeshNode(
+        nodeNum: nodeNum,
+        longName: '?????',
+        shortName: '?????',
+        channel: channel,
+        id: user.id,
+      );
+    } else {
+      meshNode = MeshNode(
+        nodeNum: nodeNum,
+        longName: user.longName,
+        shortName: user.shortName,
+        channel: channel,
+        id: user.id,
+      );
     }
-    final meshNode = MeshNode(
-      nodeNum: nodeNum,
-      longName: user.longName,
-      shortName: user.shortName,
-      channel: channel,
-    );
 
     state = {nodeNum: meshNode, ...state};
 

@@ -50,6 +50,7 @@ void main() {
           shortName: 'abc',
           longName: 'ABC DEF',
           nodeNum: 999,
+          id: '!abc',
         ),
       },
       configDownloaded: configDownloaded,
