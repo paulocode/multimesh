@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,9 +46,12 @@ class RadioConnectionScreen extends ConsumerWidget {
         children: [Flexible(child: connectedRadio), Flexible(child: scanList)],
       );
     } else {
-      body = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [connectedRadio, Expanded(child: scanList)],
+      body = SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: Platform.isIOS ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+          children: [connectedRadio, Expanded(child: scanList)],
+        ),
       );
     }
 
