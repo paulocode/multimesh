@@ -41,7 +41,7 @@ class ChannelListScreen extends ConsumerWidget {
                 channel: channel,
                 lastMessage: lastMessage,
                 lastMessageShortName: lastSender?.shortName,
-                index: index,
+                index: index + 1,
               );
             },
           );
