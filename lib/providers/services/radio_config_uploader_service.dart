@@ -44,7 +44,7 @@ class RadioConfigUploaderService {
 
     _logger.i('Setting region...\n$adminMessage');
 
-    await _radioWriter.sendMeshPacket(
+    _radioWriter.sendMeshPacket(
       to: nodeNum,
       portNum: PortNum.ADMIN_APP,
       payload: adminMessage.writeToBuffer(),

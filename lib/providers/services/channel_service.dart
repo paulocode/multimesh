@@ -104,7 +104,7 @@ class ChannelService extends _$ChannelService {
         );
       }
 
-      await _radioWriter.sendMeshPacket(
+      _radioWriter.sendMeshPacket(
         to: _myNodeNum,
         portNum: PortNum.ADMIN_APP,
         payload: adminMessage.writeToBuffer(),
@@ -113,7 +113,7 @@ class ChannelService extends _$ChannelService {
 
     final adminMessage =
         AdminMessage(setConfig: Config(lora: channelSet.loraConfig));
-    await _radioWriter.sendMeshPacket(
+    _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,
       payload: adminMessage.writeToBuffer(),
