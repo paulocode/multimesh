@@ -55,9 +55,9 @@ class TextMessageStreamService {
 
   Future<void> _loadInitialMessagesFromLocal() async {
     _currentStreamState = switch (_chatType) {
-      DirectMessageChat() => await _textMessageRepository.getBy(
-          toNode: _myNodeNum,
-          fromNode: _chatType.dmNode,
+      DirectMessageChat() => await _textMessageRepository.getDirectMessagesBy(
+          myNodeNum: _myNodeNum,
+          otherNodeNum: _chatType.dmNode,
           channel: _chatType.channel,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
         ),
@@ -83,9 +83,9 @@ class TextMessageStreamService {
 
     switch (_chatType) {
       case DirectMessageChat():
-        totalSavedMessages = await _textMessageRepository.count(
-          toNode: _myNodeNum,
-          fromNode: _chatType.dmNode,
+        totalSavedMessages = await _textMessageRepository.countDirectMessagesBy(
+          myNodeNum: _myNodeNum,
+          otherNodeNum: _chatType.dmNode,
           channel: _chatType.channel,
         );
       case ChannelChat():
@@ -101,9 +101,9 @@ class TextMessageStreamService {
   Future<void> loadOlderMessages() async {
     final prevLen = _currentStreamState.length;
     final oldMessages = switch (_chatType) {
-      DirectMessageChat() => await _textMessageRepository.getBy(
-          toNode: _myNodeNum,
-          fromNode: _chatType.dmNode,
+      DirectMessageChat() => await _textMessageRepository.getDirectMessagesBy(
+          myNodeNum: _myNodeNum,
+          otherNodeNum: _chatType.dmNode,
           channel: _chatType.channel,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
           offset: prevLen,

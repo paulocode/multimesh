@@ -93,25 +93,18 @@ class TextMessageRepository {
     ].last;
   }
 
-  Future<List<TextMessage>> getBy({
-    required int toNode,
-    int? fromNode,
+  Future<List<TextMessage>> getDirectMessagesBy({
+    required int myNodeNum,
+    required int otherNodeNum,
     required int channel,
     required int limit,
     int offset = 0,
   }) async {
-    var where = 'toNode = ? AND channel = ?';
-    final whereArgs = [toNode, channel];
-
-    if (fromNode != null) {
-      where += ' AND fromNode = ?';
-      whereArgs.add(fromNode);
-    }
-
     final result = await _database.query(
       'text_messages',
-      where: where,
-      whereArgs: whereArgs,
+      where:
+          '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND channel = ?',
+      whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, channel],
       offset: offset,
       orderBy: 'id ASC',
       limit: limit,
@@ -139,22 +132,63 @@ class TextMessageRepository {
     ];
   }
 
+  Future<List<TextMessage>> getBy({
+    required int toNode,
+    required int channel,
+    required int limit,
+    int offset = 0,
+  }) async {
+    final result = await _database.query(
+      'text_messages',
+      where: 'toNode = ? AND channel = ?',
+      whereArgs: [toNode, channel],
+      offset: offset,
+      orderBy: 'id ASC',
+      limit: limit,
+    );
+
+    return [
+      for (final {
+            'packetId': packetId as int,
+            'text': text as String,
+            'toNode': to as int,
+            'fromNode': from as int,
+            'channel': channel as int,
+            'time': time as int,
+            'state': state as int
+          } in result)
+        TextMessage(
+          packetId: packetId,
+          text: text,
+          from: from,
+          to: to,
+          channel: channel,
+          time: DateTime.fromMillisecondsSinceEpoch(time),
+          state: TextMessageStatus.values[state],
+        ),
+    ];
+  }
+
+  Future<int> countDirectMessagesBy({
+    required int channel,
+    required int myNodeNum,
+    required int otherNodeNum,
+  }) async {
+    final result = await _database.rawQuery(
+      'SELECT COUNT(*) FROM text_messages WHERE ((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND channel = ?',
+      [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, channel],
+    );
+
+    return Sqflite.firstIntValue(result) ?? 0;
+  }
+
   Future<int> count({
     required int channel,
     required int toNode,
-    int? fromNode,
   }) async {
-    var where = 'toNode = ? AND channel = ?';
-    final whereArgs = [toNode, channel];
-
-    if (fromNode != null) {
-      where += ' AND fromNode = ?';
-      whereArgs.add(fromNode);
-    }
-
     final result = await _database.rawQuery(
-      'SELECT COUNT(*) FROM text_messages WHERE $where',
-      whereArgs,
+      'SELECT COUNT(*) FROM text_messages WHERE toNode = ? AND channel = ?',
+      [toNode, channel],
     );
 
     return Sqflite.firstIntValue(result) ?? 0;

@@ -31,7 +31,7 @@ class NodesScreen extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               title: Text(
-                node.longName,
+                node.longName + node.channel.toString(),
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

@@ -57,18 +57,18 @@ void main() {
     ).thenAnswer((_) => Future.value(BATCH_NUM_MESSAGES_TO_LOAD * 5));
 
     when(
-      textMessageRepository.getBy(
-        toNode: 123,
-        fromNode: 777,
+      textMessageRepository.getDirectMessagesBy(
+        myNodeNum: 123,
+        otherNodeNum: 777,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
       ),
     ).thenAnswer((_) => Future.value(_generateMessages(toNode: 123)));
 
     when(
-      textMessageRepository.count(
-        toNode: 123,
-        fromNode: 777,
+      textMessageRepository.countDirectMessagesBy(
+        myNodeNum: 123,
+        otherNodeNum: 777,
         channel: 1,
       ),
     ).thenAnswer((_) => Future.value(BATCH_NUM_MESSAGES_TO_LOAD));
@@ -93,15 +93,26 @@ void main() {
       textMessageReceiverService: textMessageReceiverService,
       onDispose: (_) {},
     );
-    await untilCalled(
-      textMessageRepository.getBy(
-        toNode: anyNamed('toNode'),
-        fromNode: anyNamed('fromNode'),
-        channel: anyNamed('channel'),
-        limit: anyNamed('limit'),
-        offset: anyNamed('offset'),
-      ),
-    );
+    if (chatType is ChannelChat) {
+      await untilCalled(
+        textMessageRepository.getBy(
+          toNode: anyNamed('toNode'),
+          channel: anyNamed('channel'),
+          limit: anyNamed('limit'),
+          offset: anyNamed('offset'),
+        ),
+      );
+    } else if (chatType is DirectMessageChat) {
+      await untilCalled(
+        textMessageRepository.getDirectMessagesBy(
+          myNodeNum: anyNamed('myNodeNum'),
+          otherNodeNum: anyNamed('otherNodeNum'),
+          channel: anyNamed('channel'),
+          limit: anyNamed('limit'),
+          offset: anyNamed('offset'),
+        ),
+      );
+    }
   }
 
   test('load initial channel messages', () async {
@@ -235,9 +246,9 @@ void main() {
     await init(const DirectMessageChat(dmNode: 777, channel: 1));
     final messagesFuture = textMessageStreamService.stream.first;
     when(
-      textMessageRepository.getBy(
-        toNode: 123,
-        fromNode: 777,
+      textMessageRepository.getDirectMessagesBy(
+        myNodeNum: 123,
+        otherNodeNum: 777,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,

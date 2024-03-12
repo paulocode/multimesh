@@ -48,7 +48,6 @@ class NodeService extends _$NodeService {
     if (user.id.trim().isEmpty) {
       final nodeNumHex = nodeNum.toRadixString(16).padLeft(4, '0');
       final shortName = nodeNumHex.substring(nodeNumHex.length - 4);
-      print(nodeNumHex);
       meshNode = MeshNode(
         nodeNum: nodeNum,
         longName: 'Meshtastic $shortName',

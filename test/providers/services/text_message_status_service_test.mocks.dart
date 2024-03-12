@@ -102,20 +102,20 @@ class MockTextMessageRepository extends _i1.Mock
       ) as _i4.Future<_i2.TextMessage>);
 
   @override
-  _i4.Future<List<_i2.TextMessage>> getBy({
-    required int? toNode,
-    int? fromNode,
+  _i4.Future<List<_i2.TextMessage>> getDirectMessagesBy({
+    required int? myNodeNum,
+    required int? otherNodeNum,
     required int? channel,
     required int? limit,
     int? offset = 0,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getBy,
+          #getDirectMessagesBy,
           [],
           {
-            #toNode: toNode,
-            #fromNode: fromNode,
+            #myNodeNum: myNodeNum,
+            #otherNodeNum: otherNodeNum,
             #channel: channel,
             #limit: limit,
             #offset: offset,
@@ -126,10 +126,50 @@ class MockTextMessageRepository extends _i1.Mock
       ) as _i4.Future<List<_i2.TextMessage>>);
 
   @override
+  _i4.Future<List<_i2.TextMessage>> getBy({
+    required int? toNode,
+    required int? channel,
+    required int? limit,
+    int? offset = 0,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getBy,
+          [],
+          {
+            #toNode: toNode,
+            #channel: channel,
+            #limit: limit,
+            #offset: offset,
+          },
+        ),
+        returnValue:
+            _i4.Future<List<_i2.TextMessage>>.value(<_i2.TextMessage>[]),
+      ) as _i4.Future<List<_i2.TextMessage>>);
+
+  @override
+  _i4.Future<int> countDirectMessagesBy({
+    required int? channel,
+    required int? myNodeNum,
+    required int? otherNodeNum,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #countDirectMessagesBy,
+          [],
+          {
+            #channel: channel,
+            #myNodeNum: myNodeNum,
+            #otherNodeNum: otherNodeNum,
+          },
+        ),
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
+
+  @override
   _i4.Future<int> count({
     required int? channel,
     required int? toNode,
-    int? fromNode,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -138,7 +178,6 @@ class MockTextMessageRepository extends _i1.Mock
           {
             #channel: channel,
             #toNode: toNode,
-            #fromNode: fromNode,
           },
         ),
         returnValue: _i4.Future<int>.value(0),
