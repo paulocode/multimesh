@@ -20,9 +20,10 @@ class TextMessageStatusIndicator extends ConsumerWidget {
           TextMessageStatus.RADIO_ERROR => Icons.error_outline,
           TextMessageStatus.MAX_RETRANSMIT => Icons.group_off_outlined,
           TextMessageStatus.OK => Icons.check_circle,
-          _ => Icons.check_circle_outline,
+          TextMessageStatus.RECVD_BY_RADIO => Icons.check_circle_outline,
+          _ => null,
         },
-      _ => Icons.check_circle_outline,
+      _ => null,
     };
 
     return Positioned(

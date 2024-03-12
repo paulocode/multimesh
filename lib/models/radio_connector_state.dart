@@ -20,11 +20,13 @@ class Connected extends WithRadioId {
   Connected({
     required this.bleCharacteristics,
     required this.device,
+    required this.isNewRadio,
     required super.radioId,
   });
 
   final BleCharacteristics bleCharacteristics;
   final BluetoothDevice device;
+  final bool isNewRadio;
 }
 
 class ConnectionError extends WithRadioId {

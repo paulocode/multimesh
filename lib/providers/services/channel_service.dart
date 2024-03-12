@@ -23,8 +23,6 @@ class ChannelService extends _$ChannelService {
   final _logger = Logger();
   late RadioWriter _radioWriter;
   late int _myNodeNum;
-  var _completer = Completer<void>();
-  var _packetIdNeedAck = 0;
 
   @override
   List<MeshChannel> build() {
@@ -63,13 +61,6 @@ class ChannelService extends _$ChannelService {
         ...state.sublist(channel.index + 1),
       ];
       _logger.i('Added channel');
-    } else if (packet.whichPayloadVariant() ==
-        FromRadio_PayloadVariant.queueStatus) {
-      // TODO: handle queueStatus properly
-      if (!_completer.isCompleted &&
-          _packetIdNeedAck == packet.queueStatus.meshPacketId) {
-        _completer.complete();
-      }
     }
   }
 
@@ -113,16 +104,10 @@ class ChannelService extends _$ChannelService {
         );
       }
 
-      _completer = Completer();
-      _packetIdNeedAck = await _radioWriter.sendMeshPacket(
+      await _radioWriter.sendMeshPacket(
         to: _myNodeNum,
         portNum: PortNum.ADMIN_APP,
         payload: adminMessage.writeToBuffer(),
-      );
-
-      await _completer.future.timeout(
-        const Duration(seconds: 1),
-        onTimeout: () {},
       );
     }
 

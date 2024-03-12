@@ -38,6 +38,7 @@ void main() {
       ),
       device: MockBluetoothDevice(),
       radioId: 'radioId',
+      isNewRadio: true,
     );
 
     radioReaderService = RadioReader(

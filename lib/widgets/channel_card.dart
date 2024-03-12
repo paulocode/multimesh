@@ -38,7 +38,7 @@ class ChannelCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           leading: Text(
-              (_index + 1).toString(),
+            (_index + 1).toString(),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

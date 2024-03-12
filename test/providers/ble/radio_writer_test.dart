@@ -21,7 +21,7 @@ void main() {
 
   setUp(() {
     toRadio = MockBluetoothCharacteristic();
-    radioWriter = RadioWriter(toRadio: toRadio);
+    radioWriter = RadioWriter()..toRadio = toRadio;
   });
 
   test('send wantConfig', () {

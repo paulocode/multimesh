@@ -19,6 +19,7 @@ class RadioConnector extends _$RadioConnector {
   late BleCharacteristicsFinder _bleCharacteristicsFinder;
   late LocalPlatform _localPlatform;
   StreamSubscription<BluetoothConnectionState>? _bleConnectSubscription;
+  String? _currentRadioId;
 
   @override
   RadioConnectorState build() {
@@ -59,8 +60,11 @@ class RadioConnector extends _$RadioConnector {
         radioId: radioId,
         bleCharacteristics:
             await _bleCharacteristicsFinder.findCharacteristics(device),
+        isNewRadio: _currentRadioId != radioId,
         device: device,
       );
+
+      _currentRadioId = radioId;
 
       await _subscribeConnectionState(device);
     } catch (e, stackTrace) {

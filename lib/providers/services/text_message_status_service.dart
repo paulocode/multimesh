@@ -18,7 +18,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   late RadioReader _radioReader;
   late TextMessage _textMessage;
   late KeepAliveLink _link;
-  late StreamSubscription<FromRadio> _packetListener;
+  StreamSubscription<FromRadio>? _packetListener;
   late Timer _timer;
   late int _packetId;
 
@@ -46,7 +46,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
 
   void _setTimeout(Duration timeout) {
     _timer = Timer(timeout, () async {
-      await _packetListener.cancel();
+      await _packetListener?.cancel();
       _link.close();
       state = const AsyncValue.data(TextMessageStatus.RADIO_ERROR);
       await _textMessageRepository.updateStatusByPacketId(
@@ -60,26 +60,31 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   void _listenToStatusUpdates() {
     _packetListener = _radioReader.onPacketReceived().listen((event) async {
       final decoded = event.packet.decoded;
-      if (decoded.portnum != PortNum.ROUTING_APP) {
-        return;
+      if (decoded.portnum == PortNum.ROUTING_APP &&
+          decoded.requestId == packetId) {
+        final routing = Routing.fromBuffer(decoded.payload);
+        final status = switch (routing.errorReason) {
+          Routing_Error.NONE => TextMessageStatus.OK,
+          Routing_Error.MAX_RETRANSMIT => TextMessageStatus.MAX_RETRANSMIT,
+          _ => TextMessageStatus.RADIO_ERROR
+        };
+        state = AsyncValue.data(status);
+        await _textMessageRepository.updateStatusByPacketId(
+          packetId: _packetId,
+          status: status,
+        );
+        _link.close();
+        _timer.cancel();
+      } else if (event.whichPayloadVariant() ==
+              FromRadio_PayloadVariant.queueStatus &&
+          event.queueStatus.meshPacketId == _packetId) {
+        state = const AsyncValue.data(TextMessageStatus.RECVD_BY_RADIO);
+        await _textMessageRepository.updateStatusByPacketId(
+          packetId: _packetId,
+          status: TextMessageStatus.RECVD_BY_RADIO,
+        );
       }
-      if (decoded.requestId != packetId) {
-        return;
-      }
-      final routing = Routing.fromBuffer(decoded.payload);
-      final status = switch (routing.errorReason) {
-        Routing_Error.NONE => TextMessageStatus.OK,
-        Routing_Error.MAX_RETRANSMIT => TextMessageStatus.MAX_RETRANSMIT,
-        _ => TextMessageStatus.RADIO_ERROR
-      };
-      state = AsyncValue.data(status);
-      await _textMessageRepository.updateStatusByPacketId(
-        packetId: _packetId,
-        status: status,
-      );
-      _link.close();
-      _timer.cancel();
     });
-    ref.onDispose(_packetListener.cancel);
+    ref.onDispose(() => _packetListener?.cancel());
   }
 }
