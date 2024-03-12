@@ -35,7 +35,7 @@ Future<void> sendTextMessage(
     time: DateTime.now(),
   );
 
-  final packetId = await radioWriter.sendMeshPacket(
+  final packetId = radioWriter.sendMeshPacket(
     channel: chatType.channel,
     to: message.to,
     wantAck: true,

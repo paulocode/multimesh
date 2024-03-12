@@ -70,13 +70,13 @@ class RadioWriter {
     _packetSub = radioReader.onPacketReceived().listen(_packetListener);
   }
 
-  Future<int> sendMeshPacket({
+  int sendMeshPacket({
     required int to,
     int channel = 0,
     bool wantAck = false,
     required PortNum portNum,
     required Uint8List payload,
-  }) async {
+  }) {
     final id = _generatePacketId();
     final meshPacket = MeshPacket(
       to: to,
@@ -93,7 +93,7 @@ class RadioWriter {
     _logger.i('Queueing MeshPacket...\n$meshPacket');
     if (_packetQueue.isEmpty) {
       _packetQueue.add(meshPacket);
-      unawaited(_startPacketQueue());
+      _startPacketQueue();
     } else {
       _packetQueue.add(meshPacket);
     }
