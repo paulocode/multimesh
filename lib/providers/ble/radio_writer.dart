@@ -121,7 +121,7 @@ class RadioWriter {
 
   void _packetListener(FromRadio packet) {
     if (packet.whichPayloadVariant() == FromRadio_PayloadVariant.queueStatus) {
-      _logger.i('$QueueStatus ${packet.queueStatus.meshPacketId}');
+      _logger.i('QueueStatus: ${packet.queueStatus.meshPacketId}');
       if (!_packetAckCompleter.isCompleted &&
           _needAckPacketId == packet.queueStatus.meshPacketId) {
         _packetAckCompleter.complete();
