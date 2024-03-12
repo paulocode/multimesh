@@ -31,11 +31,12 @@ class NodesScreen extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               title: Text(
-                node.longName + node.channel.toString(),
+                node.longName,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
+              subtitle: Text('Channel ${node.channel}'),
               leading: CircleAvatar(
                 radius: 40,
                 child: Text(nodes[index].shortName),

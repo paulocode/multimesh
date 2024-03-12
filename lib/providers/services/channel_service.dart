@@ -78,7 +78,15 @@ class ChannelService extends _$ChannelService {
       return;
     }
 
-    final bytes = base64Url.decode(split[1]);
+    final base64Value = split[1];
+    late final String divBy4Len;
+    if (base64Value.length % 4 != 0) {
+      divBy4Len = split[1] + ('=' * (4 - (split[1].length % 4)));
+    } else {
+      divBy4Len = base64Value;
+    }
+
+    final bytes = base64Url.decode(divBy4Len);
     final channelSet = ChannelSet.fromBuffer(bytes);
     _logger.i(channelSet);
 

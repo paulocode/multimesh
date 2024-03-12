@@ -163,4 +163,18 @@ void main() {
     expect(lora.channelNum, equals(20));
     expect(lora.sx126xRxBoostedGain, isTrue);
   });
+
+  test('base64 length not div by 4', () async {
+    await container.read(channelServiceProvider.notifier).processQr(
+          'https://meshtastic.org/e/#CisSILT_OsqtbsG65wfxsvI9XehRaM9nfA1nYydXhyD-TZonGgdwcml2YXRlCggSAQElAQAAABIOCAE4AUADSAFQG1gUaAE',
+        );
+
+    verify(
+      radioWriter.sendMeshPacket(
+        to: anyNamed('to'),
+        portNum: anyNamed('portNum'),
+        payload: captureAnyNamed('payload'),
+      ),
+    );
+  });
 }

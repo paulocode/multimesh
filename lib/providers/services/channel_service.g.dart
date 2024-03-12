@@ -6,7 +6,7 @@ part of 'channel_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$channelServiceHash() => r'c4fec55053c80bebca8facc5e34b63459c17f7ef';
+String _$channelServiceHash() => r'b260e7ccde6000851b4fc3a9ef9913ceaa75715b';
 
 /// See also [ChannelService].
 @ProviderFor(ChannelService)
