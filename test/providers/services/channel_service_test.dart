@@ -41,7 +41,7 @@ void main() {
         portNum: anyNamed('portNum'),
         payload: anyNamed('payload'),
       ),
-    ).thenAnswer((_) => Future.value(1));
+    ).thenReturn(1);
     container = createContainer(
       overrides: [
         radioReaderProvider.overrideWith((ref) => radioReader),

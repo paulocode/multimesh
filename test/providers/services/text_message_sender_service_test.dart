@@ -53,7 +53,7 @@ void main() {
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: anyNamed('payload'),
       ),
-    ).thenAnswer((realInvocation) => Future.value(765));
+    ).thenReturn(765);
 
     when(
       textMessageRepository.add(textMessage: anyNamed('textMessage')),

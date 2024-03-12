@@ -106,7 +106,7 @@ class MockRadioWriter extends _i1.Mock implements _i7.RadioWriter {
       );
 
   @override
-  _i5.Future<int> sendMeshPacket({
+  int sendMeshPacket({
     required int? to,
     int? channel = 0,
     bool? wantAck = false,
@@ -125,8 +125,8 @@ class MockRadioWriter extends _i1.Mock implements _i7.RadioWriter {
             #payload: payload,
           },
         ),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+        returnValue: 0,
+      ) as int);
 
   @override
   _i5.Future<void> sendWantConfig({required int? wantConfigId}) =>
