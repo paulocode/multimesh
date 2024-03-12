@@ -54,7 +54,7 @@ class RadioWriter {
 
   BluetoothCharacteristic? _toRadio;
   StreamSubscription<FromRadio>? _packetSub;
-  final _packetQueue = Queue<MeshPacket>();
+  var _packetQueue = Queue<MeshPacket>();
   final _logger = Logger();
   final _random = Random();
   int _currentPacketId = 0;
@@ -130,25 +130,33 @@ class RadioWriter {
   }
 
   Future<void> _startPacketQueue() async {
+    final packetQueue = _packetQueue;
     _logger.i('Started packet queue');
-    while (_packetQueue.isNotEmpty) {
+    while (packetQueue.isNotEmpty) {
       _packetAckCompleter = Completer();
-      final packet = _packetQueue.first;
+      final packet = packetQueue.first;
       try {
         _needAckPacketId = packet.id;
         await _toRadio?.write(ToRadio(packet: packet).writeToBuffer());
         await _packetAckCompleter.future.timeout(const Duration(seconds: 30));
-        _packetQueue.removeFirst();
+        packetQueue.removeFirst();
         _logger.i('${packet.id} acknowledged');
       } catch (e) {
         _logger.w('Packet queue ended with $e');
-        _packetQueue.removeFirst();
+        // possibly empty now due to async
+        if (packetQueue.isNotEmpty) {
+          packetQueue.removeFirst();
+        }
       }
     }
     _logger.i('Packet queue empty');
   }
 
   void clearPacketQueue() {
+    if (!_packetAckCompleter.isCompleted) {
+      _packetAckCompleter.complete();
+    }
     _packetQueue.clear();
+    _packetQueue = Queue<MeshPacket>();
   }
 }
