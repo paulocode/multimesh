@@ -34,7 +34,7 @@ void main() {
   });
 
   test('send packet', () async {
-    final id = await radioWriter.sendMeshPacket(
+    final id = radioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
       portNum: PortNum.ADMIN_APP,

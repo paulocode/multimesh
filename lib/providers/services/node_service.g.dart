@@ -6,7 +6,7 @@ part of 'node_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nodeServiceHash() => r'20d59933d0c821777e9d69440cab6e394f8dd8cc';
+String _$nodeServiceHash() => r'9d46d48fdeba0a8fde2d288d14399c7d6f50da9d';
 
 /// See also [NodeService].
 @ProviderFor(NodeService)
