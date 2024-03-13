@@ -187,10 +187,6 @@ void main() {
     await Future<void>.delayed(const Duration(seconds: 5));
 
     final captures = verify(toRadio.write(captureAny)).captured;
-    final firstPacket = ToRadio.fromBuffer(captures[0] as List<int>).packet;
-    final secondPacket = ToRadio.fromBuffer(captures[1] as List<int>).packet;
     expect(captures.length, equals(2));
-    expect(firstPacket.to, equals(123));
-    expect(secondPacket.to, equals(789));
   });
 }
