@@ -10,5 +10,5 @@ liberapay: # Replace with a single Liberapay username
 issuehunt: # Replace with a single IssueHunt username
 lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
 polar: # Replace with a single Polar username
-buy_me_a_coffee: https://www.buymeacoffee.com/paulocode
+buy_me_a_coffee: paulocode
 custom: bitcoin:bc1qw4tyhmfkerw2l4euwy3sccsa4ce8razhzrxhs7
