@@ -22,9 +22,28 @@ Future<FlutterLocalNotificationsPlugin> flutterLocalNotificationsPlugin(
     iOS: initializationSettingsDarwin,
   );
 
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse: (response) {
+      ref
+          .read(notificationsCallbackProvider.notifier)
+          .onTapNotification(response.payload);
+    },
+  );
 
   return flutterLocalNotificationsPlugin;
+}
+
+@Riverpod(keepAlive: true)
+class NotificationsCallback extends _$NotificationsCallback {
+  @override
+  String? build() {
+    return null;
+  }
+
+  void onTapNotification(String? payload) {
+    state = payload;
+  }
 }
 
 @Riverpod(keepAlive: true)

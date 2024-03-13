@@ -106,7 +106,7 @@ void main() {
     );
   });
 
-  test('notification', () async {
+  test('channel notification', () async {
     init();
     await packetStream.emit(
       FromRadio(
@@ -127,7 +127,37 @@ void main() {
       mockShowNotification.showNotification(
         title: argThat(equals('ABC DEF'), named: 'title'),
         text: argThat(equals('abc'), named: 'text'),
-        callbackValue: argThat(equals('789'), named: 'callbackValue'),
+        callbackValue:
+            argThat(equals('/chat?channel=1'), named: 'callbackValue'),
+      ),
+    );
+  });
+
+  test('DM notification', () async {
+    init();
+    await packetStream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          id: 789,
+          channel: 1,
+          from: 123241,
+          to: 90812,
+          decoded: Data(
+            portnum: PortNum.TEXT_MESSAGE_APP,
+            payload: utf8.encode('abc'),
+          ),
+        ),
+      ),
+    );
+
+    verify(
+      mockShowNotification.showNotification(
+        title: anyNamed('title'),
+        text: anyNamed('text'),
+        callbackValue: argThat(
+          equals('/chat?channel=1&dmNode=123241'),
+          named: 'callbackValue',
+        ),
       ),
     );
   });

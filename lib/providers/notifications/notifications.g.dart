@@ -7,7 +7,7 @@ part of 'notifications.dart';
 // **************************************************************************
 
 String _$flutterLocalNotificationsPluginHash() =>
-    r'2d5222be77f2949015ca72334732e541f882c94f';
+    r'3e286e2d2c576c7010864a1d8ae683764b870d73';
 
 /// See also [flutterLocalNotificationsPlugin].
 @ProviderFor(flutterLocalNotificationsPlugin)
@@ -206,5 +206,23 @@ class _ShowNotificationProviderElement extends FutureProviderElement<void>
   String get callbackValue =>
       (origin as ShowNotificationProvider).callbackValue;
 }
+
+String _$notificationsCallbackHash() =>
+    r'd486daee0f30ef4167fe6c67e4f7a05c12c9c99e';
+
+/// See also [NotificationsCallback].
+@ProviderFor(NotificationsCallback)
+final notificationsCallbackProvider =
+    NotifierProvider<NotificationsCallback, String?>.internal(
+  NotificationsCallback.new,
+  name: r'notificationsCallbackProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$notificationsCallbackHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$NotificationsCallback = Notifier<String?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

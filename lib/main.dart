@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'providers/notifications/notifications.dart';
 import 'providers/repository/sqflite.dart';
 import 'providers/router/router.dart';
 import 'providers/services/channel_service.dart';
@@ -34,17 +35,34 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return WithForegroundTask(
+    return const WithForegroundTask(
       child: _EagerInitialization(
         child: SafeArea(
-          child: MaterialApp.router(
-            title: 'Meshtastic',
-            theme: theme,
-            darkTheme: darkTheme,
-            routerConfig: ref.watch(goRouterProvider),
-          ),
+          child: RouterWidget(),
         ),
       ),
+    );
+  }
+}
+
+class RouterWidget extends ConsumerWidget {
+  const RouterWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(goRouterProvider);
+    final notificationsCallback = ref.watch(notificationsCallbackProvider);
+    if (notificationsCallback != null) {
+      router.go('/');
+      router.push(notificationsCallback);
+    }
+    return MaterialApp.router(
+      title: 'Meshtastic',
+      theme: theme,
+      darkTheme: darkTheme,
+      routerConfig: ref.watch(goRouterProvider),
     );
   }
 }
