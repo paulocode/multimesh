@@ -48,7 +48,8 @@ RadioWriter radioWriter(RadioWriterRef ref) {
 }
 
 class RadioWriter {
-  RadioWriter() {
+  RadioWriter({Duration sendTimeout = const Duration(seconds: 30)})
+      : _sendTimeout = sendTimeout {
     _currentPacketId = _random.nextInt(0xffffffff);
   }
 
@@ -60,6 +61,7 @@ class RadioWriter {
   int _currentPacketId = 0;
   int _needAckPacketId = 0;
   var _packetAckCompleter = Completer<void>();
+  final Duration _sendTimeout;
 
   set toRadio(BluetoothCharacteristic toRadio) {
     _toRadio = toRadio;
@@ -138,11 +140,11 @@ class RadioWriter {
       try {
         _needAckPacketId = packet.id;
         await _toRadio?.write(ToRadio(packet: packet).writeToBuffer());
-        await _packetAckCompleter.future.timeout(const Duration(seconds: 30));
+        await _packetAckCompleter.future.timeout(_sendTimeout);
         packetQueue.removeFirst();
         _logger.i('${packet.id} acknowledged');
       } catch (e) {
-        _logger.w('Packet queue ended with $e');
+        _logger.w('Packet queue failed with $e');
         // possibly empty now due to async
         if (packetQueue.isNotEmpty) {
           packetQueue.removeFirst();

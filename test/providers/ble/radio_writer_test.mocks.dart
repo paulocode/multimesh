@@ -6,6 +6,8 @@
 import 'dart:async' as _i3;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i2;
+import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
+import 'package:meshx/providers/ble/radio_reader.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 
@@ -547,4 +549,31 @@ class MockBluetoothDevice extends _i1.Mock implements _i2.BluetoothDevice {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+}
+
+/// A class which mocks [RadioReader].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRadioReader extends _i1.Mock implements _i5.RadioReader {
+  MockRadioReader() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Stream<_i6.FromRadio> onPacketReceived() => (super.noSuchMethod(
+        Invocation.method(
+          #onPacketReceived,
+          [],
+        ),
+        returnValue: _i3.Stream<_i6.FromRadio>.empty(),
+      ) as _i3.Stream<_i6.FromRadio>);
+
+  @override
+  void forceRead() => super.noSuchMethod(
+        Invocation.method(
+          #forceRead,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
