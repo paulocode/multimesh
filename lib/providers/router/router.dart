@@ -36,14 +36,14 @@ GoRouter goRouter(GoRouterRef ref) {
         path: '/chat',
         builder: (context, state) {
           late final ChatType chatType;
-          final dmNodeStr = state.uri.queryParameters['dmNode'];
-          final channel = int.parse(state.uri.queryParameters['channel']!);
-          if (dmNodeStr != null) {
+          final dmNode = int.tryParse(state.uri.queryParameters['dmNode'] ?? '');
+          final channel = int.tryParse(state.uri.queryParameters['channel'] ?? '');
+          if (dmNode != null) {
             chatType = DirectMessageChat(
-              dmNode: int.parse(dmNodeStr),
+              dmNode: dmNode,
             );
           } else {
-            chatType = ChannelChat(channel: channel);
+            chatType = ChannelChat(channel: channel ?? 0);
           }
           return ChatScreen(
             chatType: chatType,

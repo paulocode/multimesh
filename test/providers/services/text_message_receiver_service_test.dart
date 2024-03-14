@@ -155,7 +155,7 @@ void main() {
         title: anyNamed('title'),
         text: anyNamed('text'),
         callbackValue: argThat(
-          equals('/chat?channel=1&dmNode=123241'),
+          equals('/chat?dmNode=123241'),
           named: 'callbackValue',
         ),
       ),

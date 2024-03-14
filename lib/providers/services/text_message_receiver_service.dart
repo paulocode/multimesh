@@ -131,9 +131,11 @@ class TextMessageReceiverService {
     await _textMessageRepository.add(textMessage: message);
     _streamController.add(message);
     final node = _nodes[message.from];
-    var payload = '/chat?channel=${message.channel}';
+    late final String payload;
     if (message.to != TO_CHANNEL) {
-      payload += '&dmNode=${message.from}';
+      payload = '/chat?dmNode=${message.from}';
+    } else {
+      payload = '/chat?channel=${message.channel}';
     }
     await _showNotification(
       node?.longName ?? '',
