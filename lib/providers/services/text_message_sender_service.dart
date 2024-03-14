@@ -59,5 +59,5 @@ Future<void> sendTextMessage(
   await textMessageRepository.add(textMessage: messageWithPacketId);
   await textMessageStreamService.onNewMessage(messageWithPacketId);
   // start the service to receive updates
-  ref.watch(textMessageStatusServiceProvider(packetId: packetId));
+  ref.watch(textMessageStatusServiceProvider(textMessage: messageWithPacketId));
 }

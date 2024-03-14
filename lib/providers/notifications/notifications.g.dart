@@ -24,7 +24,7 @@ final flutterLocalNotificationsPluginProvider =
 
 typedef FlutterLocalNotificationsPluginRef
     = FutureProviderRef<FlutterLocalNotificationsPlugin>;
-String _$showNotificationHash() => r'd3acfa3ffc7053f168c88d0b9a707b1f7ae4df46';
+String _$showNotificationHash() => r'49812c1ba8027923df59118b330ad1f5790418b4';
 
 /// Copied from Dart SDK
 class _SystemHash {

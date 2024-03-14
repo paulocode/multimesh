@@ -3,33 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../models/text_message.dart';
 import '../providers/services/node_service.dart';
 import 'text_message_status_indicator.dart';
 
 class MessageBubble extends ConsumerWidget {
   const MessageBubble({
     super.key,
-    required this.text,
-    required this.fromNode,
+    required this.textMessage,
     required this.isSender,
     required this.showSenderAvatar,
-    required this.time,
     required this.showDate,
-    required this.packetId,
   });
 
-  final String text;
-  final int fromNode;
+  final TextMessage textMessage;
   final bool isSender;
   final bool showSenderAvatar;
-  final DateTime? time;
   final bool showDate;
-  final int packetId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nodes = ref.watch(nodeServiceProvider);
-    final node = nodes[fromNode];
+    final node = nodes[textMessage.from];
     final showSenderAvatarOrNodeNull = showSenderAvatar || node == null;
     final theme = Theme.of(context);
 
@@ -40,7 +35,7 @@ class MessageBubble extends ConsumerWidget {
         if (showDate)
           Center(
             child: Text(
-              DateFormat.yMMMd().format(time ?? DateTime.now()),
+              DateFormat.yMMMd().format(textMessage.time ?? DateTime.now()),
               style: theme.textTheme.bodyLarge,
             ),
           ),
@@ -92,7 +87,7 @@ class MessageBubble extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: BubbleSpecialOne(
-                text: text,
+                text: textMessage.text,
                 color: isSender
                     ? theme.colorScheme.primary
                     : theme.colorScheme.tertiary,
@@ -107,18 +102,17 @@ class MessageBubble extends ConsumerWidget {
             ),
             if (isSender)
               TextMessageStatusIndicator(
-                packetId: packetId,
+                textMessage: textMessage,
               ),
           ],
         ),
-        if (time != null)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60),
-            child: Text(
-              DateFormat.Hm().format(time!),
-              style: theme.textTheme.bodySmall,
-            ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 60),
+          child: Text(
+            DateFormat.Hm().format(textMessage.time),
+            style: theme.textTheme.bodySmall,
           ),
+        ),
         const SizedBox(
           height: 8,
         ),

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/text_message.dart';
 import '../models/text_message_status.dart';
 import '../providers/services/text_message_status_service.dart';
 
 class TextMessageStatusIndicator extends ConsumerWidget {
-  const TextMessageStatusIndicator({super.key, required int packetId})
-      : _packetId = packetId;
+  const TextMessageStatusIndicator({
+    super.key,
+    required TextMessage textMessage,
+  }) : _textMessage = textMessage;
 
-  final int _packetId;
+  final TextMessage _textMessage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final status = ref.watch(
-      textMessageStatusServiceProvider(packetId: _packetId),
+      textMessageStatusServiceProvider(textMessage: _textMessage),
     );
     final icon = switch (status) {
       AsyncValue(:final valueOrNull?) => switch (valueOrNull) {

@@ -24,18 +24,20 @@ void main() {
   late MockRadioReader radioReader;
   late MockStream<FromRadio> mockStream;
   late ProviderSubscription<Future<TextMessageStatus>> statusSubscription;
+  final textMessage = TextMessage(
+    text: '',
+    channel: 0,
+    time: DateTime.now(),
+    from: 0,
+    to: 0,
+    packetId: 123,
+  );
+
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
     when(textMessageRepository.getByPacketId(packetId: 123)).thenAnswer(
       (realInvocation) => Future.value(
-        TextMessage(
-          text: '',
-          channel: 0,
-          time: DateTime.now(),
-          from: 0,
-          to: 0,
-          packetId: 123,
-        ),
+        textMessage,
       ),
     );
     mockStream = MockStream<FromRadio>();
@@ -50,7 +52,7 @@ void main() {
     );
     statusSubscription = container.listen(
       textMessageStatusServiceProvider(
-        packetId: 123,
+        textMessage: textMessage,
       ).future,
       (_, __) {},
     );
@@ -64,23 +66,17 @@ void main() {
   });
 
   test('finished states must return the same state', () async {
+    final okTextMessage =
+        textMessage.copyWith(packetId: 456, state: TextMessageStatus.OK);
     when(textMessageRepository.getByPacketId(packetId: 456)).thenAnswer(
       (realInvocation) => Future.value(
-        TextMessage(
-          text: '',
-          channel: 0,
-          time: DateTime.now(),
-          from: 0,
-          to: 0,
-          packetId: 456,
-          state: TextMessageStatus.OK,
-        ),
+        okTextMessage,
       ),
     );
 
     final subscription = container.listen(
       textMessageStatusServiceProvider(
-        packetId: 456,
+        textMessage: okTextMessage,
       ).future,
       (_, __) {},
     );
@@ -93,7 +89,7 @@ void main() {
   test('timeout', () async {
     final timedSubscription = container.listen(
       textMessageStatusServiceProvider(
-        packetId: 123,
+        textMessage: textMessage,
         timeout: const Duration(seconds: 5),
       ).future,
       (_, __) {},

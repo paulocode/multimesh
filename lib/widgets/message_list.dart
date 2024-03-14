@@ -199,13 +199,10 @@ class _MessageListState extends ConsumerState<MessageList> {
         showSenderBubble ||
         textMessages[index + 1].time.day != textMessages[index].time.day;
     return MessageBubble(
-      text: textMessage.text,
-      fromNode: textMessage.from,
+      textMessage: textMessage,
       isSender: textMessage.from == _myNodeNum,
       showSenderAvatar: showSenderBubble,
-      time: textMessage.time,
       showDate: needDate,
-      packetId: textMessage.packetId,
     );
   }
 

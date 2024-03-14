@@ -20,27 +20,22 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   late KeepAliveLink _link;
   StreamSubscription<FromRadio>? _packetListener;
   late Timer _timer;
-  late int _packetId;
 
   @override
   Future<TextMessageStatus> build({
-    required int packetId,
+    required TextMessage textMessage,
     Duration timeout = const Duration(minutes: 1),
   }) async {
-    _radioReader = ref.watch(radioReaderProvider);
-    _textMessageRepository = ref.watch(textMessageRepositoryProvider);
-    _packetId = packetId;
-    _textMessage =
-        await _textMessageRepository.getByPacketId(packetId: packetId);
-
-    if (_textMessage.state != TextMessageStatus.SENDING) {
-      return _textMessage.state;
+    if (textMessage.state != TextMessageStatus.SENDING) {
+      return textMessage.state;
     }
 
+    _radioReader = ref.watch(radioReaderProvider);
+    _textMessageRepository = ref.watch(textMessageRepositoryProvider);
+    _textMessage = textMessage;
     _link = ref.keepAlive();
     _setTimeout(timeout);
     _listenToStatusUpdates();
-
     return _textMessage.state;
   }
 
@@ -50,7 +45,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       _link.close();
       state = const AsyncValue.data(TextMessageStatus.RADIO_ERROR);
       await _textMessageRepository.updateStatusByPacketId(
-        packetId: _packetId,
+        packetId: _textMessage.packetId,
         status: TextMessageStatus.RADIO_ERROR,
       );
     });
@@ -61,7 +56,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
     _packetListener = _radioReader.onPacketReceived().listen((event) async {
       final decoded = event.packet.decoded;
       if (decoded.portnum == PortNum.ROUTING_APP &&
-          decoded.requestId == packetId) {
+          decoded.requestId == _textMessage.packetId) {
         final routing = Routing.fromBuffer(decoded.payload);
         final status = switch (routing.errorReason) {
           Routing_Error.NONE => TextMessageStatus.OK,
@@ -70,17 +65,17 @@ class TextMessageStatusService extends _$TextMessageStatusService {
         };
         state = AsyncValue.data(status);
         await _textMessageRepository.updateStatusByPacketId(
-          packetId: _packetId,
+          packetId: _textMessage.packetId,
           status: status,
         );
         _link.close();
         _timer.cancel();
       } else if (event.whichPayloadVariant() ==
               FromRadio_PayloadVariant.queueStatus &&
-          event.queueStatus.meshPacketId == _packetId) {
+          event.queueStatus.meshPacketId == _textMessage.packetId) {
         state = const AsyncValue.data(TextMessageStatus.RECVD_BY_RADIO);
         await _textMessageRepository.updateStatusByPacketId(
-          packetId: _packetId,
+          packetId: _textMessage.packetId,
           status: TextMessageStatus.RECVD_BY_RADIO,
         );
       }
