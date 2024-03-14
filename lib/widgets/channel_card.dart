@@ -39,7 +39,8 @@ class ChannelCard extends ConsumerWidget {
         initialData: textMessageStreamService.getMessages(),
         builder: (context, snapshot) {
           final lastMessage = snapshot.data!.lastOrNull;
-          final lastSender = lastMessage == null ? null : nodes[lastMessage.from];
+          final lastSender =
+              lastMessage == null ? null : nodes[lastMessage.from];
           final lastMessageShortName = lastSender?.shortName;
           return Card(
             margin: const EdgeInsets.all(8),

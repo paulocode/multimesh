@@ -23,7 +23,7 @@ TextMessageRepository textMessageRepository(
 
 class TextMessageRepository {
   TextMessageRepository({required Database database}) : _database = database {
-   // _createDummyData();
+    // _createDummyData();
   }
 
   final Database _database;
@@ -193,7 +193,8 @@ class TextMessageRepository {
   }
 
   Future<void> _createDummyData() async {
-    final messagesExist = await count(channel: 0, toNode: TO_CHANNEL) > BATCH_NUM_MESSAGES_TO_LOAD;
+    final messagesExist = await count(channel: 0, toNode: TO_CHANNEL) >
+        BATCH_NUM_MESSAGES_TO_LOAD;
     if (messagesExist) {
       return;
     }
