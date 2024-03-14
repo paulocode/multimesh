@@ -65,7 +65,7 @@ class NodeService extends _$NodeService {
       );
     }
 
-    state = {nodeNum: meshNode, ...state};
+    state = {...state, nodeNum: meshNode};
 
     _logger.i('Added node');
   }

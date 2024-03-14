@@ -83,6 +83,45 @@ void main() {
     expect(nodes[123]?.channel, equals(1));
   });
 
+  test('add node from NODEINFO_APP, replace old node if same nodenum',
+      () async {
+    await stream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          channel: 1,
+          from: 123,
+          decoded: Data(
+            portnum: PortNum.NODEINFO_APP,
+            payload: User(
+              id: '!123',
+              shortName: 'XYZ',
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    await stream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          channel: 1,
+          from: 123,
+          decoded: Data(
+            portnum: PortNum.NODEINFO_APP,
+            payload: User(
+              id: '!123',
+              shortName: 'ABC',
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    final nodes = container.read(nodeServiceProvider);
+    expect(nodes[123]?.nodeNum, equals(123));
+    expect(nodes[123]?.shortName, equals('ABC'));
+  });
+
   test('blank node', () async {
     await stream.emit(
       FromRadio(
