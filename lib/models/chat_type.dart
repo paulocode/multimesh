@@ -13,8 +13,7 @@ class DirectMessageChat extends ChatType {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      super == other &&
-          other is DirectMessageChat &&
+      other is DirectMessageChat &&
           runtimeType == other.runtimeType &&
           dmNode == other.dmNode;
 

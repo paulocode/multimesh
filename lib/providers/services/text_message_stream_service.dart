@@ -13,7 +13,7 @@ import 'text_message_receiver_service.dart';
 
 part 'text_message_stream_service.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 TextMessageStreamService textMessageStreamService(
   TextMessageStreamServiceRef ref, {
   required ChatType chatType,

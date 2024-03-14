@@ -7,7 +7,7 @@ part of 'text_message_stream_service.dart';
 // **************************************************************************
 
 String _$textMessageStreamServiceHash() =>
-    r'03594938df0c733b5aa6268032a879e193cd1f2c';
+    r'f78f29b2b13adbf3fae2a634277506d44d9d57e8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -74,7 +74,7 @@ class TextMessageStreamServiceFamily extends Family<TextMessageStreamService> {
 
 /// See also [textMessageStreamService].
 class TextMessageStreamServiceProvider
-    extends AutoDisposeProvider<TextMessageStreamService> {
+    extends Provider<TextMessageStreamService> {
   /// See also [textMessageStreamService].
   TextMessageStreamServiceProvider({
     required ChatType chatType,
@@ -127,7 +127,7 @@ class TextMessageStreamServiceProvider
   }
 
   @override
-  AutoDisposeProviderElement<TextMessageStreamService> createElement() {
+  ProviderElement<TextMessageStreamService> createElement() {
     return _TextMessageStreamServiceProviderElement(this);
   }
 
@@ -146,14 +146,13 @@ class TextMessageStreamServiceProvider
   }
 }
 
-mixin TextMessageStreamServiceRef
-    on AutoDisposeProviderRef<TextMessageStreamService> {
+mixin TextMessageStreamServiceRef on ProviderRef<TextMessageStreamService> {
   /// The parameter `chatType` of this provider.
   ChatType get chatType;
 }
 
 class _TextMessageStreamServiceProviderElement
-    extends AutoDisposeProviderElement<TextMessageStreamService>
+    extends ProviderElement<TextMessageStreamService>
     with TextMessageStreamServiceRef {
   _TextMessageStreamServiceProviderElement(super.provider);
 
