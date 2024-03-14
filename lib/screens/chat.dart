@@ -9,25 +9,20 @@ import '../providers/services/node_service.dart';
 import '../widgets/message_input.dart';
 import '../widgets/message_list.dart';
 
-class ChatScreen extends ConsumerStatefulWidget {
-  const ChatScreen({super.key, required this.chatType});
+class ChatScreen extends ConsumerWidget {
+  const ChatScreen({super.key, required ChatType chatType})
+      : _chatType = chatType;
 
-  final ChatType chatType;
+  final ChatType _chatType;
 
   @override
-  ConsumerState<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends ConsumerState<ChatScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final radioConnectorState = ref.watch(radioConnectorProvider);
     final channels = ref.watch(channelServiceProvider);
     final nodes = ref.watch(nodeServiceProvider);
-    final chatType = widget.chatType;
-    final title = switch (chatType) {
-      DirectMessageChat() => nodes[chatType.dmNode]?.longName ?? '',
-      ChannelChat() => channels[chatType.channel].name,
+    final title = switch (_chatType) {
+      DirectMessageChat() => nodes[_chatType.dmNode]?.longName ?? '',
+      ChannelChat() => channels[_chatType.channel].name,
     };
     return Scaffold(
       appBar: AppBar(
@@ -52,10 +47,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         child: Column(
           children: [
             MessageList(
-              chatType: widget.chatType,
+              chatType: _chatType,
             ),
             MessageInput(
-              chatType: widget.chatType,
+              chatType: _chatType,
             ),
           ],
         ),

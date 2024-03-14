@@ -7,16 +7,11 @@ import '../protobufs/generated/meshtastic/config.pb.dart';
 import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
 
-class RadioConfigScreen extends ConsumerStatefulWidget {
+class RadioConfigScreen extends ConsumerWidget {
   const RadioConfigScreen({super.key});
 
   @override
-  ConsumerState<RadioConfigScreen> createState() => _RadioConfigScreenState();
-}
-
-class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
     final radioConnectorState = ref.watch(radioConnectorProvider);
     return Scaffold(

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../constants/app_constants.dart';
 import '../../constants/ble_constants.dart';
 import '../../models/text_message.dart';
 import '../../models/text_message_status.dart';
@@ -22,7 +23,7 @@ TextMessageRepository textMessageRepository(
 
 class TextMessageRepository {
   TextMessageRepository({required Database database}) : _database = database {
-    //_createDummyData();
+    _createDummyData();
   }
 
   final Database _database;
@@ -192,7 +193,7 @@ class TextMessageRepository {
   }
 
   Future<void> _createDummyData() async {
-    final messagesExist = await count(channel: 0, toNode: 3806486552) > 0;
+    final messagesExist = await count(channel: 0, toNode: TO_CHANNEL) > BATCH_NUM_MESSAGES_TO_LOAD;
     if (messagesExist) {
       return;
     }
