@@ -84,6 +84,35 @@ void main() {
         .timeout(const Duration(seconds: 1));
   });
 
+  test('configId response', () async {
+    init(MockConnected());
+
+    final configId = verify(
+      radioWriter.sendWantConfig(
+        wantConfigId: captureAnyNamed('wantConfigId'),
+      ),
+    ).captured[0] as int;
+
+    await fromRadioStream.emit(FromRadio(configCompleteId: configId));
+
+    verify(radioConfigService.setConfigDownloaded());
+  });
+
+  test('wrong configId response', () async {
+    init(MockConnected());
+
+    final configId = verify(
+      radioWriter.sendWantConfig(
+        wantConfigId: captureAnyNamed('wantConfigId'),
+      ),
+    ).captured[0] as int;
+
+    await fromRadioStream.emit(FromRadio(configCompleteId: configId + 1));
+
+    verify(radioWriter.sendWantConfig(wantConfigId: anyNamed('wantConfigId')));
+    verifyNever(radioConfigService.setConfigDownloaded());
+  });
+
   test('NodeInfo of our node', () async {
     init(MockConnected());
 
@@ -106,7 +135,6 @@ void main() {
     verify(
       radioConfigService.setHwModel(HardwareModel.HELTEC_V3, upload: false),
     );
-    verify(radioConfigService.setConfigDownloaded());
   });
 
   test('NodeInfo of another', () async {

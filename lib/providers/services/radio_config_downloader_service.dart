@@ -60,14 +60,16 @@ class RadioConfigDownloaderService {
   final _random = Random();
   final _logger = Logger();
   int _myNodeNum = 0;
+  int _wantConfigId = 0;
 
   RadioConfigService get _radioConfigService {
     return _radioConfigServiceProvider();
   }
 
   Future<void> _requestConfig() async {
+    _wantConfigId = _random.nextInt(0xffffffff);
     await _radioWriter.sendWantConfig(
-      wantConfigId: _random.nextInt(0xffffffff),
+      wantConfigId: _wantConfigId,
     );
     _radioReader.forceRead();
   }
@@ -81,6 +83,8 @@ class RadioConfigDownloaderService {
         await _processNodeInfo(packet.nodeInfo);
       case FromRadio_PayloadVariant.config:
         await _processConfigPacket(packet.config);
+      case FromRadio_PayloadVariant.configCompleteId:
+        await _processConfigCompleteId(packet.configCompleteId);
       case _:
         break;
     }
@@ -111,6 +115,14 @@ class RadioConfigDownloaderService {
     await _radioConfigService.setShortName(user.shortName, upload: false);
     await _radioConfigService.setLongName(user.longName, upload: false);
     await _radioConfigService.setHwModel(user.hwModel, upload: false);
-    _radioConfigService.setConfigDownloaded();
+  }
+
+  Future<void> _processConfigCompleteId(int configCompleteId) async {
+    if (configCompleteId == _wantConfigId) {
+      _radioConfigService.setConfigDownloaded();
+    } else {
+      _logger.i('Stale configCompleteId');
+      await _requestConfig();
+    }
   }
 }

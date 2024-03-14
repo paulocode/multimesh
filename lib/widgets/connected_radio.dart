@@ -29,14 +29,15 @@ class ConnectedRadio extends ConsumerWidget {
             child: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               radius: 40,
-              child: radioConfig.configDownloaded &&
-                      radioConnectorState is Connected
-                  ? Text(radioConfig.shortName)
-                  : Icon(
+              child: radioConnectorState is! Connected
+                  ? Icon(
                       Icons.cloud_off,
                       color: Theme.of(context).colorScheme.error,
                       size: 40,
-                    ),
+                    )
+                  : !radioConfig.configDownloaded && radioConfig.myNodeNum != 0
+                      ? const CircularProgressIndicator()
+                      : Text(radioConfig.shortName),
             ),
           ),
           if (radioConfig.configDownloaded)
@@ -73,6 +74,11 @@ class ConnectedRadio extends ConsumerWidget {
                   ],
                 ),
               ],
+            )
+          else if (radioConfig.myNodeNum != 0)
+            Text(
+              radioConfig.longName,
+              style: Theme.of(context).textTheme.titleMedium,
             )
           else
             Text(

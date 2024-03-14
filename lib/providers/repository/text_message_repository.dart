@@ -101,8 +101,7 @@ class TextMessageRepository {
   }) async {
     final result = await _database.query(
       'text_messages',
-      where:
-          '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?))',
+      where: '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?))',
       whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum],
       offset: offset,
       orderBy: 'id ASC',

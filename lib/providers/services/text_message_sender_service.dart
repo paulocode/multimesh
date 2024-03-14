@@ -31,7 +31,7 @@ Future<void> sendTextMessage(
   late final int channel;
   late final int to;
 
-  switch(chatType) {
+  switch (chatType) {
     case DirectMessageChat():
       to = chatType.dmNode;
       channel = nodes[chatType.dmNode]?.channel ?? 0;
