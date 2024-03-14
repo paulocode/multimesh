@@ -44,7 +44,7 @@ void main() {
     return TextMessageReceiverService(
       textMessageRepository: textMessageRepository,
       radioReader: radioReader,
-      nodes: {
+      nodes: () => {
         123241: MeshNode(
           channel: 1,
           shortName: 'abc',

@@ -25,7 +25,8 @@ TextMessageReceiverService textMessageReceiverService(
   return TextMessageReceiverService(
     textMessageRepository: ref.watch(textMessageRepositoryProvider),
     radioReader: ref.watch(radioReaderProvider),
-    nodes: ref.watch(nodeServiceProvider),
+    // prevent rebuilds when there is a new node
+    nodes: () => ref.read(nodeServiceProvider),
     configDownloaded: ref
         .watch(radioConfigServiceProvider.select((it) => it.configDownloaded)),
     myNodeNum:
@@ -47,7 +48,7 @@ class TextMessageReceiverService {
   TextMessageReceiverService({
     required TextMessageRepository textMessageRepository,
     required RadioReader radioReader,
-    required Map<int, MeshNode> nodes,
+    required Map<int, MeshNode> Function() nodes,
     required bool configDownloaded,
     required int myNodeNum,
     required Future<void> Function(String, String, String) showNotification,
@@ -69,7 +70,7 @@ class TextMessageReceiverService {
 
   final TextMessageRepository _textMessageRepository;
   final RadioReader _radioReader;
-  final Map<int, MeshNode> _nodes;
+  final Map<int, MeshNode> Function() _nodes;
   final void Function(void Function() cb) _onDispose;
   final Future<void> Function(String, String, String) _showNotification;
   final int _myNodeNum;
@@ -130,7 +131,7 @@ class TextMessageReceiverService {
   ) async {
     await _textMessageRepository.add(textMessage: message);
     _streamController.add(message);
-    final node = _nodes[message.from];
+    final node = _nodes()[message.from];
     late final String payload;
     if (message.to != TO_CHANNEL) {
       payload = '/chat?dmNode=${message.from}';

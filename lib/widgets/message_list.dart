@@ -5,10 +5,7 @@ import 'package:scrollview_observer/scrollview_observer.dart';
 
 import '../constants/app_constants.dart';
 import '../models/chat_type.dart';
-import '../models/mesh_node.dart';
-import '../models/radio_configuration.dart';
 import '../models/text_message.dart';
-import '../providers/services/node_service.dart';
 import '../providers/services/radio_config_service.dart';
 import '../providers/services/text_message_stream_service.dart';
 import 'message_bubble.dart';
@@ -27,7 +24,7 @@ class MessageList extends ConsumerStatefulWidget {
 }
 
 class _MessageListState extends ConsumerState<MessageList> {
-  late RadioConfiguration _radioConfig;
+  late int _myNodeNum;
   late TextMessageStreamService _textMessageStreamService;
   final _scrollController = ScrollController();
   bool _showScrollButton = false;
@@ -66,7 +63,8 @@ class _MessageListState extends ConsumerState<MessageList> {
   Widget build(BuildContext context) {
     _textMessageStreamService =
         ref.watch(textMessageStreamServiceProvider(chatType: widget.chatType));
-    _radioConfig = ref.watch(radioConfigServiceProvider);
+    _myNodeNum = ref
+        .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
 
     return Expanded(
       child: Stack(
@@ -105,7 +103,7 @@ class _MessageListState extends ConsumerState<MessageList> {
     if (sameLastMessage) {
       return;
     }
-    final messageIsMine = lastMessage?.from == _radioConfig.myNodeNum;
+    final messageIsMine = lastMessage?.from == _myNodeNum;
     if (messageIsMine) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToBottom();
@@ -132,8 +130,6 @@ class _MessageListState extends ConsumerState<MessageList> {
     BuildContext context,
     List<TextMessage> textMessages,
   ) {
-    final nodes = ref.watch(nodeServiceProvider);
-
     return Column(
       children: [
         Expanded(
@@ -150,10 +146,8 @@ class _MessageListState extends ConsumerState<MessageList> {
               controller: _scrollController,
               itemCount: textMessages.length,
               itemBuilder: (ctx, index) {
-                final nodeFrom = nodes[textMessages[index].from];
                 return _buildMessageBubble(
                   context,
-                  nodeFrom,
                   textMessages,
                   index,
                 );
@@ -194,23 +188,20 @@ class _MessageListState extends ConsumerState<MessageList> {
 
   Widget _buildMessageBubble(
     BuildContext context,
-    MeshNode? from,
     List<TextMessage> textMessages,
     int index,
   ) {
     final textMessage = textMessages[index];
     final isFirstMessage = textMessages.last == textMessage;
-    final showSenderBubble = isFirstMessage ||
-        textMessage.from != textMessages[index + 1].from ||
-        from == null;
+    final showSenderBubble =
+        isFirstMessage || textMessage.from != textMessages[index + 1].from;
     final needDate = isFirstMessage ||
         showSenderBubble ||
         textMessages[index + 1].time.day != textMessages[index].time.day;
     return MessageBubble(
       text: textMessage.text,
-      src: from?.shortName ?? '',
-      longName: from?.longName ?? '',
-      isSender: textMessage.from == _radioConfig.myNodeNum,
+      fromNode: textMessage.from,
+      isSender: textMessage.from == _myNodeNum,
       showSenderAvatar: showSenderBubble,
       time: textMessage.time,
       showDate: needDate,
