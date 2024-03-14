@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../models/chat_type.dart';
 import '../models/mesh_channel.dart';
-import '../models/text_message.dart';
+import '../providers/services/node_service.dart';
+import '../providers/services/text_message_stream_service.dart';
 
-class ChannelCard extends StatelessWidget {
+class ChannelCard extends ConsumerWidget {
   const ChannelCard({
     super.key,
     required MeshChannel channel,
-    required TextMessage? lastMessage,
-    required String? lastMessageShortName,
     required int index,
   })  : _index = index,
-        _lastMessageShortName = lastMessageShortName,
-        _lastMessage = lastMessage,
         _channel = channel;
 
   final MeshChannel _channel;
-  final TextMessage? _lastMessage;
-  final String? _lastMessageShortName;
   final int _index;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final nodes = ref.watch(nodeServiceProvider);
+    final textMessageStreamService = ref.watch(
+      textMessageStreamServiceProvider(
+        chatType: ChannelChat(channel: _index),
+      ),
+    );
     return InkWell(
       onTap: () {
         context.push(
@@ -31,42 +34,51 @@ class ChannelCard extends StatelessWidget {
               .toString(),
         );
       },
-      child: Card(
-        margin: const EdgeInsets.all(8),
-        child: ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          leading: Text(
-            _index.toString(),
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(_channel.name),
-              if (_lastMessage != null)
-                Text(
-                  '${_lastMessageShortName ?? ''}: ${_lastMessage.text}',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  softWrap: false,
-                )
-              else
-                const Text('No messages'),
-            ],
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (_lastMessage != null)
-                Text(
-                  DateFormat.yMd().add_Hm().format(_lastMessage.time),
-                ),
-              const SizedBox(width: 20),
-              const Icon(Icons.chevron_right),
-            ],
-          ),
-        ),
+      child: StreamBuilder(
+        stream: textMessageStreamService.stream,
+        initialData: textMessageStreamService.getMessages(),
+        builder: (context, snapshot) {
+          final lastMessage = snapshot.data!.lastOrNull;
+          final lastSender = lastMessage == null ? null : nodes[lastMessage.from];
+          final lastMessageShortName = lastSender?.shortName;
+          return Card(
+            margin: const EdgeInsets.all(8),
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              leading: Text(
+                _index.toString(),
+              ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(_channel.name),
+                  if (lastMessage != null)
+                    Text(
+                      '${lastMessageShortName ?? ''}: ${lastMessage.text}',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      softWrap: false,
+                    )
+                  else
+                    const Text('No messages'),
+                ],
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (lastMessage != null)
+                    Text(
+                      DateFormat.yMd().add_Hm().format(lastMessage.time),
+                    ),
+                  const SizedBox(width: 20),
+                  const Icon(Icons.chevron_right),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
