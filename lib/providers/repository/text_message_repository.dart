@@ -23,7 +23,7 @@ TextMessageRepository textMessageRepository(
 
 class TextMessageRepository {
   TextMessageRepository({required Database database}) : _database = database {
-    _createDummyData();
+   // _createDummyData();
   }
 
   final Database _database;
