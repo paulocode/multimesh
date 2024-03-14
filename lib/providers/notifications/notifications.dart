@@ -58,7 +58,7 @@ Future<void> showNotification(
   required String callbackValue,
 }) async {
   final flutterLocalNotificationsPlugin =
-      await ref.read(flutterLocalNotificationsPluginProvider.future);
+      await ref.watch(flutterLocalNotificationsPluginProvider.future);
   const androidNotificationDetails = AndroidNotificationDetails(
     '1',
     'Meshtastic messages',

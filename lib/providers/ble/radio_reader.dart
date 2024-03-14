@@ -38,6 +38,7 @@ class RadioReader {
     });
 
     onDispose(subscription.cancel);
+    onDispose(_packetStreamController.close);
     fromNum.setNotifyValue(true);
   }
 

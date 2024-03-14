@@ -27,7 +27,7 @@ Future<void> sendTextMessage(
   final textMessageRepository = ref.watch(textMessageRepositoryProvider);
   final textMessageStreamService =
       ref.watch(textMessageStreamServiceProvider(chatType: chatType));
-  final nodes = ref.read(nodeServiceProvider);
+  final nodes = ref.watch(nodeServiceProvider);
   late final int channel;
   late final int to;
 
@@ -59,5 +59,5 @@ Future<void> sendTextMessage(
   await textMessageRepository.add(textMessage: messageWithPacketId);
   await textMessageStreamService.onNewMessage(messageWithPacketId);
   // start the service to receive updates
-  ref.read(textMessageStatusServiceProvider(packetId: packetId));
+  ref.watch(textMessageStatusServiceProvider(packetId: packetId));
 }
