@@ -60,7 +60,6 @@ void main() {
       textMessageRepository.getDirectMessagesBy(
         myNodeNum: 123,
         otherNodeNum: 777,
-        channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
       ),
     ).thenAnswer((_) => Future.value(_generateMessages(toNode: 123)));
@@ -69,7 +68,6 @@ void main() {
       textMessageRepository.countDirectMessagesBy(
         myNodeNum: 123,
         otherNodeNum: 777,
-        channel: 1,
       ),
     ).thenAnswer((_) => Future.value(BATCH_NUM_MESSAGES_TO_LOAD));
 
@@ -107,7 +105,6 @@ void main() {
         textMessageRepository.getDirectMessagesBy(
           myNodeNum: anyNamed('myNodeNum'),
           otherNodeNum: anyNamed('otherNodeNum'),
-          channel: anyNamed('channel'),
           limit: anyNamed('limit'),
           offset: anyNamed('offset'),
         ),
@@ -124,7 +121,7 @@ void main() {
   });
 
   test('load initial direct messages', () async {
-    await init(const DirectMessageChat(dmNode: 777, channel: 1));
+    await init(const DirectMessageChat(dmNode: 777));
     final messages = textMessageStreamService.getMessages();
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD));
     expect(messages[0].text, equals('0'));
@@ -132,7 +129,7 @@ void main() {
   });
 
   test('all loaded', () async {
-    await init(const DirectMessageChat(dmNode: 777, channel: 1));
+    await init(const DirectMessageChat(dmNode: 777));
     final messages = await textMessageStreamService.allMessagesLoaded;
     expect(messages, isTrue);
   });
@@ -243,13 +240,12 @@ void main() {
   });
 
   test('load older direct messages', () async {
-    await init(const DirectMessageChat(dmNode: 777, channel: 1));
+    await init(const DirectMessageChat(dmNode: 777));
     final messagesFuture = textMessageStreamService.stream.first;
     when(
       textMessageRepository.getDirectMessagesBy(
         myNodeNum: 123,
         otherNodeNum: 777,
-        channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
       ),

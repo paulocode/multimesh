@@ -58,7 +58,6 @@ class TextMessageStreamService {
       DirectMessageChat() => await _textMessageRepository.getDirectMessagesBy(
           myNodeNum: _myNodeNum,
           otherNodeNum: _chatType.dmNode,
-          channel: _chatType.channel,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
         ),
       ChannelChat() => _currentStreamState = await _textMessageRepository.getBy(
@@ -86,7 +85,6 @@ class TextMessageStreamService {
         totalSavedMessages = await _textMessageRepository.countDirectMessagesBy(
           myNodeNum: _myNodeNum,
           otherNodeNum: _chatType.dmNode,
-          channel: _chatType.channel,
         );
       case ChannelChat():
         totalSavedMessages = await _textMessageRepository.count(
@@ -104,7 +102,6 @@ class TextMessageStreamService {
       DirectMessageChat() => await _textMessageRepository.getDirectMessagesBy(
           myNodeNum: _myNodeNum,
           otherNodeNum: _chatType.dmNode,
-          channel: _chatType.channel,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
           offset: prevLen,
         ),

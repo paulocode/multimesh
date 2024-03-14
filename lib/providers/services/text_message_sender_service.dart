@@ -8,6 +8,7 @@ import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ble/radio_writer.dart';
 import '../repository/text_message_repository.dart';
+import 'node_service.dart';
 import 'radio_config_service.dart';
 import 'text_message_status_service.dart';
 import 'text_message_stream_service.dart';
@@ -26,17 +27,29 @@ Future<void> sendTextMessage(
   final textMessageRepository = ref.watch(textMessageRepositoryProvider);
   final textMessageStreamService =
       ref.watch(textMessageStreamServiceProvider(chatType: chatType));
+  final nodes = ref.read(nodeServiceProvider);
+  late final int channel;
+  late final int to;
+
+  switch(chatType) {
+    case DirectMessageChat():
+      to = chatType.dmNode;
+      channel = nodes[chatType.dmNode]?.channel ?? 0;
+    case ChannelChat():
+      to = TO_CHANNEL;
+      channel = chatType.channel;
+  }
 
   final message = TextMessage(
     text: text,
     from: myNodeNum,
-    to: chatType is DirectMessageChat ? chatType.dmNode : TO_CHANNEL,
-    channel: chatType.channel,
+    to: to,
+    channel: channel,
     time: DateTime.now(),
   );
 
   final packetId = radioWriter.sendMeshPacket(
-    channel: chatType.channel,
+    channel: message.channel,
     to: message.to,
     wantAck: true,
     portNum: PortNum.TEXT_MESSAGE_APP,

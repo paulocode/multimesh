@@ -2,23 +2,12 @@ import 'package:flutter/material.dart';
 
 @immutable
 sealed class ChatType {
-  const ChatType({required this.channel});
-  final int channel;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ChatType &&
-          runtimeType == other.runtimeType &&
-          channel == other.channel;
-
-  @override
-  int get hashCode => channel.hashCode;
+  const ChatType();
 }
 
 @immutable
 class DirectMessageChat extends ChatType {
-  const DirectMessageChat({required this.dmNode, required super.channel});
+  const DirectMessageChat({required this.dmNode});
   final int dmNode;
 
   @override
@@ -30,17 +19,21 @@ class DirectMessageChat extends ChatType {
           dmNode == other.dmNode;
 
   @override
-  int get hashCode => super.hashCode ^ dmNode.hashCode;
+  int get hashCode => dmNode.hashCode;
 }
 
 @immutable
 class ChannelChat extends ChatType {
-  const ChannelChat({required super.channel});
+  const ChannelChat({required this.channel});
+  final int channel;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      super == other &&
-          other is ChannelChat &&
-          runtimeType == other.runtimeType;
+      other is ChannelChat &&
+          runtimeType == other.runtimeType &&
+          channel == other.channel;
+
+  @override
+  int get hashCode => channel.hashCode;
 }

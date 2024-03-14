@@ -41,7 +41,6 @@ GoRouter goRouter(GoRouterRef ref) {
           if (dmNodeStr != null) {
             chatType = DirectMessageChat(
               dmNode: int.parse(dmNodeStr),
-              channel: channel,
             );
           } else {
             chatType = ChannelChat(channel: channel);

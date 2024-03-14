@@ -87,21 +87,22 @@ class TextMessageReceiverService {
     required ChatType chatType,
     required void Function(TextMessage) listener,
   }) {
-    final stream = _streamController.stream.where(
-      (event) => event.channel == chatType.channel,
-    );
+    final stream = _streamController.stream;
     switch (chatType) {
       case DirectMessageChat():
         return stream
             .where(
               (event) =>
-                  event.from == chatType.dmNode &&
-                  event.channel == chatType.channel &&
-                  event.to == _myNodeNum,
+                  event.from == chatType.dmNode && event.to == _myNodeNum,
             )
             .listen(listener);
       case ChannelChat():
-        return stream.where((event) => event.to == TO_CHANNEL).listen(listener);
+        return stream
+            .where(
+              (event) =>
+                  event.to == TO_CHANNEL && event.channel == chatType.channel,
+            )
+            .listen(listener);
     }
   }
 
@@ -130,7 +131,7 @@ class TextMessageReceiverService {
     await _textMessageRepository.add(textMessage: message);
     _streamController.add(message);
     final node = _nodes[message.from];
-    var payload = '/chat?channel=${node?.channel}';
+    var payload = '/chat?channel=${message.channel}';
     if (message.to != TO_CHANNEL) {
       payload += '&dmNode=${message.from}';
     }

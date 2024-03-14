@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notifications.g.dart';
@@ -36,12 +37,15 @@ Future<FlutterLocalNotificationsPlugin> flutterLocalNotificationsPlugin(
 
 @Riverpod(keepAlive: true)
 class NotificationsCallback extends _$NotificationsCallback {
+  final _logger = Logger();
+
   @override
   String? build() {
     return null;
   }
 
   void onTapNotification(String? payload) {
+    _logger.i('Notif callback: $payload');
     state = payload;
   }
 }

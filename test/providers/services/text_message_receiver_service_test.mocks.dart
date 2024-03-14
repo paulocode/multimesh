@@ -107,7 +107,6 @@ class MockTextMessageRepository extends _i1.Mock
   _i4.Future<List<_i2.TextMessage>> getDirectMessagesBy({
     required int? myNodeNum,
     required int? otherNodeNum,
-    required int? channel,
     required int? limit,
     int? offset = 0,
   }) =>
@@ -118,7 +117,6 @@ class MockTextMessageRepository extends _i1.Mock
           {
             #myNodeNum: myNodeNum,
             #otherNodeNum: otherNodeNum,
-            #channel: channel,
             #limit: limit,
             #offset: offset,
           },
@@ -151,7 +149,6 @@ class MockTextMessageRepository extends _i1.Mock
 
   @override
   _i4.Future<int> countDirectMessagesBy({
-    required int? channel,
     required int? myNodeNum,
     required int? otherNodeNum,
   }) =>
@@ -160,7 +157,6 @@ class MockTextMessageRepository extends _i1.Mock
           #countDirectMessagesBy,
           [],
           {
-            #channel: channel,
             #myNodeNum: myNodeNum,
             #otherNodeNum: otherNodeNum,
           },

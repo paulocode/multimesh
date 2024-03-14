@@ -221,7 +221,7 @@ void main() {
     final textMessageReceiverService = init();
     final messageCompleter = Completer<TextMessage>();
     textMessageReceiverService.addMessageListener(
-      chatType: const DirectMessageChat(dmNode: 777, channel: 1),
+      chatType: const DirectMessageChat(dmNode: 777),
       listener: messageCompleter.complete,
     );
 

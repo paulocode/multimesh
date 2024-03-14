@@ -96,15 +96,14 @@ class TextMessageRepository {
   Future<List<TextMessage>> getDirectMessagesBy({
     required int myNodeNum,
     required int otherNodeNum,
-    required int channel,
     required int limit,
     int offset = 0,
   }) async {
     final result = await _database.query(
       'text_messages',
       where:
-          '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND channel = ?',
-      whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, channel],
+          '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?))',
+      whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum],
       offset: offset,
       orderBy: 'id ASC',
       limit: limit,
@@ -170,13 +169,12 @@ class TextMessageRepository {
   }
 
   Future<int> countDirectMessagesBy({
-    required int channel,
     required int myNodeNum,
     required int otherNodeNum,
   }) async {
     final result = await _database.rawQuery(
-      'SELECT COUNT(*) FROM text_messages WHERE ((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND channel = ?',
-      [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, channel],
+      'SELECT COUNT(*) FROM text_messages WHERE ((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?))',
+      [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum],
     );
 
     return Sqflite.firstIntValue(result) ?? 0;

@@ -208,7 +208,7 @@ class _ShowNotificationProviderElement extends FutureProviderElement<void>
 }
 
 String _$notificationsCallbackHash() =>
-    r'd486daee0f30ef4167fe6c67e4f7a05c12c9c99e';
+    r'84257737ca845a0e9b6019d58e2eb111f7319df1';
 
 /// See also [NotificationsCallback].
 @ProviderFor(NotificationsCallback)
