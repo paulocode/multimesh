@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final flutterBluePlusProvider = Provider<FlutterBluePlusMockable>((ref) {
+part 'flutter_blue_plus_mockable.g.dart';
+
+@Riverpod(keepAlive: true)
+FlutterBluePlusMockable flutterBluePlus(FlutterBluePlusRef ref) {
   return FlutterBluePlusMockable();
-});
+}
 
 /// Wrapper for FlutterBluePlus in order to easily mock it
 /// Wraps all static calls for testing purposes

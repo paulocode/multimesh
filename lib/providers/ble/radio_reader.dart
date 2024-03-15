@@ -23,6 +23,7 @@ RadioReader radioReader(RadioReaderRef ref) {
   );
 }
 
+// TODO create dart file for this class
 abstract class RadioReader {
   Stream<FromRadio> onPacketReceived();
   void forceRead();

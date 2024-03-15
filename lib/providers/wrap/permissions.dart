@@ -1,9 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final permissionsProvider = Provider<Permissions>((ref) {
+part 'permissions.g.dart';
+
+@Riverpod(keepAlive: true)
+Permissions permissions(PermissionsRef ref) {
   return Permissions();
-});
+}
 
 class Permissions {
   Future<void> locationWhenInUseRequest() async {

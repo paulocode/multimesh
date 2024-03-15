@@ -48,6 +48,7 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
   return queuedRadioWriter;
 }
 
+// TODO create dart file for this class
 abstract class RadioWriter {
   Future<void> write(List<int> value);
 }

@@ -1,6 +1,9 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:platform/platform.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final localPlatformProvider = Provider<LocalPlatform>((ref) {
+part 'local_platform.g.dart';
+
+@Riverpod(keepAlive: true)
+LocalPlatform localPlatform(LocalPlatformRef ref) {
   return const LocalPlatform();
-});
+}
