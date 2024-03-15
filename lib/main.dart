@@ -28,7 +28,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     super.initState();
     _initForegroundTask();
     FlutterForegroundTask.startService(
-      notificationTitle: 'Meshtastic',
+      notificationTitle: 'meshx',
       notificationText: 'Tap to view',
     );
   }

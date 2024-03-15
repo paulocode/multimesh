@@ -38,7 +38,15 @@ class TabParent extends ConsumerWidget {
             padding: const EdgeInsets.only(left: 16),
             child: Image.asset('assets/meshx.png'),
           ),
-          title: const Text('Meshtastic'),
+          title: const Row(
+            children: [
+              Text('Meshtastic'),
+              Text(
+                '®',
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.radio)),

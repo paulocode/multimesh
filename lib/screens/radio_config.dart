@@ -152,6 +152,16 @@ class RadioConfigScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  textAlign: TextAlign.justify,
+                  'Meshtastic® is a registered trademark of Meshtastic LLC.'
+                  ' Meshtastic software components are released under '
+                  'various licenses, see GitHub for details. No warranty '
+                  'is provided - use at your own risk.',
+                ),
+              ),
             ],
           ),
         ),
