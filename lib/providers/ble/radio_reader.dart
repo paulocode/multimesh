@@ -17,14 +17,19 @@ RadioReader radioReader(RadioReaderRef ref) {
     }
   });
   ref.onDispose(sub.close);
-  return RadioReader(
+  return BleRadioReader(
     radioConnectorState: sub.read(),
     onDispose: ref.onDispose,
   );
 }
 
-class RadioReader {
-  RadioReader({
+abstract class RadioReader {
+  Stream<FromRadio> onPacketReceived();
+  void forceRead();
+}
+
+class BleRadioReader implements RadioReader {
+  BleRadioReader({
     required RadioConnectorState radioConnectorState,
     required void Function(void Function() cb) onDispose,
   }) : _radioConnectorState = radioConnectorState {

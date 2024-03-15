@@ -10,14 +10,14 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../mock_stream.dart';
-import 'radio_reader_test.mocks.dart';
+import 'ble_radio_reader_test.mocks.dart';
 
 @GenerateMocks([
   BluetoothCharacteristic,
   BluetoothDevice,
 ])
 void main() {
-  late RadioReader radioReaderService;
+  late BleRadioReader radioReaderService;
   late MockBluetoothCharacteristic fromRadio;
   late MockBluetoothCharacteristic fromNum;
   late MockStream<List<int>> fromNumStream;
@@ -41,7 +41,7 @@ void main() {
       isNewRadio: true,
     );
 
-    radioReaderService = RadioReader(
+    radioReaderService = BleRadioReader(
       radioConnectorState: connectionState,
       onDispose: diposers.add,
     );
