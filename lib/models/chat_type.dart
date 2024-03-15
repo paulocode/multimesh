@@ -4,10 +4,9 @@ import '../constants/ble_constants.dart';
 
 @immutable
 sealed class ChatType {
+  const ChatType({required this.toNode, required this.channel});
   final int toNode;
   final int channel;
-
-  const ChatType({required this.toNode, required this.channel});
 
   @override
   bool operator ==(Object other) =>
@@ -23,7 +22,8 @@ sealed class ChatType {
 
 @immutable
 class DirectMessageChat extends ChatType {
-  const DirectMessageChat({required int dmNode}) : super(toNode: dmNode, channel: 0);
+  const DirectMessageChat({required int dmNode})
+      : super(toNode: dmNode, channel: 0);
 }
 
 @immutable
