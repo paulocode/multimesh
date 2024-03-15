@@ -21,7 +21,7 @@ class ChatScreen extends ConsumerWidget {
     final channels = ref.watch(channelServiceProvider);
     final nodes = ref.watch(nodeServiceProvider);
     final title = switch (_chatType) {
-      DirectMessageChat() => nodes[_chatType.dmNode]?.longName ?? '',
+      DirectMessageChat() => nodes[_chatType.toNode]?.longName ?? '',
       ChannelChat() => channels[_chatType.channel].name,
     };
     return Scaffold(

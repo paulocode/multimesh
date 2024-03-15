@@ -80,7 +80,7 @@ void main() {
           id: 123,
           channel: 1,
           from: 789,
-          to: TO_CHANNEL,
+          to: TO_BROADCAST,
           decoded: Data(
             portnum: PortNum.TEXT_MESSAGE_APP,
             payload: utf8.encode('abc'),
@@ -94,7 +94,7 @@ void main() {
     expect(message.packetId, equals(123));
     expect(message.channel, equals(1));
     expect(message.from, equals(789));
-    expect(message.to, equals(TO_CHANNEL));
+    expect(message.to, equals(TO_BROADCAST));
     expect(
       message.time.difference(DateTime.now()).inSeconds.abs() < 10,
       isTrue,
@@ -114,7 +114,7 @@ void main() {
           id: 789,
           channel: 1,
           from: 123241,
-          to: TO_CHANNEL,
+          to: TO_BROADCAST,
           decoded: Data(
             portnum: PortNum.TEXT_MESSAGE_APP,
             payload: utf8.encode('abc'),
@@ -176,7 +176,7 @@ void main() {
           id: 123,
           channel: 1,
           from: 789,
-          to: TO_CHANNEL,
+          to: TO_BROADCAST,
           decoded: Data(
             portnum: PortNum.TEXT_MESSAGE_APP,
             payload: utf8.encode('abc😊'),
@@ -204,7 +204,7 @@ void main() {
           packet: MeshPacket(
             id: 123,
             channel: 1,
-            to: TO_CHANNEL,
+            to: TO_BROADCAST,
             decoded: Data(
               portnum: PortNum.TEXT_MESSAGE_APP,
               payload: utf8.encode('abc'),

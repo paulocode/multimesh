@@ -94,14 +94,14 @@ class TextMessageReceiverService {
         return stream
             .where(
               (event) =>
-                  event.from == chatType.dmNode && event.to == _myNodeNum,
+                  event.from == chatType.toNode && event.to == _myNodeNum,
             )
             .listen(listener);
       case ChannelChat():
         return stream
             .where(
               (event) =>
-                  event.to == TO_CHANNEL && event.channel == chatType.channel,
+                  event.to == TO_BROADCAST && event.channel == chatType.channel,
             )
             .listen(listener);
     }
@@ -133,7 +133,7 @@ class TextMessageReceiverService {
     _streamController.add(message);
     final node = _nodes()[message.from];
     late final String payload;
-    if (message.to != TO_CHANNEL) {
+    if (message.to != TO_BROADCAST) {
       payload = '/chat?dmNode=${message.from}';
     } else {
       payload = '/chat?channel=${message.channel}';

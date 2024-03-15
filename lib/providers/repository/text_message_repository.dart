@@ -193,7 +193,7 @@ class TextMessageRepository {
   }
 
   Future<void> _createDummyData() async {
-    final messagesExist = await count(channel: 0, toNode: TO_CHANNEL) >
+    final messagesExist = await count(channel: 0, toNode: TO_BROADCAST) >
         BATCH_NUM_MESSAGES_TO_LOAD;
     if (messagesExist) {
       return;
@@ -206,7 +206,7 @@ class TextMessageRepository {
           packetId: random.nextInt(0xffffffff),
           text: ('a' * random.nextInt(250)) + i.toString(),
           from: random.nextBool() ? 3806486552 : 3620505567,
-          to: TO_CHANNEL,
+          to: TO_BROADCAST,
           channel: 0,
           time: DateTime.fromMillisecondsSinceEpoch(
             (msSinceEpoch - 1000 * 1000 * 60) + i * 1000 * 60,

@@ -47,7 +47,7 @@ void main() {
 
     when(
       radioWriter.sendMeshPacket(
-        to: TO_CHANNEL,
+        to: TO_BROADCAST,
         channel: 1,
         wantAck: true,
         portNum: PortNum.TEXT_MESSAGE_APP,
@@ -76,7 +76,7 @@ void main() {
 
     final text = verify(
       radioWriter.sendMeshPacket(
-        to: TO_CHANNEL,
+        to: TO_BROADCAST,
         channel: 1,
         wantAck: true,
         portNum: PortNum.TEXT_MESSAGE_APP,

@@ -1,38 +1,32 @@
 import 'package:flutter/material.dart';
 
+import '../constants/ble_constants.dart';
+
 @immutable
 sealed class ChatType {
-  const ChatType();
+  final int toNode;
+  final int channel;
+
+  const ChatType({required this.toNode, required this.channel});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChatType &&
+          runtimeType == other.runtimeType &&
+          toNode == other.toNode &&
+          channel == other.channel;
+
+  @override
+  int get hashCode => toNode.hashCode ^ channel.hashCode;
 }
 
 @immutable
 class DirectMessageChat extends ChatType {
-  const DirectMessageChat({required this.dmNode});
-  final int dmNode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is DirectMessageChat &&
-          runtimeType == other.runtimeType &&
-          dmNode == other.dmNode;
-
-  @override
-  int get hashCode => dmNode.hashCode;
+  const DirectMessageChat({required int dmNode}) : super(toNode: dmNode, channel: 0);
 }
 
 @immutable
 class ChannelChat extends ChatType {
-  const ChannelChat({required this.channel});
-  final int channel;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ChannelChat &&
-          runtimeType == other.runtimeType &&
-          channel == other.channel;
-
-  @override
-  int get hashCode => channel.hashCode;
+  const ChannelChat({super.toNode = TO_BROADCAST, required super.channel});
 }

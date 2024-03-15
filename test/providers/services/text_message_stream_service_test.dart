@@ -43,15 +43,15 @@ void main() {
 
     when(
       textMessageRepository.getBy(
-        toNode: TO_CHANNEL,
+        toNode: TO_BROADCAST,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
       ),
-    ).thenAnswer((_) => Future.value(_generateMessages(toNode: TO_CHANNEL)));
+    ).thenAnswer((_) => Future.value(_generateMessages(toNode: TO_BROADCAST)));
 
     when(
       textMessageRepository.count(
-        toNode: TO_CHANNEL,
+        toNode: TO_BROADCAST,
         channel: 1,
       ),
     ).thenAnswer((_) => Future.value(BATCH_NUM_MESSAGES_TO_LOAD * 5));
@@ -117,7 +117,7 @@ void main() {
     final messages = textMessageStreamService.getMessages();
     expect(messages.length, equals(BATCH_NUM_MESSAGES_TO_LOAD));
     expect(messages[0].text, equals('0'));
-    expect(messages[0].to, equals(TO_CHANNEL));
+    expect(messages[0].to, equals(TO_BROADCAST));
   });
 
   test('load initial direct messages', () async {
@@ -217,7 +217,7 @@ void main() {
     final messagesFuture = textMessageStreamService.stream.first;
     when(
       textMessageRepository.getBy(
-        toNode: TO_CHANNEL,
+        toNode: TO_BROADCAST,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
@@ -226,7 +226,7 @@ void main() {
       (_) => Future.value(
         _generateMessages(
           offset: BATCH_NUM_MESSAGES_TO_LOAD,
-          toNode: TO_CHANNEL,
+          toNode: TO_BROADCAST,
         ),
       ),
     );
@@ -280,7 +280,7 @@ void main() {
       (_) => Future.value(
         _generateMessages(
           offset: BATCH_NUM_MESSAGES_TO_LOAD,
-          toNode: TO_CHANNEL,
+          toNode: TO_BROADCAST,
         ),
       ),
     );

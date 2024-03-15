@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../constants/ble_constants.dart';
 import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ble/radio_writer.dart';
 import '../repository/text_message_repository.dart';
-import 'node_service.dart';
 import 'radio_config_service.dart';
 import 'text_message_status_service.dart';
 import 'text_message_stream_service.dart';
@@ -27,24 +25,12 @@ Future<void> sendTextMessage(
   final textMessageRepository = ref.watch(textMessageRepositoryProvider);
   final textMessageStreamService =
       ref.watch(textMessageStreamServiceProvider(chatType: chatType));
-  final nodes = ref.watch(nodeServiceProvider);
-  late final int channel;
-  late final int to;
-
-  switch (chatType) {
-    case DirectMessageChat():
-      to = chatType.dmNode;
-      channel = nodes[chatType.dmNode]?.channel ?? 0;
-    case ChannelChat():
-      to = TO_CHANNEL;
-      channel = chatType.channel;
-  }
 
   final message = TextMessage(
     text: text,
     from: myNodeNum,
-    to: to,
-    channel: channel,
+    to: chatType.toNode,
+    channel: chatType.channel,
     time: DateTime.now(),
   );
 
