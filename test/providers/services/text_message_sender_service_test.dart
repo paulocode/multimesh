@@ -42,6 +42,9 @@ void main() {
         textMessageStreamServiceProvider(
           chatType: const ChannelChat(channel: 1),
         ).overrideWith((ref) => textMessageStreamService),
+        textMessageStreamServiceProvider(
+          chatType: const DirectMessageChat(dmNode: 789123),
+        ).overrideWith((ref) => textMessageStreamService),
       ],
     );
 
@@ -56,6 +59,17 @@ void main() {
     ).thenReturn(765);
 
     when(
+      radioWriter.sendMeshPacket(
+        to: 789123,
+        // ignore: avoid_redundant_argument_values
+        channel: 0,
+        wantAck: true,
+        portNum: PortNum.TEXT_MESSAGE_APP,
+        payload: anyNamed('payload'),
+      ),
+    ).thenReturn(654);
+
+    when(
       textMessageRepository.add(textMessage: anyNamed('textMessage')),
     ).thenAnswer((realInvocation) => Future.value(1));
 
@@ -66,7 +80,7 @@ void main() {
     container.read(radioConfigServiceProvider.notifier).setMyNodeNum(31415);
   });
 
-  test('broadcast', () async {
+  test('send channel message', () async {
     await container.read(
       sendTextMessageProvider(
         chatType: const ChannelChat(channel: 1),
@@ -85,6 +99,28 @@ void main() {
     ).captured.first as Uint8List;
 
     expect(utf8.decode(text), equals('abc'));
+  });
+
+  test('send direct message', () async {
+    await container.read(
+      sendTextMessageProvider(
+        chatType: const DirectMessageChat(dmNode: 789123),
+        text: 'xyz',
+      ).future,
+    );
+
+    final text = verify(
+      radioWriter.sendMeshPacket(
+        to: 789123,
+        // ignore: avoid_redundant_argument_values
+        channel: 0,
+        wantAck: true,
+        portNum: PortNum.TEXT_MESSAGE_APP,
+        payload: captureAnyNamed('payload'),
+      ),
+    ).captured.first as Uint8List;
+
+    expect(utf8.decode(text), equals('xyz'));
   });
 
   test('save', () async {
