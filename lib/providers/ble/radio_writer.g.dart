@@ -6,11 +6,11 @@ part of 'radio_writer.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$radioWriterHash() => r'5e7c7c292eeaf504a345ee2d7633f88e3b0dfa4e';
+String _$radioWriterHash() => r'f0c8305ccd0913e11a37e8e7bd2e560bd883941a';
 
 /// See also [radioWriter].
 @ProviderFor(radioWriter)
-final radioWriterProvider = Provider<RadioWriter>.internal(
+final radioWriterProvider = Provider<QueuedRadioWriter>.internal(
   radioWriter,
   name: r'radioWriterProvider',
   debugGetCreateSourceHash:
@@ -19,6 +19,6 @@ final radioWriterProvider = Provider<RadioWriter>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef RadioWriterRef = ProviderRef<RadioWriter>;
+typedef RadioWriterRef = ProviderRef<QueuedRadioWriter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -8,6 +8,7 @@ import 'dart:async' as _i3;
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i2;
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
 import 'package:meshx/providers/ble/radio_reader.dart' as _i5;
+import 'package:meshx/providers/ble/radio_writer.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 
@@ -576,4 +577,23 @@ class MockRadioReader extends _i1.Mock implements _i5.RadioReader {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [RadioWriter].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRadioWriter extends _i1.Mock implements _i7.RadioWriter {
+  MockRadioWriter() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Future<void> write(List<int>? value) => (super.noSuchMethod(
+        Invocation.method(
+          #write,
+          [value],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }

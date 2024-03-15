@@ -35,7 +35,7 @@ RadioConfigDownloaderService radioConfigDownloaderService(
 
 class RadioConfigDownloaderService {
   RadioConfigDownloaderService({
-    required RadioWriter radioWriter,
+    required QueuedRadioWriter radioWriter,
     required RadioReader radioReader,
     required RadioConnectorState radioConnectorState,
     required RadioConfigService Function() radioConfigServiceProvider,
@@ -53,7 +53,7 @@ class RadioConfigDownloaderService {
     onDispose(subscription.cancel);
   }
 
-  final RadioWriter _radioWriter;
+  final QueuedRadioWriter _radioWriter;
   final RadioReader _radioReader;
   final RadioConnectorState _radioConnectorState;
   final RadioConfigService Function() _radioConfigServiceProvider;

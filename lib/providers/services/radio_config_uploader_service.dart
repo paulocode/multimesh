@@ -19,10 +19,10 @@ RadioConfigUploaderService radioConfigUploaderService(
 
 class RadioConfigUploaderService {
   RadioConfigUploaderService({
-    required RadioWriter radioWriter,
+    required QueuedRadioWriter radioWriter,
   }) : _radioWriter = radioWriter;
 
-  final RadioWriter _radioWriter;
+  final QueuedRadioWriter _radioWriter;
   final _logger = Logger();
 
   Future<void> setRegion({

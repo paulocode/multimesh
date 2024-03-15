@@ -111,16 +111,16 @@ class _FakeBleCharacteristics_6 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [RadioWriter].
+/// A class which mocks [QueuedRadioWriter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRadioWriter extends _i1.Mock implements _i6.RadioWriter {
-  MockRadioWriter() {
+class MockQueuedRadioWriter extends _i1.Mock implements _i6.QueuedRadioWriter {
+  MockQueuedRadioWriter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set toRadio(_i4.BluetoothCharacteristic? toRadio) => super.noSuchMethod(
+  set toRadio(_i6.RadioWriter? toRadio) => super.noSuchMethod(
         Invocation.setter(
           #toRadio,
           toRadio,

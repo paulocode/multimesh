@@ -51,8 +51,10 @@ class BleRadioReader implements RadioReader {
   final _logger = Logger();
   final _packetStreamController = StreamController<FromRadio>.broadcast();
 
+  @override
   Stream<FromRadio> onPacketReceived() => _packetStreamController.stream;
 
+  @override
   void forceRead() {
     _readUntilEmpty();
   }

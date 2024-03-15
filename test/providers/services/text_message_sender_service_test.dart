@@ -19,20 +19,20 @@ import '../../common.dart';
 import 'text_message_sender_service_test.mocks.dart';
 
 @GenerateMocks([
-  RadioWriter,
+  QueuedRadioWriter,
   RadioConfigService,
   TextMessageRepository,
   TextMessageStreamService,
 ])
 void main() {
   late MockTextMessageRepository textMessageRepository;
-  late MockRadioWriter radioWriter;
+  late MockQueuedRadioWriter radioWriter;
   late MockTextMessageStreamService textMessageStreamService;
   late ProviderContainer container;
 
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
-    radioWriter = MockRadioWriter();
+    radioWriter = MockQueuedRadioWriter();
     textMessageStreamService = MockTextMessageStreamService();
     container = createContainer(
       overrides: [

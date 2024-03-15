@@ -17,21 +17,22 @@ import 'radio_writer_test.mocks.dart';
   BluetoothCharacteristic,
   BluetoothDevice,
   RadioReader,
+  RadioWriter,
 ])
 void main() {
-  late MockBluetoothCharacteristic toRadio;
-  late RadioWriter radioWriter;
+  late MockRadioWriter toRadio;
+  late QueuedRadioWriter radioWriter;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> packetStream;
 
   setUp(() {
-    toRadio = MockBluetoothCharacteristic();
+    toRadio = MockRadioWriter();
     radioReader = MockRadioReader();
     packetStream = MockStream();
 
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
 
-    radioWriter = RadioWriter(sendTimeout: const Duration(seconds: 1))
+    radioWriter = QueuedRadioWriter(sendTimeout: const Duration(seconds: 1))
       ..toRadio = toRadio
       ..radioReader = radioReader;
   });

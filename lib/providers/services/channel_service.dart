@@ -21,7 +21,7 @@ part 'channel_service.g.dart';
 @Riverpod(keepAlive: true)
 class ChannelService extends _$ChannelService {
   final _logger = Logger();
-  late RadioWriter _radioWriter;
+  late QueuedRadioWriter _radioWriter;
   late int _myNodeNum;
 
   @override

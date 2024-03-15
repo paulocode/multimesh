@@ -16,9 +16,9 @@ import 'radio_reader.dart';
 part 'radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
-RadioWriter radioWriter(RadioWriterRef ref) {
+QueuedRadioWriter radioWriter(RadioWriterRef ref) {
   final _logger = Logger();
-  final radioWriter = RadioWriter();
+  final queuedRadioWriter = QueuedRadioWriter();
 
   final connectorListener =
       ref.listen(radioConnectorProvider, (_, connectorState) {
@@ -28,32 +28,48 @@ RadioWriter radioWriter(RadioWriterRef ref) {
 
     if (connectorState.isNewRadio) {
       _logger.i('New radio, clearing packet queue');
-      radioWriter.clearPacketQueue();
+      queuedRadioWriter.clearPacketQueue();
     } else {
       _logger.i('Reconnected to same radio');
     }
 
-    radioWriter.toRadio = connectorState.bleCharacteristics.toRadio;
+    queuedRadioWriter.toRadio =
+        BleRadioWriter(to: connectorState.bleCharacteristics.toRadio);
   });
 
   final readerListener = ref.listen(radioReaderProvider, (_, next) {
     _logger.i('New reader');
-    radioWriter.radioReader = next;
+    queuedRadioWriter.radioReader = next;
   });
 
   ref.onDispose(readerListener.close);
   ref.onDispose(connectorListener.close);
 
-  return radioWriter;
+  return queuedRadioWriter;
 }
 
-class RadioWriter {
-  RadioWriter({Duration sendTimeout = const Duration(seconds: 30)})
+abstract class RadioWriter {
+  Future<void> write(List<int> value);
+}
+
+class BleRadioWriter implements RadioWriter {
+  BleRadioWriter({required BluetoothCharacteristic to}) : _to = to;
+
+  final BluetoothCharacteristic _to;
+
+  @override
+  Future<void> write(List<int> value) async {
+    await _to.write(value);
+  }
+}
+
+class QueuedRadioWriter {
+  QueuedRadioWriter({Duration sendTimeout = const Duration(seconds: 30)})
       : _sendTimeout = sendTimeout {
     _currentPacketId = _random.nextInt(0xffffffff);
   }
 
-  BluetoothCharacteristic? _toRadio;
+  RadioWriter? _toRadio;
   StreamSubscription<FromRadio>? _packetSub;
   var _packetQueue = Queue<MeshPacket>();
   final _logger = Logger();
@@ -63,7 +79,7 @@ class RadioWriter {
   var _packetAckCompleter = Completer<void>();
   final Duration _sendTimeout;
 
-  set toRadio(BluetoothCharacteristic toRadio) {
+  set toRadio(RadioWriter toRadio) {
     _toRadio = toRadio;
   }
 

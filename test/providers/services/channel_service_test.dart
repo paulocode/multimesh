@@ -21,18 +21,18 @@ import 'channel_service_test.mocks.dart';
 
 @GenerateMocks([
   RadioReader,
-  RadioWriter,
+  QueuedRadioWriter,
   RadioConfigService,
 ])
 void main() {
   late ProviderContainer container;
   late MockRadioReader radioReader;
-  late MockRadioWriter radioWriter;
+  late MockQueuedRadioWriter radioWriter;
   late MockStream<FromRadio> stream;
 
   setUp(() {
     radioReader = MockRadioReader();
-    radioWriter = MockRadioWriter();
+    radioWriter = MockQueuedRadioWriter();
     stream = MockStream();
     when(radioReader.onPacketReceived()).thenAnswer((_) => stream);
     when(
