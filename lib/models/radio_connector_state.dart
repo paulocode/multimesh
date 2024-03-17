@@ -40,7 +40,8 @@ class Connected extends WithRadioId {
 
 @immutable
 class ConnectionError extends WithRadioId {
-  ConnectionError({required this.msg, required super.radioId});
+  ConnectionError({String? msg, required super.radioId})
+      : msg = msg ?? 'Unknown error';
 
   final String msg;
 }

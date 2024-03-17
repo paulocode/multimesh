@@ -70,13 +70,12 @@ class RadioConnector extends _$RadioConnector {
       _currentRadioId = radioId;
 
       await _subscribeConnectionState(device);
-    } catch (e, stackTrace) {
-      _logger.e(stackTrace);
-      if (e is MeshRadioException) {
-        state = ConnectionError(msg: e.msg, radioId: radioId);
-      } else {
-        state = ConnectionError(msg: 'Unknown error', radioId: radioId);
-      }
+    } on MeshRadioException catch (e) {
+      state = ConnectionError(msg: e.msg, radioId: radioId);
+    } on FlutterBluePlusException catch (e) {
+      state = ConnectionError(msg: e.description, radioId: radioId);
+    } catch (e) {
+      state = ConnectionError(msg: 'Unknown error', radioId: radioId);
     }
   }
 

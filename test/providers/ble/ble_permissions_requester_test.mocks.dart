@@ -329,7 +329,7 @@ class MockFlutterBluePlusMockable extends _i1.Mock
   @override
   void setLogLevel(
     _i2.LogLevel? level, {
-    dynamic color = true,
+    bool? color = true,
   }) =>
       super.noSuchMethod(
         Invocation.method(
