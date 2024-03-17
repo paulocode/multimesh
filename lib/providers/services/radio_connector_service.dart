@@ -1,4 +1,6 @@
 // ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
+import 'dart:async';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/mesh_radio.dart';
@@ -16,11 +18,8 @@ class RadioConnectorService extends _$RadioConnectorService
 
   @override
   RadioConnectorState build() {
-    ref.watch(bleRadioConnectorProvider);
-    ref.watch(tcpRadioConnectorProvider);
-
     if (_lastUsedConnector != null) {
-      return ref.read(_lastUsedConnector!);
+      return ref.watch(_lastUsedConnector!);
     } else {
       return Disconnected();
     }
@@ -42,6 +41,7 @@ class RadioConnectorService extends _$RadioConnectorService
         _lastUsedConnector = tcpRadioConnectorProvider;
     }
 
-    await ref.read(_lastUsedConnector!.notifier).connect(radio);
+    unawaited(ref.read(_lastUsedConnector!.notifier).connect(radio));
+    ref.invalidateSelf();
   }
 }
