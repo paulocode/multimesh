@@ -27,7 +27,7 @@ class RadioConnectionScreen extends ConsumerWidget {
         final scanList = ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
           child: Padding(
-            padding: const EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Scrollbar(
               child: ListView.builder(
                 itemCount: meshRadios.length,
