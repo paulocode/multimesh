@@ -54,7 +54,7 @@ class RadioConnectionScreen extends ConsumerWidget {
           body = SizedBox(
             width: double.infinity,
             child: Column(
-              crossAxisAlignment: Platform.isIOS
+              crossAxisAlignment: Platform.isIOS || Platform.isMacOS
                   ? CrossAxisAlignment.center
                   : CrossAxisAlignment.start,
               children: [connectedRadio, Expanded(child: scanList)],

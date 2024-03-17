@@ -1,21 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'ble_characteristics.dart';
 
 sealed class RadioConnectorState {}
 
+@immutable
 abstract class WithRadioId extends RadioConnectorState {
   WithRadioId({required this.radioId});
 
   final String radioId;
 }
 
-class Disconnected extends RadioConnectorState {}
+@immutable
+class Disconnected extends RadioConnectorState {
+  Disconnected({this.errorMsg});
 
+  final String? errorMsg;
+}
+
+@immutable
 class Connecting extends WithRadioId {
   Connecting({required super.radioId});
 }
 
+@immutable
 class Connected extends WithRadioId {
   Connected({
     required this.bleCharacteristics,
@@ -29,6 +38,7 @@ class Connected extends WithRadioId {
   final bool isNewRadio;
 }
 
+@immutable
 class ConnectionError extends WithRadioId {
   ConnectionError({required this.msg, required super.radioId});
 

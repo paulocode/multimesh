@@ -48,6 +48,8 @@ void main() {
         radioReader: radioReader,
         radioConnectorState: radioConnectorState,
         radioConfigServiceProvider: () => radioConfigService,
+        // TODO
+        disconnect: (_) {},
         onDispose: diposers.add,
       );
 

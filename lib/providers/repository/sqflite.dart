@@ -13,12 +13,9 @@ Future<Database> sqflite(
   SqfliteRef ref,
 ) async {
   final localPlatform = ref.read(localPlatformProvider);
-  if (localPlatform.isWindows ||
-      localPlatform.isLinux ||
-      localPlatform.isMacOS) {
+  if (localPlatform.isWindows || localPlatform.isLinux) {
     sqfliteFfiInit();
   }
-  databaseFactory = databaseFactoryFfi;
   return openDatabase(
     join(await getDatabasesPath(), 'meshx.db'),
     onCreate: (db, version) {

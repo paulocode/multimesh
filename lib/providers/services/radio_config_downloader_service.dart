@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -29,6 +30,8 @@ RadioConfigDownloaderService radioConfigDownloaderService(
     // riverpod requires us to read the notifier
     radioConfigServiceProvider: () =>
         ref.read(radioConfigServiceProvider.notifier),
+    disconnect: (errorMsg) =>
+        ref.read(radioConnectorProvider.notifier).disconnect(errorMsg),
     onDispose: ref.onDispose,
   );
 }
@@ -39,11 +42,13 @@ class RadioConfigDownloaderService {
     required RadioReader radioReader,
     required RadioConnectorState radioConnectorState,
     required RadioConfigService Function() radioConfigServiceProvider,
+    required void Function(String?) disconnect,
     required void Function(void Function() cb) onDispose,
   })  : _radioWriter = radioWriter,
         _radioReader = radioReader,
         _radioConfigServiceProvider = radioConfigServiceProvider,
-        _radioConnectorState = radioConnectorState {
+        _radioConnectorState = radioConnectorState,
+        _disconnect = disconnect {
     if (_radioConnectorState is Connected) {
       _myNodeNum = 0;
       _radioConfigServiceProvider().clear();
@@ -57,6 +62,7 @@ class RadioConfigDownloaderService {
   final RadioReader _radioReader;
   final RadioConnectorState _radioConnectorState;
   final RadioConfigService Function() _radioConfigServiceProvider;
+  final void Function(String?) _disconnect;
   final _random = Random();
   final _logger = Logger();
   int _myNodeNum = 0;
@@ -68,9 +74,19 @@ class RadioConfigDownloaderService {
 
   Future<void> _requestConfig() async {
     _wantConfigId = _random.nextInt(0xffffffff);
-    await _radioWriter.sendWantConfig(
-      wantConfigId: _wantConfigId,
-    );
+    //  for some systems, if the pin auth fails then the device will appear
+    //  connected but the first write will fail.
+    try {
+      await _radioWriter.sendWantConfig(
+        wantConfigId: _wantConfigId,
+      );
+    } on FlutterBluePlusException catch (e) {
+      _disconnect(e.description);
+      return;
+    } catch (e) {
+      _disconnect(null);
+      return;
+    }
     _radioReader.forceRead();
   }
 

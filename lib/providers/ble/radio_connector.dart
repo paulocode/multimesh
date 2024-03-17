@@ -28,13 +28,16 @@ class RadioConnector extends _$RadioConnector {
     return Disconnected();
   }
 
-  Future<void> disconnect() async {
+  Future<void> disconnect(String? errorMsg) async {
+    if (errorMsg != null) {
+      _logger.e(errorMsg);
+    }
     if (state is! Connected) {
       return;
     }
     final device = (state as Connected).device;
     await device.disconnect();
-    state = Disconnected();
+    state = Disconnected(errorMsg: errorMsg);
     await _bleConnectSubscription?.cancel();
   }
 
