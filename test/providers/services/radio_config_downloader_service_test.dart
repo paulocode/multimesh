@@ -20,7 +20,7 @@ import 'radio_config_downloader_service_test.mocks.dart';
   RadioConfigService,
   BluetoothCharacteristic,
   BluetoothDevice,
-  Connected,
+  BleConnected,
   Disconnected,
 ])
 void main() {
@@ -39,7 +39,7 @@ void main() {
     when(radioReader.onPacketReceived()).thenAnswer((_) => fromRadioStream);
 
     when(radioWriter.sendWantConfig(wantConfigId: anyNamed('wantConfigId')))
-        .thenAnswer((realInvocation) => Future.value());
+        .thenAnswer((realInvocation) => Future<void>.value());
   });
 
   RadioConfigDownloaderService init(RadioConnectorState radioConnectorState) =>
@@ -54,7 +54,7 @@ void main() {
       );
 
   test('init, dispose', () {
-    init(MockConnected());
+    init(MockBleConnected());
 
     for (final diposer in diposers) {
       diposer();
@@ -72,13 +72,13 @@ void main() {
   });
 
   test('clear config upon connection', () {
-    init(MockConnected());
+    init(MockBleConnected());
 
     verify(radioConfigService.clear());
   });
 
   test('MyInfo packet', () async {
-    init(MockConnected());
+    init(MockBleConnected());
 
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
 
@@ -87,7 +87,7 @@ void main() {
   });
 
   test('configId response', () async {
-    init(MockConnected());
+    init(MockBleConnected());
 
     final configId = verify(
       radioWriter.sendWantConfig(
@@ -101,7 +101,7 @@ void main() {
   });
 
   test('wrong configId response', () async {
-    init(MockConnected());
+    init(MockBleConnected());
 
     final configId = verify(
       radioWriter.sendWantConfig(
@@ -116,7 +116,7 @@ void main() {
   });
 
   test('NodeInfo of our node', () async {
-    init(MockConnected());
+    init(MockBleConnected());
 
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
     await fromRadioStream.emit(
@@ -140,7 +140,7 @@ void main() {
   });
 
   test('NodeInfo of another', () async {
-    init(MockConnected());
+    init(MockBleConnected());
 
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
     await fromRadioStream.emit(
@@ -167,7 +167,7 @@ void main() {
   });
 
   test('Config packet', () async {
-    init(MockConnected());
+    init(MockBleConnected());
 
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
     await fromRadioStream.emit(

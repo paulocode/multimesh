@@ -25,8 +25,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
     state = Connecting(radioId: radio.address);
     final socket = await Socket.connect(radio.address, MESHTASTIC_TCP_PORT);
     _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
-    state =
-        TcpConnected(socket: socket, isNewRadio: false, radioId: radio.address);
+    state = TcpConnected(socket: socket, radioId: radio.address);
     ref.onDispose(socket.close);
   }
 

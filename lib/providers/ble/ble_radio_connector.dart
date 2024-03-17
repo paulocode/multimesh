@@ -21,7 +21,6 @@ class BleRadioConnector extends _$BleRadioConnector
   late BleCharacteristicsFinder _bleCharacteristicsFinder;
   late LocalPlatform _localPlatform;
   StreamSubscription<BluetoothConnectionState>? _bleConnectSubscription;
-  String? _currentRadioId;
 
   @override
   RadioConnectorState build() {
@@ -67,11 +66,8 @@ class BleRadioConnector extends _$BleRadioConnector
         radioId: radioId,
         bleCharacteristics:
             await _bleCharacteristicsFinder.findCharacteristics(device),
-        isNewRadio: _currentRadioId != radioId,
         device: device,
       );
-
-      _currentRadioId = radioId;
 
       await _subscribeConnectionState(device);
     } on MeshRadioException catch (e) {

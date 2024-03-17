@@ -27,13 +27,32 @@ class Connecting extends WithRadioId {
 }
 
 @immutable
-abstract class Connected extends WithRadioId {
+sealed class Connected extends WithRadioId {
   Connected({
-    required this.isNewRadio,
+    this.isNewRadio = false,
     required super.radioId,
   });
 
   final bool isNewRadio;
+
+  Connected copyWith({bool? isNewRadio, String? radioId}) {
+    final _this = this;
+    switch (_this) {
+      case BleConnected():
+        return BleConnected(
+          bleCharacteristics: _this.bleCharacteristics,
+          device: _this.device,
+          isNewRadio: isNewRadio ?? _this.isNewRadio,
+          radioId: radioId ?? _this.radioId,
+        );
+      case TcpConnected():
+        return TcpConnected(
+          socket: _this.socket,
+          isNewRadio: isNewRadio ?? _this.isNewRadio,
+          radioId: radioId ?? _this.radioId,
+        );
+    }
+  }
 }
 
 @immutable
@@ -41,7 +60,7 @@ class BleConnected extends Connected {
   BleConnected({
     required this.bleCharacteristics,
     required this.device,
-    required super.isNewRadio,
+    super.isNewRadio = false,
     required super.radioId,
   });
 
@@ -53,7 +72,7 @@ class BleConnected extends Connected {
 class TcpConnected extends Connected {
   TcpConnected({
     required this.socket,
-    required super.isNewRadio,
+    super.isNewRadio = false,
     required super.radioId,
   });
 

@@ -3,22 +3,23 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
-import 'dart:typed_data' as _i8;
+import 'dart:async' as _i10;
+import 'dart:typed_data' as _i9;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i4;
+import 'package:meshx/models/ble_characteristics.dart' as _i5;
 import 'package:meshx/models/radio_configuration.dart' as _i3;
-import 'package:meshx/models/radio_connector_state.dart' as _i15;
-import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart' as _i13;
-import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i10;
-import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i7;
-import 'package:meshx/providers/ble/radio_reader.dart' as _i6;
-import 'package:meshx/providers/ble/radio_writer.dart' as _i5;
+import 'package:meshx/models/radio_connector_state.dart' as _i16;
+import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart' as _i14;
+import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i11;
+import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i8;
+import 'package:meshx/providers/ble/radio_reader.dart' as _i7;
+import 'package:meshx/providers/ble/radio_writer.dart' as _i6;
 import 'package:meshx/providers/services/radio_config_downloader_service.dart'
-    as _i11;
-import 'package:meshx/providers/services/radio_config_service.dart' as _i12;
+    as _i12;
+import 'package:meshx/providers/services/radio_config_service.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i14;
+import 'package:mockito/src/dummies.dart' as _i15;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -99,17 +100,28 @@ class _FakeCharacteristicProperties_5 extends _i1.SmartFake
         );
 }
 
+class _FakeBleCharacteristics_6 extends _i1.SmartFake
+    implements _i5.BleCharacteristics {
+  _FakeBleCharacteristics_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [QueuedRadioWriter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
+class MockQueuedRadioWriter extends _i1.Mock implements _i6.QueuedRadioWriter {
   MockQueuedRadioWriter() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   void setRadioWriter(
-    _i5.RadioWriter? toRadio, {
+    _i6.RadioWriter? toRadio, {
     required bool? isNewRadio,
   }) =>
       super.noSuchMethod(
@@ -122,7 +134,7 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
       );
 
   @override
-  void setRadioReader(_i6.RadioReader? radioReader) => super.noSuchMethod(
+  void setRadioReader(_i7.RadioReader? radioReader) => super.noSuchMethod(
         Invocation.method(
           #setRadioReader,
           [radioReader],
@@ -135,8 +147,8 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
     required int? to,
     int? channel = 0,
     bool? wantAck = false,
-    required _i7.PortNum? portNum,
-    required _i8.Uint8List? payload,
+    required _i8.PortNum? portNum,
+    required _i9.Uint8List? payload,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -154,34 +166,34 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
       ) as int);
 
   @override
-  _i9.Future<void> sendWantConfig({required int? wantConfigId}) =>
+  _i10.Future<void> sendWantConfig({required int? wantConfigId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendWantConfig,
           [],
           {#wantConfigId: wantConfigId},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 }
 
 /// A class which mocks [RadioReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRadioReader extends _i1.Mock implements _i6.RadioReader {
+class MockRadioReader extends _i1.Mock implements _i7.RadioReader {
   MockRadioReader() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Stream<_i10.FromRadio> onPacketReceived() => (super.noSuchMethod(
+  _i10.Stream<_i11.FromRadio> onPacketReceived() => (super.noSuchMethod(
         Invocation.method(
           #onPacketReceived,
           [],
         ),
-        returnValue: _i9.Stream<_i10.FromRadio>.empty(),
-      ) as _i9.Stream<_i10.FromRadio>);
+        returnValue: _i10.Stream<_i11.FromRadio>.empty(),
+      ) as _i10.Stream<_i11.FromRadio>);
 
   @override
   void forceRead() => super.noSuchMethod(
@@ -197,7 +209,7 @@ class MockRadioReader extends _i1.Mock implements _i6.RadioReader {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRadioConfigDownloaderService extends _i1.Mock
-    implements _i11.RadioConfigDownloaderService {
+    implements _i12.RadioConfigDownloaderService {
   MockRadioConfigDownloaderService() {
     _i1.throwOnMissingStub(this);
   }
@@ -207,7 +219,7 @@ class MockRadioConfigDownloaderService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRadioConfigService extends _i1.Mock
-    implements _i12.RadioConfigService {
+    implements _i13.RadioConfigService {
   MockRadioConfigService() {
     _i1.throwOnMissingStub(this);
   }
@@ -256,8 +268,8 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i3.RadioConfiguration);
 
   @override
-  _i9.Future<void> setRegion(
-    _i13.Config_LoRaConfig_RegionCode? region, {
+  _i10.Future<void> setRegion(
+    _i14.Config_LoRaConfig_RegionCode? region, {
     bool? upload = true,
   }) =>
       (super.noSuchMethod(
@@ -266,13 +278,13 @@ class MockRadioConfigService extends _i1.Mock
           [region],
           {#upload: upload},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> setModemPreset(
-    _i13.Config_LoRaConfig_ModemPreset? modemPreset, {
+  _i10.Future<void> setModemPreset(
+    _i14.Config_LoRaConfig_ModemPreset? modemPreset, {
     bool? upload = true,
   }) =>
       (super.noSuchMethod(
@@ -281,22 +293,22 @@ class MockRadioConfigService extends _i1.Mock
           [modemPreset],
           {#upload: upload},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> setMyNodeNum(int? myNodeNum) => (super.noSuchMethod(
+  _i10.Future<void> setMyNodeNum(int? myNodeNum) => (super.noSuchMethod(
         Invocation.method(
           #setMyNodeNum,
           [myNodeNum],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> setShortName(
+  _i10.Future<void> setShortName(
     String? shortName, {
     bool? upload = true,
   }) =>
@@ -306,12 +318,12 @@ class MockRadioConfigService extends _i1.Mock
           [shortName],
           {#upload: upload},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> setLongName(
+  _i10.Future<void> setLongName(
     String? longName, {
     bool? upload = true,
   }) =>
@@ -321,13 +333,13 @@ class MockRadioConfigService extends _i1.Mock
           [longName],
           {#upload: upload},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> setHwModel(
-    _i10.HardwareModel? hwModel, {
+  _i10.Future<void> setHwModel(
+    _i11.HardwareModel? hwModel, {
     bool? upload = true,
   }) =>
       (super.noSuchMethod(
@@ -336,9 +348,9 @@ class MockRadioConfigService extends _i1.Mock
           [hwModel],
           {#upload: upload},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
   void setConfigDownloaded() => super.noSuchMethod(
@@ -451,16 +463,16 @@ class MockBluetoothCharacteristic extends _i1.Mock
       ) as List<int>);
 
   @override
-  _i9.Stream<List<int>> get lastValueStream => (super.noSuchMethod(
+  _i10.Stream<List<int>> get lastValueStream => (super.noSuchMethod(
         Invocation.getter(#lastValueStream),
-        returnValue: _i9.Stream<List<int>>.empty(),
-      ) as _i9.Stream<List<int>>);
+        returnValue: _i10.Stream<List<int>>.empty(),
+      ) as _i10.Stream<List<int>>);
 
   @override
-  _i9.Stream<List<int>> get onValueReceived => (super.noSuchMethod(
+  _i10.Stream<List<int>> get onValueReceived => (super.noSuchMethod(
         Invocation.getter(#onValueReceived),
-        returnValue: _i9.Stream<List<int>>.empty(),
-      ) as _i9.Stream<List<int>>);
+        returnValue: _i10.Stream<List<int>>.empty(),
+      ) as _i10.Stream<List<int>>);
 
   @override
   bool get isNotifying => (super.noSuchMethod(
@@ -478,29 +490,29 @@ class MockBluetoothCharacteristic extends _i1.Mock
       ) as _i4.DeviceIdentifier);
 
   @override
-  _i9.Stream<List<int>> get value => (super.noSuchMethod(
+  _i10.Stream<List<int>> get value => (super.noSuchMethod(
         Invocation.getter(#value),
-        returnValue: _i9.Stream<List<int>>.empty(),
-      ) as _i9.Stream<List<int>>);
+        returnValue: _i10.Stream<List<int>>.empty(),
+      ) as _i10.Stream<List<int>>);
 
   @override
-  _i9.Stream<List<int>> get onValueChangedStream => (super.noSuchMethod(
+  _i10.Stream<List<int>> get onValueChangedStream => (super.noSuchMethod(
         Invocation.getter(#onValueChangedStream),
-        returnValue: _i9.Stream<List<int>>.empty(),
-      ) as _i9.Stream<List<int>>);
+        returnValue: _i10.Stream<List<int>>.empty(),
+      ) as _i10.Stream<List<int>>);
 
   @override
-  _i9.Future<List<int>> read({int? timeout = 15}) => (super.noSuchMethod(
+  _i10.Future<List<int>> read({int? timeout = 15}) => (super.noSuchMethod(
         Invocation.method(
           #read,
           [],
           {#timeout: timeout},
         ),
-        returnValue: _i9.Future<List<int>>.value(<int>[]),
-      ) as _i9.Future<List<int>>);
+        returnValue: _i10.Future<List<int>>.value(<int>[]),
+      ) as _i10.Future<List<int>>);
 
   @override
-  _i9.Future<void> write(
+  _i10.Future<void> write(
     List<int>? value, {
     bool? withoutResponse = false,
     bool? allowLongWrite = false,
@@ -516,12 +528,12 @@ class MockBluetoothCharacteristic extends _i1.Mock
             #timeout: timeout,
           },
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<bool> setNotifyValue(
+  _i10.Future<bool> setNotifyValue(
     bool? notify, {
     int? timeout = 15,
     bool? forceIndications = false,
@@ -535,8 +547,8 @@ class MockBluetoothCharacteristic extends _i1.Mock
             #forceIndications: forceIndications,
           },
         ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i10.Future<bool>.value(false),
+      ) as _i10.Future<bool>);
 }
 
 /// A class which mocks [BluetoothDevice].
@@ -559,7 +571,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get platformName => (super.noSuchMethod(
         Invocation.getter(#platformName),
-        returnValue: _i14.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.getter(#platformName),
         ),
@@ -568,7 +580,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get advName => (super.noSuchMethod(
         Invocation.getter(#advName),
-        returnValue: _i14.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.getter(#advName),
         ),
@@ -599,11 +611,11 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
       ) as bool);
 
   @override
-  _i9.Stream<_i4.BluetoothConnectionState> get connectionState =>
+  _i10.Stream<_i4.BluetoothConnectionState> get connectionState =>
       (super.noSuchMethod(
         Invocation.getter(#connectionState),
-        returnValue: _i9.Stream<_i4.BluetoothConnectionState>.empty(),
-      ) as _i9.Stream<_i4.BluetoothConnectionState>);
+        returnValue: _i10.Stream<_i4.BluetoothConnectionState>.empty(),
+      ) as _i10.Stream<_i4.BluetoothConnectionState>);
 
   @override
   int get mtuNow => (super.noSuchMethod(
@@ -612,28 +624,28 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
       ) as int);
 
   @override
-  _i9.Stream<int> get mtu => (super.noSuchMethod(
+  _i10.Stream<int> get mtu => (super.noSuchMethod(
         Invocation.getter(#mtu),
-        returnValue: _i9.Stream<int>.empty(),
-      ) as _i9.Stream<int>);
+        returnValue: _i10.Stream<int>.empty(),
+      ) as _i10.Stream<int>);
 
   @override
-  _i9.Stream<void> get onServicesReset => (super.noSuchMethod(
+  _i10.Stream<void> get onServicesReset => (super.noSuchMethod(
         Invocation.getter(#onServicesReset),
-        returnValue: _i9.Stream<void>.empty(),
-      ) as _i9.Stream<void>);
+        returnValue: _i10.Stream<void>.empty(),
+      ) as _i10.Stream<void>);
 
   @override
-  _i9.Stream<_i4.BluetoothBondState> get bondState => (super.noSuchMethod(
+  _i10.Stream<_i4.BluetoothBondState> get bondState => (super.noSuchMethod(
         Invocation.getter(#bondState),
-        returnValue: _i9.Stream<_i4.BluetoothBondState>.empty(),
-      ) as _i9.Stream<_i4.BluetoothBondState>);
+        returnValue: _i10.Stream<_i4.BluetoothBondState>.empty(),
+      ) as _i10.Stream<_i4.BluetoothBondState>);
 
   @override
-  _i9.Stream<bool> get isDiscoveringServices => (super.noSuchMethod(
+  _i10.Stream<bool> get isDiscoveringServices => (super.noSuchMethod(
         Invocation.getter(#isDiscoveringServices),
-        returnValue: _i9.Stream<bool>.empty(),
-      ) as _i9.Stream<bool>);
+        returnValue: _i10.Stream<bool>.empty(),
+      ) as _i10.Stream<bool>);
 
   @override
   _i4.DeviceIdentifier get id => (super.noSuchMethod(
@@ -647,7 +659,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get localName => (super.noSuchMethod(
         Invocation.getter(#localName),
-        returnValue: _i14.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.getter(#localName),
         ),
@@ -656,34 +668,34 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get name => (super.noSuchMethod(
         Invocation.getter(#name),
-        returnValue: _i14.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.getter(#name),
         ),
       ) as String);
 
   @override
-  _i9.Stream<_i4.BluetoothConnectionState> get state => (super.noSuchMethod(
+  _i10.Stream<_i4.BluetoothConnectionState> get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i9.Stream<_i4.BluetoothConnectionState>.empty(),
-      ) as _i9.Stream<_i4.BluetoothConnectionState>);
+        returnValue: _i10.Stream<_i4.BluetoothConnectionState>.empty(),
+      ) as _i10.Stream<_i4.BluetoothConnectionState>);
 
   @override
-  _i9.Stream<List<_i4.BluetoothService>> get servicesStream =>
+  _i10.Stream<List<_i4.BluetoothService>> get servicesStream =>
       (super.noSuchMethod(
         Invocation.getter(#servicesStream),
-        returnValue: _i9.Stream<List<_i4.BluetoothService>>.empty(),
-      ) as _i9.Stream<List<_i4.BluetoothService>>);
+        returnValue: _i10.Stream<List<_i4.BluetoothService>>.empty(),
+      ) as _i10.Stream<List<_i4.BluetoothService>>);
 
   @override
-  _i9.Stream<List<_i4.BluetoothService>> get services => (super.noSuchMethod(
+  _i10.Stream<List<_i4.BluetoothService>> get services => (super.noSuchMethod(
         Invocation.getter(#services),
-        returnValue: _i9.Stream<List<_i4.BluetoothService>>.empty(),
-      ) as _i9.Stream<List<_i4.BluetoothService>>);
+        returnValue: _i10.Stream<List<_i4.BluetoothService>>.empty(),
+      ) as _i10.Stream<List<_i4.BluetoothService>>);
 
   @override
   void cancelWhenDisconnected(
-    _i9.StreamSubscription<dynamic>? subscription, {
+    _i10.StreamSubscription<dynamic>? subscription, {
     bool? next = false,
     bool? delayed = false,
   }) =>
@@ -700,7 +712,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
       );
 
   @override
-  _i9.Future<void> connect({
+  _i10.Future<void> connect({
     Duration? timeout = const Duration(seconds: 35),
     int? mtu = 512,
     bool? autoConnect = false,
@@ -715,12 +727,12 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
             #autoConnect: autoConnect,
           },
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> disconnect({
+  _i10.Future<void> disconnect({
     int? timeout = 35,
     bool? queue = true,
   }) =>
@@ -733,12 +745,12 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
             #queue: queue,
           },
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<List<_i4.BluetoothService>> discoverServices({
+  _i10.Future<List<_i4.BluetoothService>> discoverServices({
     bool? subscribeToServicesChanged = true,
     int? timeout = 15,
   }) =>
@@ -751,22 +763,22 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
             #timeout: timeout,
           },
         ),
-        returnValue: _i9.Future<List<_i4.BluetoothService>>.value(
+        returnValue: _i10.Future<List<_i4.BluetoothService>>.value(
             <_i4.BluetoothService>[]),
-      ) as _i9.Future<List<_i4.BluetoothService>>);
+      ) as _i10.Future<List<_i4.BluetoothService>>);
 
   @override
-  _i9.Future<int> readRssi({int? timeout = 15}) => (super.noSuchMethod(
+  _i10.Future<int> readRssi({int? timeout = 15}) => (super.noSuchMethod(
         Invocation.method(
           #readRssi,
           [],
           {#timeout: timeout},
         ),
-        returnValue: _i9.Future<int>.value(0),
-      ) as _i9.Future<int>);
+        returnValue: _i10.Future<int>.value(0),
+      ) as _i10.Future<int>);
 
   @override
-  _i9.Future<int> requestMtu(
+  _i10.Future<int> requestMtu(
     int? desiredMtu, {
     double? predelay = 0.35,
     int? timeout = 15,
@@ -780,11 +792,11 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
             #timeout: timeout,
           },
         ),
-        returnValue: _i9.Future<int>.value(0),
-      ) as _i9.Future<int>);
+        returnValue: _i10.Future<int>.value(0),
+      ) as _i10.Future<int>);
 
   @override
-  _i9.Future<void> requestConnectionPriority(
+  _i10.Future<void> requestConnectionPriority(
           {required _i4.ConnectionPriority? connectionPriorityRequest}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -792,12 +804,12 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
           [],
           {#connectionPriorityRequest: connectionPriorityRequest},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> setPreferredPhy({
+  _i10.Future<void> setPreferredPhy({
     required int? txPhy,
     required int? rxPhy,
     required _i4.PhyCoding? option,
@@ -812,61 +824,79 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
             #option: option,
           },
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> createBond({int? timeout = 90}) => (super.noSuchMethod(
+  _i10.Future<void> createBond({int? timeout = 90}) => (super.noSuchMethod(
         Invocation.method(
           #createBond,
           [],
           {#timeout: timeout},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> removeBond({int? timeout = 30}) => (super.noSuchMethod(
+  _i10.Future<void> removeBond({int? timeout = 30}) => (super.noSuchMethod(
         Invocation.method(
           #removeBond,
           [],
           {#timeout: timeout},
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> clearGattCache() => (super.noSuchMethod(
+  _i10.Future<void> clearGattCache() => (super.noSuchMethod(
         Invocation.method(
           #clearGattCache,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  _i9.Future<void> pair() => (super.noSuchMethod(
+  _i10.Future<void> pair() => (super.noSuchMethod(
         Invocation.method(
           #pair,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 }
 
-/// A class which mocks [Connected].
+/// A class which mocks [BleConnected].
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockConnected extends _i1.Mock implements _i15.Connected {
-  MockConnected() {
+class MockBleConnected extends _i1.Mock implements _i16.BleConnected {
+  MockBleConnected() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  _i5.BleCharacteristics get bleCharacteristics => (super.noSuchMethod(
+        Invocation.getter(#bleCharacteristics),
+        returnValue: _FakeBleCharacteristics_6(
+          this,
+          Invocation.getter(#bleCharacteristics),
+        ),
+      ) as _i5.BleCharacteristics);
+
+  @override
+  _i4.BluetoothDevice get device => (super.noSuchMethod(
+        Invocation.getter(#device),
+        returnValue: _FakeBluetoothDevice_4(
+          this,
+          Invocation.getter(#device),
+        ),
+      ) as _i4.BluetoothDevice);
 
   @override
   bool get isNewRadio => (super.noSuchMethod(
@@ -877,18 +907,45 @@ class MockConnected extends _i1.Mock implements _i15.Connected {
   @override
   String get radioId => (super.noSuchMethod(
         Invocation.getter(#radioId),
-        returnValue: _i14.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.getter(#radioId),
         ),
       ) as String);
+
+  @override
+  _i16.Connected copyWith({
+    bool? isNewRadio,
+    String? radioId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #copyWith,
+          [],
+          {
+            #isNewRadio: isNewRadio,
+            #radioId: radioId,
+          },
+        ),
+        returnValue: _i15.dummyValue<_i16.Connected>(
+          this,
+          Invocation.method(
+            #copyWith,
+            [],
+            {
+              #isNewRadio: isNewRadio,
+              #radioId: radioId,
+            },
+          ),
+        ),
+      ) as _i16.Connected);
 }
 
 /// A class which mocks [Disconnected].
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockDisconnected extends _i1.Mock implements _i15.Disconnected {
+class MockDisconnected extends _i1.Mock implements _i16.Disconnected {
   MockDisconnected() {
     _i1.throwOnMissingStub(this);
   }

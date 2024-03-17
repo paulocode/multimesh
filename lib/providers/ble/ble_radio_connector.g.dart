@@ -6,7 +6,7 @@ part of 'ble_radio_connector.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bleRadioConnectorHash() => r'413cb74a12b20da49f6f7b3a3ac70055f78119e4';
+String _$bleRadioConnectorHash() => r'acd3fd908e4d31f81cbd65ac67bfaacccb20cf64';
 
 /// See also [BleRadioConnector].
 @ProviderFor(BleRadioConnector)

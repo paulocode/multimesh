@@ -15,15 +15,22 @@ part 'radio_connector_service.g.dart';
 class RadioConnectorService extends _$RadioConnectorService
     implements RadioConnector {
   NotifierProvider<RadioConnector, RadioConnectorState>? _lastUsedConnector;
+  String? _currentRadioId;
 
-  // TODO: set isNewRadio
   @override
   RadioConnectorState build() {
-    if (_lastUsedConnector != null) {
-      return ref.watch(_lastUsedConnector!);
-    } else {
+    if (_lastUsedConnector == null) {
       return Disconnected();
     }
+    final connectorState = ref.watch(_lastUsedConnector!);
+    if (connectorState is Connected) {
+      final currentRadioId = _currentRadioId;
+      _currentRadioId = connectorState.radioId;
+      return connectorState.copyWith(
+        isNewRadio: currentRadioId != connectorState.radioId,
+      );
+    }
+    return connectorState;
   }
 
   @override

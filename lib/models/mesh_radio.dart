@@ -1,6 +1,6 @@
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-abstract class MeshRadio {
+sealed class MeshRadio {
   String get name;
   String get remoteId;
 }
