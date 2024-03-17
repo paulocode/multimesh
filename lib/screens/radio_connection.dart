@@ -42,8 +42,11 @@ class RadioConnectionScreen extends ConsumerWidget {
           ),
         );
 
-        if (constraints.maxHeight < 500) {
+        if (constraints.maxHeight < 500 && constraints.maxWidth > 700) {
           body = Row(
+            mainAxisAlignment: Platform.isIOS || Platform.isMacOS
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(child: connectedRadio),
