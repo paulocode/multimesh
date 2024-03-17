@@ -8,13 +8,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/mesh_radio.dart';
 import '../../models/radio_connector_state.dart';
+import '../interfaces/radio_connector.dart';
 import '../wrap/local_platform.dart';
 import 'ble_characteristics_finder.dart';
 
-part 'radio_connector.g.dart';
+part 'ble_radio_connector.g.dart';
 
 @Riverpod(keepAlive: true)
-class RadioConnector extends _$RadioConnector {
+class BleRadioConnector extends _$BleRadioConnector
+    implements RadioConnector<BleMeshRadio> {
   final _logger = Logger();
   late BleCharacteristicsFinder _bleCharacteristicsFinder;
   late LocalPlatform _localPlatform;
@@ -28,6 +30,7 @@ class RadioConnector extends _$RadioConnector {
     return Disconnected();
   }
 
+  @override
   Future<void> disconnect(String? errorMsg) async {
     if (errorMsg != null) {
       _logger.e(errorMsg);
@@ -41,6 +44,7 @@ class RadioConnector extends _$RadioConnector {
     await _bleConnectSubscription?.cancel();
   }
 
+  @override
   Future<void> connect(BleMeshRadio radio) async {
     if (state is Connecting) {
       return;

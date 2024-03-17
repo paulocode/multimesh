@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/chat_type.dart';
 import '../models/radio_connector_state.dart';
-import '../providers/ble/radio_connector.dart';
 import '../providers/services/channel_service.dart';
 import '../providers/services/node_service.dart';
+import '../providers/services/radio_connector_service.dart';
 import '../widgets/message_input.dart';
 import '../widgets/message_list.dart';
 
@@ -17,7 +17,7 @@ class ChatScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radioConnectorState = ref.watch(radioConnectorProvider);
+    final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     final channels = ref.watch(channelServiceProvider);
     final nodes = ref.watch(nodeServiceProvider);
     final title = switch (_chatType) {

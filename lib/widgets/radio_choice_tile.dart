@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/mesh_radio.dart';
 import '../models/radio_connector_state.dart';
-import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
+import '../providers/services/radio_connector_service.dart';
 
 class RadioChoiceTile extends ConsumerWidget {
   const RadioChoiceTile({
     super.key,
-    required BleMeshRadio radio,
+    required MeshRadio radio,
   }) : _radio = radio;
 
-  final BleMeshRadio _radio;
+  final MeshRadio _radio;
 
   Widget _connectionIcon(
     BuildContext context,
@@ -58,7 +58,7 @@ class RadioChoiceTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radioConnectorState = ref.watch(radioConnectorProvider);
+    final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     final radioConfig = ref.watch(radioConfigServiceProvider);
     final showConnectionIcon = radioConnectorState is WithRadioId &&
         radioConnectorState.radioId == _radio.remoteId;
@@ -72,8 +72,8 @@ class RadioChoiceTile extends ConsumerWidget {
             )
           : const SizedBox(height: 1),
       onTap: () async {
-        await ref.read(radioConnectorProvider.notifier).connect(_radio);
-        final state = ref.read(radioConnectorProvider);
+        await ref.read(radioConnectorServiceProvider.notifier).connect(_radio);
+        final state = ref.read(radioConnectorServiceProvider);
         if (state is ConnectionError && context.mounted) {
           final snackBar = SnackBar(
             backgroundColor: Theme.of(context).colorScheme.error,

@@ -7,7 +7,7 @@ import 'package:meshx/models/ble_characteristics.dart';
 import 'package:meshx/models/mesh_radio.dart';
 import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/providers/ble/ble_characteristics_finder.dart';
-import 'package:meshx/providers/ble/radio_connector.dart';
+import 'package:meshx/providers/ble/ble_radio_connector.dart';
 import 'package:meshx/providers/wrap/local_platform.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -15,7 +15,7 @@ import 'package:platform/platform.dart';
 import 'package:test/test.dart';
 
 import '../../common.dart';
-import 'radio_connect_test.mocks.dart';
+import 'ble_radio_connector_test.mocks.dart';
 
 @GenerateMocks(
   [
@@ -55,7 +55,7 @@ void main() {
   });
   test('default status is disconnected', () {
     expect(
-      container.read(radioConnectorProvider),
+      container.read(bleRadioConnectorProvider),
       isA<Disconnected>(),
     );
   });
@@ -64,12 +64,14 @@ void main() {
     final infiniteWait = Completer<void>().future;
     when(radio.device.connect()).thenAnswer((_) => infiniteWait);
 
-    unawaited(container.read(radioConnectorProvider.notifier).connect(radio));
+    unawaited(
+      container.read(bleRadioConnectorProvider.notifier).connect(radio),
+    );
 
     await untilCalled(radio.device.connect())
         .timeout(const Duration(seconds: 5));
     expect(
-      container.read(radioConnectorProvider),
+      container.read(bleRadioConnectorProvider),
       isA<Connecting>(),
     );
   });
@@ -78,13 +80,15 @@ void main() {
     final infiniteWait = Completer<void>().future;
     when(radio.device.connect()).thenAnswer((_) => infiniteWait);
 
-    unawaited(container.read(radioConnectorProvider.notifier).connect(radio));
+    unawaited(
+      container.read(bleRadioConnectorProvider.notifier).connect(radio),
+    );
 
     await untilCalled(radio.device.connect())
         .timeout(const Duration(seconds: 5));
 
     final radioConnectorState =
-        container.read(radioConnectorProvider) as Connecting;
+        container.read(bleRadioConnectorProvider) as Connecting;
     expect(
       radioConnectorState.radioId,
       equals('radio'),
@@ -95,7 +99,7 @@ void main() {
     when(localPlatform.isAndroid).thenReturn(true);
     when(radio.device.discoverServices()).thenAnswer((_) => Future.value([]));
 
-    await container.read(radioConnectorProvider.notifier).connect(radio);
+    await container.read(bleRadioConnectorProvider.notifier).connect(radio);
 
     verify(device.createBond()).called(1);
   });
@@ -104,7 +108,7 @@ void main() {
     when(localPlatform.isAndroid).thenReturn(false);
     when(radio.device.discoverServices()).thenAnswer((_) => Future.value([]));
 
-    await container.read(radioConnectorProvider.notifier).connect(radio);
+    await container.read(bleRadioConnectorProvider.notifier).connect(radio);
 
     verifyNever(device.createBond());
   });
@@ -119,9 +123,9 @@ void main() {
       throw const MeshRadioException(msg: 'myerror');
     });
 
-    await container.read(radioConnectorProvider.notifier).connect(radio);
+    await container.read(bleRadioConnectorProvider.notifier).connect(radio);
 
-    final radioConnectorState = container.read(radioConnectorProvider);
+    final radioConnectorState = container.read(bleRadioConnectorProvider);
     expect(
       radioConnectorState,
       isA<ConnectionError>(),
@@ -141,9 +145,9 @@ void main() {
       throw Exception();
     });
 
-    await container.read(radioConnectorProvider.notifier).connect(radio);
+    await container.read(bleRadioConnectorProvider.notifier).connect(radio);
 
-    final radioConnectorState = container.read(radioConnectorProvider);
+    final radioConnectorState = container.read(bleRadioConnectorProvider);
     expect(
       radioConnectorState,
       isA<ConnectionError>(),
@@ -161,9 +165,9 @@ void main() {
     when(bleCharacteristicsFinder.findCharacteristics(device))
         .thenAnswer((_) => Future.value(bleCharacteristics));
 
-    await container.read(radioConnectorProvider.notifier).connect(radio);
+    await container.read(bleRadioConnectorProvider.notifier).connect(radio);
 
-    final radioConnectorState = container.read(radioConnectorProvider);
+    final radioConnectorState = container.read(bleRadioConnectorProvider);
     expect(
       radioConnectorState,
       isA<Connected>(),

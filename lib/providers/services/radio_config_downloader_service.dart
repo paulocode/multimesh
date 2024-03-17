@@ -7,10 +7,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
-import '../ble/radio_connector.dart';
 import '../ble/radio_reader.dart';
 import '../ble/radio_writer.dart';
 import 'radio_config_service.dart';
+import 'radio_connector_service.dart';
 
 part 'radio_config_downloader_service.g.dart';
 
@@ -18,7 +18,7 @@ part 'radio_config_downloader_service.g.dart';
 RadioConfigDownloaderService radioConfigDownloaderService(
   RadioConfigDownloaderServiceRef ref,
 ) {
-  final sub = ref.listen(radioConnectorProvider, (_, next) {
+  final sub = ref.listen(radioConnectorServiceProvider, (_, next) {
     if (next is Connected) {
       ref.invalidateSelf();
     }
@@ -31,7 +31,7 @@ RadioConfigDownloaderService radioConfigDownloaderService(
     radioConfigServiceProvider: () =>
         ref.read(radioConfigServiceProvider.notifier),
     disconnect: (errorMsg) =>
-        ref.read(radioConnectorProvider.notifier).disconnect(errorMsg),
+        ref.read(radioConnectorServiceProvider.notifier).disconnect(errorMsg),
     onDispose: ref.onDispose,
   );
 }

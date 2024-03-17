@@ -5,13 +5,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
-import 'radio_connector.dart';
+import '../services/radio_connector_service.dart';
 
 part 'radio_reader.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioReader radioReader(RadioReaderRef ref) {
-  final sub = ref.listen(radioConnectorProvider, (_, next) {
+  final sub = ref.listen(radioConnectorServiceProvider, (_, next) {
     if (next is Connected) {
       ref.invalidateSelf();
     }

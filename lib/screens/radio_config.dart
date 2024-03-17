@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../models/radio_connector_state.dart';
 import '../protobufs/generated/meshtastic/config.pb.dart';
-import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
+import '../providers/services/radio_connector_service.dart';
 
 class RadioConfigScreen extends ConsumerWidget {
   const RadioConfigScreen({super.key});
@@ -13,7 +13,7 @@ class RadioConfigScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
-    final radioConnectorState = ref.watch(radioConnectorProvider);
+    final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('${radioConfig.longName} ⚙️'),

@@ -10,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../ble/radio_connector.dart';
+import '../services/radio_connector_service.dart';
 import 'radio_reader.dart';
 
 part 'radio_writer.g.dart';
@@ -21,7 +21,7 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
   final queuedRadioWriter = QueuedRadioWriter();
 
   final connectorListener =
-      ref.listen(radioConnectorProvider, (_, connectorState) {
+      ref.listen(radioConnectorServiceProvider, (_, connectorState) {
     if (connectorState is! Connected) {
       return;
     }

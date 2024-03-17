@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/radio_connector_state.dart';
-import '../providers/ble/radio_connector.dart';
+import '../providers/services/radio_connector_service.dart';
 import 'channel_list.dart';
 import 'map.dart';
 import 'nodes.dart';
@@ -15,7 +15,7 @@ class TabParent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radioConnectorState = ref.watch(radioConnectorProvider);
+    final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return DefaultTabController(
       length: 4,
       child: Scaffold(

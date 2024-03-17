@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/radio_connector_state.dart';
-import '../providers/ble/radio_connector.dart';
 import '../providers/services/radio_config_service.dart';
+import '../providers/services/radio_connector_service.dart';
 
 class ConnectedRadio extends ConsumerWidget {
   const ConnectedRadio({
@@ -14,7 +14,7 @@ class ConnectedRadio extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
-    final radioConnectorState = ref.watch(radioConnectorProvider);
+    final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
