@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/ble/ble_radio_scanner.dart';
+import '../providers/tcp/tcp_radio_scanner.dart';
 import '../widgets/connected_radio.dart';
 import '../widgets/radio_choice_tile.dart';
 
@@ -13,7 +14,9 @@ class RadioConnectionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bleRadioScanner = ref.watch(bleRadioScannerProvider);
-    final meshRadios = bleRadioScanner.meshRadios;
+    final tcpRadioScanner = ref.watch(tcpRadioScannerProvider);
+    final bleMeshRadios = bleRadioScanner.meshRadios;
+    final tcpMeshRadios = tcpRadioScanner.meshRadios;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -29,14 +32,68 @@ class RadioConnectionScreen extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Scrollbar(
-              child: ListView.builder(
-                itemCount: meshRadios.length,
-                itemBuilder: (context, index) {
-                  final radio = meshRadios[index];
-                  return RadioChoiceTile(
-                    radio: radio,
-                  );
-                },
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Text(
+                      'BLE devices:',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => RadioChoiceTile(
+                        radio: bleMeshRadios[index],
+                      ),
+                      childCount: bleMeshRadios.length,
+                    ),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 16,
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Text(
+                      'TCP devices:',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => RadioChoiceTile(
+                        radio: tcpMeshRadios[index],
+                      ),
+                      childCount: tcpMeshRadios.length,
+                    ),
+                  ),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 16,
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: SizedBox(
+                            height: 50,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Host/IP Address',
+                                filled: true,
+                              ),
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.send),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -74,7 +131,7 @@ class RadioConnectionScreen extends ConsumerWidget {
             floatingActionButton: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               radius: 50,
-              child: bleRadioScanner.scanning
+              child: bleRadioScanner.scanning || tcpRadioScanner.scanning
                   ? const SizedBox(
                       height: 50,
                       width: 50,
@@ -86,6 +143,7 @@ class RadioConnectionScreen extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                       onPressed: () {
                         ref.read(bleRadioScannerProvider.notifier).scan();
+                        ref.read(tcpRadioScannerProvider.notifier).scan();
                       },
                       icon: const Icon(
                         Icons.search,
