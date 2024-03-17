@@ -142,8 +142,8 @@ class RadioConnectionScreen extends ConsumerWidget {
                   : IconButton(
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                       onPressed: () {
-                        ref.read(bleRadioScannerProvider.notifier).scan();
                         ref.read(tcpRadioScannerProvider.notifier).scan();
+                        ref.read(bleRadioScannerProvider.notifier).scan();
                       },
                       icon: const Icon(
                         Icons.search,

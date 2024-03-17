@@ -18,6 +18,7 @@ class TcpRadioScanner extends _$TcpRadioScanner {
   }
 
   Future<void> scan() async {
+    int errors = 0;
     state = state.copyWith(scanning: true);
     for (var i = 0; i < 10; i++) {
       final host = i == 0 ? 'meshtastic.local' : 'meshtastic-$i.local';
@@ -29,10 +30,14 @@ class TcpRadioScanner extends _$TcpRadioScanner {
           timeout: const Duration(seconds: 5),
         );
         _addIfNew(host);
+        errors = 0;
       } catch (e) {
+        await Future<void>.delayed(const Duration(seconds: 1));
         _logger.e(e.toString());
-        // there is likely no next device
-        break;
+        if (++errors > 2) {
+          // there is likely no next device
+          break;
+        }
       } finally {
         await socket?.close();
       }
