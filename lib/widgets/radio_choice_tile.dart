@@ -33,7 +33,7 @@ class RadioChoiceTile extends ConsumerWidget {
     );
 
     switch (radioConnectorState) {
-      case Connected():
+      case TcpConnected():
         if (!configDownloaded) {
           return loadingIndicator;
         } else {

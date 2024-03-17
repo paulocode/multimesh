@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -25,17 +27,37 @@ class Connecting extends WithRadioId {
 }
 
 @immutable
-class Connected extends WithRadioId {
+abstract class Connected extends WithRadioId {
   Connected({
+    required this.isNewRadio,
+    required super.radioId,
+  });
+
+  final bool isNewRadio;
+}
+
+@immutable
+class BleConnected extends Connected {
+  BleConnected({
     required this.bleCharacteristics,
     required this.device,
-    required this.isNewRadio,
+    required super.isNewRadio,
     required super.radioId,
   });
 
   final BleCharacteristics bleCharacteristics;
   final BluetoothDevice device;
-  final bool isNewRadio;
+}
+
+@immutable
+class TcpConnected extends Connected {
+  TcpConnected({
+    required this.socket,
+    required super.isNewRadio,
+    required super.radioId,
+  });
+
+  final Socket socket;
 }
 
 @immutable

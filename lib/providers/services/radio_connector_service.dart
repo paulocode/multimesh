@@ -16,6 +16,7 @@ class RadioConnectorService extends _$RadioConnectorService
     implements RadioConnector {
   NotifierProvider<RadioConnector, RadioConnectorState>? _lastUsedConnector;
 
+  // TODO: set isNewRadio
   @override
   RadioConnectorState build() {
     if (_lastUsedConnector != null) {

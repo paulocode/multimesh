@@ -30,7 +30,7 @@ void main() {
     when(fromNum.onValueReceived).thenAnswer((_) => fromNumStream);
     when(fromNum.setNotifyValue(any)).thenAnswer((_) => Future.value(true));
 
-    final connectionState = Connected(
+    final connectionState = BleConnected(
       bleCharacteristics: BleCharacteristics(
         toRadio: MockBluetoothCharacteristic(),
         fromRadio: fromRadio,

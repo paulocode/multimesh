@@ -26,10 +26,15 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
       return;
     }
 
-    queuedRadioWriter.setRadioWriter(
-      BleRadioWriter(to: connectorState.bleCharacteristics.toRadio),
-      isNewRadio: connectorState.isNewRadio,
-    );
+    switch (connectorState) {
+      case BleConnected():
+        queuedRadioWriter.setRadioWriter(
+          BleRadioWriter(to: connectorState.bleCharacteristics.toRadio),
+          isNewRadio: connectorState.isNewRadio,
+        );
+      case TcpConnected():
+        throw UnimplementedError();
+    }
   });
 
   final readerListener = ref.listen(radioReaderProvider, (_, next) {

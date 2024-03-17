@@ -35,10 +35,10 @@ class BleRadioConnector extends _$BleRadioConnector
     if (errorMsg != null) {
       _logger.e(errorMsg);
     }
-    if (state is! Connected) {
+    if (state is! BleConnected) {
       return;
     }
-    final device = (state as Connected).device;
+    final device = (state as BleConnected).device;
     await device.disconnect();
     state = Disconnected(errorMsg: errorMsg);
     await _bleConnectSubscription?.cancel();
@@ -63,7 +63,7 @@ class BleRadioConnector extends _$BleRadioConnector
         await device.createBond();
       }
 
-      state = Connected(
+      state = BleConnected(
         radioId: radioId,
         bleCharacteristics:
             await _bleCharacteristicsFinder.findCharacteristics(device),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../constants/meshtastic_constants.dart';
 import '../../models/mesh_radio.dart';
 import '../../models/radio_scan_state.dart';
 
@@ -18,7 +19,7 @@ class TcpRadioScanner extends _$TcpRadioScanner {
   }
 
   Future<void> scan() async {
-    int errors = 0;
+    var errors = 0;
     state = state.copyWith(scanning: true);
     for (var i = 0; i < 10; i++) {
       final host = i == 0 ? 'meshtastic.local' : 'meshtastic-$i.local';
@@ -26,7 +27,7 @@ class TcpRadioScanner extends _$TcpRadioScanner {
       try {
         socket = await Socket.connect(
           host,
-          4403,
+          MESHTASTIC_TCP_PORT,
           timeout: const Duration(seconds: 5),
         );
         _addIfNew(host);

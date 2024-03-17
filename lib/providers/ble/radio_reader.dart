@@ -17,10 +17,19 @@ RadioReader radioReader(RadioReaderRef ref) {
     }
   });
   ref.onDispose(sub.close);
-  return BleRadioReader(
-    radioConnectorState: sub.read(),
-    onDispose: ref.onDispose,
-  );
+
+  final connectorState = sub.read();
+  switch (connectorState) {
+    case BleConnected():
+      return BleRadioReader(
+        radioConnectorState: sub.read(),
+        onDispose: ref.onDispose,
+      );
+    case TcpConnected():
+      throw UnimplementedError();
+    case _:
+      return NullReader(onDispose: ref.onDispose);
+  }
 }
 
 // TODO create dart file for this class
@@ -29,12 +38,29 @@ abstract class RadioReader {
   void forceRead();
 }
 
+class NullReader implements RadioReader {
+  NullReader({
+    required void Function(void Function() cb) onDispose,
+  }) {
+    onDispose(_streamController.close);
+  }
+
+  // ignore: close_sinks
+  final _streamController = StreamController<FromRadio>.broadcast();
+
+  @override
+  void forceRead() {}
+
+  @override
+  Stream<FromRadio> onPacketReceived() => _streamController.stream;
+}
+
 class BleRadioReader implements RadioReader {
   BleRadioReader({
     required RadioConnectorState radioConnectorState,
     required void Function(void Function() cb) onDispose,
   }) : _radioConnectorState = radioConnectorState {
-    if (_radioConnectorState is! Connected) {
+    if (_radioConnectorState is! BleConnected) {
       return;
     }
 
@@ -61,7 +87,7 @@ class BleRadioReader implements RadioReader {
   }
 
   Future<void> _readUntilEmpty() async {
-    if (_radioConnectorState is! Connected) {
+    if (_radioConnectorState is! BleConnected) {
       return;
     }
     var read = <int>[];

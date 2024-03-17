@@ -170,10 +170,10 @@ void main() {
     final radioConnectorState = container.read(bleRadioConnectorProvider);
     expect(
       radioConnectorState,
-      isA<Connected>(),
+      isA<BleConnected>(),
     );
     expect(
-      (radioConnectorState as Connected).bleCharacteristics,
+      (radioConnectorState as BleConnected).bleCharacteristics,
       equals(bleCharacteristics),
     );
   });
