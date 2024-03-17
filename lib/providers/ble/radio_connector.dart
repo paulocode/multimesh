@@ -41,7 +41,7 @@ class RadioConnector extends _$RadioConnector {
     await _bleConnectSubscription?.cancel();
   }
 
-  Future<void> connect(MeshRadio radio) async {
+  Future<void> connect(BleMeshRadio radio) async {
     if (state is Connecting) {
       return;
     }

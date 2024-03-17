@@ -9,10 +9,10 @@ import '../providers/services/radio_config_service.dart';
 class RadioChoiceTile extends ConsumerWidget {
   const RadioChoiceTile({
     super.key,
-    required MeshRadio radio,
+    required BleMeshRadio radio,
   }) : _radio = radio;
 
-  final MeshRadio _radio;
+  final BleMeshRadio _radio;
 
   Widget _connectionIcon(
     BuildContext context,

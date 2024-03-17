@@ -28,7 +28,7 @@ import 'radio_connect_test.mocks.dart';
 void main() {
   late ProviderContainer container;
   late MockBluetoothDevice device;
-  late MeshRadio radio;
+  late BleMeshRadio radio;
   late MockLocalPlatform localPlatform;
   late MockBleCharacteristicsFinder bleCharacteristicsFinder;
   late MockBleCharacteristics bleCharacteristics;
@@ -36,7 +36,7 @@ void main() {
   setUp(() {
     localPlatform = MockLocalPlatform();
     device = MockBluetoothDevice();
-    radio = MeshRadio(device: device);
+    radio = BleMeshRadio(device: device);
     bleCharacteristicsFinder = MockBleCharacteristicsFinder();
     bleCharacteristics = MockBleCharacteristics();
 

@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RadioScanState {
   bool get scanning => throw _privateConstructorUsedError;
-  List<MeshRadio> get meshRadios => throw _privateConstructorUsedError;
+  List<BleMeshRadio> get meshRadios => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RadioScanStateCopyWith<RadioScanState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $RadioScanStateCopyWith<$Res> {
           RadioScanState value, $Res Function(RadioScanState) then) =
       _$RadioScanStateCopyWithImpl<$Res, RadioScanState>;
   @useResult
-  $Res call({bool scanning, List<MeshRadio> meshRadios});
+  $Res call({bool scanning, List<BleMeshRadio> meshRadios});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$RadioScanStateCopyWithImpl<$Res, $Val extends RadioScanState>
       meshRadios: null == meshRadios
           ? _value.meshRadios
           : meshRadios // ignore: cast_nullable_to_non_nullable
-              as List<MeshRadio>,
+              as List<BleMeshRadio>,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$RadioScanStateImplCopyWith<$Res>
       __$$RadioScanStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool scanning, List<MeshRadio> meshRadios});
+  $Res call({bool scanning, List<BleMeshRadio> meshRadios});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$RadioScanStateImplCopyWithImpl<$Res>
       meshRadios: null == meshRadios
           ? _value._meshRadios
           : meshRadios // ignore: cast_nullable_to_non_nullable
-              as List<MeshRadio>,
+              as List<BleMeshRadio>,
     ));
   }
 }
@@ -104,17 +104,17 @@ class __$$RadioScanStateImplCopyWithImpl<$Res>
 
 class _$RadioScanStateImpl extends _RadioScanState {
   const _$RadioScanStateImpl(
-      {this.scanning = false, final List<MeshRadio> meshRadios = const []})
+      {this.scanning = false, final List<BleMeshRadio> meshRadios = const []})
       : _meshRadios = meshRadios,
         super._();
 
   @override
   @JsonKey()
   final bool scanning;
-  final List<MeshRadio> _meshRadios;
+  final List<BleMeshRadio> _meshRadios;
   @override
   @JsonKey()
-  List<MeshRadio> get meshRadios {
+  List<BleMeshRadio> get meshRadios {
     if (_meshRadios is EqualUnmodifiableListView) return _meshRadios;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_meshRadios);
@@ -151,13 +151,13 @@ class _$RadioScanStateImpl extends _RadioScanState {
 abstract class _RadioScanState extends RadioScanState {
   const factory _RadioScanState(
       {final bool scanning,
-      final List<MeshRadio> meshRadios}) = _$RadioScanStateImpl;
+      final List<BleMeshRadio> meshRadios}) = _$RadioScanStateImpl;
   const _RadioScanState._() : super._();
 
   @override
   bool get scanning;
   @override
-  List<MeshRadio> get meshRadios;
+  List<BleMeshRadio> get meshRadios;
   @override
   @JsonKey(ignore: true)
   _$$RadioScanStateImplCopyWith<_$RadioScanStateImpl> get copyWith =>

@@ -55,12 +55,12 @@ class RadioScanner extends _$RadioScanner {
     );
   }
 
-  void _addUniqueResults(List<MeshRadio> devices, List<ScanResult> results) {
+  void _addUniqueResults(List<BleMeshRadio> devices, List<ScanResult> results) {
     final newDevices = results
         .where(
           (e) => e.advertisementData.advName.trim().isNotEmpty,
         )
-        .map((e) => MeshRadio(device: e.device));
+        .map((e) => BleMeshRadio(device: e.device));
     final uniqueNewDevices = newDevices.where(
       (newDevice) => devices
           .where(
@@ -73,12 +73,12 @@ class RadioScanner extends _$RadioScanner {
     state = state.copyWith(meshRadios: devices);
   }
 
-  Future<List<MeshRadio>> _createListFromSystemDevices() async {
+  Future<List<BleMeshRadio>> _createListFromSystemDevices() async {
     final systemDevices = await _flutterBluePlus.systemDevices;
-    return List<MeshRadio>.from(
+    return List<BleMeshRadio>.from(
       systemDevices
           .where((element) => element.advName.trim().isNotEmpty)
-          .map((e) => MeshRadio(device: e)),
+          .map((e) => BleMeshRadio(device: e)),
     );
   }
 }
