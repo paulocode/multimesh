@@ -192,6 +192,7 @@ class TextMessageRepository {
     return Sqflite.firstIntValue(result) ?? 0;
   }
 
+  // ignore: unused_element
   Future<void> _createDummyData() async {
     final messagesExist = await count(channel: 0, toNode: TO_BROADCAST) >
         BATCH_NUM_MESSAGES_TO_LOAD;

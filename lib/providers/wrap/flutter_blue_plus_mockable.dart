@@ -49,7 +49,7 @@ class FlutterBluePlusMockable {
     return FlutterBluePlus.stopScan();
   }
 
-  void setLogLevel(LogLevel level, {color = true}) {
+  void setLogLevel(LogLevel level, {bool color = true}) {
     return FlutterBluePlus.setLogLevel(level, color: color);
   }
 

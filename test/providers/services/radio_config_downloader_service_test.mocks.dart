@@ -120,19 +120,24 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i6.QueuedRadioWriter {
   }
 
   @override
-  set toRadio(_i6.RadioWriter? toRadio) => super.noSuchMethod(
-        Invocation.setter(
-          #toRadio,
-          toRadio,
+  void setRadioWriter(
+    _i6.RadioWriter? toRadio, {
+    required bool? isNewRadio,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setRadioWriter,
+          [toRadio],
+          {#isNewRadio: isNewRadio},
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  set radioReader(_i7.RadioReader? radioReader) => super.noSuchMethod(
-        Invocation.setter(
-          #radioReader,
-          radioReader,
+  void setRadioReader(_i7.RadioReader? radioReader) => super.noSuchMethod(
+        Invocation.method(
+          #setRadioReader,
+          [radioReader],
         ),
         returnValueForMissingStub: null,
       );
@@ -171,15 +176,6 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i6.QueuedRadioWriter {
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),
       ) as _i10.Future<void>);
-
-  @override
-  void clearPacketQueue() => super.noSuchMethod(
-        Invocation.method(
-          #clearPacketQueue,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
 
 /// A class which mocks [RadioReader].

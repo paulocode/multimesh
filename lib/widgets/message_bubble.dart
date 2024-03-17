@@ -35,7 +35,7 @@ class MessageBubble extends ConsumerWidget {
         if (showDate)
           Center(
             child: Text(
-              DateFormat.yMMMd().format(textMessage.time ?? DateTime.now()),
+              DateFormat.yMMMd().format(textMessage.time),
               style: theme.textTheme.bodyLarge,
             ),
           ),

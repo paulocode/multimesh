@@ -1,5 +1,14 @@
 include: all_lint_rules.yaml
 analyzer:
+  exclude:
+    - '**.freezed.dart'
+    - '**.g.dart'
+    - '**.gr.dart'
+    - '**.pb.dart'
+    - '**/generated_plugin_registrant.dart'
+    - '**.mocks.dart'
+    - 'lib/protobufs/generated/**'
+    - 'build/**'
   plugins:
     - custom_lint
   language:
@@ -89,3 +98,7 @@ linter:
 
     # Disabled for now until we have NNBD as it otherwise conflicts with `missing_return`
     no_default_cases: false
+
+    public_member_api_docs: false
+
+    constant_identifier_names: false

@@ -43,7 +43,7 @@ class BleRadioScanner extends _$BleRadioScanner {
       (results) async {
         _addUniqueResults(devices, results);
       },
-      onError: (e) {
+      onError: (dynamic e) {
         _logger.e(e.toString());
         state = state.copyWith(scanning: false);
         throw const MeshRadioException(msg: 'Scanning failed');

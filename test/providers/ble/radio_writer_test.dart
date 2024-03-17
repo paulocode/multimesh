@@ -33,8 +33,8 @@ void main() {
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
 
     radioWriter = QueuedRadioWriter(sendTimeout: const Duration(seconds: 1))
-      ..toRadio = toRadio
-      ..radioReader = radioReader;
+      ..setRadioWriter(toRadio, isNewRadio: false)
+      ..setRadioReader(radioReader);
   });
 
   test('send wantConfig', () {
@@ -145,7 +145,7 @@ void main() {
     expect(captures.length, equals(2));
   });
 
-  test('clearPacketQueue must prevent 2nd packet from sending', () async {
+  test('new radio must prevent 2nd packet from sending', () async {
     final id = radioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
@@ -159,7 +159,7 @@ void main() {
       payload: Uint8List.fromList([1, 2, 3]),
     );
 
-    radioWriter.clearPacketQueue();
+    radioWriter.setRadioWriter(toRadio, isNewRadio: true);
     await packetStream.emit(
       FromRadio(
         queueStatus: QueueStatus(

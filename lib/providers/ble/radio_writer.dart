@@ -26,20 +26,15 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
       return;
     }
 
-    if (connectorState.isNewRadio) {
-      _logger.i('New radio, clearing packet queue');
-      queuedRadioWriter.clearPacketQueue();
-    } else {
-      _logger.i('Reconnected to same radio');
-    }
-
-    queuedRadioWriter.toRadio =
-        BleRadioWriter(to: connectorState.bleCharacteristics.toRadio);
+    queuedRadioWriter.setRadioWriter(
+      BleRadioWriter(to: connectorState.bleCharacteristics.toRadio),
+      isNewRadio: connectorState.isNewRadio,
+    );
   });
 
   final readerListener = ref.listen(radioReaderProvider, (_, next) {
     _logger.i('New reader');
-    queuedRadioWriter.radioReader = next;
+    queuedRadioWriter.setRadioReader(next);
   });
 
   ref.onDispose(readerListener.close);
@@ -80,11 +75,17 @@ class QueuedRadioWriter {
   var _packetAckCompleter = Completer<void>();
   final Duration _sendTimeout;
 
-  set toRadio(RadioWriter toRadio) {
+  void setRadioWriter(RadioWriter toRadio, {required bool isNewRadio}) {
+    if (isNewRadio) {
+      _logger.i('New radio, clearing packet queue');
+      _clearPacketQueue();
+    } else {
+      _logger.i('Reconnected to same radio');
+    }
     _toRadio = toRadio;
   }
 
-  set radioReader(RadioReader radioReader) {
+  void setRadioReader(RadioReader radioReader) {
     _packetSub?.cancel();
     _packetSub = radioReader.onPacketReceived().listen(_packetListener);
   }
@@ -171,7 +172,7 @@ class QueuedRadioWriter {
     _logger.i('Packet queue empty');
   }
 
-  void clearPacketQueue() {
+  void _clearPacketQueue() {
     if (!_packetAckCompleter.isCompleted) {
       _packetAckCompleter.complete();
     }
