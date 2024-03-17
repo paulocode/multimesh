@@ -23,10 +23,20 @@ class TcpRadioConnector extends _$TcpRadioConnector
   @override
   Future<void> connect(TcpMeshRadio radio) async {
     state = Connecting(radioId: radio.address);
-    final socket = await Socket.connect(radio.address, MESHTASTIC_TCP_PORT);
-    _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
-    state = TcpConnected(socket: socket, radioId: radio.address);
-    ref.onDispose(socket.close);
+    Socket? socket;
+    try {
+      socket = await Socket.connect(radio.address, MESHTASTIC_TCP_PORT);
+      _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
+      state = TcpConnected(socket: socket, radioId: radio.address);
+    } on SocketException catch (e) {
+      _logger.e(e);
+      state = ConnectionError(radioId: radio.address, msg: e.message);
+    } catch (e) {
+      _logger.e(e);
+      state = ConnectionError(radioId: radio.address);
+    } finally {
+      ref.onDispose(() => socket?.close());
+    }
   }
 
   @override
