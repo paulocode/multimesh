@@ -10,10 +10,10 @@ import '../../models/radio_scan_state.dart';
 import '../wrap/flutter_blue_plus_mockable.dart';
 import 'ble_permissions_requester.dart';
 
-part 'radio_scanner.g.dart';
+part 'ble_radio_scanner.g.dart';
 
 @Riverpod(keepAlive: true)
-class RadioScanner extends _$RadioScanner {
+class BleRadioScanner extends _$BleRadioScanner {
   late FlutterBluePlusMockable _flutterBluePlus;
   late BlePermissionsRequester _blePermissionsRequester;
   final _logger = Logger();

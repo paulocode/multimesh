@@ -878,6 +878,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
 /// A class which mocks [Connected].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockConnected extends _i1.Mock implements _i16.Connected {
   MockConnected() {
     _i1.throwOnMissingStub(this);
@@ -920,6 +921,7 @@ class MockConnected extends _i1.Mock implements _i16.Connected {
 /// A class which mocks [Disconnected].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockDisconnected extends _i1.Mock implements _i16.Disconnected {
   MockDisconnected() {
     _i1.throwOnMissingStub(this);

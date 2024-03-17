@@ -4,14 +4,14 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/providers/ble/ble_permissions_requester.dart';
-import 'package:meshx/providers/ble/radio_scanner.dart';
+import 'package:meshx/providers/ble/ble_radio_scanner.dart';
 import 'package:meshx/providers/wrap/flutter_blue_plus_mockable.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../common.dart';
 import '../../mock_stream.dart';
-import 'radio_scanner_test.mocks.dart';
+import 'ble_radio_scanner_test.mocks.dart';
 
 @GenerateMocks([
   FlutterBluePlusMockable,
@@ -39,12 +39,12 @@ void main() {
 
   test('initial state', () {
     expect(
-      container.read(radioScannerProvider).scanning,
+      container.read(bleRadioScannerProvider).scanning,
       false,
     );
 
     expect(
-      container.read(radioScannerProvider).meshRadios,
+      container.read(bleRadioScannerProvider).meshRadios,
       isEmpty,
     );
   });
@@ -54,10 +54,10 @@ void main() {
 
     when(blePermissionsRequester.request()).thenAnswer((_) => infiniteWait);
 
-    container.read(radioScannerProvider.notifier).scan();
+    container.read(bleRadioScannerProvider.notifier).scan();
 
     expect(
-      container.read(radioScannerProvider).scanning,
+      container.read(bleRadioScannerProvider).scanning,
       equals(true),
     );
   });
@@ -67,7 +67,7 @@ void main() {
 
     when(blePermissionsRequester.request()).thenAnswer((_) => infiniteWait);
 
-    container.read(radioScannerProvider.notifier).scan();
+    container.read(bleRadioScannerProvider.notifier).scan();
 
     verify(blePermissionsRequester.request()).called(1);
   });
@@ -76,11 +76,11 @@ void main() {
     when(blePermissionsRequester.request())
         .thenAnswer((_) => Future.value(false));
 
-    unawaited(container.read(radioScannerProvider.notifier).scan());
+    unawaited(container.read(bleRadioScannerProvider.notifier).scan());
 
     await untilCalled(blePermissionsRequester.request())
         .timeout(const Duration(seconds: 5));
-    expect(container.read(radioScannerProvider).scanning, equals(false));
+    expect(container.read(bleRadioScannerProvider).scanning, equals(false));
   });
 
   test('scanning must be false after scan', () async {
@@ -98,9 +98,9 @@ void main() {
     when(flutterBluePlus.isScanning)
         .thenAnswer((_) => Future<bool>.value(false).asStream());
 
-    await container.read(radioScannerProvider.notifier).scan();
+    await container.read(bleRadioScannerProvider.notifier).scan();
 
-    expect(container.read(radioScannerProvider).scanning, isFalse);
+    expect(container.read(bleRadioScannerProvider).scanning, isFalse);
   });
 
   test('must return system (previously paired) bluetooth device', () async {
@@ -118,10 +118,10 @@ void main() {
     when(flutterBluePlus.isScanning)
         .thenAnswer((_) => Future<bool>.value(false).asStream());
 
-    await container.read(radioScannerProvider.notifier).scan();
+    await container.read(bleRadioScannerProvider.notifier).scan();
 
     expect(
-      container.read(radioScannerProvider).meshRadios[0].remoteId,
+      container.read(bleRadioScannerProvider).meshRadios[0].remoteId,
       equals('systemDevice'),
     );
   });
@@ -146,10 +146,10 @@ void main() {
     when(flutterBluePlus.isScanning)
         .thenAnswer((_) => Future<bool>.value(false).asStream());
 
-    await container.read(radioScannerProvider.notifier).scan();
+    await container.read(bleRadioScannerProvider.notifier).scan();
 
     expect(
-      container.read(radioScannerProvider).meshRadios[0].remoteId,
+      container.read(bleRadioScannerProvider).meshRadios[0].remoteId,
       equals('scannedDevice'),
     );
   });
@@ -173,7 +173,7 @@ void main() {
     when(flutterBluePlus.scanResults).thenAnswer((_) => scanResultStream);
     when(flutterBluePlus.isScanning).thenAnswer((_) => isScanningStream);
 
-    final scanFuture = container.read(radioScannerProvider.notifier).scan();
+    final scanFuture = container.read(bleRadioScannerProvider.notifier).scan();
     await container.pump(); // prevent deadlock
     await scanResultStream.emit([scanResult]);
     await scanResultStream.emit([scanResult]);
@@ -181,7 +181,7 @@ void main() {
     await scanFuture;
 
     expect(
-      container.read(radioScannerProvider).meshRadios.length,
+      container.read(bleRadioScannerProvider).meshRadios.length,
       equals(1),
     );
   });

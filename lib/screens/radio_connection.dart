@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/ble/radio_scanner.dart';
+import '../providers/ble/ble_radio_scanner.dart';
 import '../widgets/connected_radio.dart';
 import '../widgets/radio_choice_tile.dart';
 
@@ -12,8 +12,8 @@ class RadioConnectionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radioScanner = ref.watch(radioScannerProvider);
-    final meshRadios = radioScanner.meshRadios;
+    final bleRadioScanner = ref.watch(bleRadioScannerProvider);
+    final meshRadios = bleRadioScanner.meshRadios;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -74,7 +74,7 @@ class RadioConnectionScreen extends ConsumerWidget {
             floatingActionButton: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               radius: 50,
-              child: radioScanner.scanning
+              child: bleRadioScanner.scanning
                   ? const SizedBox(
                       height: 50,
                       width: 50,
@@ -85,7 +85,7 @@ class RadioConnectionScreen extends ConsumerWidget {
                   : IconButton(
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                       onPressed: () {
-                        ref.read(radioScannerProvider.notifier).scan();
+                        ref.read(bleRadioScannerProvider.notifier).scan();
                       },
                       icon: const Icon(
                         Icons.search,
