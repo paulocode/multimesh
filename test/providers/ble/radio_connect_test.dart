@@ -116,7 +116,7 @@ void main() {
       (_) => StreamController<BluetoothConnectionState>().stream,
     );
     when(bleCharacteristicsFinder.findCharacteristics(device)).thenAnswer((_) {
-      throw const MeshRadioException('myerror');
+      throw const MeshRadioException(msg: 'myerror');
     });
 
     await container.read(radioConnectorProvider.notifier).connect(radio);

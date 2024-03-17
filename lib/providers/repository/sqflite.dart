@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:path/path.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
+import '../wrap/local_platform.dart';
 
 part 'sqflite.g.dart';
 
@@ -10,6 +12,13 @@ part 'sqflite.g.dart';
 Future<Database> sqflite(
   SqfliteRef ref,
 ) async {
+  final localPlatform = ref.read(localPlatformProvider);
+  if (localPlatform.isWindows ||
+      localPlatform.isLinux ||
+      localPlatform.isMacOS) {
+    sqfliteFfiInit();
+  }
+  databaseFactory = databaseFactoryFfi;
   return openDatabase(
     join(await getDatabasesPath(), 'meshx.db'),
     onCreate: (db, version) {

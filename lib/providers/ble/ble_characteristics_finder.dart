@@ -19,7 +19,8 @@ class BleCharacteristicsFinder {
     final services = await device.discoverServices();
     final service = services.firstWhere(
       (element) => element.uuid.str == MESHTASTIC_BLE_SERVICE,
-      orElse: () => throw const MeshRadioException('Not a Meshtastic device'),
+      orElse: () =>
+          throw const MeshRadioException(msg: 'Not a Meshtastic device'),
     );
 
     final toRadio = service.characteristics.firstWhere(

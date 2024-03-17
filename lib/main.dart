@@ -9,6 +9,7 @@ import 'providers/services/channel_service.dart';
 import 'providers/services/node_service.dart';
 import 'providers/services/radio_config_downloader_service.dart';
 import 'providers/services/text_message_receiver_service.dart';
+import 'providers/wrap/local_platform.dart';
 import 'theme.dart';
 
 void main() {
@@ -26,11 +27,14 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    _initForegroundTask();
-    FlutterForegroundTask.startService(
-      notificationTitle: 'meshx',
-      notificationText: 'Tap to view',
-    );
+    final localPlatform = ref.read(localPlatformProvider);
+    if (localPlatform.isAndroid || localPlatform.isIOS) {
+      _initForegroundTask();
+      FlutterForegroundTask.startService(
+        notificationTitle: 'meshx',
+        notificationText: 'Tap to view',
+      );
+    }
   }
 
   @override

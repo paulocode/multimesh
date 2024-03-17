@@ -46,7 +46,7 @@ class RadioScanner extends _$RadioScanner {
       onError: (e) {
         _logger.e(e.toString());
         state = state.copyWith(scanning: false);
-        throw const MeshRadioException('Scanning failed');
+        throw const MeshRadioException(msg: 'Scanning failed');
       },
     );
     _flutterBluePlus.cancelWhenScanComplete(subscription);

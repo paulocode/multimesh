@@ -33,6 +33,7 @@ dependencies:
   scrollview_observer: ^1.19.0
   shimmer: ^3.0.0
   sqflite: ^2.3.2
+  sqflite_common_ffi: ^2.3.3
   tuple: ^2.0.2
 
 dev_dependencies:

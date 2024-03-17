@@ -1,5 +1,5 @@
 class MeshRadioException implements Exception {
-  const MeshRadioException(this.msg);
+  const MeshRadioException({String? msg}) : msg = msg ?? 'Unknown error';
 
   final String msg;
 
