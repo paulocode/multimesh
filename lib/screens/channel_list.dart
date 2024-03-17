@@ -14,18 +14,21 @@ class ChannelListScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Channel List'),
       ),
-      body: ListView.builder(
-        itemCount: channels.length,
-        itemBuilder: (context, index) {
-          final channel = channels[index];
-          if (!channel.used) {
-            return Container();
-          }
-          return ChannelCard(
-            channel: channel,
-            index: index,
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView.builder(
+          itemCount: channels.length,
+          itemBuilder: (context, index) {
+            final channel = channels[index];
+            if (!channel.used) {
+              return Container();
+            }
+            return ChannelCard(
+              channel: channel,
+              index: index,
+            );
+          },
+        ),
       ),
     );
   }

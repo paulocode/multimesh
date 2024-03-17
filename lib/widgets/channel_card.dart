@@ -43,7 +43,7 @@ class ChannelCard extends ConsumerWidget {
               lastMessage == null ? null : nodes[lastMessage.from];
           final lastMessageShortName = lastSender?.shortName;
           return Card(
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.symmetric(vertical: 4),
             child: ListTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

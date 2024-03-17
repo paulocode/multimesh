@@ -17,15 +17,18 @@ class NodesScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Nodes'),
       ),
-      body: ListView.builder(
-        itemCount: nodes.length,
-        itemBuilder: (context, index) {
-          final node = nodes[index];
-          if (node.nodeNum == myNodeNum) {
-            return Container();
-          }
-          return NodeCard(node: node);
-        },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView.builder(
+          itemCount: nodes.length,
+          itemBuilder: (context, index) {
+            final node = nodes[index];
+            if (node.nodeNum == myNodeNum) {
+              return Container();
+            }
+            return NodeCard(node: node);
+          },
+        ),
       ),
     );
   }
