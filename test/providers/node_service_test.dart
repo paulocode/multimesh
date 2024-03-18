@@ -8,8 +8,8 @@ import 'package:meshx/services/interfaces/radio_reader.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../common.dart';
-import '../../mock_stream.dart';
+import '../common.dart';
+import '../mock_stream.dart';
 import 'node_service_test.mocks.dart';
 
 @GenerateMocks([

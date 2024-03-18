@@ -11,8 +11,8 @@ import 'package:meshx/services/queued_radio_writer.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../mock_stream.dart';
-import 'radio_writer_test.mocks.dart';
+import '../mock_stream.dart';
+import 'queued_radio_writer_test.mocks.dart';
 
 @GenerateMocks([
   BluetoothCharacteristic,
