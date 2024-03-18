@@ -13,7 +13,7 @@ import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ble/radio_reader.dart';
-import '../ble/radio_writer.dart';
+import '../radio_writer/queued_radio_writer.dart';
 import 'radio_config_service.dart';
 
 part 'channel_service.g.dart';
@@ -31,7 +31,7 @@ class ChannelService extends _$ChannelService {
         .onPacketReceived()
         .listen(_processPacket);
 
-    _radioWriter = ref.watch(radioWriterProvider);
+    _radioWriter = ref.watch(queuedRadioWriterProvider);
     _myNodeNum = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
 

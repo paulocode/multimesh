@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:meshx/providers/ble/radio_reader.dart';
-import 'package:meshx/providers/ble/radio_writer.dart';
+import 'package:meshx/providers/interfaces/radio_writer.dart';
+import 'package:meshx/providers/radio_writer/queued_radio_writer.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

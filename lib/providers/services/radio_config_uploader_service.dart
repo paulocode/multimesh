@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../protobufs/generated/meshtastic/admin.pb.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../ble/radio_writer.dart';
+import '../radio_writer/queued_radio_writer.dart';
 
 part 'radio_config_uploader_service.g.dart';
 
@@ -13,7 +13,7 @@ RadioConfigUploaderService radioConfigUploaderService(
   RadioConfigUploaderServiceRef ref,
 ) {
   return RadioConfigUploaderService(
-    radioWriter: ref.watch(radioWriterProvider),
+    radioWriter: ref.watch(queuedRadioWriterProvider),
   );
 }
 

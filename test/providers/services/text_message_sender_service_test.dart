@@ -7,7 +7,7 @@ import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:meshx/providers/ble/radio_writer.dart';
+import 'package:meshx/providers/radio_writer/queued_radio_writer.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
 import 'package:meshx/providers/services/radio_config_service.dart';
 import 'package:meshx/providers/services/text_message_sender_service.dart';
@@ -38,7 +38,7 @@ void main() {
       overrides: [
         textMessageRepositoryProvider
             .overrideWith((ref) => textMessageRepository),
-        radioWriterProvider.overrideWith((ref) => radioWriter),
+        queuedRadioWriterProvider.overrideWith((ref) => radioWriter),
         textMessageStreamServiceProvider(
           chatType: const ChannelChat(channel: 1),
         ).overrideWith((ref) => textMessageStreamService),

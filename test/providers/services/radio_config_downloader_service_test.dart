@@ -4,7 +4,7 @@ import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/providers/ble/radio_reader.dart';
-import 'package:meshx/providers/ble/radio_writer.dart';
+import 'package:meshx/providers/radio_writer/queued_radio_writer.dart';
 import 'package:meshx/providers/services/radio_config_downloader_service.dart';
 import 'package:meshx/providers/services/radio_config_service.dart';
 import 'package:mockito/annotations.dart';

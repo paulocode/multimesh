@@ -3,20 +3,22 @@ import 'dart:collection';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
+import '../ble/radio_reader.dart';
+import '../interfaces/radio_writer.dart';
 import '../services/radio_connector_service.dart';
-import 'radio_reader.dart';
+import 'ble_radio_writer.dart';
+import 'null_writer.dart';
 
-part 'radio_writer.g.dart';
+part 'queued_radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
-QueuedRadioWriter radioWriter(RadioWriterRef ref) {
+QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
   final _logger = Logger();
   final queuedRadioWriter = QueuedRadioWriter();
 
@@ -26,18 +28,19 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
       return;
     }
 
+    late final RadioWriter radioWriter;
     switch (connectorState) {
       case BleConnected():
-        queuedRadioWriter.setRadioWriter(
-          BleRadioWriter(to: connectorState.bleCharacteristics.toRadio),
-          isNewRadio: connectorState.isNewRadio,
-        );
+        radioWriter =
+            BleRadioWriter(to: connectorState.bleCharacteristics.toRadio);
       case TcpConnected():
-        queuedRadioWriter.setRadioWriter(
-          NullWriter(),
-          isNewRadio: connectorState.isNewRadio,
-        );
+        radioWriter = NullWriter();
     }
+
+    queuedRadioWriter.setRadioWriter(
+      radioWriter,
+      isNewRadio: connectorState.isNewRadio,
+    );
   });
 
   final readerListener = ref.listen(radioReaderProvider, (_, next) {
@@ -49,27 +52,6 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
   ref.onDispose(connectorListener.close);
 
   return queuedRadioWriter;
-}
-
-// TODO create dart file for this class
-abstract class RadioWriter {
-  Future<void> write(List<int> value);
-}
-
-class NullWriter implements RadioWriter {
-  @override
-  Future<void> write(List<int> value) async {}
-}
-
-class BleRadioWriter implements RadioWriter {
-  BleRadioWriter({required BluetoothCharacteristic to}) : _to = to;
-
-  final BluetoothCharacteristic _to;
-
-  @override
-  Future<void> write(List<int> value) async {
-    await _to.write(value);
-  }
 }
 
 class QueuedRadioWriter {

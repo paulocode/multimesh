@@ -9,7 +9,7 @@ import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:meshx/providers/ble/radio_reader.dart';
-import 'package:meshx/providers/ble/radio_writer.dart';
+import 'package:meshx/providers/radio_writer/queued_radio_writer.dart';
 import 'package:meshx/providers/services/channel_service.dart';
 import 'package:meshx/providers/services/radio_config_service.dart';
 import 'package:mockito/annotations.dart';
@@ -45,7 +45,7 @@ void main() {
     container = createContainer(
       overrides: [
         radioReaderProvider.overrideWith((ref) => radioReader),
-        radioWriterProvider.overrideWith((ref) => radioWriter),
+        queuedRadioWriterProvider.overrideWith((ref) => radioWriter),
       ],
     );
     container.read(radioConfigServiceProvider.notifier).setMyNodeNum(555);

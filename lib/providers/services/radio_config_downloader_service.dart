@@ -8,7 +8,7 @@ import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../ble/radio_reader.dart';
-import '../ble/radio_writer.dart';
+import '../radio_writer/queued_radio_writer.dart';
 import 'radio_config_service.dart';
 import 'radio_connector_service.dart';
 
@@ -24,7 +24,7 @@ RadioConfigDownloaderService radioConfigDownloaderService(
     }
   });
   return RadioConfigDownloaderService(
-    radioWriter: ref.watch(radioWriterProvider),
+    radioWriter: ref.watch(queuedRadioWriterProvider),
     radioReader: ref.watch(radioReaderProvider),
     radioConnectorState: sub.read(),
     // riverpod requires us to read the notifier
