@@ -33,7 +33,7 @@ class RadioChoiceTile extends ConsumerWidget {
     );
 
     switch (radioConnectorState) {
-      case TcpConnected():
+      case Connected():
         if (!configDownloaded) {
           return loadingIndicator;
         } else {
@@ -72,13 +72,13 @@ class RadioChoiceTile extends ConsumerWidget {
             )
           : const SizedBox(height: 1),
       onTap: () async {
+        await ref.read(radioConnectorServiceProvider.notifier).disconnect();
         await ref.read(radioConnectorServiceProvider.notifier).connect(_radio);
-        final state = ref.read(radioConnectorServiceProvider);
-        if (state is ConnectionError && context.mounted) {
+        if (radioConnectorState is ConnectionError && context.mounted) {
           final snackBar = SnackBar(
             backgroundColor: Theme.of(context).colorScheme.error,
             content: Text(
-              state.msg,
+              radioConnectorState.msg,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge!

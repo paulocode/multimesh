@@ -26,7 +26,7 @@ RadioReader radioReader(RadioReaderRef ref) {
         onDispose: ref.onDispose,
       );
     case TcpConnected():
-      throw UnimplementedError();
+      return NullReader(onDispose: ref.onDispose);
     case _:
       return NullReader(onDispose: ref.onDispose);
   }

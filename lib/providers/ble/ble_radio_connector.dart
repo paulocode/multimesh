@@ -30,7 +30,7 @@ class BleRadioConnector extends _$BleRadioConnector
   }
 
   @override
-  Future<void> disconnect(String? errorMsg) async {
+  Future<void> disconnect({String? errorMsg}) async {
     if (errorMsg != null) {
       _logger.e(errorMsg);
     }

@@ -40,7 +40,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
   }
 
   @override
-  Future<void> disconnect(String? errorMsg) async {
+  Future<void> disconnect({String? errorMsg}) async {
     if (state is TcpConnected) {
       await (state as TcpConnected).socket.close();
     }

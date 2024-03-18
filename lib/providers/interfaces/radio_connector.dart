@@ -8,7 +8,7 @@ abstract class RadioConnector<T extends MeshRadio>
   @override
   RadioConnectorState build();
 
-  Future<void> disconnect(String? errorMsg);
+  Future<void> disconnect({String? errorMsg});
 
   Future<void> connect(T radio);
 }

@@ -30,8 +30,9 @@ RadioConfigDownloaderService radioConfigDownloaderService(
     // riverpod requires us to read the notifier
     radioConfigServiceProvider: () =>
         ref.read(radioConfigServiceProvider.notifier),
-    disconnect: (errorMsg) =>
-        ref.read(radioConnectorServiceProvider.notifier).disconnect(errorMsg),
+    disconnect: (errorMsg) => ref
+        .read(radioConnectorServiceProvider.notifier)
+        .disconnect(errorMsg: errorMsg),
     onDispose: ref.onDispose,
   );
 }

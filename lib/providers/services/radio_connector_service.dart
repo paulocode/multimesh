@@ -34,9 +34,11 @@ class RadioConnectorService extends _$RadioConnectorService
   }
 
   @override
-  Future<void> disconnect(String? errorMsg) async {
+  Future<void> disconnect({String? errorMsg}) async {
     if (_lastUsedConnector != null) {
-      await ref.read(_lastUsedConnector!.notifier).disconnect(errorMsg);
+      await ref
+          .read(_lastUsedConnector!.notifier)
+          .disconnect(errorMsg: errorMsg);
     }
   }
 

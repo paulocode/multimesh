@@ -33,7 +33,10 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
           isNewRadio: connectorState.isNewRadio,
         );
       case TcpConnected():
-        throw UnimplementedError();
+        queuedRadioWriter.setRadioWriter(
+          NullWriter(),
+          isNewRadio: connectorState.isNewRadio,
+        );
     }
   });
 
@@ -51,6 +54,11 @@ QueuedRadioWriter radioWriter(RadioWriterRef ref) {
 // TODO create dart file for this class
 abstract class RadioWriter {
   Future<void> write(List<int> value);
+}
+
+class NullWriter implements RadioWriter {
+  @override
+  Future<void> write(List<int> value) async {}
 }
 
 class BleRadioWriter implements RadioWriter {
