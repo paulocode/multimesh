@@ -74,8 +74,8 @@ class TcpRadioReader implements RadioReader {
               resetSync();
               continue;
             } else if (packetLen == 0) {
-              resetSync();
               emitPacket(packetBytes);
+              resetSync();
               continue;
             }
           case _:
