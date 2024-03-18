@@ -4,8 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/radio_connector_state.dart';
 import '../services/ble/ble_radio_writer.dart';
 import '../services/interfaces/radio_writer.dart';
-import '../services/null/null_writer.dart';
 import '../services/queued_radio_writer.dart';
+import '../services/tcp/tcp_radio_writer.dart';
 import 'radio_connector_service.dart';
 import 'radio_reader.dart';
 
@@ -28,7 +28,7 @@ QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
         radioWriter =
             BleRadioWriter(to: connectorState.bleCharacteristics.toRadio);
       case TcpConnected():
-        radioWriter = NullWriter();
+        radioWriter = TcpRadioWriter(socket: connectorState.socket);
     }
 
     queuedRadioWriter.setRadioWriter(

@@ -4,6 +4,7 @@ import '../models/radio_connector_state.dart';
 import '../services/ble/ble_radio_reader.dart';
 import '../services/interfaces/radio_reader.dart';
 import '../services/null/null_reader.dart';
+import '../services/tcp/tcp_radio_reader.dart';
 import 'radio_connector_service.dart';
 
 part 'radio_reader.g.dart';
@@ -25,7 +26,10 @@ RadioReader radioReader(RadioReaderRef ref) {
         onDispose: ref.onDispose,
       );
     case TcpConnected():
-      return NullReader(onDispose: ref.onDispose);
+      return TcpRadioReader(
+        radioConnectorState: sub.read(),
+        onDispose: ref.onDispose,
+      );
     case _:
       return NullReader(onDispose: ref.onDispose);
   }

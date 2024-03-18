@@ -26,6 +26,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
     Socket? socket;
     try {
       socket = await Socket.connect(radio.address, MESHTASTIC_TCP_PORT);
+      socket.add([0x94, 0x94, 0x94, 0x94]);
       _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
       state = TcpConnected(socket: socket, radioId: radio.address);
     } on SocketException catch (e) {
