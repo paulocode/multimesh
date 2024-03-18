@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../constants/meshtastic_constants.dart';
 import '../../models/mesh_radio.dart';
 import '../../models/radio_connector_state.dart';
-import '../interfaces/radio_connector.dart';
+import '../../services/interfaces/radio_connector.dart';
 
 part 'tcp_radio_connector.g.dart';
 

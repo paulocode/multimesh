@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/text_message.dart';
 import '../models/text_message_status.dart';
-import '../providers/services/text_message_status_service.dart';
+import '../providers/text_message/text_message_status_service.dart';
 
 class TextMessageStatusIndicator extends ConsumerWidget {
   const TextMessageStatusIndicator({

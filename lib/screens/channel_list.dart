@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/services/channel_service.dart';
+import '../providers/channel_service.dart';
 import '../widgets/channel_card.dart';
 
 class ChannelListScreen extends ConsumerWidget {

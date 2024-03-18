@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'providers/notifications/notifications.dart';
+import 'providers/channel_service.dart';
+import 'providers/node_service.dart';
+import 'providers/notifications.dart';
+import 'providers/radio_config/radio_config_downloader_service.dart';
 import 'providers/repository/sqflite.dart';
-import 'providers/router/router.dart';
-import 'providers/services/channel_service.dart';
-import 'providers/services/node_service.dart';
-import 'providers/services/radio_config_downloader_service.dart';
-import 'providers/services/text_message_receiver_service.dart';
+import 'providers/router.dart';
+import 'providers/text_message/text_message_receiver_service.dart';
 import 'providers/wrap/local_platform.dart';
 import 'theme.dart';
 

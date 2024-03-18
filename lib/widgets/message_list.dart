@@ -6,8 +6,9 @@ import 'package:scrollview_observer/scrollview_observer.dart';
 import '../constants/app_constants.dart';
 import '../models/chat_type.dart';
 import '../models/text_message.dart';
-import '../providers/services/radio_config_service.dart';
-import '../providers/services/text_message_stream_service.dart';
+import '../providers/radio_config/radio_config_service.dart';
+import '../providers/text_message/text_message_stream_service.dart';
+import '../services/text_message/text_message_stream_service.dart';
 import 'message_bubble.dart';
 import 'scroll_button.dart';
 

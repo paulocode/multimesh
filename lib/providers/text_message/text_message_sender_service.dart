@@ -5,9 +5,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../radio_writer/queued_radio_writer.dart';
+import '../queued_radio_writer.dart';
+import '../radio_config/radio_config_service.dart';
 import '../repository/text_message_repository.dart';
-import 'radio_config_service.dart';
 import 'text_message_status_service.dart';
 import 'text_message_stream_service.dart';
 

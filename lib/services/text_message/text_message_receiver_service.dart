@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:logger/logger.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/ble_constants.dart';
 import '../../models/chat_type.dart';
@@ -10,40 +9,8 @@ import '../../models/mesh_node.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
+import '../../repository/text_message_repository.dart';
 import '../interfaces/radio_reader.dart';
-import '../notifications/notifications.dart';
-import '../radio_reader/radio_reader.dart';
-import '../repository/text_message_repository.dart';
-import 'node_service.dart';
-import 'radio_config_service.dart';
-
-part 'text_message_receiver_service.g.dart';
-
-@Riverpod(keepAlive: true)
-TextMessageReceiverService textMessageReceiverService(
-  TextMessageReceiverServiceRef ref,
-) {
-  return TextMessageReceiverService(
-    textMessageRepository: ref.watch(textMessageRepositoryProvider),
-    radioReader: ref.watch(radioReaderProvider),
-    // prevent rebuilds when there is a new node
-    nodes: () => ref.read(nodeServiceProvider),
-    configDownloaded: ref
-        .watch(radioConfigServiceProvider.select((it) => it.configDownloaded)),
-    myNodeNum:
-        ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
-    showNotification: (title, text, callbackValue) async {
-      ref.read(
-        showNotificationProvider(
-          title: title,
-          text: text,
-          callbackValue: callbackValue,
-        ),
-      );
-    },
-    onDispose: ref.onDispose,
-  );
-}
 
 class TextMessageReceiverService {
   TextMessageReceiverService({

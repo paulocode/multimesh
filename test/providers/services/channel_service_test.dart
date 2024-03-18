@@ -8,11 +8,12 @@ import 'package:meshx/protobufs/generated/meshtastic/channel.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:meshx/providers/interfaces/radio_reader.dart';
-import 'package:meshx/providers/radio_reader/radio_reader.dart';
-import 'package:meshx/providers/radio_writer/queued_radio_writer.dart';
-import 'package:meshx/providers/services/channel_service.dart';
-import 'package:meshx/providers/services/radio_config_service.dart';
+import 'package:meshx/providers/channel_service.dart';
+import 'package:meshx/providers/queued_radio_writer.dart';
+import 'package:meshx/providers/radio_config/radio_config_service.dart';
+import 'package:meshx/providers/radio_reader.dart';
+import 'package:meshx/services/interfaces/radio_reader.dart';
+import 'package:meshx/services/queued_radio_writer.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

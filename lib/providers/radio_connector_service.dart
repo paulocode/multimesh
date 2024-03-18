@@ -3,11 +3,11 @@ import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/mesh_radio.dart';
-import '../../models/radio_connector_state.dart';
-import '../ble/ble_radio_connector.dart';
-import '../interfaces/radio_connector.dart';
-import '../tcp/tcp_radio_connector.dart';
+import '../models/mesh_radio.dart';
+import '../models/radio_connector_state.dart';
+import '../services/interfaces/radio_connector.dart';
+import 'ble/ble_radio_connector.dart';
+import 'tcp/tcp_radio_connector.dart';
 
 part 'radio_connector_service.g.dart';
 

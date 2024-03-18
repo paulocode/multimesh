@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../models/text_message.dart';
-import '../providers/services/node_service.dart';
+import '../providers/node_service.dart';
 import 'text_message_status_indicator.dart';
 
 class MessageBubble extends ConsumerWidget {

@@ -4,17 +4,18 @@ import 'dart:convert';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../constants/meshtastic_constants.dart';
-import '../../models/mesh_channel.dart';
-import '../../protobufs/generated/meshtastic/admin.pb.dart';
-import '../../protobufs/generated/meshtastic/apponly.pb.dart';
-import '../../protobufs/generated/meshtastic/channel.pb.dart';
-import '../../protobufs/generated/meshtastic/config.pb.dart';
-import '../../protobufs/generated/meshtastic/mesh.pb.dart';
-import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../radio_reader/radio_reader.dart';
-import '../radio_writer/queued_radio_writer.dart';
-import 'radio_config_service.dart';
+import '../constants/meshtastic_constants.dart';
+import '../models/mesh_channel.dart';
+import '../protobufs/generated/meshtastic/admin.pb.dart';
+import '../protobufs/generated/meshtastic/apponly.pb.dart';
+import '../protobufs/generated/meshtastic/channel.pb.dart';
+import '../protobufs/generated/meshtastic/config.pb.dart';
+import '../protobufs/generated/meshtastic/mesh.pb.dart';
+import '../protobufs/generated/meshtastic/portnums.pb.dart';
+import '../services/queued_radio_writer.dart';
+import 'queued_radio_writer.dart';
+import 'radio_config/radio_config_service.dart';
+import 'radio_reader.dart';
 
 part 'channel_service.g.dart';
 

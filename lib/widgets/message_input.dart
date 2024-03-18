@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/chat_type.dart';
-import '../providers/services/text_message_sender_service.dart';
+import '../providers/text_message/text_message_sender_service.dart';
 
 class MessageInput extends ConsumerStatefulWidget {
   const MessageInput({

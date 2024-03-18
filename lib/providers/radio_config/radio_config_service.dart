@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/radio_configuration.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
+import '../../services/radio_config/radio_config_uploader_service.dart';
 import 'radio_config_uploader_service.dart';
 
 part 'radio_config_service.g.dart';

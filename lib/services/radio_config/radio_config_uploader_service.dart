@@ -1,21 +1,9 @@
 import 'package:logger/logger.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../protobufs/generated/meshtastic/admin.pb.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../radio_writer/queued_radio_writer.dart';
-
-part 'radio_config_uploader_service.g.dart';
-
-@Riverpod(keepAlive: true)
-RadioConfigUploaderService radioConfigUploaderService(
-  RadioConfigUploaderServiceRef ref,
-) {
-  return RadioConfigUploaderService(
-    radioWriter: ref.watch(queuedRadioWriterProvider),
-  );
-}
+import '../queued_radio_writer.dart';
 
 class RadioConfigUploaderService {
   RadioConfigUploaderService({

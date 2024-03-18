@@ -7,11 +7,14 @@ import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:meshx/providers/radio_writer/queued_radio_writer.dart';
+import 'package:meshx/providers/queued_radio_writer.dart';
+import 'package:meshx/providers/radio_config/radio_config_service.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
-import 'package:meshx/providers/services/radio_config_service.dart';
-import 'package:meshx/providers/services/text_message_sender_service.dart';
-import 'package:meshx/providers/services/text_message_stream_service.dart';
+import 'package:meshx/providers/text_message/text_message_sender_service.dart';
+import 'package:meshx/providers/text_message/text_message_stream_service.dart';
+import 'package:meshx/repository/text_message_repository.dart';
+import 'package:meshx/services/queued_radio_writer.dart';
+import 'package:meshx/services/text_message/text_message_stream_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

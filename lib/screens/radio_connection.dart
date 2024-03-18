@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/mesh_radio.dart';
 import '../models/radio_connector_state.dart';
 import '../providers/ble/ble_radio_scanner.dart';
-import '../providers/services/radio_connector_service.dart';
+import '../providers/radio_connector_service.dart';
 import '../providers/tcp/tcp_radio_connector.dart';
 import '../providers/tcp/tcp_radio_scanner.dart';
 import '../widgets/connected_radio.dart';

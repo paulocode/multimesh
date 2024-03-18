@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/radio_connector_state.dart';
-import '../providers/services/radio_connector_service.dart';
+import '../providers/radio_connector_service.dart';
 import 'channel_list.dart';
 import 'map.dart';
 import 'nodes.dart';

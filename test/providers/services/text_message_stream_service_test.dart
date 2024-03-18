@@ -3,9 +3,9 @@ import 'package:meshx/constants/app_constants.dart';
 import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/models/chat_type.dart';
 import 'package:meshx/models/text_message.dart';
-import 'package:meshx/providers/repository/text_message_repository.dart';
-import 'package:meshx/providers/services/text_message_receiver_service.dart';
-import 'package:meshx/providers/services/text_message_stream_service.dart';
+import 'package:meshx/repository/text_message_repository.dart';
+import 'package:meshx/services/text_message/text_message_receiver_service.dart';
+import 'package:meshx/services/text_message/text_message_stream_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

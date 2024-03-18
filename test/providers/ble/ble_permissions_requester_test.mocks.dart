@@ -6,8 +6,8 @@
 import 'dart:async' as _i6;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i2;
-import 'package:meshx/providers/wrap/flutter_blue_plus_mockable.dart' as _i5;
-import 'package:meshx/providers/wrap/permissions.dart' as _i7;
+import 'package:meshx/services/wrap/flutter_blue_plus_mockable.dart' as _i5;
+import 'package:meshx/services/wrap/permissions.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 import 'package:platform/platform.dart' as _i3;

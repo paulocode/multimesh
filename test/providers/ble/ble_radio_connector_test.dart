@@ -9,6 +9,7 @@ import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/providers/ble/ble_characteristics_finder.dart';
 import 'package:meshx/providers/ble/ble_radio_connector.dart';
 import 'package:meshx/providers/wrap/local_platform.dart';
+import 'package:meshx/services/ble/ble_characteristics_finder.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:platform/platform.dart';

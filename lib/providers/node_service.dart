@@ -3,12 +3,12 @@ import 'dart:collection';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/mesh_node.dart';
-import '../../protobufs/generated/meshtastic/mesh.pb.dart';
-import '../../protobufs/generated/meshtastic/mesh.pbserver.dart';
-import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../interfaces/radio_reader.dart';
-import '../radio_reader/radio_reader.dart';
+import '../models/mesh_node.dart';
+import '../protobufs/generated/meshtastic/mesh.pb.dart';
+import '../protobufs/generated/meshtastic/mesh.pbserver.dart';
+import '../protobufs/generated/meshtastic/portnums.pb.dart';
+import '../services/interfaces/radio_reader.dart';
+import 'radio_reader.dart';
 
 part 'node_service.g.dart';
 

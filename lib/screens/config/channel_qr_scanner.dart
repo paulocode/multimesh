@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../../providers/services/channel_service.dart';
+import '../../providers/channel_service.dart';
 
 class ChannelQrScanner extends ConsumerStatefulWidget {
   const ChannelQrScanner({super.key});

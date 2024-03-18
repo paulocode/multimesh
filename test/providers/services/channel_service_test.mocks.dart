@@ -10,10 +10,10 @@ import 'package:meshx/models/radio_configuration.dart' as _i3;
 import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart' as _i12;
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i9;
-import 'package:meshx/providers/interfaces/radio_reader.dart' as _i4;
-import 'package:meshx/providers/interfaces/radio_writer.dart' as _i8;
-import 'package:meshx/providers/radio_writer/queued_radio_writer.dart' as _i7;
-import 'package:meshx/providers/services/radio_config_service.dart' as _i11;
+import 'package:meshx/providers/radio_config/radio_config_service.dart' as _i11;
+import 'package:meshx/services/interfaces/radio_reader.dart' as _i4;
+import 'package:meshx/services/interfaces/radio_writer.dart' as _i8;
+import 'package:meshx/services/queued_radio_writer.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
 

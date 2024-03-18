@@ -8,7 +8,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/mesh_radio.dart';
 import '../../models/radio_connector_state.dart';
-import '../interfaces/radio_connector.dart';
+import '../../services/ble/ble_characteristics_finder.dart';
+import '../../services/interfaces/radio_connector.dart';
 import '../wrap/local_platform.dart';
 import 'ble_characteristics_finder.dart';
 

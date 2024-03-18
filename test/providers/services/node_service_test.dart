@@ -2,9 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:meshx/providers/interfaces/radio_reader.dart';
-import 'package:meshx/providers/radio_reader/radio_reader.dart';
-import 'package:meshx/providers/services/node_service.dart';
+import 'package:meshx/providers/node_service.dart';
+import 'package:meshx/providers/radio_reader.dart';
+import 'package:meshx/services/interfaces/radio_reader.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

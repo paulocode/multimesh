@@ -2,7 +2,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/constants/ble_constants.dart';
 import 'package:meshx/exceptions/mesh_radio_exception.dart';
-import 'package:meshx/providers/ble/ble_characteristics_finder.dart';
+import 'package:meshx/services/ble/ble_characteristics_finder.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

@@ -1,10 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/radio_connector_state.dart';
-import '../interfaces/radio_reader.dart';
-import '../services/radio_connector_service.dart';
-import 'ble_radio_reader.dart';
-import 'null_reader.dart';
+import '../models/radio_connector_state.dart';
+import '../services/ble/ble_radio_reader.dart';
+import '../services/interfaces/radio_reader.dart';
+import '../services/null/null_reader.dart';
+import 'radio_connector_service.dart';
 
 part 'radio_reader.g.dart';
 

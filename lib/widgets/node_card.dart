@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../models/chat_type.dart';
 import '../models/mesh_node.dart';
-import '../providers/services/node_service.dart';
-import '../providers/services/text_message_stream_service.dart';
+import '../providers/node_service.dart';
+import '../providers/text_message/text_message_stream_service.dart';
 
 class NodeCard extends ConsumerWidget {
   const NodeCard({

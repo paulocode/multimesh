@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/services/node_service.dart';
-import '../providers/services/radio_config_service.dart';
+import '../providers/node_service.dart';
+import '../providers/radio_config/radio_config_service.dart';
 import '../widgets/node_card.dart';
 
 class NodesScreen extends ConsumerWidget {

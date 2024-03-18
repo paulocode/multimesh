@@ -13,12 +13,12 @@ import 'package:meshx/models/radio_connector_state.dart' as _i17;
 import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart' as _i15;
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i12;
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i9;
-import 'package:meshx/providers/interfaces/radio_reader.dart' as _i8;
-import 'package:meshx/providers/interfaces/radio_writer.dart' as _i7;
-import 'package:meshx/providers/radio_writer/queued_radio_writer.dart' as _i6;
-import 'package:meshx/providers/services/radio_config_downloader_service.dart'
+import 'package:meshx/providers/radio_config/radio_config_service.dart' as _i14;
+import 'package:meshx/services/interfaces/radio_reader.dart' as _i8;
+import 'package:meshx/services/interfaces/radio_writer.dart' as _i7;
+import 'package:meshx/services/queued_radio_writer.dart' as _i6;
+import 'package:meshx/services/radio_config/radio_config_downloader_service.dart'
     as _i13;
-import 'package:meshx/providers/services/radio_config_service.dart' as _i14;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i16;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;

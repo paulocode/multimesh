@@ -1,32 +1,13 @@
 import 'dart:async';
 
 import 'package:logger/logger.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/app_constants.dart';
 import '../../constants/ble_constants.dart';
 import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
-import '../repository/text_message_repository.dart';
-import 'radio_config_service.dart';
+import '../../repository/text_message_repository.dart';
 import 'text_message_receiver_service.dart';
-
-part 'text_message_stream_service.g.dart';
-
-@Riverpod(keepAlive: true)
-TextMessageStreamService textMessageStreamService(
-  TextMessageStreamServiceRef ref, {
-  required ChatType chatType,
-}) {
-  return TextMessageStreamService(
-    chatType: chatType,
-    myNodeNum:
-        ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum)),
-    textMessageRepository: ref.watch(textMessageRepositoryProvider),
-    textMessageReceiverService: ref.watch(textMessageReceiverServiceProvider),
-    onDispose: ref.onDispose,
-  );
-}
 
 class TextMessageStreamService {
   TextMessageStreamService({

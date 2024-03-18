@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/providers/ble/ble_permissions_requester.dart';
 import 'package:meshx/providers/ble/ble_radio_scanner.dart';
 import 'package:meshx/providers/wrap/flutter_blue_plus_mockable.dart';
+import 'package:meshx/services/ble/ble_permissions_requester.dart';
+import 'package:meshx/services/wrap/flutter_blue_plus_mockable.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
