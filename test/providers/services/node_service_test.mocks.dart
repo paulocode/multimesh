@@ -6,7 +6,7 @@
 import 'dart:async' as _i3;
 
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i4;
-import 'package:meshx/providers/ble/radio_reader.dart' as _i2;
+import 'package:meshx/providers/interfaces/radio_reader.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

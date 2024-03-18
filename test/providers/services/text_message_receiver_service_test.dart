@@ -8,7 +8,7 @@ import 'package:meshx/models/text_message.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pbserver.dart';
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:meshx/providers/ble/radio_reader.dart';
+import 'package:meshx/providers/interfaces/radio_reader.dart';
 import 'package:meshx/providers/repository/text_message_repository.dart';
 import 'package:meshx/providers/services/text_message_receiver_service.dart';
 import 'package:mockito/annotations.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:meshx/models/ble_characteristics.dart';
 import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
-import 'package:meshx/providers/ble/radio_reader.dart';
+import 'package:meshx/providers/radio_reader/ble_radio_reader.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';

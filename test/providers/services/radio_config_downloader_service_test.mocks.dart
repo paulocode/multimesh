@@ -13,7 +13,7 @@ import 'package:meshx/models/radio_connector_state.dart' as _i17;
 import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart' as _i15;
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i12;
 import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i9;
-import 'package:meshx/providers/ble/radio_reader.dart' as _i8;
+import 'package:meshx/providers/interfaces/radio_reader.dart' as _i8;
 import 'package:meshx/providers/interfaces/radio_writer.dart' as _i7;
 import 'package:meshx/providers/radio_writer/queued_radio_writer.dart' as _i6;
 import 'package:meshx/providers/services/radio_config_downloader_service.dart'

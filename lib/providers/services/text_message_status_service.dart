@@ -7,7 +7,8 @@ import '../../models/text_message.dart';
 import '../../models/text_message_status.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../ble/radio_reader.dart';
+import '../interfaces/radio_reader.dart';
+import '../radio_reader/radio_reader.dart';
 import '../repository/text_message_repository.dart';
 
 part 'text_message_status_service.g.dart';
