@@ -158,12 +158,6 @@ class _ManualNetworkAddressInputState
   @override
   Widget build(BuildContext context) {
     final connectorState = ref.watch(tcpRadioConnectorProvider);
-    print(connectorState is ConnectionError);
-    if (connectorState is WithRadioId) {
-      print(connectorState.radioId);
-      print(_manualInputController.text);
-    }
-
     switch (connectorState) {
       case Connecting():
         break;
