@@ -25,6 +25,7 @@ class BleRadioReader implements RadioReader, ForceReadableRadioReader {
     fromNum.setNotifyValue(true);
   }
 
+  var _isRunningReadLoop = false;
   final RadioConnectorState _radioConnectorState;
   final _logger = Logger();
   final _packetStreamController = StreamController<FromRadio>.broadcast();
@@ -41,14 +42,22 @@ class BleRadioReader implements RadioReader, ForceReadableRadioReader {
     if (_radioConnectorState is! BleConnected) {
       return;
     }
-    var read = <int>[];
-    do {
-      read = await _radioConnectorState.bleCharacteristics.fromRadio.read();
-      final fromRadioPacket = FromRadio.fromBuffer(read);
-      _logger.i(fromRadioPacket);
-      if (read.isNotEmpty) {
-        _packetStreamController.add(fromRadioPacket);
-      }
-    } while (read.isNotEmpty);
+    if (_isRunningReadLoop) {
+      return;
+    }
+    _isRunningReadLoop = true;
+    try {
+      var read = <int>[];
+      do {
+        read = await _radioConnectorState.bleCharacteristics.fromRadio.read();
+        final fromRadioPacket = FromRadio.fromBuffer(read);
+        _logger.i(fromRadioPacket);
+        if (read.isNotEmpty) {
+          _packetStreamController.add(fromRadioPacket);
+        }
+      } while (read.isNotEmpty);
+    } finally {
+      _isRunningReadLoop = false;
+    }
   }
 }
