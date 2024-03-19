@@ -82,7 +82,7 @@ class TcpConnected extends Connected {
   // that is broadcast. do not listen to socket directly. you can use
   // socket for close() and add().
   final Socket socket;
-  final Stream<Uint8List> recvStream;
+  final Stream<List<int>> recvStream;
 }
 
 @immutable

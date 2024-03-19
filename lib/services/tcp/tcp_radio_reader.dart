@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:logger/logger.dart';
 
@@ -21,7 +20,7 @@ class TcpRadioReader implements RadioReader {
     _readListener();
   }
 
-  late final Stream<Uint8List> _socket;
+  late final Stream<List<int>> _socket;
   final _packetStreamController = StreamController<FromRadio>.broadcast();
   final _logger = Logger();
 
@@ -69,14 +68,14 @@ class TcpRadioReader implements RadioReader {
               resetSync();
               continue;
             } else if (packetLen == 0) {
-              emitPacket(packetBytes);
+              _emitPacket(packetBytes);
               resetSync();
               continue;
             }
           case _:
             packetBytes.add(byte);
             if (packetBytes.length == packetLen) {
-              emitPacket(packetBytes);
+              _emitPacket(packetBytes);
               resetSync();
               continue;
             }
@@ -86,7 +85,7 @@ class TcpRadioReader implements RadioReader {
     });
   }
 
-  void emitPacket(List<int> packetBytes) {
+  void _emitPacket(List<int> packetBytes) {
     final fromRadioPacket = FromRadio.fromBuffer(packetBytes);
     _logger.i(fromRadioPacket);
     _packetStreamController.add(fromRadioPacket);
