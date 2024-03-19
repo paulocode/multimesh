@@ -107,6 +107,7 @@ class RadioConfigDownloaderService {
     await _radioConfigService.setShortName(user.shortName, upload: false);
     await _radioConfigService.setLongName(user.longName, upload: false);
     await _radioConfigService.setHwModel(user.hwModel, upload: false);
+    _radioConfigService.setHasOwnNodeInfo();
   }
 
   Future<void> _processConfigCompleteId(int configCompleteId) async {

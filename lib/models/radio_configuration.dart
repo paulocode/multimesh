@@ -16,6 +16,7 @@ class RadioConfiguration with _$RadioConfiguration {
     Config_LoRaConfig_RegionCode region,
     @Default(Config_LoRaConfig_ModemPreset.LONG_FAST)
     Config_LoRaConfig_ModemPreset modemPreset,
+    @Default(false) bool hasOwnNodeInfo,
     @Default(false) bool configDownloaded,
   }) = _RadioConfiguration;
 

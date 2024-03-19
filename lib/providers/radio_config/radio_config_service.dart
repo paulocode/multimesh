@@ -70,6 +70,10 @@ class RadioConfigService extends _$RadioConfigService {
     state = state.copyWith(hwModel: hwModel);
   }
 
+  void setHasOwnNodeInfo() {
+    state = state.copyWith(hasOwnNodeInfo: true);
+  }
+
   void setConfigDownloaded() {
     state = state.copyWith(configDownloaded: true);
   }

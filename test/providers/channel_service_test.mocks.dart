@@ -275,6 +275,15 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i5.Future<void>);
 
   @override
+  void setHasOwnNodeInfo() => super.noSuchMethod(
+        Invocation.method(
+          #setHasOwnNodeInfo,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void setConfigDownloaded() => super.noSuchMethod(
         Invocation.method(
           #setConfigDownloaded,

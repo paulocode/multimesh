@@ -16,12 +16,14 @@ class ManualNetworkAddressInput extends ConsumerStatefulWidget {
 }
 
 class _ManualNetworkAddressInputState
-    extends ConsumerState<ManualNetworkAddressInput> {
+    extends ConsumerState<ManualNetworkAddressInput>
+    with AutomaticKeepAliveClientMixin {
   bool _connectingToManualInput = false;
   final _manualInputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final connectorState = ref.watch(tcpRadioConnectorProvider);
     switch (connectorState) {
       case Connecting():
@@ -73,9 +75,12 @@ class _ManualNetworkAddressInputState
         else
           IconButton(
             onPressed: () async {
+              if (connectorState is Connecting) {
+                return;
+              }
               EasyThrottle.throttle(
                 'connect-throttler',
-                const Duration(milliseconds: 500),
+                const Duration(milliseconds: 1000),
                 () async {
                   await ref
                       .read(radioConnectorServiceProvider.notifier)
@@ -98,4 +103,7 @@ class _ManualNetworkAddressInputState
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/mesh_radio.dart';
+import '../models/radio_connector_state.dart';
 import '../providers/radio_connector_service.dart';
 import 'connection_icon.dart';
 
@@ -16,12 +17,17 @@ class RadioChoiceTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final connectorState = ref.watch(radioConnectorServiceProvider);
+
     return ListTile(
       leading: ConnectionIcon(_radio.remoteId),
       onTap: () async {
+        if (connectorState is Connecting) {
+          return;
+        }
         EasyThrottle.throttle(
           'connect-throttler',
-          const Duration(milliseconds: 500),
+          const Duration(milliseconds: 1000),
           () async {
             await ref.read(radioConnectorServiceProvider.notifier).disconnect();
             await ref
