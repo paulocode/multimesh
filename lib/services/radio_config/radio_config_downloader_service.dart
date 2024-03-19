@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/logger.dart';
 
+import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
@@ -54,14 +54,16 @@ class RadioConfigDownloaderService {
       await _radioWriter.sendWantConfig(
         wantConfigId: _wantConfigId,
       );
-    } on FlutterBluePlusException catch (e) {
-      _disconnect(e.description);
+    } on MeshRadioException catch (e) {
+      _disconnect(e.msg);
       return;
     } catch (e) {
       _disconnect(null);
       return;
     }
-    _radioReader.forceRead();
+    if (_radioReader is ForceReadableRadioReader) {
+      _radioReader.forceRead();
+    }
   }
 
   Future<void> _processPacket(FromRadio packet) async {

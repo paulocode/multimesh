@@ -26,11 +26,6 @@ class TcpRadioReader implements RadioReader {
   final _logger = Logger();
 
   @override
-  void forceRead() {
-    // do nothing
-  }
-
-  @override
   Stream<FromRadio> onPacketReceived() => _packetStreamController.stream;
 
   Future<void> _readListener() async {

@@ -6,7 +6,7 @@ import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../interfaces/radio_reader.dart';
 
-class BleRadioReader implements RadioReader {
+class BleRadioReader implements RadioReader, ForceReadableRadioReader {
   BleRadioReader({
     required RadioConnectorState radioConnectorState,
     required void Function(void Function() cb) onDispose,

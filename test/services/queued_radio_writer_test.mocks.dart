@@ -568,15 +568,6 @@ class MockRadioReader extends _i1.Mock implements _i5.RadioReader {
         ),
         returnValue: _i3.Stream<_i6.FromRadio>.empty(),
       ) as _i3.Stream<_i6.FromRadio>);
-
-  @override
-  void forceRead() => super.noSuchMethod(
-        Invocation.method(
-          #forceRead,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
 
 /// A class which mocks [RadioWriter].

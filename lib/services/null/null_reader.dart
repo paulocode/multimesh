@@ -14,8 +14,5 @@ class NullReader implements RadioReader {
   final _streamController = StreamController<FromRadio>.broadcast();
 
   @override
-  void forceRead() {}
-
-  @override
   Stream<FromRadio> onPacketReceived() => _streamController.stream;
 }
