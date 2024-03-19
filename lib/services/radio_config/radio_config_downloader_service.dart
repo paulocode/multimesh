@@ -114,6 +114,7 @@ class RadioConfigDownloaderService {
       _radioConfigService.setConfigDownloaded();
     } else {
       _logger.i('Stale configCompleteId');
+      _radioConfigServiceProvider().clear();
       await _requestConfig();
     }
   }
