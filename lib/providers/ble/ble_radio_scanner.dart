@@ -70,6 +70,11 @@ class BleRadioScanner extends _$BleRadioScanner {
           )
           .isEmpty,
     );
+
+    for (final element in uniqueNewDevices) {
+      _logger.i('scanned BLE ${element.device.advName}');
+    }
+
     devices.addAll(uniqueNewDevices);
 
     state = state.copyWith(meshRadios: devices);

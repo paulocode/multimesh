@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import '../../constants/meshtastic_constants.dart';
 import '../interfaces/radio_writer.dart';
 
 class TcpRadioWriter implements RadioWriter {
@@ -8,7 +9,12 @@ class TcpRadioWriter implements RadioWriter {
   @override
   Future<void> write(List<int> value) async {
     final packetLen = value.length;
-    final header = [0x94, 0xc3, packetLen >> 8, packetLen & 0xff];
+    final header = [
+      MESHTASTIC_STREAM_START1,
+      MESHTASTIC_STREAM_START2,
+      packetLen >> 8,
+      packetLen & 0xff,
+    ];
     _socket.add(header);
     _socket.add(value);
   }

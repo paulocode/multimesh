@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:logger/logger.dart';
 
+import '../../constants/meshtastic_constants.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../interfaces/radio_reader.dart';
@@ -50,12 +51,12 @@ class TcpRadioReader implements RadioReader {
         final byte = accumulator.removeAt(0);
         switch (pointer) {
           case 0:
-            if (byte != 0x94) {
+            if (byte != MESHTASTIC_STREAM_START1) {
               resetSync();
               continue;
             }
           case 1:
-            if (byte != 0xc3) {
+            if (byte != MESHTASTIC_STREAM_START2) {
               resetSync();
               continue;
             }
@@ -64,7 +65,7 @@ class TcpRadioReader implements RadioReader {
           case 3:
             lsb = byte & 0xff;
             packetLen = (msb << 8) | lsb;
-            if (packetLen > 512) {
+            if (packetLen > MESHTASTIC_MAX_PACKET_LEN) {
               _logger.w('improper packetLen $packetLen');
               resetSync();
               continue;

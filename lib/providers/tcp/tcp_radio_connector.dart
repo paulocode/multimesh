@@ -26,7 +26,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
     Socket? socket;
     try {
       socket = await Socket.connect(radio.address, MESHTASTIC_TCP_PORT);
-      socket.add([0x94, 0x94, 0x94, 0x94]);
+      _wakeUpRadio(socket);
       _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
       state = TcpConnected(socket: socket, radioId: radio.address);
     } on SocketException catch (e) {
@@ -38,6 +38,17 @@ class TcpRadioConnector extends _$TcpRadioConnector
     } finally {
       ref.onDispose(() => socket?.close());
     }
+  }
+
+  void _wakeUpRadio(Socket socket) {
+    socket.add(
+      [
+        MESHTASTIC_STREAM_START1,
+        MESHTASTIC_STREAM_START1,
+        MESHTASTIC_STREAM_START1,
+        MESHTASTIC_STREAM_START1,
+      ],
+    );
   }
 
   @override

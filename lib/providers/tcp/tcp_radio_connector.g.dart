@@ -6,7 +6,7 @@ part of 'tcp_radio_connector.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tcpRadioConnectorHash() => r'bd16701af8ef64c15ace46ac5e465aa8daa76c41';
+String _$tcpRadioConnectorHash() => r'72eb9a013ef740e26874fd47f6acc7ca532e6c21';
 
 /// See also [TcpRadioConnector].
 @ProviderFor(TcpRadioConnector)
