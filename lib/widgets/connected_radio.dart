@@ -64,15 +64,28 @@ class ConnectedRadio extends ConsumerWidget {
                     Text('Charging'),
                   ],
                 ),
-                const Row(
-                  children: [
-                    Icon(
-                      Icons.bluetooth,
-                      size: 20,
-                    ),
-                    Text('Bluetooth'),
-                  ],
-                ),
+                if (radioConnectorState is BleConnected)
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.bluetooth,
+                        size: 20,
+                      ),
+                      Text('Bluetooth'),
+                    ],
+                  )
+                else if (radioConnectorState is TcpConnected)
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.wifi,
+                        size: 20,
+                      ),
+                      Text('W/LAN'),
+                    ],
+                  )
+                else
+                  Container(),
               ],
             )
           else if (radioConfig.myNodeNum != 0)
