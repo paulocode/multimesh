@@ -48,6 +48,9 @@ class RadioConnectorService extends _$RadioConnectorService
       case BleMeshRadio():
         _lastUsedConnector = bleRadioConnectorProvider;
       case TcpMeshRadio():
+        if (_currentRadioId == radio.remoteId) {
+          await Future<void>.delayed(const Duration(milliseconds: 500));
+        }
         _lastUsedConnector = tcpRadioConnectorProvider;
     }
 

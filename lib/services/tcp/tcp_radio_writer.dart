@@ -4,8 +4,8 @@ import '../../constants/meshtastic_constants.dart';
 import '../interfaces/radio_writer.dart';
 
 class TcpRadioWriter implements RadioWriter {
-  TcpRadioWriter({required Socket socket}) : _socket = socket;
-  final Socket _socket;
+  TcpRadioWriter({required IOSink socket}) : _socket = socket;
+  final IOSink _socket;
   @override
   Future<void> write(List<int> value) async {
     final packetLen = value.length;

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:logger/logger.dart';
 
@@ -16,13 +16,12 @@ class TcpRadioReader implements RadioReader {
     if (radioConnectorState is! TcpConnected) {
       return;
     }
-    _socket = radioConnectorState.socket;
-    onDispose(_socket.close);
+    _socket = radioConnectorState.recvStream;
     onDispose(_packetStreamController.close);
     _readListener();
   }
 
-  late final Socket _socket;
+  late final Stream<Uint8List> _socket;
   final _packetStreamController = StreamController<FromRadio>.broadcast();
   final _logger = Logger();
 

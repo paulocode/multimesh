@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'ble_characteristics.dart';
@@ -48,6 +48,7 @@ sealed class Connected extends WithRadioId {
       case TcpConnected():
         return TcpConnected(
           socket: _this.socket,
+          recvStream: _this.recvStream,
           isNewRadio: isNewRadio ?? _this.isNewRadio,
           radioId: radioId ?? _this.radioId,
         );
@@ -72,11 +73,16 @@ class BleConnected extends Connected {
 class TcpConnected extends Connected {
   TcpConnected({
     required this.socket,
+    required this.recvStream,
     super.isNewRadio = false,
     required super.radioId,
   });
 
+  // because socket is not a broadcast stream, create recvStream
+  // that is broadcast. do not listen to socket directly. you can use
+  // socket for close() and add().
   final Socket socket;
+  final Stream<Uint8List> recvStream;
 }
 
 @immutable

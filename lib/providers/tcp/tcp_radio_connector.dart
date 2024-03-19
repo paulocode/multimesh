@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,7 +29,13 @@ class TcpRadioConnector extends _$TcpRadioConnector
       socket = await Socket.connect(radio.address, MESHTASTIC_TCP_PORT);
       _wakeUpRadio(socket);
       _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
-      state = TcpConnected(socket: socket, radioId: radio.address);
+      final socketStream = socket.asBroadcastStream();
+      state = TcpConnected(
+        socket: socket,
+        recvStream: socketStream,
+        radioId: radio.address,
+      );
+      _listenToSocketErrors(socketStream);
     } on SocketException catch (e) {
       _logger.e(e);
       state = ConnectionError(radioId: radio.address, msg: e.message);
@@ -55,6 +62,15 @@ class TcpRadioConnector extends _$TcpRadioConnector
   Future<void> disconnect({String? errorMsg}) async {
     if (state is TcpConnected) {
       await (state as TcpConnected).socket.close();
+      state = Disconnected(errorMsg: errorMsg);
     }
+  }
+
+  void _listenToSocketErrors(Stream<Uint8List> socket) {
+    final sub = socket.listen(
+      (_) {},
+      onError: (_) => disconnect(errorMsg: 'Disconnected'),
+    );
+    ref.onDispose(sub.cancel);
   }
 }

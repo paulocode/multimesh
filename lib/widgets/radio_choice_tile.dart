@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,8 +19,16 @@ class RadioChoiceTile extends ConsumerWidget {
     return ListTile(
       leading: ConnectionIcon(_radio.remoteId),
       onTap: () async {
-        await ref.read(radioConnectorServiceProvider.notifier).disconnect();
-        await ref.read(radioConnectorServiceProvider.notifier).connect(_radio);
+        EasyThrottle.throttle(
+          'connect-throttler',
+          const Duration(milliseconds: 500),
+          () async {
+            await ref.read(radioConnectorServiceProvider.notifier).disconnect();
+            await ref
+                .read(radioConnectorServiceProvider.notifier)
+                .connect(_radio);
+          },
+        );
       },
       title: Text(_radio.name),
       visualDensity: const VisualDensity(vertical: -2),
