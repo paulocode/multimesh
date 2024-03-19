@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -15,6 +16,7 @@ part 'tcp_radio_connector.g.dart';
 class TcpRadioConnector extends _$TcpRadioConnector
     implements RadioConnector<TcpMeshRadio> {
   final _logger = Logger();
+  StreamSubscription<Uint8List>? _errorListener;
 
   @override
   RadioConnectorState build() {
@@ -65,16 +67,26 @@ class TcpRadioConnector extends _$TcpRadioConnector
   @override
   Future<void> disconnect({String? errorMsg}) async {
     if (state is TcpConnected) {
-      await (state as TcpConnected).socket.close();
+      await _errorListener?.cancel();
+      try {
+        await (state as TcpConnected).socket.close();
+      } catch (e) {
+        _logger.e(e.toString());
+      }
       state = Disconnected(errorMsg: errorMsg);
     }
   }
 
   void _listenToSocketErrors(Stream<Uint8List> socket) {
-    final sub = socket.listen(
+    _errorListener = socket.listen(
       (_) {},
-      onError: (_) => disconnect(errorMsg: 'Disconnected'),
+      onError: (_) {
+        disconnect(errorMsg: 'Disconnected');
+      },
+      onDone: disconnect,
     );
-    ref.onDispose(sub.cancel);
+    ref.onDispose(() {
+      _errorListener?.cancel();
+    });
   }
 }
