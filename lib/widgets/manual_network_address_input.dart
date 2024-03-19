@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -72,17 +73,25 @@ class _ManualNetworkAddressInputState
         else
           IconButton(
             onPressed: () async {
-              await ref
-                  .read(radioConnectorServiceProvider.notifier)
-                  .disconnect();
-              await ref.read(radioConnectorServiceProvider.notifier).connect(
-                    TcpMeshRadio(
-                      address: _manualInputController.text,
-                    ),
-                  );
-              setState(() {
-                _connectingToManualInput = true;
-              });
+              EasyThrottle.throttle(
+                'connect-throttler',
+                const Duration(milliseconds: 500),
+                () async {
+                  await ref
+                      .read(radioConnectorServiceProvider.notifier)
+                      .disconnect();
+                  await ref
+                      .read(radioConnectorServiceProvider.notifier)
+                      .connect(
+                        TcpMeshRadio(
+                          address: _manualInputController.text,
+                        ),
+                      );
+                  setState(() {
+                    _connectingToManualInput = true;
+                  });
+                },
+              );
             },
             icon: const Icon(Icons.send),
           ),
