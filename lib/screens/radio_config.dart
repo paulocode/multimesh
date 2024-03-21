@@ -13,10 +13,13 @@ class RadioConfigScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
+    final longName = radioConfig.configDownloaded
+        ? '${radioConfig.longName} ⚙️'
+        : 'Settings';
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${radioConfig.longName} ⚙️'),
+        title: Text(longName),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -42,9 +45,11 @@ class RadioConfigScreen extends ConsumerWidget {
                   Card(
                     child: ListTile(
                       style: ListTileStyle.list,
-                      onTap: () {
-                        context.push('/channelQrScanner');
-                      },
+                      onTap: radioConnectorState is Connected
+                          ? () {
+                              context.push('/channelQrScanner');
+                            }
+                          : null,
                       title: const Text('Channels (Scan QR)'),
                       trailing: const Icon(Icons.chevron_right),
                     ),
@@ -62,11 +67,16 @@ class RadioConfigScreen extends ConsumerWidget {
                             child: Text(region.name),
                           ),
                       ],
-                      onChanged: (value) {
-                        ref.read(radioConfigServiceProvider.notifier).setRegion(
-                              Config_LoRaConfig_RegionCode.values[value!],
-                            );
-                      },
+                      onChanged: radioConnectorState is Connected
+                          ? (value) {
+                              ref
+                                  .read(radioConfigServiceProvider.notifier)
+                                  .setRegion(
+                                    Config_LoRaConfig_RegionCode
+                                        .values[value! as int],
+                                  );
+                            }
+                          : null,
                       decoration: const InputDecoration(label: Text('Region')),
                     ),
                   ),

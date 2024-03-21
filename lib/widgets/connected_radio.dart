@@ -22,104 +22,112 @@ class ConnectedRadio extends ConsumerWidget {
       ),
       clipBehavior: Clip.hardEdge,
       elevation: 2,
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              radius: 40,
-              child: radioConnectorState is Connected
-                  ? radioConfig.configDownloaded
-                      ? Text(radioConfig.shortName)
-                      : const CircularProgressIndicator()
-                  : Icon(
-                      Icons.cloud_off,
-                      color: Theme.of(context).colorScheme.error,
-                      size: 40,
-                    ),
-            ),
-          ),
-          if (radioConfig.configDownloaded)
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(radioConfig.longName),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.radio,
-                      size: 20,
-                    ),
-                    Text(radioConfig.hwModel.toString()),
-                  ],
-                ),
-                const Row(
-                  children: [
-                    Icon(
-                      Icons.battery_charging_full_sharp,
-                      size: 20,
-                    ),
-                    Text('Charging'),
-                  ],
-                ),
-                if (radioConnectorState is BleConnected)
-                  const Row(
-                    children: [
-                      Icon(
-                        Icons.bluetooth,
-                        size: 20,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                radius: 40,
+                child: radioConnectorState is Connected
+                    ? radioConfig.configDownloaded
+                        ? Text(radioConfig.shortName)
+                        : const CircularProgressIndicator()
+                    : Icon(
+                        Icons.cloud_off,
+                        color: Theme.of(context).colorScheme.error,
+                        size: 40,
                       ),
-                      Text('Bluetooth'),
-                    ],
-                  )
-                else if (radioConnectorState is TcpConnected)
-                  const Row(
-                    children: [
-                      Icon(
-                        Icons.wifi,
-                        size: 20,
-                      ),
-                      Text('W/LAN'),
-                    ],
-                  )
-                else
-                  Container(),
-              ],
-            )
-          else if (radioConnectorState is Connected)
-            Text(
-              'Downloading config...',
-              style: Theme.of(context).textTheme.titleMedium,
-            )
-          else
-            Text(
-              'No radio connected.',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          if (radioConfig.configDownloaded)
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(12),
-                    ),
-                    onPressed: () {
-                      context.push('/radioConfig');
-                    },
-                    child: const Icon(
-                      Icons.settings,
-                      size: 54,
-                    ),
-                  ),
-                ],
               ),
             ),
-        ],
+            const SizedBox(width: 16),
+            if (radioConfig.configDownloaded)
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(radioConfig.longName),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.radio,
+                          size: 20,
+                        ),
+                        Text(radioConfig.hwModel.toString()),
+                      ],
+                    ),
+                    const Row(
+                      children: [
+                        Icon(
+                          Icons.battery_charging_full_sharp,
+                          size: 20,
+                        ),
+                        Text('Charging'),
+                      ],
+                    ),
+                    if (radioConnectorState is BleConnected)
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.bluetooth,
+                            size: 20,
+                          ),
+                          Text('Bluetooth'),
+                        ],
+                      )
+                    else if (radioConnectorState is TcpConnected)
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.wifi,
+                            size: 20,
+                          ),
+                          Text('W/LAN'),
+                        ],
+                      )
+                    else
+                      Container(),
+                  ],
+                ),
+              )
+            else if (radioConnectorState is Connected)
+              Expanded(
+                child: Text(
+                  'Downloading config...',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              )
+            else
+              Expanded(
+                child: Text(
+                  'No radio connected.',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+            const SizedBox(width: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(12),
+                  ),
+                  onPressed: () {
+                    context.push('/radioConfig');
+                  },
+                  child: const Icon(
+                    Icons.settings,
+                    size: 54,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
