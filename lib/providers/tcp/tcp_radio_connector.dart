@@ -9,6 +9,7 @@ import '../../constants/meshtastic_constants.dart';
 import '../../models/mesh_radio.dart';
 import '../../models/radio_connector_state.dart';
 import '../../services/interfaces/radio_connector.dart';
+import '../wrap/socket.dart';
 
 part 'tcp_radio_connector.g.dart';
 
@@ -16,7 +17,7 @@ part 'tcp_radio_connector.g.dart';
 class TcpRadioConnector extends _$TcpRadioConnector
     implements RadioConnector<TcpMeshRadio> {
   final _logger = Logger();
-  StreamSubscription<Uint8List>? _errorListener;
+  StreamSubscription<Uint8List>? _socketListener;
 
   @override
   RadioConnectorState build() {
@@ -25,14 +26,19 @@ class TcpRadioConnector extends _$TcpRadioConnector
 
   @override
   Future<void> connect(TcpMeshRadio radio) async {
+    if (state is Connected || state is Connecting) {
+      _logger.w('Attempted to connect with existing connection');
+      return;
+    }
+    await _socketListener?.cancel();
     state = Connecting(radioId: radio.address);
     Socket? socket;
     try {
-      socket = await Socket.connect(
-        radio.address,
-        MESHTASTIC_TCP_PORT,
-        timeout: const Duration(seconds: 10),
-      );
+      socket = await ref.read(socketProvider).connect(
+            radio.address,
+            MESHTASTIC_TCP_PORT,
+            timeout: const Duration(seconds: 10),
+          );
       _wakeUpRadio(socket);
       _logger.i('Connected to ${radio.address}:$MESHTASTIC_TCP_PORT');
       final socketStream = socket.asBroadcastStream();
@@ -67,7 +73,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
   @override
   Future<void> disconnect({String? errorMsg}) async {
     if (state is TcpConnected) {
-      await _errorListener?.cancel();
+      await _socketListener?.cancel();
       try {
         await (state as TcpConnected).socket.close();
       } catch (e) {
@@ -78,15 +84,13 @@ class TcpRadioConnector extends _$TcpRadioConnector
   }
 
   void _listenToSocketErrors(Stream<Uint8List> socket) {
-    _errorListener = socket.listen(
+    _socketListener = socket.listen(
       (_) {},
-      onError: (_) {
-        disconnect(errorMsg: 'Disconnected');
-      },
+      onError: (_) => disconnect(),
       onDone: disconnect,
     );
     ref.onDispose(() {
-      _errorListener?.cancel();
+      _socketListener?.cancel();
     });
   }
 }
