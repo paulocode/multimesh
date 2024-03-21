@@ -22,6 +22,16 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def commitHash = System.getenv('GIT_HASH')
+if (commitHash != null) {
+    flutterVersionName += "-$commitHash"
+}
+
+def isNightly = System.getenv('NIGHTLY')
+if (isNightly != null) {
+    flutterVersionName += "-nightly"
+}
+
 android {
     namespace "xyz.paulocode.meshx"
     compileSdkVersion flutter.compileSdkVersion
