@@ -162,6 +162,8 @@ class RadioConfigScreen extends ConsumerWidget {
                   'is provided - use at your own risk.',
                 ),
               ),
+              // ignore: do_not_use_environment
+              const Text(String.fromEnvironment('GIT_HASH')),
             ],
           ),
         ),
