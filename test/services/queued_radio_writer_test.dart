@@ -21,34 +21,35 @@ import 'queued_radio_writer_test.mocks.dart';
   RadioWriter,
 ])
 void main() {
-  late MockRadioWriter toRadio;
-  late QueuedRadioWriter radioWriter;
+  late MockRadioWriter radioWriter;
+  late QueuedRadioWriter queuedRadioWriter;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> packetStream;
 
   setUp(() {
-    toRadio = MockRadioWriter();
+    radioWriter = MockRadioWriter();
     radioReader = MockRadioReader();
     packetStream = MockStream();
 
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
 
-    radioWriter = QueuedRadioWriter(sendTimeout: const Duration(seconds: 1))
-      ..setRadioWriter(toRadio, isNewRadio: false)
-      ..setRadioReader(radioReader);
+    queuedRadioWriter =
+        QueuedRadioWriter(sendTimeout: const Duration(seconds: 1))
+          ..setRadioWriter(radioWriter)
+          ..setRadioReader(radioReader);
   });
 
   test('send wantConfig', () {
-    radioWriter.sendWantConfig(wantConfigId: 123);
+    queuedRadioWriter.sendWantConfig(wantConfigId: 123);
 
     final captured =
-        verify(toRadio.write(captureAny)).captured.first as List<int>;
+        verify(radioWriter.write(captureAny)).captured.first as List<int>;
     final capturedPacket = ToRadio.fromBuffer(captured);
     expect(capturedPacket.wantConfigId, equals(123));
   });
 
   test('send packet', () async {
-    final id = radioWriter.sendMeshPacket(
+    final id = queuedRadioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
@@ -56,7 +57,7 @@ void main() {
     );
 
     final captured =
-        verify(toRadio.write(captureAny)).captured.first as List<int>;
+        verify(radioWriter.write(captureAny)).captured.first as List<int>;
     final capturedPacket = ToRadio.fromBuffer(captured).packet;
     expect(capturedPacket.to, equals(123));
     expect(capturedPacket.id, equals(id));
@@ -69,31 +70,31 @@ void main() {
   });
 
   test('send 2 packets without ack from first', () async {
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
       payload: Uint8List.fromList([1, 2, 3]),
     );
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 789,
       channel: 321,
       portNum: PortNum.ADMIN_APP,
       payload: Uint8List.fromList([1, 2, 3]),
     );
 
-    final captures = verify(toRadio.write(captureAny)).captured;
+    final captures = verify(radioWriter.write(captureAny)).captured;
     expect(captures.length, equals(1));
   });
 
   test('send 2 packets with ack from first', () async {
-    final id = radioWriter.sendMeshPacket(
+    final id = queuedRadioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
       payload: Uint8List.fromList([1, 2, 3]),
     );
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 789,
       channel: 321,
       portNum: PortNum.ADMIN_APP,
@@ -107,7 +108,7 @@ void main() {
       ),
     );
 
-    final captures = verify(toRadio.write(captureAny)).captured;
+    final captures = verify(radioWriter.write(captureAny)).captured;
     final firstPacket = ToRadio.fromBuffer(captures[0] as List<int>).packet;
     final secondPacket = ToRadio.fromBuffer(captures[1] as List<int>).packet;
     expect(captures.length, equals(2));
@@ -116,19 +117,19 @@ void main() {
   });
 
   test('send 3 packets with ack from first', () async {
-    final id = radioWriter.sendMeshPacket(
+    final id = queuedRadioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
       payload: Uint8List.fromList([1, 2, 3]),
     );
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 789,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
       payload: Uint8List.fromList([1, 2, 3]),
     );
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 111,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
@@ -142,45 +143,18 @@ void main() {
       ),
     );
 
-    final captures = verify(toRadio.write(captureAny)).captured;
+    final captures = verify(radioWriter.write(captureAny)).captured;
     expect(captures.length, equals(2));
   });
 
-  test('new radio must prevent 2nd packet from sending', () async {
-    final id = radioWriter.sendMeshPacket(
-      to: 123,
-      channel: 456,
-      portNum: PortNum.ADMIN_APP,
-      payload: Uint8List.fromList([1, 2, 3]),
-    );
-    radioWriter.sendMeshPacket(
-      to: 789,
-      channel: 321,
-      portNum: PortNum.ADMIN_APP,
-      payload: Uint8List.fromList([1, 2, 3]),
-    );
-
-    radioWriter.setRadioWriter(toRadio, isNewRadio: true);
-    await packetStream.emit(
-      FromRadio(
-        queueStatus: QueueStatus(
-          meshPacketId: id,
-        ),
-      ),
-    );
-
-    final captures = verify(toRadio.write(captureAny)).captured;
-    expect(captures.length, equals(1));
-  });
-
   test('send 2nd packet after timeout', () async {
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 123,
       channel: 456,
       portNum: PortNum.ADMIN_APP,
       payload: Uint8List.fromList([1, 2, 3]),
     );
-    radioWriter.sendMeshPacket(
+    queuedRadioWriter.sendMeshPacket(
       to: 789,
       channel: 321,
       portNum: PortNum.ADMIN_APP,
@@ -188,7 +162,7 @@ void main() {
     );
     await Future<void>.delayed(const Duration(seconds: 5));
 
-    final captures = verify(toRadio.write(captureAny)).captured;
+    final captures = verify(radioWriter.write(captureAny)).captured;
     expect(captures.length, equals(2));
   });
 }

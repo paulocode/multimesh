@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'dart:async';
 
+import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/mesh_radio.dart';
@@ -58,3 +59,7 @@ class RadioConnectorService extends _$RadioConnectorService
     ref.invalidateSelf();
   }
 }
+
+class MockRadioConnectorService extends _$RadioConnectorService
+    with Mock
+    implements RadioConnectorService {}

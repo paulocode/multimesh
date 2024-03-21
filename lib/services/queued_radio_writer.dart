@@ -14,11 +14,12 @@ class QueuedRadioWriter {
   QueuedRadioWriter({Duration sendTimeout = const Duration(seconds: 30)})
       : _sendTimeout = sendTimeout {
     _currentPacketId = _random.nextInt(0xffffffff);
+    _logger.i('created queue $hashCode');
   }
 
-  RadioWriter? _toRadio;
+  RadioWriter? _radioWriter;
   StreamSubscription<FromRadio>? _packetSub;
-  var _packetQueue = Queue<MeshPacket>();
+  final _packetQueue = Queue<MeshPacket>();
   final _logger = Logger();
   final _random = Random();
   int _currentPacketId = 0;
@@ -26,17 +27,13 @@ class QueuedRadioWriter {
   var _packetAckCompleter = Completer<void>();
   final Duration _sendTimeout;
 
-  void setRadioWriter(RadioWriter toRadio, {required bool isNewRadio}) {
-    if (isNewRadio) {
-      _logger.i('New radio, clearing packet queue');
-      _clearPacketQueue();
-    } else {
-      _logger.i('Reconnected to same radio');
-    }
-    _toRadio = toRadio;
+  void setRadioWriter(RadioWriter radioWriter) {
+    _logger.i('received radioWriter for queue $hashCode');
+    _radioWriter = radioWriter;
   }
 
   void setRadioReader(RadioReader radioReader) {
+    _logger.i('received radioReader for queue $hashCode');
     _packetSub?.cancel();
     _packetSub = radioReader.onPacketReceived().listen(_packetListener);
   }
@@ -74,7 +71,7 @@ class QueuedRadioWriter {
   Future<void> sendWantConfig({required int wantConfigId}) async {
     final packet = ToRadio(wantConfigId: wantConfigId);
     _logger.i('Requesting config...\n$packet');
-    await _toRadio?.write(packet.writeToBuffer());
+    await _radioWriter?.write(packet.writeToBuffer());
   }
 
   int _generatePacketId() {
@@ -108,7 +105,7 @@ class QueuedRadioWriter {
       final packet = packetQueue.first;
       try {
         _needAckPacketId = packet.id;
-        await _toRadio?.write(ToRadio(packet: packet).writeToBuffer());
+        await _radioWriter?.write(ToRadio(packet: packet).writeToBuffer());
         await _packetAckCompleter.future.timeout(_sendTimeout);
         packetQueue.removeFirst();
         _logger.i('${packet.id} acknowledged');
@@ -123,11 +120,12 @@ class QueuedRadioWriter {
     _logger.i('Packet queue empty');
   }
 
-  void _clearPacketQueue() {
+  void dispose() {
+    _logger.i('disposing queue $hashCode');
+    _packetSub?.cancel();
+    _packetQueue.clear();
     if (!_packetAckCompleter.isCompleted) {
       _packetAckCompleter.complete();
     }
-    _packetQueue.clear();
-    _packetQueue = Queue<MeshPacket>();
   }
 }

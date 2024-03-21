@@ -2,48 +2,41 @@ import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/radio_connector_state.dart';
-import '../services/ble/ble_radio_writer.dart';
-import '../services/interfaces/radio_writer.dart';
 import '../services/queued_radio_writer.dart';
-import '../services/tcp/tcp_radio_writer.dart';
 import 'radio_connector_service.dart';
 import 'radio_reader.dart';
+import 'radio_writer.dart';
 
 part 'queued_radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
 QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
-  final _logger = Logger();
   final queuedRadioWriter = QueuedRadioWriter();
+  final _logger = Logger();
+  ref.onDispose(queuedRadioWriter.dispose);
 
-  final connectorListener =
-      ref.listen(radioConnectorServiceProvider, (_, connectorState) {
+  ref.listen(radioConnectorServiceProvider, (_, connectorState) {
     if (connectorState is! Connected) {
       return;
     }
 
-    late final RadioWriter radioWriter;
-    switch (connectorState) {
-      case BleConnected():
-        radioWriter =
-            BleRadioWriter(to: connectorState.bleCharacteristics.toRadio);
-      case TcpConnected():
-        radioWriter = TcpRadioWriter(socket: connectorState.socket);
+    if (connectorState.isNewRadio) {
+      _logger.i('new radio');
+      ref.invalidateSelf();
+    } else {
+      _logger.i('reconnected to previous radio');
     }
+  });
 
+  ref.listen(radioWriterProvider, fireImmediately: true, (_, next) {
     queuedRadioWriter.setRadioWriter(
-      radioWriter,
-      isNewRadio: connectorState.isNewRadio,
+      next,
     );
   });
 
-  final readerListener = ref.listen(radioReaderProvider, (_, next) {
-    _logger.i('New reader');
+  ref.listen(radioReaderProvider, fireImmediately: true, (_, next) {
     queuedRadioWriter.setRadioReader(next);
   });
-
-  ref.onDispose(readerListener.close);
-  ref.onDispose(connectorListener.close);
 
   return queuedRadioWriter;
 }
