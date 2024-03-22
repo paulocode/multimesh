@@ -106,5 +106,11 @@ class _ManualNetworkAddressInputState
   }
 
   @override
+  void dispose() {
+    _manualInputController.dispose();
+    super.dispose();
+  }
+
+  @override
   bool get wantKeepAlive => true;
 }
