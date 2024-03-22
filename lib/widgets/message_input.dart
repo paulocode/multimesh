@@ -26,22 +26,13 @@ class _MessageInputState extends ConsumerState<MessageInput> {
         Expanded(
           child: TextField(
             controller: _textEditingController,
+            textInputAction: TextInputAction.send,
+            onSubmitted: (_) => _send(),
             decoration: const InputDecoration(hintText: 'Input message...'),
           ),
         ),
         IconButton(
-          onPressed: () async {
-            final text = _textEditingController.text.trim();
-            _textEditingController.clear();
-            if (text.isNotEmpty) {
-              ref.read(
-                sendTextMessageProvider(
-                  chatType: widget.chatType,
-                  text: text,
-                ),
-              );
-            }
-          },
+          onPressed: _send,
           icon: const Icon(
             Icons.send,
             size: 35,
@@ -49,6 +40,19 @@ class _MessageInputState extends ConsumerState<MessageInput> {
         ),
       ],
     );
+  }
+
+  void _send() {
+    final text = _textEditingController.text.trim();
+    _textEditingController.clear();
+    if (text.isNotEmpty) {
+      ref.read(
+        sendTextMessageProvider(
+          chatType: widget.chatType,
+          text: text,
+        ),
+      );
+    }
   }
 
   @override

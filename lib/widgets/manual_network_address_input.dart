@@ -62,6 +62,8 @@ class _ManualNetworkAddressInputState
             height: 50,
             child: TextField(
               controller: _manualInputController,
+              textInputAction: TextInputAction.go,
+              onSubmitted: (_) => _connect(),
               decoration: const InputDecoration(
                 hintText: 'Host/IP Address',
                 filled: true,
@@ -74,33 +76,32 @@ class _ManualNetworkAddressInputState
           const CircularProgressIndicator()
         else
           IconButton(
-            onPressed: () async {
-              if (connectorState is Connecting) {
-                return;
-              }
-              EasyThrottle.throttle(
-                'connect-throttler',
-                const Duration(milliseconds: 1000),
-                () async {
-                  await ref
-                      .read(radioConnectorServiceProvider.notifier)
-                      .disconnect();
-                  await ref
-                      .read(radioConnectorServiceProvider.notifier)
-                      .connect(
-                        TcpMeshRadio(
-                          address: _manualInputController.text,
-                        ),
-                      );
-                  setState(() {
-                    _connectingToManualInput = true;
-                  });
-                },
-              );
-            },
+            onPressed: _connect,
             icon: const Icon(Icons.send),
           ),
       ],
+    );
+  }
+
+  Future<void> _connect() async {
+    final connectorState = ref.read(tcpRadioConnectorProvider);
+    if (connectorState is Connecting) {
+      return;
+    }
+    EasyThrottle.throttle(
+      'connect-throttler',
+      const Duration(milliseconds: 1000),
+      () async {
+        await ref.read(radioConnectorServiceProvider.notifier).disconnect();
+        await ref.read(radioConnectorServiceProvider.notifier).connect(
+              TcpMeshRadio(
+                address: _manualInputController.text,
+              ),
+            );
+        setState(() {
+          _connectingToManualInput = true;
+        });
+      },
     );
   }
 
