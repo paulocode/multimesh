@@ -14,6 +14,8 @@ class BleRadioWriter implements RadioWriter {
       await _to.write(value);
     } on FlutterBluePlusException catch (e) {
       throw MeshRadioException(msg: e.description);
+    } catch (e) {
+      throw const MeshRadioException();
     }
   }
 }
