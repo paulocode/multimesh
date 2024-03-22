@@ -61,6 +61,8 @@ class RadioConnectorService extends _$RadioConnectorService
   }
 }
 
+// coverage:ignore-start
 class MockRadioConnectorService extends _$RadioConnectorService
     with Mock
     implements RadioConnectorService {}
+// coverage:ignore-end

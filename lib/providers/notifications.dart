@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notifications.g.dart';
 
+// coverage:ignore-start
 @Riverpod(keepAlive: true)
 Future<FlutterLocalNotificationsPlugin> flutterLocalNotificationsPlugin(
   FlutterLocalNotificationsPluginRef ref,
@@ -34,6 +35,7 @@ Future<FlutterLocalNotificationsPlugin> flutterLocalNotificationsPlugin(
 
   return flutterLocalNotificationsPlugin;
 }
+// coverage:ignore-end
 
 @Riverpod(keepAlive: true)
 class NotificationsCallback extends _$NotificationsCallback {

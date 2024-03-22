@@ -92,6 +92,7 @@ class BleRadioConnector extends _$BleRadioConnector
   }
 }
 
+// coverage:ignore-start
 class MockBleRadioConnectorContainer extends _$BleRadioConnector
     with Mock
     implements BleRadioConnector {
@@ -104,3 +105,4 @@ class MockBleRadioConnectorContainer extends _$BleRadioConnector
     await _bleRadioConnector.connect(radio);
   }
 }
+// coverage:ignore-end

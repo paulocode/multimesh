@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../services/text_message/text_message_receiver_service.dart';

@@ -97,6 +97,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
   }
 }
 
+// coverage:ignore-start
 class MockTcpRadioConnectorContainer extends _$TcpRadioConnector
     with Mock
     implements TcpRadioConnector {
@@ -114,3 +115,4 @@ class MockTcpRadioConnectorContainer extends _$TcpRadioConnector
     await _tcpRadioConnector.disconnect(errorMsg: errorMsg);
   }
 }
+// coverage:ignore-end

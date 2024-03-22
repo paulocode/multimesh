@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/radio_connector_state.dart';
