@@ -16,7 +16,6 @@ RadioReader radioReader(RadioReaderRef ref) {
       ref.invalidateSelf();
     }
   });
-  ref.onDispose(sub.close);
 
   final connectorState = sub.read();
   switch (connectorState) {
