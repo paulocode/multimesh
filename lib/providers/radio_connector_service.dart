@@ -40,18 +40,19 @@ class RadioConnectorService extends _$RadioConnectorService
       await ref
           .read(_lastUsedConnector!.notifier)
           .disconnect(errorMsg: errorMsg);
+      _lastUsedConnector = null;
     }
   }
 
   @override
   Future<void> connect(MeshRadio radio) async {
+    if (_currentRadioId == radio.remoteId) {
+      await Future<void>.delayed(const Duration(milliseconds: 500));
+    }
     switch (radio) {
       case BleMeshRadio():
         _lastUsedConnector = bleRadioConnectorProvider;
       case TcpMeshRadio():
-        if (_currentRadioId == radio.remoteId) {
-          await Future<void>.delayed(const Duration(milliseconds: 500));
-        }
         _lastUsedConnector = tcpRadioConnectorProvider;
     }
 
