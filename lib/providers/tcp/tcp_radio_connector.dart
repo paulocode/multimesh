@@ -97,6 +97,15 @@ class TcpRadioConnector extends _$TcpRadioConnector
   }
 }
 
-class MockTcpRadioConnector extends _$TcpRadioConnector
+class MockTcpRadioConnectorContainer extends _$TcpRadioConnector
     with Mock
-    implements TcpRadioConnector {}
+    implements TcpRadioConnector {
+  MockTcpRadioConnectorContainer({required TcpRadioConnector tcpRadioConnector})
+      : _tcpRadioConnector = tcpRadioConnector;
+
+  final TcpRadioConnector _tcpRadioConnector;
+  @override
+  Future<void> connect(TcpMeshRadio radio) async {
+    await _tcpRadioConnector.connect(radio);
+  }
+}
