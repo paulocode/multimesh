@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/logger.dart';
+import 'package:mockito/mockito.dart';
 import 'package:platform/platform.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -88,5 +89,18 @@ class BleRadioConnector extends _$BleRadioConnector
         _bleConnectSubscription?.cancel();
       }
     });
+  }
+}
+
+class MockBleRadioConnectorContainer extends _$BleRadioConnector
+    with Mock
+    implements BleRadioConnector {
+  MockBleRadioConnectorContainer({required BleRadioConnector bleRadioConnector})
+      : _bleRadioConnector = bleRadioConnector;
+
+  final BleRadioConnector _bleRadioConnector;
+  @override
+  Future<void> connect(BleMeshRadio radio) async {
+    await _bleRadioConnector.connect(radio);
   }
 }

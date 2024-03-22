@@ -108,4 +108,9 @@ class MockTcpRadioConnectorContainer extends _$TcpRadioConnector
   Future<void> connect(TcpMeshRadio radio) async {
     await _tcpRadioConnector.connect(radio);
   }
+
+  @override
+  Future<void> disconnect({String? errorMsg}) async {
+    await _tcpRadioConnector.disconnect(errorMsg: errorMsg);
+  }
 }
