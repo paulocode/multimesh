@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:logger/logger.dart';
+import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/meshtastic_constants.dart';
@@ -30,6 +31,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
       _logger.w('Attempted to connect with existing connection');
       return;
     }
+    _logger.i('TCP connecting to ${radio.remoteId}');
     await _socketListener?.cancel();
     state = Connecting(radioId: radio.address);
     Socket? socket;
@@ -94,3 +96,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
     });
   }
 }
+
+class MockTcpRadioConnector extends _$TcpRadioConnector
+    with Mock
+    implements TcpRadioConnector {}
