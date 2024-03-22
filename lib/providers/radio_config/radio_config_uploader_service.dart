@@ -1,3 +1,4 @@
+// coverage:ignore-file
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../services/radio_config/radio_config_uploader_service.dart';
