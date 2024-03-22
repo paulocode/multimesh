@@ -167,6 +167,29 @@ void main() {
     expect(recreatedPacket.myInfo.myNodeNum, equals(123));
   });
 
+  test('reset sync but STREAM_START2', () async {
+    final packet =
+        FromRadio(myInfo: MyNodeInfo(myNodeNum: 123, rebootCount: 234))
+            .writeToBuffer();
+    final msb = packet.length >> 8;
+    final lsb = packet.length & 0xFF;
+    final completer = Completer<FromRadio>();
+    tcpRadioReader.onPacketReceived().listen(completer.complete);
+
+    await recvStream.emit([
+      MESHTASTIC_STREAM_START1,
+      0xff,
+      MESHTASTIC_STREAM_START1,
+      MESHTASTIC_STREAM_START2,
+      msb,
+      lsb,
+      ...packet,
+    ]);
+
+    final recreatedPacket = await completer.future;
+    expect(recreatedPacket.myInfo.myNodeNum, equals(123));
+  });
+
   test('invalid size', () async {
     final packet =
         FromRadio(myInfo: MyNodeInfo(myNodeNum: 123, rebootCount: 234))

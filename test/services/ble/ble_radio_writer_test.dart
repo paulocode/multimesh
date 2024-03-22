@@ -1,22 +1,29 @@
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/exceptions/mesh_radio_exception.dart';
+import 'package:meshx/models/ble_characteristics.dart';
+import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/services/ble/ble_radio_writer.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'ble_characteristics_finder_test.mocks.dart';
+import 'ble_radio_writer_test.mocks.dart';
 
-@GenerateMocks([BluetoothCharacteristic])
+@GenerateMocks([BluetoothCharacteristic, BleConnected, BleCharacteristics])
 void main() {
+  late BleConnected connectorState;
   late MockBluetoothCharacteristic to;
   setUp(() {
+    final bleCharacteristics = MockBleCharacteristics();
     to = MockBluetoothCharacteristic();
+    connectorState = MockBleConnected();
+    when(connectorState.bleCharacteristics).thenReturn(bleCharacteristics);
+    when(bleCharacteristics.toRadio).thenReturn(to);
   });
 
   test('write', () {
     when(to.write(any)).thenAnswer((_) async {});
-    final writer = BleRadioWriter(to: to);
+    final writer = BleRadioWriter(connectorState);
 
     writer.write([2, 7, 1, 8, 2]);
 
@@ -27,7 +34,7 @@ void main() {
     when(to.write(any)).thenThrow(
       FlutterBluePlusException(ErrorPlatform.android, '', 123, 'error 31415'),
     );
-    final writer = BleRadioWriter(to: to);
+    final writer = BleRadioWriter(connectorState);
 
     expect(
       () => writer.write([2]),
@@ -45,7 +52,7 @@ void main() {
     when(to.write(any)).thenThrow(
       Exception(),
     );
-    final writer = BleRadioWriter(to: to);
+    final writer = BleRadioWriter(connectorState);
 
     expect(
       () => writer.write([2]),

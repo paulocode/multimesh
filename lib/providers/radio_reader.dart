@@ -11,6 +11,9 @@ part 'radio_reader.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioReader radioReader(RadioReaderRef ref) {
+  // we can not ref.watch radioConnectorServiceProvider
+  // because we want to cache states of providers that
+  // depend on radioReader for offline view mode
   final sub = ref.listen(radioConnectorServiceProvider, (_, next) {
     if (next is Connected) {
       ref.invalidateSelf();

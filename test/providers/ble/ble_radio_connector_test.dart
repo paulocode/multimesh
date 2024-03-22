@@ -41,6 +41,7 @@ void main() {
     bleCharacteristicsFinder = MockBleCharacteristicsFinder();
     bleCharacteristics = MockBleCharacteristics();
 
+    when(device.disconnect()).thenAnswer((_) async {});
     when(localPlatform.isAndroid).thenReturn(false);
     when(bleCharacteristicsFinder.findCharacteristics(any))
         .thenAnswer((_) => Future.value(bleCharacteristics));
@@ -176,6 +177,22 @@ void main() {
     expect(
       (radioConnectorState as BleConnected).bleCharacteristics,
       equals(bleCharacteristics),
+    );
+  });
+
+  test('disconnection', () async {
+    when(radio.device.connectionState).thenAnswer(
+      (_) => StreamController<BluetoothConnectionState>().stream,
+    );
+    when(bleCharacteristicsFinder.findCharacteristics(device))
+        .thenAnswer((_) => Future.value(bleCharacteristics));
+
+    await container.read(bleRadioConnectorProvider.notifier).connect(radio);
+    await container.read(bleRadioConnectorProvider.notifier).disconnect();
+
+    expect(
+      container.read(bleRadioConnectorProvider),
+      isA<Disconnected>(),
     );
   });
 }

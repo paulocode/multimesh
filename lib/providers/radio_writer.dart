@@ -11,14 +11,16 @@ part 'radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioWriter radioWriter(RadioWriterRef ref) {
+  // it is safe to rebuild for every connector state
+  // since this provider is abstracted by queuedRadioWriterProvider,
+  // preserving offline view mode
   final connectorState = ref.watch(radioConnectorServiceProvider);
   late final RadioWriter radioWriter;
   switch (connectorState) {
     case BleConnected():
-      radioWriter =
-          BleRadioWriter(to: connectorState.bleCharacteristics.toRadio);
+      radioWriter = BleRadioWriter(connectorState);
     case TcpConnected():
-      radioWriter = TcpRadioWriter(socket: connectorState.socket);
+      radioWriter = TcpRadioWriter(connectorState);
     case _:
       radioWriter = NullWriter();
   }
