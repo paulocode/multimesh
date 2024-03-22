@@ -7,15 +7,15 @@ class TcpRadioWriter implements RadioWriter {
   TcpRadioWriter({required IOSink socket}) : _socket = socket;
   final IOSink _socket;
   @override
-  Future<void> write(List<int> value) async {
-    final packetLen = value.length;
-    final header = [
+  Future<void> write(List<int> payload) async {
+    final payloadLen = payload.length;
+    final packet = [
       MESHTASTIC_STREAM_START1,
       MESHTASTIC_STREAM_START2,
-      packetLen >> 8,
-      packetLen & 0xff,
+      payloadLen >> 8,
+      payloadLen & 0xff,
+      ...payload,
     ];
-    _socket.add(header);
-    _socket.add(value);
+    _socket.add(packet);
   }
 }
