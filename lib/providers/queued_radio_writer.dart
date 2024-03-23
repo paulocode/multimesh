@@ -12,7 +12,7 @@ part 'queued_radio_writer.g.dart';
 @Riverpod(keepAlive: true)
 QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
   final queuedRadioWriter = QueuedRadioWriter();
-  final _logger = Logger();
+  final logger = Logger();
   ref.onDispose(queuedRadioWriter.dispose);
 
   ref.listen(radioConnectorServiceProvider, (_, connectorState) {
@@ -21,10 +21,10 @@ QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
     }
 
     if (connectorState.isNewRadio) {
-      _logger.i('new radio');
+      logger.i('new radio');
       ref.invalidateSelf();
     } else {
-      _logger.i('reconnected to previous radio');
+      logger.i('reconnected to previous radio');
     }
   });
 
