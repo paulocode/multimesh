@@ -24,7 +24,6 @@ class RadioConfigDownloaderService {
         _radioConnectorState = radioConnectorState,
         _disconnect = disconnect {
     if (_radioConnectorState is Connected) {
-      _myNodeNum = 0;
       _radioConfigServiceProvider().clear();
       _requestConfig();
     }

@@ -45,4 +45,12 @@ void main() {
       ),
     );
   });
+
+  test('clear config', () {
+    final config1 = container.read(radioConfigServiceProvider);
+    container.read(radioConfigServiceProvider.notifier).clear();
+    final config2 = container.read(radioConfigServiceProvider);
+
+    expect(config1, equals(config2));
+  });
 }
