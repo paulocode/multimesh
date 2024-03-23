@@ -12,10 +12,7 @@ class RadioConfiguration with _$RadioConfiguration {
     @Default('') String longName,
     @Default(0) int myNodeNum,
     @Default(HardwareModel.UNSET) HardwareModel hwModel,
-    @Default(Config_LoRaConfig_RegionCode.UNSET)
-    Config_LoRaConfig_RegionCode region,
-    @Default(Config_LoRaConfig_ModemPreset.LONG_FAST)
-    Config_LoRaConfig_ModemPreset modemPreset,
+    required Config_LoRaConfig loraConfig,
     @Default(false) bool hasOwnNodeInfo,
     @Default(false) bool configDownloaded,
   }) = _RadioConfiguration;

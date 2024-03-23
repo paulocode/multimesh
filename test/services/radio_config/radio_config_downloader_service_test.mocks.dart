@@ -264,29 +264,14 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i3.RadioConfiguration);
 
   @override
-  _i11.Future<void> setRegion(
-    _i15.Config_LoRaConfig_RegionCode? region, {
+  _i11.Future<void> setLoraConfig(
+    _i15.Config_LoRaConfig? loraConfig, {
     bool? upload = true,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #setRegion,
-          [region],
-          {#upload: upload},
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
-
-  @override
-  _i11.Future<void> setModemPreset(
-    _i15.Config_LoRaConfig_ModemPreset? modemPreset, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setModemPreset,
-          [modemPreset],
+          #setLoraConfig,
+          [loraConfig],
           {#upload: upload},
         ),
         returnValue: _i11.Future<void>.value(),

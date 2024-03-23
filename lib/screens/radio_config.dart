@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/radio_connector_state.dart';
-import '../protobufs/generated/meshtastic/config.pb.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/radio_connector_service.dart';
 
@@ -54,38 +53,13 @@ class RadioConfigScreen extends ConsumerWidget {
                       trailing: const Icon(Icons.chevron_right),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: DropdownButtonFormField(
-                      value: Config_LoRaConfig_RegionCode.values
-                          .indexOf(radioConfig.region),
-                      items: [
-                        for (final region
-                            in Config_LoRaConfig_RegionCode.values)
-                          DropdownMenuItem(
-                            value: region.value,
-                            child: Text(region.name),
-                          ),
-                      ],
-                      onChanged: radioConnectorState is Connected
-                          ? (value) {
-                              ref
-                                  .read(radioConfigServiceProvider.notifier)
-                                  .setRegion(
-                                    Config_LoRaConfig_RegionCode
-                                        .values[value! as int],
-                                  );
-                            }
-                          : null,
-                      decoration: const InputDecoration(label: Text('Region')),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
                   Card(
                     child: ListTile(
-                      onTap: () {},
+                      onTap: radioConnectorState is Connected
+                          ? () {
+                              context.push('/loraConfig');
+                            }
+                          : null,
                       title: const Text('LoRa'),
                       trailing: const Icon(Icons.chevron_right),
                     ),

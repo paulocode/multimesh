@@ -166,25 +166,20 @@ void main() {
     verifyNever(radioConfigService.setConfigDownloaded());
   });
 
-  test('Config packet', () async {
+  test('LoraConfig packet', () async {
     init(MockBleConnected());
-
+    final loraConfig = Config_LoRaConfig();
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
     await fromRadioStream.emit(
       FromRadio(
         config: Config(
-          lora: Config_LoRaConfig(
-            region: Config_LoRaConfig_RegionCode.US,
-          ),
+          lora: loraConfig,
         ),
       ),
     );
 
     verify(
-      radioConfigService.setRegion(
-        Config_LoRaConfig_RegionCode.US,
-        upload: false,
-      ),
+      radioConfigService.setLoraConfig(loraConfig, upload: false),
     );
   });
 }

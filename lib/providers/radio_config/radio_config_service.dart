@@ -22,27 +22,20 @@ class RadioConfigService extends _$RadioConfigService {
   RadioConfiguration build() {
     _radioConfigUploaderService = ref.watch(radioConfigUploaderServiceProvider);
 
-    return const RadioConfiguration();
+    return RadioConfiguration(loraConfig: Config_LoRaConfig());
   }
 
-  Future<void> setRegion(
-    Config_LoRaConfig_RegionCode region, {
+  Future<void> setLoraConfig(
+    Config_LoRaConfig loraConfig, {
     bool upload = true,
   }) async {
-    state = state.copyWith(region: region);
+    state = state.copyWith(loraConfig: loraConfig);
     if (upload) {
-      await _radioConfigUploaderService.setRegion(
+      await _radioConfigUploaderService.setLoraConfig(
         nodeNum: _myNodeNum,
-        region: region,
+        loraConfig: loraConfig,
       );
     }
-  }
-
-  Future<void> setModemPreset(
-    Config_LoRaConfig_ModemPreset modemPreset, {
-    bool upload = true,
-  }) async {
-    state = state.copyWith(modemPreset: modemPreset);
   }
 
   Future<void> setMyNodeNum(int myNodeNum) async {

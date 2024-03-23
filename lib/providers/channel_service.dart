@@ -50,7 +50,11 @@ class ChannelService extends _$ChannelService {
         return;
       }
       final channelName = channel.settings.name.isEmpty
-          ? ref.read(radioConfigServiceProvider).modemPreset.toString()
+          ? ref
+              .read(radioConfigServiceProvider)
+              .loraConfig
+              .modemPreset
+              .toString()
           : channel.settings.name;
       final meshChannel = MeshChannel(
         name: channelName,

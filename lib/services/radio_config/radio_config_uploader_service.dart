@@ -13,24 +13,17 @@ class RadioConfigUploaderService {
   final QueuedRadioWriter _radioWriter;
   final _logger = Logger();
 
-  Future<void> setRegion({
+  Future<void> setLoraConfig({
     required int nodeNum,
-    required Config_LoRaConfig_RegionCode region,
+    required Config_LoRaConfig loraConfig,
   }) async {
     final adminMessage = AdminMessage(
       setConfig: Config(
-        lora: Config_LoRaConfig(
-          region: region,
-          usePreset: true,
-          hopLimit: 3,
-          txEnabled: true,
-          txPower: 30,
-          sx126xRxBoostedGain: true,
-        ),
+        lora: loraConfig,
       ),
     );
 
-    _logger.i('Setting region...\n$adminMessage');
+    _logger.i('Setting loraConfig:\n$loraConfig');
 
     _radioWriter.sendMeshPacket(
       to: nodeNum,
