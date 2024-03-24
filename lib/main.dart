@@ -6,6 +6,7 @@ import 'providers/channel_service.dart';
 import 'providers/node_service.dart';
 import 'providers/notifications.dart';
 import 'providers/radio_config/radio_config_downloader_service.dart';
+import 'providers/reconnector.dart';
 import 'providers/repository/sqflite.dart';
 import 'providers/router.dart';
 import 'providers/text_message/text_message_receiver_service.dart';
@@ -89,6 +90,9 @@ class _EagerInitialization extends ConsumerWidget {
       ref.watch(channelServiceProvider);
       ref.watch(nodeServiceProvider);
       ref.watch(radioConfigDownloaderServiceProvider);
+
+      // make sure autoreconnect is ready
+      ref.watch(reconnectorServiceProvider());
       return child;
     }
   }

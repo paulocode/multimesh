@@ -65,4 +65,19 @@ class RadioConnectorService extends _$RadioConnectorService
 class MockRadioConnectorService extends _$RadioConnectorService
     with Mock
     implements RadioConnectorService {}
+
+class MockRadioConnectorServiceContainer extends _$RadioConnectorService
+    with Mock
+    implements RadioConnectorService {
+  MockRadioConnectorServiceContainer({
+    required RadioConnectorService radioConnectorService,
+  }) : _radioConnectorService = radioConnectorService;
+
+  final RadioConnectorService _radioConnectorService;
+
+  @override
+  Future<void> connect(MeshRadio radio) async {
+    await _radioConnectorService.connect(radio);
+  }
+}
 // coverage:ignore-end

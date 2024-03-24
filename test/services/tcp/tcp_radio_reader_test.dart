@@ -23,8 +23,11 @@ void main() {
     recvStream = MockStream();
 
     tcpRadioReader = TcpRadioReader(
-      radioConnectorState:
-          TcpConnected(radio: TcpMeshRadio(address: 'address'), recvStream: recvStream, socket: socket),
+      radioConnectorState: TcpConnected(
+        radio: TcpMeshRadio(address: 'address'),
+        recvStream: recvStream,
+        socket: socket,
+      ),
       onDispose: (_) => {},
     );
   });

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/mesh_radio.dart';
 import '../models/radio_connector_state.dart';
 import '../providers/radio_connector_service.dart';
+import '../providers/reconnector.dart';
 import '../providers/tcp/tcp_radio_connector.dart';
 
 class ManualNetworkAddressInput extends ConsumerStatefulWidget {
@@ -92,6 +93,9 @@ class _ManualNetworkAddressInputState
       'connect-throttler',
       const Duration(milliseconds: 1000),
       () async {
+        ref
+            .read(reconnectorServiceProvider().notifier)
+            .disableReconnectUntilNextDisconnect();
         await ref.read(radioConnectorServiceProvider.notifier).disconnect();
         await ref.read(radioConnectorServiceProvider.notifier).connect(
               TcpMeshRadio(

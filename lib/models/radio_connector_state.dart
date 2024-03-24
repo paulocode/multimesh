@@ -66,9 +66,13 @@ class BleConnected extends Connected<BleMeshRadio> {
     required super.radio,
   });
 
-
   final BleCharacteristics bleCharacteristics;
   BluetoothDevice get device => radio.device;
+
+  @override
+  String toString() {
+    return 'BleConnected{${device.advName} $radioId}';
+  }
 }
 
 @immutable
@@ -85,6 +89,11 @@ class TcpConnected extends Connected<TcpMeshRadio> {
   // socket for close() and add().
   final Socket socket;
   final Stream<List<int>> recvStream;
+
+  @override
+  String toString() {
+    return 'TcpConnected{$radioId}';
+  }
 }
 
 @immutable

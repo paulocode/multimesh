@@ -52,7 +52,6 @@ class BleRadioConnector extends _$BleRadioConnector
     }
 
     final device = radio.device;
-    final radioId = device.remoteId.str;
 
     state = Connecting(
       radio: radio,
