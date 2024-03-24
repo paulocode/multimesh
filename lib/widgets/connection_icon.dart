@@ -15,7 +15,7 @@ class ConnectionIcon extends ConsumerWidget {
     final radioConfig = ref.watch(radioConfigServiceProvider);
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
 
-    if (radioConnectorState is WithRadioId &&
+    if (radioConnectorState is WithRadio &&
         radioConnectorState.radioId != _radioId) {
       return const SizedBox(
         width: 1,

@@ -4,6 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/models/ble_characteristics.dart';
+import 'package:meshx/models/mesh_radio.dart';
 import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/providers/radio_connector_service.dart';
 import 'package:meshx/providers/radio_writer.dart';
@@ -46,7 +47,7 @@ void main() {
     container.read(radioConnectorServiceProvider.notifier).state = TcpConnected(
       socket: socket,
       recvStream: MockStream(),
-      radioId: 'radioId',
+      radio: TcpMeshRadio(address: 'address'),
     );
 
     final state = container.read(radioWriterProvider);

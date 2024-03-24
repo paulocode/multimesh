@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:meshx/models/ble_characteristics.dart';
+import 'package:meshx/models/mesh_radio.dart';
 import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/services/ble/ble_radio_reader.dart';
@@ -36,8 +37,7 @@ void main() {
         fromRadio: fromRadio,
         fromNum: fromNum,
       ),
-      device: MockBluetoothDevice(),
-      radioId: 'radioId',
+      radio: BleMeshRadio(device: MockBluetoothDevice()),
       isNewRadio: true,
     );
 

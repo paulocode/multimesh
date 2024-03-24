@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshx/constants/meshtastic_constants.dart';
+import 'package:meshx/models/mesh_radio.dart';
 import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:meshx/services/tcp/tcp_radio_reader.dart';
@@ -23,7 +24,7 @@ void main() {
 
     tcpRadioReader = TcpRadioReader(
       radioConnectorState:
-          TcpConnected(radioId: '', recvStream: recvStream, socket: socket),
+          TcpConnected(radio: TcpMeshRadio(address: 'address'), recvStream: recvStream, socket: socket),
       onDispose: (_) => {},
     );
   });

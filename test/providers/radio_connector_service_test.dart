@@ -83,7 +83,7 @@ void main() {
       container.read(tcpRadioConnectorProvider.notifier).state = TcpConnected(
         socket: MockSocket(),
         recvStream: MockStream<List<int>>(),
-        radioId: radio.address,
+        radio: radio,
       );
     });
 
@@ -109,7 +109,7 @@ void main() {
       container.read(tcpRadioConnectorProvider.notifier).state = TcpConnected(
         socket: MockSocket(),
         recvStream: MockStream<List<int>>(),
-        radioId: radio.address,
+        radio: radio,
       );
     });
 
@@ -135,7 +135,7 @@ void main() {
         .read(radioConnectorServiceProvider.notifier)
         .connect(TcpMeshRadio(address: 'address'));
     container.read(tcpRadioConnectorProvider.notifier).state =
-        Connecting(radioId: 'address');
+        Connecting(radio: TcpMeshRadio(address: 'address'));
     expect(
       container.read(tcpRadioConnectorProvider),
       isInstanceOf<Connecting>(),
@@ -143,7 +143,7 @@ void main() {
     container.read(tcpRadioConnectorProvider.notifier).state = TcpConnected(
       socket: MockSocket(),
       recvStream: MockStream<List<int>>(),
-      radioId: 'address',
+      radio: TcpMeshRadio(address: 'address'),
     );
     expect(
       container.read(tcpRadioConnectorProvider),

@@ -33,7 +33,7 @@ class TcpRadioConnector extends _$TcpRadioConnector
     }
     _logger.i('TCP connecting to ${radio.remoteId}');
     await _socketListener?.cancel();
-    state = Connecting(radioId: radio.address);
+    state = Connecting(radio: radio);
     Socket? socket;
     try {
       socket = await ref.read(socketProvider).connect(
@@ -47,15 +47,15 @@ class TcpRadioConnector extends _$TcpRadioConnector
       state = TcpConnected(
         socket: socket,
         recvStream: socketStream,
-        radioId: radio.address,
+        radio: radio,
       );
       _listenToSocketErrors(socketStream);
     } on SocketException catch (e) {
       _logger.e(e);
-      state = ConnectionError(radioId: radio.address, msg: e.message);
+      state = ConnectionError(radio: radio, msg: e.message);
     } catch (e) {
       _logger.e(e);
-      state = ConnectionError(radioId: radio.address);
+      state = ConnectionError(radio: radio);
     } finally {
       ref.onDispose(() => socket?.close());
     }

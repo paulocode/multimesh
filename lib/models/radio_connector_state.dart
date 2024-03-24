@@ -4,14 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'ble_characteristics.dart';
+import 'mesh_radio.dart';
 
 sealed class RadioConnectorState {}
 
 @immutable
-abstract class WithRadioId extends RadioConnectorState {
-  WithRadioId({required this.radioId});
+abstract class WithRadio<T extends MeshRadio> extends RadioConnectorState {
+  WithRadio({required this.radio});
 
-  final String radioId;
+  final T radio;
+  String get radioId => radio.remoteId;
 }
 
 @immutable
@@ -22,60 +24,60 @@ class Disconnected extends RadioConnectorState {
 }
 
 @immutable
-class Connecting extends WithRadioId {
-  Connecting({required super.radioId});
+class Connecting<T extends MeshRadio> extends WithRadio<T> {
+  Connecting({required super.radio});
 }
 
 @immutable
-sealed class Connected extends WithRadioId {
+sealed class Connected<T extends MeshRadio> extends WithRadio<T> {
   Connected({
     this.isNewRadio = false,
-    required super.radioId,
+    required super.radio,
   });
 
   final bool isNewRadio;
 
-  Connected copyWith({bool? isNewRadio, String? radioId}) {
-    final _this = this;
-    switch (_this) {
+  Connected copyWith({bool? isNewRadio, T? radio}) {
+    switch (this) {
       case BleConnected():
+        final _this = this as BleConnected;
         return BleConnected(
           bleCharacteristics: _this.bleCharacteristics,
-          device: _this.device,
           isNewRadio: isNewRadio ?? _this.isNewRadio,
-          radioId: radioId ?? _this.radioId,
+          radio: radio == null ? _this.radio : radio as BleMeshRadio,
         );
       case TcpConnected():
+        final _this = this as TcpConnected;
         return TcpConnected(
           socket: _this.socket,
           recvStream: _this.recvStream,
           isNewRadio: isNewRadio ?? _this.isNewRadio,
-          radioId: radioId ?? _this.radioId,
+          radio: radio == null ? _this.radio : radio as TcpMeshRadio,
         );
     }
   }
 }
 
 @immutable
-class BleConnected extends Connected {
+class BleConnected extends Connected<BleMeshRadio> {
   BleConnected({
     required this.bleCharacteristics,
-    required this.device,
     super.isNewRadio = false,
-    required super.radioId,
+    required super.radio,
   });
 
+
   final BleCharacteristics bleCharacteristics;
-  final BluetoothDevice device;
+  BluetoothDevice get device => radio.device;
 }
 
 @immutable
-class TcpConnected extends Connected {
+class TcpConnected extends Connected<TcpMeshRadio> {
   TcpConnected({
     required this.socket,
     required this.recvStream,
     super.isNewRadio = false,
-    required super.radioId,
+    required super.radio,
   });
 
   // because socket is not a broadcast stream, create recvStream
@@ -86,8 +88,8 @@ class TcpConnected extends Connected {
 }
 
 @immutable
-class ConnectionError extends WithRadioId {
-  ConnectionError({String? msg, required super.radioId})
+class ConnectionError<T extends MeshRadio> extends WithRadio<T> {
+  ConnectionError({String? msg, required super.radio})
       : msg = msg ?? 'Unknown error';
 
   final String msg;

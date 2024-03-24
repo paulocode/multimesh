@@ -55,7 +55,7 @@ class BleRadioConnector extends _$BleRadioConnector
     final radioId = device.remoteId.str;
 
     state = Connecting(
-      radioId: radioId,
+      radio: radio,
     );
 
     try {
@@ -65,19 +65,18 @@ class BleRadioConnector extends _$BleRadioConnector
       }
 
       state = BleConnected(
-        radioId: radioId,
+        radio: radio,
         bleCharacteristics:
             await _bleCharacteristicsFinder.findCharacteristics(device),
-        device: device,
       );
 
       await _subscribeConnectionState(device);
     } on MeshRadioException catch (e) {
-      state = ConnectionError(msg: e.msg, radioId: radioId);
+      state = ConnectionError(msg: e.msg, radio: radio);
     } on FlutterBluePlusException catch (e) {
-      state = ConnectionError(msg: e.description, radioId: radioId);
+      state = ConnectionError(msg: e.description, radio: radio);
     } catch (e) {
-      state = ConnectionError(msg: 'Unknown error', radioId: radioId);
+      state = ConnectionError(msg: 'Unknown error', radio: radio);
     }
   }
 

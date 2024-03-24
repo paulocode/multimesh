@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:meshx/models/mesh_radio.dart';
 import 'package:meshx/models/radio_connector_state.dart';
 import 'package:meshx/providers/queued_radio_writer.dart';
 import 'package:meshx/providers/radio_connector_service.dart';
@@ -43,7 +44,7 @@ void main() {
           TcpConnected(
         socket: MockSocket(),
         recvStream: MockStream(),
-        radioId: '',
+        radio: TcpMeshRadio(address: 'address'),
         isNewRadio: true,
       );
 
@@ -58,9 +59,8 @@ void main() {
           TcpConnected(
         socket: MockSocket(),
         recvStream: MockStream(),
-        radioId: '',
-        // ignore: avoid_redundant_argument_values
-        isNewRadio: false,
+        radio: TcpMeshRadio(address: 'address'),
+        isNewRadio: false, // ignore: avoid_redundant_argument_values
       );
 
       final newWriter = container.read(queuedRadioWriterProvider);
