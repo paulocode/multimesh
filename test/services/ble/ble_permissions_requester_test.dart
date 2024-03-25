@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/services/ble/ble_permissions_requester.dart';
 import 'package:multimesh/services/wrap/flutter_blue_plus_mockable.dart';
 import 'package:multimesh/services/wrap/permissions.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:platform/platform.dart';
 
 import 'ble_permissions_requester_test.mocks.dart';

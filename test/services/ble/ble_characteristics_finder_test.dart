@@ -1,10 +1,10 @@
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/constants/ble_constants.dart';
 import 'package:multimesh/exceptions/mesh_radio_exception.dart';
 import 'package:multimesh/services/ble/ble_characteristics_finder.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import 'ble_characteristics_finder_test.mocks.dart';
 

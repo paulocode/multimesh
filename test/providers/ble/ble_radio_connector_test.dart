@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/exceptions/mesh_radio_exception.dart';
 import 'package:multimesh/models/ble_characteristics.dart';
 import 'package:multimesh/models/mesh_radio.dart';
@@ -10,8 +12,6 @@ import 'package:multimesh/providers/ble/ble_characteristics_finder.dart';
 import 'package:multimesh/providers/ble/ble_radio_connector.dart';
 import 'package:multimesh/providers/wrap/local_platform.dart';
 import 'package:multimesh/services/ble/ble_characteristics_finder.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:platform/platform.dart';
 import 'package:test/test.dart';
 

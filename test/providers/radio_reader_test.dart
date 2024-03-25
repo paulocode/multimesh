@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/models/ble_characteristics.dart';
 import 'package:multimesh/models/mesh_radio.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
@@ -11,8 +13,6 @@ import 'package:multimesh/providers/radio_reader.dart';
 import 'package:multimesh/services/ble/ble_radio_reader.dart';
 import 'package:multimesh/services/null/null_reader.dart';
 import 'package:multimesh/services/tcp/tcp_radio_reader.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../common.dart';
 import '../mock_stream.dart';

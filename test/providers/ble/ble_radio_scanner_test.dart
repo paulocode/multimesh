@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/providers/ble/ble_permissions_requester.dart';
 import 'package:multimesh/providers/ble/ble_radio_scanner.dart';
 import 'package:multimesh/providers/wrap/flutter_blue_plus_mockable.dart';
 import 'package:multimesh/services/ble/ble_permissions_requester.dart';
 import 'package:multimesh/services/wrap/flutter_blue_plus_mockable.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../common.dart';
 import '../../mock_stream.dart';

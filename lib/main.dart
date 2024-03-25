@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'providers/ble/ble_radio_scanner.dart';
 import 'providers/channel_service.dart';
 import 'providers/node_service.dart';
 import 'providers/notifications.dart';

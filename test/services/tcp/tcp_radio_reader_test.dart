@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:multimesh/constants/meshtastic_constants.dart';
 import 'package:multimesh/models/mesh_radio.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/services/tcp/tcp_radio_reader.dart';
-import 'package:mockito/annotations.dart';
 
 import '../../mock_stream.dart';
 import 'tcp_radio_reader_test.mocks.dart';

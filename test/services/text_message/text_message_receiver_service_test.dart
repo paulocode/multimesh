@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/constants/ble_constants.dart';
 import 'package:multimesh/models/chat_type.dart';
 import 'package:multimesh/models/mesh_node.dart';
@@ -11,8 +13,6 @@ import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:multimesh/repository/text_message_repository.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
 import 'package:multimesh/services/text_message/text_message_receiver_service.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../common.dart';

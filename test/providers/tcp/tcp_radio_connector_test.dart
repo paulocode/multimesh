@@ -4,14 +4,14 @@ import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/constants/meshtastic_constants.dart';
 import 'package:multimesh/models/mesh_radio.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/providers/tcp/tcp_radio_connector.dart';
 import 'package:multimesh/providers/wrap/socket.dart';
 import 'package:multimesh/services/wrap/socket_mockable.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../common.dart';
 import 'tcp_radio_connector_test.mocks.dart';

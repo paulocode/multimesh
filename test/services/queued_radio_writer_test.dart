@@ -3,13 +3,13 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
 import 'package:multimesh/services/interfaces/radio_writer.dart';
 import 'package:multimesh/services/queued_radio_writer.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../mock_stream.dart';
 import 'queued_radio_writer_test.mocks.dart';

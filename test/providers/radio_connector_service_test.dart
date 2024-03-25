@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/models/mesh_radio.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/providers/ble/ble_radio_connector.dart';
 import 'package:multimesh/providers/radio_connector_service.dart';
 import 'package:multimesh/providers/tcp/tcp_radio_connector.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../common.dart';
 import '../mock_stream.dart';

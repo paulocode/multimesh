@@ -1,15 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/models/mesh_radio.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/providers/radio_connector_service.dart'
     hide MockRadioConnectorService;
 import 'package:multimesh/providers/reconnector.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../common.dart';
-
 import 'reconnector_test.mocks.dart';
 
 @GenerateMocks([TcpConnected, TcpMeshRadio, RadioConnectorService])

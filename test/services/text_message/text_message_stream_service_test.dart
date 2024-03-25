@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:multimesh/constants/app_constants.dart';
 import 'package:multimesh/constants/ble_constants.dart';
 import 'package:multimesh/models/chat_type.dart';
@@ -6,8 +8,6 @@ import 'package:multimesh/models/text_message.dart';
 import 'package:multimesh/repository/text_message_repository.dart';
 import 'package:multimesh/services/text_message/text_message_receiver_service.dart';
 import 'package:multimesh/services/text_message/text_message_stream_service.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../mock_stream.dart';
 import 'text_message_stream_service_test.mocks.dart';

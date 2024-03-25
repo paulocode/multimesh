@@ -11,10 +11,13 @@ import 'package:multimesh/models/ble_characteristics.dart' as _i5;
 import 'package:multimesh/models/mesh_radio.dart' as _i6;
 import 'package:multimesh/models/radio_configuration.dart' as _i3;
 import 'package:multimesh/models/radio_connector_state.dart' as _i18;
-import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart' as _i16;
+import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
+    as _i16;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i13;
-import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart' as _i10;
-import 'package:multimesh/providers/radio_config/radio_config_service.dart' as _i15;
+import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
+    as _i10;
+import 'package:multimesh/providers/radio_config/radio_config_service.dart'
+    as _i15;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i9;
 import 'package:multimesh/services/interfaces/radio_writer.dart' as _i8;
 import 'package:multimesh/services/queued_radio_writer.dart' as _i7;
