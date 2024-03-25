@@ -6,10 +6,10 @@
 import 'dart:async' as _i7;
 import 'dart:typed_data' as _i6;
 
-import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i5;
-import 'package:meshx/services/interfaces/radio_reader.dart' as _i4;
-import 'package:meshx/services/interfaces/radio_writer.dart' as _i3;
-import 'package:meshx/services/queued_radio_writer.dart' as _i2;
+import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart' as _i5;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i4;
+import 'package:multimesh/services/interfaces/radio_writer.dart' as _i3;
+import 'package:multimesh/services/queued_radio_writer.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

@@ -5,11 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:meshx/models/text_message.dart' as _i2;
-import 'package:meshx/models/text_message_status.dart' as _i5;
-import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i7;
-import 'package:meshx/repository/text_message_repository.dart' as _i3;
-import 'package:meshx/services/interfaces/radio_reader.dart' as _i6;
+import 'package:multimesh/models/text_message.dart' as _i2;
+import 'package:multimesh/models/text_message_status.dart' as _i5;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i7;
+import 'package:multimesh/repository/text_message_repository.dart' as _i3;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 import '../../common.dart' as _i8;

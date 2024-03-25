@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:meshx/models/mesh_radio.dart';
-import 'package:meshx/models/radio_connector_state.dart';
-import 'package:meshx/providers/radio_connector_service.dart'
+import 'package:multimesh/models/mesh_radio.dart';
+import 'package:multimesh/models/radio_connector_state.dart';
+import 'package:multimesh/providers/radio_connector_service.dart'
     hide MockRadioConnectorService;
-import 'package:meshx/providers/reconnector.dart';
+import 'package:multimesh/providers/reconnector.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

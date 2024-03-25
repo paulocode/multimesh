@@ -6,9 +6,9 @@
 import 'dart:async' as _i5;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i2;
-import 'package:meshx/models/ble_characteristics.dart' as _i3;
-import 'package:meshx/models/mesh_radio.dart' as _i4;
-import 'package:meshx/models/radio_connector_state.dart' as _i6;
+import 'package:multimesh/models/ble_characteristics.dart' as _i3;
+import 'package:multimesh/models/mesh_radio.dart' as _i4;
+import 'package:multimesh/models/radio_connector_state.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 

@@ -6,9 +6,9 @@
 import 'dart:async' as _i6;
 import 'dart:io' as _i2;
 
-import 'package:meshx/models/mesh_radio.dart' as _i3;
-import 'package:meshx/models/radio_connector_state.dart' as _i5;
-import 'package:meshx/providers/radio_connector_service.dart' as _i8;
+import 'package:multimesh/models/mesh_radio.dart' as _i3;
+import 'package:multimesh/models/radio_connector_state.dart' as _i5;
+import 'package:multimesh/providers/radio_connector_service.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i4;

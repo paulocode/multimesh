@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:meshx/models/chat_type.dart';
+import 'package:multimesh/models/chat_type.dart';
 
 void main() {
   test('DirectMessageChat equals', () async {

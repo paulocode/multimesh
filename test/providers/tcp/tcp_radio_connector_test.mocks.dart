@@ -8,7 +8,7 @@ import 'dart:convert' as _i3;
 import 'dart:io' as _i2;
 import 'dart:typed_data' as _i6;
 
-import 'package:meshx/services/wrap/socket_mockable.dart' as _i5;
+import 'package:multimesh/services/wrap/socket_mockable.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 

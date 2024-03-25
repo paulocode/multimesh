@@ -5,8 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i4;
-import 'package:meshx/services/interfaces/radio_reader.dart' as _i2;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i4;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

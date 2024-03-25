@@ -2,12 +2,12 @@ import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:meshx/protobufs/generated/meshtastic/admin.pb.dart';
-import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart';
-import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:meshx/providers/queued_radio_writer.dart';
-import 'package:meshx/providers/radio_config/radio_config_uploader_service.dart';
-import 'package:meshx/services/queued_radio_writer.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/admin.pb.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
+import 'package:multimesh/providers/queued_radio_writer.dart';
+import 'package:multimesh/providers/radio_config/radio_config_uploader_service.dart';
+import 'package:multimesh/services/queued_radio_writer.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

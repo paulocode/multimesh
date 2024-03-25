@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart';
-import 'package:meshx/providers/radio_config/radio_config_service.dart';
-import 'package:meshx/providers/radio_config/radio_config_uploader_service.dart';
-import 'package:meshx/services/radio_config/radio_config_uploader_service.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
+import 'package:multimesh/providers/radio_config/radio_config_service.dart';
+import 'package:multimesh/providers/radio_config/radio_config_uploader_service.dart';
+import 'package:multimesh/services/radio_config/radio_config_uploader_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

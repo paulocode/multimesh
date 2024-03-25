@@ -7,18 +7,18 @@ import 'dart:async' as _i12;
 import 'dart:typed_data' as _i11;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i4;
-import 'package:meshx/models/ble_characteristics.dart' as _i5;
-import 'package:meshx/models/mesh_radio.dart' as _i6;
-import 'package:meshx/models/radio_configuration.dart' as _i3;
-import 'package:meshx/models/radio_connector_state.dart' as _i18;
-import 'package:meshx/protobufs/generated/meshtastic/config.pb.dart' as _i16;
-import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i13;
-import 'package:meshx/protobufs/generated/meshtastic/portnums.pb.dart' as _i10;
-import 'package:meshx/providers/radio_config/radio_config_service.dart' as _i15;
-import 'package:meshx/services/interfaces/radio_reader.dart' as _i9;
-import 'package:meshx/services/interfaces/radio_writer.dart' as _i8;
-import 'package:meshx/services/queued_radio_writer.dart' as _i7;
-import 'package:meshx/services/radio_config/radio_config_downloader_service.dart'
+import 'package:multimesh/models/ble_characteristics.dart' as _i5;
+import 'package:multimesh/models/mesh_radio.dart' as _i6;
+import 'package:multimesh/models/radio_configuration.dart' as _i3;
+import 'package:multimesh/models/radio_connector_state.dart' as _i18;
+import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart' as _i16;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i13;
+import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart' as _i10;
+import 'package:multimesh/providers/radio_config/radio_config_service.dart' as _i15;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i9;
+import 'package:multimesh/services/interfaces/radio_writer.dart' as _i8;
+import 'package:multimesh/services/queued_radio_writer.dart' as _i7;
+import 'package:multimesh/services/radio_config/radio_config_downloader_service.dart'
     as _i14;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i17;

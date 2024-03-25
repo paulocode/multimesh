@@ -8,9 +8,9 @@ import 'dart:convert' as _i3;
 import 'dart:io' as _i2;
 import 'dart:typed_data' as _i5;
 
-import 'package:meshx/protobufs/generated/meshtastic/mesh.pb.dart' as _i9;
-import 'package:meshx/services/interfaces/radio_reader.dart' as _i8;
-import 'package:meshx/services/interfaces/radio_writer.dart' as _i7;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i9;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i8;
+import 'package:multimesh/services/interfaces/radio_writer.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 
