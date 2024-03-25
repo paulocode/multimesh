@@ -52,12 +52,12 @@ void main() {
 
   test('tcp connect', () async {
     final radio = TcpMeshRadio(address: 'address');
+
     await radioConnectorService.connect(radio);
 
     final capturedRadio = verify(tcpRadioConnector.connect(captureAny))
         .captured
         .first as TcpMeshRadio;
-
     expect(radio, equals(capturedRadio));
   });
 
@@ -65,12 +65,12 @@ void main() {
     final device = MockBluetoothDevice();
     when(device.remoteId).thenReturn(const DeviceIdentifier('device'));
     final radio = BleMeshRadio(device: device);
+
     await radioConnectorService.connect(radio);
 
     final capturedRadio = verify(bleRadioConnector.connect(captureAny))
         .captured
         .first as BleMeshRadio;
-
     expect(radio, equals(capturedRadio));
   });
 
