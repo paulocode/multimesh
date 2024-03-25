@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'providers/ble/ble_radio_scanner.dart';
 import 'providers/channel_service.dart';
 import 'providers/node_service.dart';
 import 'providers/notifications.dart';
@@ -10,6 +11,7 @@ import 'providers/reconnector.dart';
 import 'providers/repository/sqflite.dart';
 import 'providers/router.dart';
 import 'providers/text_message/text_message_receiver_service.dart';
+import 'providers/wrap/flutter_blue_plus_mockable.dart';
 import 'providers/wrap/local_platform.dart';
 import 'theme.dart';
 
@@ -93,6 +95,12 @@ class _EagerInitialization extends ConsumerWidget {
 
       // make sure autoreconnect is ready
       ref.watch(reconnectorServiceProvider());
+
+      // workaround for iOS scanning bug
+      if (ref.read(localPlatformProvider).isIOS ||
+          ref.read(localPlatformProvider).isMacOS) {
+        ref.read(flutterBluePlusProvider).startScan();
+      }
       return child;
     }
   }
