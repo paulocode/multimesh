@@ -1,4 +1,4 @@
-# meshx
+# multimesh
 
 A cross-platform Meshtastic® client based on Flutter
 
