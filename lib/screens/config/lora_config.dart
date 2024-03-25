@@ -57,14 +57,61 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 ],
                 onChanged: radioConnectorState is Connected
                     ? (value) {
-                        loraConfig.region =
-                            Config_LoRaConfig_RegionCode.values[value! as int];
+                        setState(() {
+                          loraConfig.region = Config_LoRaConfig_RegionCode
+                              .values[value! as int];
+                        });
                       }
                     : null,
                 decoration: const InputDecoration(label: Text('Region')),
               ),
+              DropdownButtonFormField(
+                value: Config_LoRaConfig_ModemPreset.values
+                    .indexOf(loraConfig.modemPreset),
+                items: [
+                  for (final preset in Config_LoRaConfig_ModemPreset.values)
+                    DropdownMenuItem(
+                      value: preset.value,
+                      child: Text(preset.name),
+                    ),
+                ],
+                onChanged: radioConnectorState is Connected
+                    ? (value) {
+                        setState(() {
+                          loraConfig.modemPreset = Config_LoRaConfig_ModemPreset
+                              .values[value! as int];
+                        });
+                      }
+                    : null,
+                decoration: const InputDecoration(label: Text('Region')),
+              ),
+              DropdownButtonFormField(
+                value: loraConfig.hopLimit,
+                items: [
+                  for (var i = 0; i <= 7; i++)
+                    DropdownMenuItem(
+                      value: i,
+                      child: Text(i.toString()),
+                    ),
+                ],
+                onChanged: radioConnectorState is Connected
+                    ? (value) {
+                        loraConfig.hopLimit = int.parse(value! as String);
+                      }
+                    : null,
+                decoration: const InputDecoration(label: Text('Hops')),
+              ),
               const SizedBox(
                 height: 16,
+              ),
+              SwitchListTile(
+                title: const Text('Transmit enabled'),
+                value: loraConfig.txEnabled,
+                onChanged: (value) {
+                  setState(() {
+                    loraConfig.txEnabled = value;
+                  });
+                },
               ),
               OutlinedButton.icon(
                 onPressed: radioConnectorState is Connected
