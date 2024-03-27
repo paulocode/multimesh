@@ -33,7 +33,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     if (localPlatform.isAndroid || localPlatform.isIOS) {
       _initForegroundTask();
       FlutterForegroundTask.startService(
-        notificationTitle: 'meshx',
+        notificationTitle: 'multimesh',
         notificationText: 'Tap to view',
       );
     }
