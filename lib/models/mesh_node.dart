@@ -1,19 +1,19 @@
-class MeshNode {
-  MeshNode({
-    required this.nodeNum,
-    required this.longName,
-    this.hwModel,
-    required this.shortName,
-    required this.channel,
-    required this.id,
-    this.batteryLevel,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'mesh_node.freezed.dart';
 
-  final int nodeNum;
-  final String longName;
-  final String shortName;
-  final String? hwModel;
-  final int channel;
-  final String id;
-  final int? batteryLevel;
+@freezed
+class MeshNode with _$MeshNode {
+  const factory MeshNode({
+    required int nodeNum,
+    required String longName,
+    String? hwModel,
+    required String shortName,
+    required int channel,
+    required String id,
+    int? batteryLevel,
+    required DateTime lastSeen,
+    @Default(false) bool hasUnreadMessages,
+  }) = _MeshNode;
+
+  const MeshNode._();
 }

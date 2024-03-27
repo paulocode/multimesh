@@ -9,6 +9,7 @@ import '../../models/mesh_node.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
+import '../../providers/node_service.dart';
 import '../../repository/text_message_repository.dart';
 import '../interfaces/radio_reader.dart';
 
@@ -17,6 +18,7 @@ class TextMessageReceiverService {
     required TextMessageRepository textMessageRepository,
     required RadioReader radioReader,
     required Map<int, MeshNode> Function() nodes,
+    required NodeService Function() nodeService,
     required bool configDownloaded,
     required int myNodeNum,
     required Future<void> Function(String, String, String) showNotification,
@@ -26,7 +28,8 @@ class TextMessageReceiverService {
         _textMessageRepository = textMessageRepository,
         _nodes = nodes,
         _showNotification = showNotification,
-        _myNodeNum = myNodeNum {
+        _myNodeNum = myNodeNum,
+        _nodeService = nodeService {
     _onDispose(_streamController.close);
 
     if (!configDownloaded) {
@@ -41,6 +44,7 @@ class TextMessageReceiverService {
   final Map<int, MeshNode> Function() _nodes;
   final void Function(void Function() cb) _onDispose;
   final Future<void> Function(String, String, String) _showNotification;
+  final NodeService Function() _nodeService;
   final int _myNodeNum;
   final _logger = Logger();
 
@@ -101,6 +105,9 @@ class TextMessageReceiverService {
     await _textMessageRepository.add(textMessage: message);
     _streamController.add(message);
     final node = _nodes()[message.from];
+    if (message.to != TO_BROADCAST) {
+      _nodeService().notifyHasUnreadMessages(message.from);
+    }
     late final String payload;
     if (message.to != TO_BROADCAST) {
       payload = '/chat?dmNode=${message.from}';

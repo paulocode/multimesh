@@ -20,6 +20,7 @@ import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i10;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i15;
+import 'package:multimesh/providers/radio_connector_service.dart' as _i19;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i9;
 import 'package:multimesh/services/interfaces/radio_writer.dart' as _i8;
 import 'package:multimesh/services/queued_radio_writer.dart' as _i7;
@@ -932,4 +933,94 @@ class MockDisconnected extends _i1.Mock implements _i18.Disconnected {
   MockDisconnected() {
     _i1.throwOnMissingStub(this);
   }
+}
+
+/// A class which mocks [RadioConnectorService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRadioConnectorService extends _i1.Mock
+    implements _i19.RadioConnectorService {
+  MockRadioConnectorService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.NotifierProviderRef<_i18.RadioConnectorState> get ref =>
+      (super.noSuchMethod(
+        Invocation.getter(#ref),
+        returnValue: _FakeNotifierProviderRef_0<_i18.RadioConnectorState>(
+          this,
+          Invocation.getter(#ref),
+        ),
+      ) as _i2.NotifierProviderRef<_i18.RadioConnectorState>);
+
+  @override
+  _i18.RadioConnectorState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _i17.dummyValue<_i18.RadioConnectorState>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i18.RadioConnectorState);
+
+  @override
+  set state(_i18.RadioConnectorState? value) => super.noSuchMethod(
+        Invocation.setter(
+          #state,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i18.RadioConnectorState build() => (super.noSuchMethod(
+        Invocation.method(
+          #build,
+          [],
+        ),
+        returnValue: _i17.dummyValue<_i18.RadioConnectorState>(
+          this,
+          Invocation.method(
+            #build,
+            [],
+          ),
+        ),
+      ) as _i18.RadioConnectorState);
+
+  @override
+  _i12.Future<void> disconnect({String? errorMsg}) => (super.noSuchMethod(
+        Invocation.method(
+          #disconnect,
+          [],
+          {#errorMsg: errorMsg},
+        ),
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
+
+  @override
+  _i12.Future<void> connect(_i6.MeshRadio? radio) => (super.noSuchMethod(
+        Invocation.method(
+          #connect,
+          [radio],
+        ),
+        returnValue: _i12.Future<void>.value(),
+        returnValueForMissingStub: _i12.Future<void>.value(),
+      ) as _i12.Future<void>);
+
+  @override
+  bool updateShouldNotify(
+    _i18.RadioConnectorState? previous,
+    _i18.RadioConnectorState? next,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateShouldNotify,
+          [
+            previous,
+            next,
+          ],
+        ),
+        returnValue: false,
+      ) as bool);
 }

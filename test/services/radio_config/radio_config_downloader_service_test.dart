@@ -2,10 +2,13 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:multimesh/exceptions/mesh_radio_exception.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
+import 'package:multimesh/providers/radio_connector_service.dart'
+    hide MockRadioConnectorService;
 import 'package:multimesh/services/interfaces/radio_reader.dart';
 import 'package:multimesh/services/queued_radio_writer.dart';
 import 'package:multimesh/services/radio_config/radio_config_downloader_service.dart';
@@ -22,11 +25,13 @@ import 'radio_config_downloader_service_test.mocks.dart';
   BluetoothDevice,
   BleConnected,
   Disconnected,
+  RadioConnectorService,
 ])
 void main() {
   late MockRadioConfigService radioConfigService;
   late MockQueuedRadioWriter radioWriter;
   late MockRadioReader radioReader;
+  late MockRadioConnectorService radioConnectorService;
   late MockStream<FromRadio> fromRadioStream;
   final diposers = <void Function()>[];
 
@@ -34,12 +39,15 @@ void main() {
     radioWriter = MockQueuedRadioWriter();
     radioReader = MockRadioReader();
     radioConfigService = MockRadioConfigService();
+    radioConnectorService = MockRadioConnectorService();
 
     fromRadioStream = MockStream();
     when(radioReader.onPacketReceived()).thenAnswer((_) => fromRadioStream);
 
     when(radioWriter.sendWantConfig(wantConfigId: anyNamed('wantConfigId')))
         .thenAnswer((realInvocation) => Future<void>.value());
+
+    when(radioConnectorService.disconnect()).thenAnswer((_) async {});
   });
 
   RadioConfigDownloaderService init(RadioConnectorState radioConnectorState) =>
@@ -48,8 +56,9 @@ void main() {
         radioReader: radioReader,
         radioConnectorState: radioConnectorState,
         radioConfigServiceProvider: () => radioConfigService,
-        // TODO
-        disconnect: (_) {},
+        disconnect: (msg) {
+          radioConnectorService.disconnect(errorMsg: msg);
+        },
         onDispose: diposers.add,
       );
 
@@ -84,6 +93,24 @@ void main() {
 
     await untilCalled(radioConfigService.setMyNodeNum(123))
         .timeout(const Duration(seconds: 1));
+  });
+
+  test('error after wantConfig', () async {
+    when(radioWriter.sendWantConfig(wantConfigId: anyNamed('wantConfigId')))
+        .thenThrow(Exception());
+
+    init(MockBleConnected());
+
+    verify(radioConnectorService.disconnect());
+  });
+
+  test('error after wantConfig but with message', () async {
+    when(radioWriter.sendWantConfig(wantConfigId: anyNamed('wantConfigId')))
+        .thenThrow(const MeshRadioException(msg: '404'));
+
+    init(MockBleConnected());
+
+    verify(radioConnectorService.disconnect(errorMsg: '404'));
   });
 
   test('configId response', () async {

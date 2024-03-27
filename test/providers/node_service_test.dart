@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/telemetry.pb.dart';
 import 'package:multimesh/providers/node_service.dart';
 import 'package:multimesh/providers/radio_reader.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
@@ -48,6 +49,7 @@ void main() {
             longName: 'XYZ node',
             shortName: 'XYZ',
           ),
+          deviceMetrics: DeviceMetrics(batteryLevel: 71),
         ),
       ),
     );
@@ -57,6 +59,7 @@ void main() {
     expect(nodes[123]?.shortName, equals('XYZ'));
     expect(nodes[123]?.longName, equals('XYZ node'));
     expect(nodes[123]?.channel, equals(3));
+    expect(nodes[123]?.batteryLevel, equals(71));
   });
 
   test('add node from NODEINFO_APP', () async {
@@ -82,6 +85,45 @@ void main() {
     expect(nodes[123]?.shortName, equals('XYZ'));
     expect(nodes[123]?.longName, equals('XYZ node'));
     expect(nodes[123]?.channel, equals(1));
+  });
+
+  test('add node then update with NODEINFO_APP packet', () async {
+    await stream.emit(
+      FromRadio(
+        nodeInfo: NodeInfo(
+          channel: 3,
+          num: 123,
+          user: User(
+            id: '!123',
+            longName: 'XYZ node',
+            shortName: 'XYZ',
+          ),
+          deviceMetrics: DeviceMetrics(batteryLevel: 71),
+        ),
+      ),
+    );
+
+    await stream.emit(
+      FromRadio(
+        packet: MeshPacket(
+          channel: 1,
+          from: 123,
+          decoded: Data(
+            portnum: PortNum.NODEINFO_APP,
+            payload: User(
+              id: '!98',
+              shortName: 'asd',
+            ).writeToBuffer(),
+          ),
+        ),
+      ),
+    );
+
+    final nodes = container.read(nodeServiceProvider);
+    expect(nodes[123]?.nodeNum, equals(123));
+    expect(nodes[123]?.shortName, equals('asd'));
+    expect(nodes[123]?.channel, equals(1));
+    expect(nodes[123]?.batteryLevel, equals(71));
   });
 
   test('add node from NODEINFO_APP, replace old node if same nodenum',

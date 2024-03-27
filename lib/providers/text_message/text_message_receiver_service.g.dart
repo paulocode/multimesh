@@ -7,7 +7,7 @@ part of 'text_message_receiver_service.dart';
 // **************************************************************************
 
 String _$textMessageReceiverServiceHash() =>
-    r'e7c9c614374b5d3fe086dbefaa9cd824ca2008c6';
+    r'4499643b6a6d7414df3a86552cbbf96ed00a0017';
 
 /// See also [textMessageReceiverService].
 @ProviderFor(textMessageReceiverService)

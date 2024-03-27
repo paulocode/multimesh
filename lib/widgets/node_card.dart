@@ -45,7 +45,7 @@ class NodeCard extends ConsumerWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
-                if (node.batteryLevel != null)
+                if (node.batteryLevel != null && node.batteryLevel != 0)
                   Row(
                     children: [
                       const Icon(
@@ -91,6 +91,9 @@ class NodeCard extends ConsumerWidget {
               children: [
                 IconButton(
                   onPressed: () {
+                    ref
+                        .read(nodeServiceProvider.notifier)
+                        .unsetHasUnreadMessages(node.nodeNum);
                     context.push(
                       Uri(
                         path: '/chat',
@@ -101,7 +104,21 @@ class NodeCard extends ConsumerWidget {
                       ).toString(),
                     );
                   },
-                  icon: const Icon(Icons.mail),
+                  icon: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      const Icon(Icons.mail),
+                      if (node.hasUnreadMessages)
+                        const Positioned(
+                          right: -2,
+                          child: Icon(
+                            Icons.circle,
+                            color: Colors.red,
+                            size: 10,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},

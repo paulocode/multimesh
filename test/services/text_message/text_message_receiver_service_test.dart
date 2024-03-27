@@ -10,6 +10,7 @@ import 'package:multimesh/models/text_message.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pbserver.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
+import 'package:multimesh/providers/node_service.dart';
 import 'package:multimesh/repository/text_message_repository.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
 import 'package:multimesh/services/text_message/text_message_receiver_service.dart';
@@ -23,12 +24,14 @@ import 'text_message_receiver_service_test.mocks.dart';
   TextMessageRepository,
   RadioReader,
   ShowNotification,
+  NodeService,
 ])
 void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> packetStream;
   late MockShowNotification mockShowNotification;
+  late MockNodeService nodeService;
 
   setUp(() {
     packetStream = MockStream();
@@ -37,6 +40,7 @@ void main() {
         .thenAnswer((realInvocation) => Future.value(456));
     radioReader = MockRadioReader();
     mockShowNotification = MockShowNotification();
+    nodeService = MockNodeService();
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
   });
 
@@ -51,8 +55,10 @@ void main() {
           longName: 'ABC DEF',
           nodeNum: 999,
           id: '!abc',
+          lastSeen: DateTime.now(),
         ),
       },
+      nodeService: () => nodeService,
       configDownloaded: configDownloaded,
       myNodeNum: 111,
       showNotification: (title, text, callbackValue) async {
@@ -160,6 +166,8 @@ void main() {
         ),
       ),
     );
+
+    verify(nodeService.notifyHasUnreadMessages(123241));
   });
 
   test('emoji decoding', () async {

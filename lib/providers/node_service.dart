@@ -26,57 +26,76 @@ class NodeService extends _$NodeService {
   }
 
   void _processPacket(FromRadio fromRadio) {
-    late final User user;
-    late final int nodeNum;
-    late final int channel;
-    late final String hwModel;
-    late final int? batteryLevel;
+    late final MeshNode meshNode;
     if (fromRadio.whichPayloadVariant() == FromRadio_PayloadVariant.nodeInfo) {
       final nodeInfo = fromRadio.nodeInfo;
-      nodeNum = nodeInfo.num;
-      user = nodeInfo.user;
-      channel = nodeInfo.channel;
-      batteryLevel = nodeInfo.deviceMetrics.batteryLevel;
-      hwModel = nodeInfo.user.hwModel.toString();
+      meshNode = _createNode(
+        channel: nodeInfo.channel,
+        nodeNum: nodeInfo.num,
+        user: nodeInfo.user,
+        batteryLevel: nodeInfo.deviceMetrics.batteryLevel,
+      );
     } else if (fromRadio.packet.decoded.portnum == PortNum.NODEINFO_APP) {
       final packet = fromRadio.packet;
-      nodeNum = packet.from;
-      user = User.fromBuffer(packet.decoded.payload);
+      final user = User.fromBuffer(packet.decoded.payload);
       _logger.i(user);
-      channel = packet.channel;
-      batteryLevel = null;
-      hwModel = user.hwModel.toString();
+      meshNode = _createNode(
+        channel: packet.channel,
+        nodeNum: packet.from,
+        user: user,
+        batteryLevel: null,
+      );
     } else {
       return;
     }
 
-    late final MeshNode meshNode;
+    state = {...state, meshNode.nodeNum: meshNode};
 
+    _logger.i('Added node');
+  }
+
+  MeshNode _createNode({
+    required int channel,
+    required int nodeNum,
+    required User user,
+    required int? batteryLevel,
+  }) {
     if (user.id.trim().isEmpty) {
       final nodeNumHex = nodeNum.toRadixString(16).padLeft(4, '0');
       final shortName = nodeNumHex.substring(nodeNumHex.length - 4);
-      meshNode = MeshNode(
+      return MeshNode(
         nodeNum: nodeNum,
         longName: '???? $shortName',
         shortName: shortName,
         channel: channel,
         id: user.id,
-        batteryLevel: batteryLevel,
+        lastSeen: DateTime.now(),
       );
     } else {
-      meshNode = MeshNode(
+      return MeshNode(
         nodeNum: nodeNum,
         longName: user.longName,
         shortName: user.shortName,
         channel: channel,
         id: user.id,
-        batteryLevel: batteryLevel,
-        hwModel: hwModel,
+        batteryLevel: batteryLevel ?? state[nodeNum]?.batteryLevel,
+        hwModel: user.hwModel.toString(),
+        lastSeen: DateTime.now(),
       );
     }
+  }
 
-    state = {...state, nodeNum: meshNode};
+  void notifyHasUnreadMessages(int nodeNum) {
+    final node = state[nodeNum];
+    if (node != null) {
+      state = {...state, nodeNum: node.copyWith(hasUnreadMessages: true)};
+    }
+  }
 
-    _logger.i('Added node');
+  void unsetHasUnreadMessages(int nodeNum) {
+    final node = state[nodeNum];
+    if (node != null) {
+      state = {...state, nodeNum: node.copyWith(hasUnreadMessages: false)};
+    }
   }
 }

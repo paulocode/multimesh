@@ -19,6 +19,7 @@ TextMessageReceiverService textMessageReceiverService(
     radioReader: ref.watch(radioReaderProvider),
     // prevent rebuilds when there is a new node
     nodes: () => ref.read(nodeServiceProvider),
+    nodeService: () => ref.read(nodeServiceProvider.notifier),
     configDownloaded: ref
         .watch(radioConfigServiceProvider.select((it) => it.configDownloaded)),
     myNodeNum:
