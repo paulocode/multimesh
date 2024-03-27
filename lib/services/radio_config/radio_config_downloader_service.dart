@@ -102,10 +102,7 @@ class RadioConfigDownloaderService {
     if (_myNodeNum != nodeInfo.num) {
       return;
     }
-    final user = nodeInfo.user;
-    await _radioConfigService.setShortName(user.shortName, upload: false);
-    await _radioConfigService.setLongName(user.longName, upload: false);
-    await _radioConfigService.setHwModel(user.hwModel, upload: false);
+    await _radioConfigService.setMyNodeInfo(nodeInfo, upload: false);
     _radioConfigService.setHasOwnNodeInfo();
   }
 

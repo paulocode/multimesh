@@ -29,17 +29,23 @@ class NodeService extends _$NodeService {
     late final User user;
     late final int nodeNum;
     late final int channel;
+    late final String hwModel;
+    late final int? batteryLevel;
     if (fromRadio.whichPayloadVariant() == FromRadio_PayloadVariant.nodeInfo) {
       final nodeInfo = fromRadio.nodeInfo;
       nodeNum = nodeInfo.num;
       user = nodeInfo.user;
       channel = nodeInfo.channel;
+      batteryLevel = nodeInfo.deviceMetrics.batteryLevel;
+      hwModel = nodeInfo.user.hwModel.toString();
     } else if (fromRadio.packet.decoded.portnum == PortNum.NODEINFO_APP) {
       final packet = fromRadio.packet;
       nodeNum = packet.from;
       user = User.fromBuffer(packet.decoded.payload);
       _logger.i(user);
       channel = packet.channel;
+      batteryLevel = null;
+      hwModel = user.hwModel.toString();
     } else {
       return;
     }
@@ -51,10 +57,11 @@ class NodeService extends _$NodeService {
       final shortName = nodeNumHex.substring(nodeNumHex.length - 4);
       meshNode = MeshNode(
         nodeNum: nodeNum,
-        longName: 'Meshtastic $shortName',
+        longName: '???? $shortName',
         shortName: shortName,
         channel: channel,
         id: user.id,
+        batteryLevel: batteryLevel,
       );
     } else {
       meshNode = MeshNode(
@@ -63,6 +70,8 @@ class NodeService extends _$NodeService {
         shortName: user.shortName,
         channel: channel,
         id: user.id,
+        batteryLevel: batteryLevel,
+        hwModel: hwModel,
       );
     }
 

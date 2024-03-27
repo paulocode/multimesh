@@ -22,7 +22,10 @@ class RadioConfigService extends _$RadioConfigService {
   RadioConfiguration build() {
     _radioConfigUploaderService = ref.watch(radioConfigUploaderServiceProvider);
 
-    return RadioConfiguration(loraConfig: Config_LoRaConfig());
+    return RadioConfiguration(
+      loraConfig: Config_LoRaConfig(),
+      myNodeInfo: NodeInfo(),
+    );
   }
 
   Future<void> setLoraConfig(
@@ -38,29 +41,18 @@ class RadioConfigService extends _$RadioConfigService {
     }
   }
 
+  Future<void> setMyNodeInfo(
+    NodeInfo myNodeInfo, {
+    bool upload = true,
+  }) async {
+    state = state.copyWith(myNodeInfo: myNodeInfo);
+    if (upload) {
+      // TODO
+    }
+  }
+
   Future<void> setMyNodeNum(int myNodeNum) async {
     state = state.copyWith(myNodeNum: myNodeNum);
-  }
-
-  Future<void> setShortName(
-    String shortName, {
-    bool upload = true,
-  }) async {
-    state = state.copyWith(shortName: shortName);
-  }
-
-  Future<void> setLongName(
-    String longName, {
-    bool upload = true,
-  }) async {
-    state = state.copyWith(longName: longName);
-  }
-
-  Future<void> setHwModel(
-    HardwareModel hwModel, {
-    bool upload = true,
-  }) async {
-    state = state.copyWith(hwModel: hwModel);
   }
 
   void setHasOwnNodeInfo() {

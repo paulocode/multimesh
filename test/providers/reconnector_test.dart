@@ -13,6 +13,7 @@ import 'reconnector_test.mocks.dart';
 
 @GenerateMocks([TcpConnected, TcpMeshRadio, RadioConnectorService])
 void main() {
+  const delayMs = 500;
   late ProviderContainer container;
   late MockTcpConnected tcpConnected;
   late MockTcpMeshRadio tcpMeshRadio;
@@ -34,7 +35,8 @@ void main() {
     );
 
     container.read(
-      reconnectorServiceProvider(delay: const Duration(seconds: 1)).notifier,
+      reconnectorServiceProvider(delay: const Duration(milliseconds: delayMs))
+          .notifier,
     );
   });
 
@@ -45,7 +47,7 @@ void main() {
     container.read(radioConnectorServiceProvider.notifier).state = tcpConnected;
 
     verify(radioConnectorService.connect(tcpMeshRadio));
-    await Future<void>.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(milliseconds: delayMs * 2));
   });
 
   test('reconnect again after failure', () async {
@@ -57,8 +59,8 @@ void main() {
     await Future<void>.delayed(const Duration(seconds: 3));
     container.read(radioConnectorServiceProvider.notifier).state = tcpConnected;
 
-    verify(radioConnectorService.connect(tcpMeshRadio)).called(equals(3));
-    await Future<void>.delayed(const Duration(seconds: 1));
+    verify(radioConnectorService.connect(tcpMeshRadio)).called(equals(6));
+    await Future<void>.delayed(const Duration(milliseconds: delayMs * 2));
   });
 
   test('stop reconnecting after success', () async {
@@ -71,16 +73,17 @@ void main() {
     container.read(radioConnectorServiceProvider.notifier).state = tcpConnected;
     await Future<void>.delayed(const Duration(seconds: 3));
 
-    verify(radioConnectorService.connect(tcpMeshRadio)).called(equals(3));
-    await Future<void>.delayed(const Duration(seconds: 1));
+    verify(radioConnectorService.connect(tcpMeshRadio)).called(equals(6));
+    await Future<void>.delayed(const Duration(milliseconds: delayMs * 2));
   });
 
   test('dont reconnect', () async {
     container.read(radioConnectorServiceProvider.notifier).state = tcpConnected;
     container
         .read(
-          reconnectorServiceProvider(delay: const Duration(seconds: 1))
-              .notifier,
+          reconnectorServiceProvider(
+            delay: const Duration(milliseconds: delayMs),
+          ).notifier,
         )
         .disableReconnectUntilNextDisconnect();
 
@@ -94,8 +97,9 @@ void main() {
     container.read(radioConnectorServiceProvider.notifier).state = tcpConnected;
     container
         .read(
-          reconnectorServiceProvider(delay: const Duration(seconds: 1))
-              .notifier,
+          reconnectorServiceProvider(
+            delay: const Duration(milliseconds: delayMs),
+          ).notifier,
         )
         .disableReconnectUntilNextDisconnect();
     container.read(radioConnectorServiceProvider.notifier).state =
@@ -105,6 +109,6 @@ void main() {
         Disconnected();
 
     verify(radioConnectorService.connect(tcpMeshRadio));
-    await Future<void>.delayed(const Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(milliseconds: delayMs * 2));
   });
 }

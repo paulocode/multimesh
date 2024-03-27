@@ -13,7 +13,7 @@ class RadioConfigScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
     final longName = radioConfig.configDownloaded
-        ? '${radioConfig.longName} ⚙️'
+        ? '${radioConfig.myNodeInfo.user.longName} ⚙️'
         : 'Settings';
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(

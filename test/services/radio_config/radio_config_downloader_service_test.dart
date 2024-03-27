@@ -117,26 +117,27 @@ void main() {
 
   test('NodeInfo of our node', () async {
     init(MockBleConnected());
-
+    final nodeInfo = NodeInfo(
+      num: 123,
+      user: User(
+        shortName: 'abc',
+        longName: 'abc def',
+        hwModel: HardwareModel.HELTEC_V3,
+      ),
+    );
     await fromRadioStream.emit(FromRadio(myInfo: MyNodeInfo(myNodeNum: 123)));
     await fromRadioStream.emit(
       FromRadio(
-        nodeInfo: NodeInfo(
-          num: 123,
-          user: User(
-            shortName: 'abc',
-            longName: 'abc def',
-            hwModel: HardwareModel.HELTEC_V3,
-          ),
-        ),
+        nodeInfo: nodeInfo,
       ),
     );
 
-    verify(radioConfigService.setShortName('abc', upload: false));
-    verify(radioConfigService.setLongName('abc def', upload: false));
-    verify(
-      radioConfigService.setHwModel(HardwareModel.HELTEC_V3, upload: false),
-    );
+    final capturedNodeInfo =
+        verify(radioConfigService.setMyNodeInfo(captureAny, upload: false))
+            .captured
+            .first as NodeInfo;
+    expect(nodeInfo, equals(capturedNodeInfo));
+    verify(radioConfigService.setHasOwnNodeInfo());
   });
 
   test('NodeInfo of another', () async {
@@ -157,13 +158,9 @@ void main() {
     );
 
     verifyNever(
-      radioConfigService.setShortName(any, upload: anyNamed('upload')),
+      radioConfigService.setMyNodeInfo(any, upload: anyNamed('upload')),
     );
-    verifyNever(radioConfigService.setLongName('abc def', upload: false));
-    verifyNever(
-      radioConfigService.setHwModel(HardwareModel.HELTEC_V3, upload: false),
-    );
-    verifyNever(radioConfigService.setConfigDownloaded());
+    verifyNever(radioConfigService.setHasOwnNodeInfo());
   });
 
   test('LoraConfig packet', () async {

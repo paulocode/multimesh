@@ -16,11 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RadioConfiguration {
-  String get shortName => throw _privateConstructorUsedError;
-  String get longName => throw _privateConstructorUsedError;
   int get myNodeNum => throw _privateConstructorUsedError;
-  HardwareModel get hwModel => throw _privateConstructorUsedError;
   Config_LoRaConfig get loraConfig => throw _privateConstructorUsedError;
+  NodeInfo get myNodeInfo => throw _privateConstructorUsedError;
   bool get hasOwnNodeInfo => throw _privateConstructorUsedError;
   bool get configDownloaded => throw _privateConstructorUsedError;
 
@@ -36,11 +34,9 @@ abstract class $RadioConfigurationCopyWith<$Res> {
       _$RadioConfigurationCopyWithImpl<$Res, RadioConfiguration>;
   @useResult
   $Res call(
-      {String shortName,
-      String longName,
-      int myNodeNum,
-      HardwareModel hwModel,
+      {int myNodeNum,
       Config_LoRaConfig loraConfig,
+      NodeInfo myNodeInfo,
       bool hasOwnNodeInfo,
       bool configDownloaded});
 }
@@ -58,35 +54,25 @@ class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shortName = null,
-    Object? longName = null,
     Object? myNodeNum = null,
-    Object? hwModel = null,
     Object? loraConfig = null,
+    Object? myNodeInfo = null,
     Object? hasOwnNodeInfo = null,
     Object? configDownloaded = null,
   }) {
     return _then(_value.copyWith(
-      shortName: null == shortName
-          ? _value.shortName
-          : shortName // ignore: cast_nullable_to_non_nullable
-              as String,
-      longName: null == longName
-          ? _value.longName
-          : longName // ignore: cast_nullable_to_non_nullable
-              as String,
       myNodeNum: null == myNodeNum
           ? _value.myNodeNum
           : myNodeNum // ignore: cast_nullable_to_non_nullable
               as int,
-      hwModel: null == hwModel
-          ? _value.hwModel
-          : hwModel // ignore: cast_nullable_to_non_nullable
-              as HardwareModel,
       loraConfig: null == loraConfig
           ? _value.loraConfig
           : loraConfig // ignore: cast_nullable_to_non_nullable
               as Config_LoRaConfig,
+      myNodeInfo: null == myNodeInfo
+          ? _value.myNodeInfo
+          : myNodeInfo // ignore: cast_nullable_to_non_nullable
+              as NodeInfo,
       hasOwnNodeInfo: null == hasOwnNodeInfo
           ? _value.hasOwnNodeInfo
           : hasOwnNodeInfo // ignore: cast_nullable_to_non_nullable
@@ -108,11 +94,9 @@ abstract class _$$RadioConfigurationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String shortName,
-      String longName,
-      int myNodeNum,
-      HardwareModel hwModel,
+      {int myNodeNum,
       Config_LoRaConfig loraConfig,
+      NodeInfo myNodeInfo,
       bool hasOwnNodeInfo,
       bool configDownloaded});
 }
@@ -128,35 +112,25 @@ class __$$RadioConfigurationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? shortName = null,
-    Object? longName = null,
     Object? myNodeNum = null,
-    Object? hwModel = null,
     Object? loraConfig = null,
+    Object? myNodeInfo = null,
     Object? hasOwnNodeInfo = null,
     Object? configDownloaded = null,
   }) {
     return _then(_$RadioConfigurationImpl(
-      shortName: null == shortName
-          ? _value.shortName
-          : shortName // ignore: cast_nullable_to_non_nullable
-              as String,
-      longName: null == longName
-          ? _value.longName
-          : longName // ignore: cast_nullable_to_non_nullable
-              as String,
       myNodeNum: null == myNodeNum
           ? _value.myNodeNum
           : myNodeNum // ignore: cast_nullable_to_non_nullable
               as int,
-      hwModel: null == hwModel
-          ? _value.hwModel
-          : hwModel // ignore: cast_nullable_to_non_nullable
-              as HardwareModel,
       loraConfig: null == loraConfig
           ? _value.loraConfig
           : loraConfig // ignore: cast_nullable_to_non_nullable
               as Config_LoRaConfig,
+      myNodeInfo: null == myNodeInfo
+          ? _value.myNodeInfo
+          : myNodeInfo // ignore: cast_nullable_to_non_nullable
+              as NodeInfo,
       hasOwnNodeInfo: null == hasOwnNodeInfo
           ? _value.hasOwnNodeInfo
           : hasOwnNodeInfo // ignore: cast_nullable_to_non_nullable
@@ -173,29 +147,20 @@ class __$$RadioConfigurationImplCopyWithImpl<$Res>
 
 class _$RadioConfigurationImpl extends _RadioConfiguration {
   const _$RadioConfigurationImpl(
-      {this.shortName = '',
-      this.longName = '',
-      this.myNodeNum = 0,
-      this.hwModel = HardwareModel.UNSET,
+      {this.myNodeNum = 0,
       required this.loraConfig,
+      required this.myNodeInfo,
       this.hasOwnNodeInfo = false,
       this.configDownloaded = false})
       : super._();
 
   @override
   @JsonKey()
-  final String shortName;
-  @override
-  @JsonKey()
-  final String longName;
-  @override
-  @JsonKey()
   final int myNodeNum;
   @override
-  @JsonKey()
-  final HardwareModel hwModel;
-  @override
   final Config_LoRaConfig loraConfig;
+  @override
+  final NodeInfo myNodeInfo;
   @override
   @JsonKey()
   final bool hasOwnNodeInfo;
@@ -205,7 +170,7 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
 
   @override
   String toString() {
-    return 'RadioConfiguration(shortName: $shortName, longName: $longName, myNodeNum: $myNodeNum, hwModel: $hwModel, loraConfig: $loraConfig, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
+    return 'RadioConfiguration(myNodeNum: $myNodeNum, loraConfig: $loraConfig, myNodeInfo: $myNodeInfo, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
   }
 
   @override
@@ -213,15 +178,12 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RadioConfigurationImpl &&
-            (identical(other.shortName, shortName) ||
-                other.shortName == shortName) &&
-            (identical(other.longName, longName) ||
-                other.longName == longName) &&
             (identical(other.myNodeNum, myNodeNum) ||
                 other.myNodeNum == myNodeNum) &&
-            (identical(other.hwModel, hwModel) || other.hwModel == hwModel) &&
             (identical(other.loraConfig, loraConfig) ||
                 other.loraConfig == loraConfig) &&
+            (identical(other.myNodeInfo, myNodeInfo) ||
+                other.myNodeInfo == myNodeInfo) &&
             (identical(other.hasOwnNodeInfo, hasOwnNodeInfo) ||
                 other.hasOwnNodeInfo == hasOwnNodeInfo) &&
             (identical(other.configDownloaded, configDownloaded) ||
@@ -229,8 +191,8 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, shortName, longName, myNodeNum,
-      hwModel, loraConfig, hasOwnNodeInfo, configDownloaded);
+  int get hashCode => Object.hash(runtimeType, myNodeNum, loraConfig,
+      myNodeInfo, hasOwnNodeInfo, configDownloaded);
 
   @JsonKey(ignore: true)
   @override
@@ -242,25 +204,19 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
 
 abstract class _RadioConfiguration extends RadioConfiguration {
   const factory _RadioConfiguration(
-      {final String shortName,
-      final String longName,
-      final int myNodeNum,
-      final HardwareModel hwModel,
+      {final int myNodeNum,
       required final Config_LoRaConfig loraConfig,
+      required final NodeInfo myNodeInfo,
       final bool hasOwnNodeInfo,
       final bool configDownloaded}) = _$RadioConfigurationImpl;
   const _RadioConfiguration._() : super._();
 
   @override
-  String get shortName;
-  @override
-  String get longName;
-  @override
   int get myNodeNum;
   @override
-  HardwareModel get hwModel;
-  @override
   Config_LoRaConfig get loraConfig;
+  @override
+  NodeInfo get myNodeInfo;
   @override
   bool get hasOwnNodeInfo;
   @override

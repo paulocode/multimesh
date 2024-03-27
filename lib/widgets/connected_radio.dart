@@ -33,7 +33,7 @@ class ConnectedRadio extends ConsumerWidget {
                 radius: 40,
                 child: radioConnectorState is Connected
                     ? radioConfig.configDownloaded
-                        ? Text(radioConfig.shortName)
+                        ? Text(radioConfig.myNodeInfo.user.shortName)
                         : const CircularProgressIndicator()
                     : Icon(
                         Icons.cloud_off,
@@ -49,23 +49,25 @@ class ConnectedRadio extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(radioConfig.longName),
+                    Text(radioConfig.myNodeInfo.user.longName),
                     Row(
                       children: [
                         const Icon(
                           Icons.radio,
                           size: 20,
                         ),
-                        Text(radioConfig.hwModel.toString()),
+                        Text(radioConfig.myNodeInfo.user.hwModel.toString()),
                       ],
                     ),
-                    const Row(
+                    Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.battery_charging_full_sharp,
                           size: 20,
                         ),
-                        Text('Charging'),
+                        Text(
+                          '${radioConfig.myNodeInfo.deviceMetrics.batteryLevel}%',
+                        ),
                       ],
                     ),
                     if (radioConnectorState is BleConnected)

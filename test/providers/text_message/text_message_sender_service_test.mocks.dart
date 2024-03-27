@@ -209,55 +209,25 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i10.Future<void>);
 
   @override
+  _i10.Future<void> setMyNodeInfo(
+    _i13.NodeInfo? myNodeInfo, {
+    bool? upload = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setMyNodeInfo,
+          [myNodeInfo],
+          {#upload: upload},
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+
+  @override
   _i10.Future<void> setMyNodeNum(int? myNodeNum) => (super.noSuchMethod(
         Invocation.method(
           #setMyNodeNum,
           [myNodeNum],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-
-  @override
-  _i10.Future<void> setShortName(
-    String? shortName, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setShortName,
-          [shortName],
-          {#upload: upload},
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-
-  @override
-  _i10.Future<void> setLongName(
-    String? longName, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setLongName,
-          [longName],
-          {#upload: upload},
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-
-  @override
-  _i10.Future<void> setHwModel(
-    _i13.HardwareModel? hwModel, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setHwModel,
-          [hwModel],
-          {#upload: upload},
         ),
         returnValue: _i10.Future<void>.value(),
         returnValueForMissingStub: _i10.Future<void>.value(),

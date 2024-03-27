@@ -19,8 +19,10 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
   Widget build(BuildContext context) {
     loraConfig = ref
         .watch(radioConfigServiceProvider.select((value) => value.loraConfig));
-    final longName =
-        ref.watch(radioConfigServiceProvider.select((value) => value.longName));
+    final longName = ref
+        .watch(radioConfigServiceProvider.select((value) => value.myNodeInfo))
+        .user
+        .longName;
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(
       appBar: AppBar(

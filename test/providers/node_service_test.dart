@@ -136,7 +136,7 @@ void main() {
     final nodes = container.read(nodeServiceProvider);
     expect(nodes[123]?.nodeNum, equals(123));
     expect(nodes[123]?.shortName, equals('007b'));
-    expect(nodes[123]?.longName, equals('Meshtastic 007b'));
+    expect(nodes[123]?.longName, equals('???? 007b'));
     expect(nodes[123]?.channel, equals(2));
   });
 

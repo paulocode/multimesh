@@ -36,15 +36,44 @@ class NodeCard extends ConsumerWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            title: Text(
-              node.longName,
-              softWrap: true,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  node.longName,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+                if (node.batteryLevel != null)
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.battery_charging_full_sharp,
+                        size: 20,
+                      ),
+                      Text('${node.batteryLevel}%'),
+                    ],
+                  ),
+                if (node.hwModel != null)
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.radio,
+                        size: 20,
+                      ),
+                      Text('${node.hwModel}'),
+                    ],
+                  ),
+              ],
             ),
             subtitle: lastMessage != null
                 ? Row(
                     children: [
+                      const Icon(
+                        Icons.message,
+                        size: 20,
+                      ),
                       Text(
                         '$lastSenderShortName: ',
                         style: const TextStyle(fontWeight: FontWeight.bold),
