@@ -32,6 +32,7 @@ void main() {
         to: toNode,
         channel: 1,
         time: DateTime.now(),
+        owner: 123,
       ),
     );
   }
@@ -46,6 +47,7 @@ void main() {
         toNode: TO_BROADCAST,
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
+        owner: 123,
       ),
     ).thenAnswer((_) => Future.value(_generateMessages(toNode: TO_BROADCAST)));
 
@@ -53,6 +55,7 @@ void main() {
       textMessageRepository.count(
         toNode: TO_BROADCAST,
         channel: 1,
+        owner: 123,
       ),
     ).thenAnswer((_) => Future.value(BATCH_NUM_MESSAGES_TO_LOAD * 5));
 
@@ -61,6 +64,7 @@ void main() {
         myNodeNum: 123,
         otherNodeNum: 777,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
+        owner: 123,
       ),
     ).thenAnswer((_) => Future.value(_generateMessages(toNode: 123)));
 
@@ -68,6 +72,7 @@ void main() {
       textMessageRepository.countDirectMessagesBy(
         myNodeNum: 123,
         otherNodeNum: 777,
+        owner: 123,
       ),
     ).thenAnswer((_) => Future.value(BATCH_NUM_MESSAGES_TO_LOAD));
 
@@ -98,6 +103,7 @@ void main() {
           channel: anyNamed('channel'),
           limit: anyNamed('limit'),
           offset: anyNamed('offset'),
+          owner: anyNamed('owner'),
         ),
       );
     } else if (chatType is DirectMessageChat) {
@@ -107,6 +113,7 @@ void main() {
           otherNodeNum: anyNamed('otherNodeNum'),
           limit: anyNamed('limit'),
           offset: anyNamed('offset'),
+          owner: anyNamed('owner'),
         ),
       );
     }
@@ -149,6 +156,7 @@ void main() {
         to: 0,
         channel: 0,
         time: DateTime.now(),
+        owner: 123,
       ),
     );
 
@@ -168,6 +176,7 @@ void main() {
         to: 0,
         channel: 0,
         time: DateTime.now(),
+        owner: 123,
       ),
     );
 
@@ -185,6 +194,7 @@ void main() {
         to: 0,
         channel: 0,
         time: DateTime.now(),
+        owner: 123,
       ),
     );
 
@@ -204,6 +214,7 @@ void main() {
         to: 0,
         channel: 0,
         time: DateTime.now(),
+        owner: 123,
       ),
     );
     final messages = await messagesFuture;
@@ -221,6 +232,7 @@ void main() {
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
+        owner: 123,
       ),
     ).thenAnswer(
       (_) => Future.value(
@@ -248,6 +260,7 @@ void main() {
         otherNodeNum: 777,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
+        owner: 123,
       ),
     ).thenAnswer(
       (_) => Future.value(
@@ -275,6 +288,7 @@ void main() {
         channel: 1,
         limit: argThat(equals(BATCH_NUM_MESSAGES_TO_LOAD), named: 'limit'),
         offset: BATCH_NUM_MESSAGES_TO_LOAD,
+        owner: 123,
       ),
     ).thenAnswer(
       (_) => Future.value(

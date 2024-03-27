@@ -1,16 +1,10 @@
-import 'dart:math';
-
 import 'package:sqflite/sqflite.dart';
 
-import '../constants/app_constants.dart';
-import '../constants/ble_constants.dart';
 import '../models/text_message.dart';
 import '../models/text_message_status.dart';
 
 class TextMessageRepository {
-  TextMessageRepository({required Database database}) : _database = database {
-    // _createDummyData();
-  }
+  TextMessageRepository({required Database database}) : _database = database;
 
   final Database _database;
 
@@ -31,6 +25,7 @@ class TextMessageRepository {
         'channel': textMessage.channel,
         'time': textMessage.time.millisecondsSinceEpoch,
         'state': textMessage.state.index,
+        'owner': textMessage.owner,
       },
     );
   }
@@ -58,26 +53,7 @@ class TextMessageRepository {
       orderBy: 'id ASC',
     );
 
-    return [
-      for (final {
-            'packetId': packetId as int,
-            'text': text as String,
-            'toNode': to as int,
-            'fromNode': from as int,
-            'channel': channel as int,
-            'time': time as int,
-            'state': state as int
-          } in result)
-        TextMessage(
-          packetId: packetId,
-          text: text,
-          from: from,
-          to: to,
-          channel: channel,
-          time: DateTime.fromMillisecondsSinceEpoch(time),
-          state: TextMessageStatus.values[state],
-        ),
-    ].last;
+    return _mapResult(result).last;
   }
 
   Future<List<TextMessage>> getDirectMessagesBy({
@@ -85,36 +61,19 @@ class TextMessageRepository {
     required int otherNodeNum,
     required int limit,
     int offset = 0,
+    required int owner,
   }) async {
     final result = await _database.query(
       'text_messages',
-      where: '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?))',
-      whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum],
+      where:
+          '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND owner = ?',
+      whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, owner],
       offset: offset,
       orderBy: 'id ASC',
       limit: limit,
     );
 
-    return [
-      for (final {
-            'packetId': packetId as int,
-            'text': text as String,
-            'toNode': to as int,
-            'fromNode': from as int,
-            'channel': channel as int,
-            'time': time as int,
-            'state': state as int
-          } in result)
-        TextMessage(
-          packetId: packetId,
-          text: text,
-          from: from,
-          to: to,
-          channel: channel,
-          time: DateTime.fromMillisecondsSinceEpoch(time),
-          state: TextMessageStatus.values[state],
-        ),
-    ];
+    return _mapResult(result);
   }
 
   Future<List<TextMessage>> getBy({
@@ -122,45 +81,28 @@ class TextMessageRepository {
     required int channel,
     required int limit,
     int offset = 0,
+    required int owner,
   }) async {
     final result = await _database.query(
       'text_messages',
-      where: 'toNode = ? AND channel = ?',
-      whereArgs: [toNode, channel],
+      where: 'toNode = ? AND channel = ? AND owner = ?',
+      whereArgs: [toNode, channel, owner],
       offset: offset,
       orderBy: 'id ASC',
       limit: limit,
     );
 
-    return [
-      for (final {
-            'packetId': packetId as int,
-            'text': text as String,
-            'toNode': to as int,
-            'fromNode': from as int,
-            'channel': channel as int,
-            'time': time as int,
-            'state': state as int
-          } in result)
-        TextMessage(
-          packetId: packetId,
-          text: text,
-          from: from,
-          to: to,
-          channel: channel,
-          time: DateTime.fromMillisecondsSinceEpoch(time),
-          state: TextMessageStatus.values[state],
-        ),
-    ];
+    return _mapResult(result);
   }
 
   Future<int> countDirectMessagesBy({
     required int myNodeNum,
     required int otherNodeNum,
+    required int owner,
   }) async {
     final result = await _database.rawQuery(
-      'SELECT COUNT(*) FROM text_messages WHERE ((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?))',
-      [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum],
+      'SELECT COUNT(*) FROM text_messages WHERE ((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND owner = ?',
+      [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, owner],
     );
 
     return Sqflite.firstIntValue(result) ?? 0;
@@ -169,37 +111,38 @@ class TextMessageRepository {
   Future<int> count({
     required int channel,
     required int toNode,
+    required int owner,
   }) async {
     final result = await _database.rawQuery(
-      'SELECT COUNT(*) FROM text_messages WHERE toNode = ? AND channel = ?',
-      [toNode, channel],
+      'SELECT COUNT(*) FROM text_messages WHERE toNode = ? AND channel = ? AND owner = ?',
+      [toNode, channel, owner],
     );
 
     return Sqflite.firstIntValue(result) ?? 0;
   }
 
-  // ignore: unused_element
-  Future<void> _createDummyData() async {
-    final messagesExist = await count(channel: 0, toNode: TO_BROADCAST) >
-        BATCH_NUM_MESSAGES_TO_LOAD;
-    if (messagesExist) {
-      return;
-    }
-    final random = Random();
-    final msSinceEpoch = DateTime.now().millisecondsSinceEpoch;
-    for (var i = 0; i < 1000; i++) {
-      await add(
-        textMessage: TextMessage(
-          packetId: random.nextInt(0xffffffff),
-          text: ('a' * random.nextInt(250)) + i.toString(),
-          from: random.nextBool() ? 3806486552 : 3620505567,
-          to: TO_BROADCAST,
-          channel: 0,
-          time: DateTime.fromMillisecondsSinceEpoch(
-            (msSinceEpoch - 1000 * 1000 * 60) + i * 1000 * 60,
-          ),
+  List<TextMessage> _mapResult(List<Map<String, Object?>> result) {
+    return [
+      for (final {
+            'packetId': packetId as int,
+            'text': text as String,
+            'toNode': to as int,
+            'fromNode': from as int,
+            'channel': channel as int,
+            'time': time as int,
+            'state': state as int,
+            'owner': owner as int
+          } in result)
+        TextMessage(
+          packetId: packetId,
+          text: text,
+          from: from,
+          to: to,
+          channel: channel,
+          time: DateTime.fromMillisecondsSinceEpoch(time),
+          state: TextMessageStatus.values[state],
+          owner: owner,
         ),
-      );
-    }
+    ];
   }
 }

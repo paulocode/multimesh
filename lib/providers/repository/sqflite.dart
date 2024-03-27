@@ -26,6 +26,11 @@ Future<Database> sqflite(
         'time INTEGER, state INTEGER, packetId INTEGER)',
       );
     },
-    version: 1,
+    onUpgrade: (db, oldVersion, newVersion) {
+      if (newVersion > 1) {
+        db.execute('ALTER TABLE text_messages ADD COLUMN owner INTEGER;');
+      }
+    },
+    version: 2,
   );
 }

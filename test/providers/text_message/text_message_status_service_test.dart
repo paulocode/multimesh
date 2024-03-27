@@ -33,6 +33,7 @@ void main() {
     from: 0,
     to: 0,
     packetId: 123,
+    owner: 0,
   );
 
   setUp(() {

@@ -32,6 +32,7 @@ Future<void> sendTextMessage(
     to: chatType.toNode,
     channel: chatType.channel,
     time: DateTime.now(),
+    owner: myNodeNum,
   );
 
   final packetId = radioWriter.sendMeshPacket(

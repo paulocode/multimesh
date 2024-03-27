@@ -87,6 +87,7 @@ class TextMessageReceiverService {
         to: packet.to,
         channel: packet.channel,
         time: DateTime.now(),
+        owner: _myNodeNum,
       );
       _logger.i('Received text message from ${packet.from}');
       await _saveAndBroadcastMessage(channel, message);

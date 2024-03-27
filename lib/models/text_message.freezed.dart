@@ -23,6 +23,7 @@ mixin _$TextMessage {
   int get channel => throw _privateConstructorUsedError;
   DateTime get time => throw _privateConstructorUsedError;
   TextMessageStatus get state => throw _privateConstructorUsedError;
+  int get owner => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TextMessageCopyWith<TextMessage> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $TextMessageCopyWith<$Res> {
       int to,
       int channel,
       DateTime time,
-      TextMessageStatus state});
+      TextMessageStatus state,
+      int owner});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
     Object? channel = null,
     Object? time = null,
     Object? state = null,
+    Object? owner = null,
   }) {
     return _then(_value.copyWith(
       packetId: null == packetId
@@ -95,6 +98,10 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as TextMessageStatus,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$TextMessageImplCopyWith<$Res>
       int to,
       int channel,
       DateTime time,
-      TextMessageStatus state});
+      TextMessageStatus state,
+      int owner});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$TextMessageImplCopyWithImpl<$Res>
     Object? channel = null,
     Object? time = null,
     Object? state = null,
+    Object? owner = null,
   }) {
     return _then(_$TextMessageImpl(
       packetId: null == packetId
@@ -165,6 +174,10 @@ class __$$TextMessageImplCopyWithImpl<$Res>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as TextMessageStatus,
+      owner: null == owner
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$TextMessageImpl extends _TextMessage {
       required this.to,
       required this.channel,
       required this.time,
-      this.state = TextMessageStatus.SENDING})
+      this.state = TextMessageStatus.SENDING,
+      required this.owner})
       : super._();
 
   @override
@@ -198,10 +212,12 @@ class _$TextMessageImpl extends _TextMessage {
   @override
   @JsonKey()
   final TextMessageStatus state;
+  @override
+  final int owner;
 
   @override
   String toString() {
-    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state)';
+    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state, owner: $owner)';
   }
 
   @override
@@ -216,12 +232,13 @@ class _$TextMessageImpl extends _TextMessage {
             (identical(other.to, to) || other.to == to) &&
             (identical(other.channel, channel) || other.channel == channel) &&
             (identical(other.time, time) || other.time == time) &&
-            (identical(other.state, state) || other.state == state));
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.owner, owner) || other.owner == owner));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, packetId, text, from, to, channel, time, state);
+  int get hashCode => Object.hash(
+      runtimeType, packetId, text, from, to, channel, time, state, owner);
 
   @JsonKey(ignore: true)
   @override
@@ -238,7 +255,8 @@ abstract class _TextMessage extends TextMessage {
       required final int to,
       required final int channel,
       required final DateTime time,
-      final TextMessageStatus state}) = _$TextMessageImpl;
+      final TextMessageStatus state,
+      required final int owner}) = _$TextMessageImpl;
   const _TextMessage._() : super._();
 
   @override
@@ -255,6 +273,8 @@ abstract class _TextMessage extends TextMessage {
   DateTime get time;
   @override
   TextMessageStatus get state;
+  @override
+  int get owner;
   @override
   @JsonKey(ignore: true)
   _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>

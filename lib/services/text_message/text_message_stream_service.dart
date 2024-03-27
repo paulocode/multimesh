@@ -40,11 +40,13 @@ class TextMessageStreamService {
           myNodeNum: _myNodeNum,
           otherNodeNum: _chatType.toNode,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
+          owner: _myNodeNum,
         ),
       ChannelChat() => _currentStreamState = await _textMessageRepository.getBy(
           toNode: TO_BROADCAST,
           channel: _chatType.channel,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
+          owner: _myNodeNum,
         ),
     };
 
@@ -66,11 +68,13 @@ class TextMessageStreamService {
         totalSavedMessages = await _textMessageRepository.countDirectMessagesBy(
           myNodeNum: _myNodeNum,
           otherNodeNum: _chatType.toNode,
+          owner: _myNodeNum,
         );
       case ChannelChat():
         totalSavedMessages = await _textMessageRepository.count(
           toNode: TO_BROADCAST,
           channel: _chatType.channel,
+          owner: _myNodeNum,
         );
     }
 
@@ -85,12 +89,14 @@ class TextMessageStreamService {
           otherNodeNum: _chatType.toNode,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
           offset: prevLen,
+          owner: _myNodeNum,
         ),
       ChannelChat() => await _textMessageRepository.getBy(
           toNode: TO_BROADCAST,
           channel: _chatType.channel,
           limit: BATCH_NUM_MESSAGES_TO_LOAD,
           offset: prevLen,
+          owner: _myNodeNum,
         )
     };
     _currentStreamState = [

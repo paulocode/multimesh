@@ -14,6 +14,7 @@ class TextMessage with _$TextMessage {
     required int channel,
     required DateTime time,
     @Default(TextMessageStatus.SENDING) TextMessageStatus state,
+    required int owner,
   }) = _TextMessage;
 
   const TextMessage._();
