@@ -10,7 +10,7 @@ import 'package:multimesh/models/text_message.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pbserver.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:multimesh/providers/node_service.dart';
+import 'package:multimesh/providers/node/node_service.dart';
 import 'package:multimesh/repository/text_message_repository.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
 import 'package:multimesh/services/text_message/text_message_receiver_service.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'providers/channel_service.dart';
-import 'providers/node_service.dart';
+import 'providers/node/node_service.dart';
 import 'providers/notifications.dart';
 import 'providers/radio_config/radio_config_downloader_service.dart';
 import 'providers/reconnector.dart';

@@ -9,7 +9,7 @@ import '../../models/mesh_node.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../../providers/node_service.dart';
+import '../../providers/node/node_service.dart';
 import '../../repository/text_message_repository.dart';
 import '../interfaces/radio_reader.dart';
 

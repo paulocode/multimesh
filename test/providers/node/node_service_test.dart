@@ -5,12 +5,12 @@ import 'package:mockito/mockito.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/telemetry.pb.dart';
-import 'package:multimesh/providers/node_service.dart';
+import 'package:multimesh/providers/node/node_service.dart';
 import 'package:multimesh/providers/radio_reader.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
 
-import '../common.dart';
-import '../mock_stream.dart';
+import '../../common.dart';
+import '../../mock_stream.dart';
 import 'node_service_test.mocks.dart';
 
 @GenerateMocks([
@@ -221,4 +221,6 @@ void main() {
     expect(nodes[456]?.longName, equals('UVW node'));
     expect(nodes[456]?.channel, equals(2));
   });
+
+  // TODO notifyHasUnreadMessages, unsetHasUnreadMessages
 }

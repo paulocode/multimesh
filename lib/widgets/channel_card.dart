@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../models/chat_type.dart';
 import '../models/mesh_channel.dart';
-import '../providers/node_service.dart';
+import '../providers/node/node_service.dart';
 import '../providers/text_message/text_message_stream_service.dart';
 
 class ChannelCard extends ConsumerWidget {

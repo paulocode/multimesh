@@ -11,7 +11,7 @@ import 'package:multimesh/models/mesh_node.dart' as _i11;
 import 'package:multimesh/models/text_message.dart' as _i2;
 import 'package:multimesh/models/text_message_status.dart' as _i6;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i8;
-import 'package:multimesh/providers/node_service.dart' as _i10;
+import 'package:multimesh/providers/node/node_service.dart' as _i10;
 import 'package:multimesh/repository/text_message_repository.dart' as _i4;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i7;
 

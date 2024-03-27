@@ -2,7 +2,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../services/text_message/text_message_receiver_service.dart';
-import '../node_service.dart';
+import '../node/node_service.dart';
 import '../notifications.dart';
 import '../radio_config/radio_config_service.dart';
 import '../radio_reader.dart';
