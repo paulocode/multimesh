@@ -34,7 +34,7 @@ class _NodesScreenState extends ConsumerState<NodesScreen> {
                 _searchKey = value;
               }),
               decoration: const InputDecoration(
-                hintText: 'Node id/name',
+                hintText: 'Search node name',
                 filled: true,
               ),
             ),

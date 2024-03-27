@@ -32,7 +32,7 @@ class NodeCard extends ConsumerWidget {
         final lastSenderShortName = nodes[lastSender]?.shortName ?? '';
         return Card(
           child: ListTile(
-            contentPadding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+            contentPadding: const EdgeInsets.symmetric(vertical: 4),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -44,6 +44,7 @@ class NodeCard extends ConsumerWidget {
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 if (node.batteryLevel != null && node.batteryLevel != 0)
                   Row(
