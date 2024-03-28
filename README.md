@@ -3,7 +3,7 @@
 A cross-platform Meshtastic® client based on Flutter
 
 ## Nightly builds
-[![Nightly builds](https://app.bitrise.io/app/989c6c99-13a5-4938-9e00-d012acc48d87/status.svg?token=oYLjMn1LwvLKJufvosoNxA&branch=main)](https://app.bitrise.io/app/989c6c99-13a5-4938-9e00-d012acc48d87?commit_message=Nightly+build)
+[![Nightly builds](https://app.bitrise.io/app/39797fbe-e2bc-4938-9ef2-6552671f060c/status.svg?token=LySOjGHyY7cfnRRCLOtSpw&branch=main)](https://app.bitrise.io/app/39797fbe-e2bc-4938-9ef2-6552671f060c?commit_message=Nightly)
 
 
 ## Legal
