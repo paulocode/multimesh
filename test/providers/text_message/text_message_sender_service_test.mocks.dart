@@ -194,44 +194,31 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i3.RadioConfiguration);
 
   @override
-  _i10.Future<void> setLoraConfig(
-    _i12.Config_LoRaConfig? loraConfig, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
+  void setLoraConfig(_i12.Config_LoRaConfig? loraConfig) => super.noSuchMethod(
         Invocation.method(
           #setLoraConfig,
           [loraConfig],
-          {#upload: upload},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValueForMissingStub: null,
+      );
 
   @override
-  _i10.Future<void> setMyNodeInfo(
-    _i13.NodeInfo? myNodeInfo, {
-    bool? upload = true,
-  }) =>
-      (super.noSuchMethod(
+  void setMyNodeInfo(_i13.NodeInfo? myNodeInfo) => super.noSuchMethod(
         Invocation.method(
           #setMyNodeInfo,
           [myNodeInfo],
-          {#upload: upload},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValueForMissingStub: null,
+      );
 
   @override
-  _i10.Future<void> setMyNodeNum(int? myNodeNum) => (super.noSuchMethod(
+  void setMyNodeNum(int? myNodeNum) => super.noSuchMethod(
         Invocation.method(
           #setMyNodeNum,
           [myNodeNum],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValueForMissingStub: null,
+      );
 
   @override
   void setHasOwnNodeInfo() => super.noSuchMethod(

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
+import '../../providers/radio_config/radio_config_uploader_service.dart';
 import '../../providers/radio_connector_service.dart';
 
 class LoraConfigScreen extends ConsumerStatefulWidget {
@@ -14,10 +15,9 @@ class LoraConfigScreen extends ConsumerStatefulWidget {
 }
 
 class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
-  late Config_LoRaConfig loraConfig;
   @override
   Widget build(BuildContext context) {
-    loraConfig = ref
+    final loraConfig = ref
         .watch(radioConfigServiceProvider.select((value) => value.loraConfig));
     final longName = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeInfo))
@@ -117,10 +117,15 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
               ),
               OutlinedButton.icon(
                 onPressed: radioConnectorState is Connected
-                    ? () {
+                    ? () async {
                         ref
                             .read(radioConfigServiceProvider.notifier)
                             .setLoraConfig(loraConfig);
+                        await ref
+                            .read(radioConfigUploaderServiceProvider)
+                            .uploadLoraConfig(
+                              loraConfig: loraConfig,
+                            );
                       }
                     : null,
                 label: const Text('Save'),

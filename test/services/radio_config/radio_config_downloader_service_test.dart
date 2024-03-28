@@ -6,7 +6,8 @@ import 'package:multimesh/exceptions/mesh_radio_exception.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
-import 'package:multimesh/providers/radio_config/radio_config_service.dart';
+import 'package:multimesh/providers/radio_config/radio_config_service.dart'
+    hide MockRadioConfigService;
 import 'package:multimesh/providers/radio_connector_service.dart'
     hide MockRadioConnectorService;
 import 'package:multimesh/services/interfaces/radio_reader.dart';
@@ -160,9 +161,8 @@ void main() {
     );
 
     final capturedNodeInfo =
-        verify(radioConfigService.setMyNodeInfo(captureAny, upload: false))
-            .captured
-            .first as NodeInfo;
+        verify(radioConfigService.setMyNodeInfo(captureAny)).captured.first
+            as NodeInfo;
     expect(nodeInfo, equals(capturedNodeInfo));
     verify(radioConfigService.setHasOwnNodeInfo());
   });
@@ -185,7 +185,7 @@ void main() {
     );
 
     verifyNever(
-      radioConfigService.setMyNodeInfo(any, upload: anyNamed('upload')),
+      radioConfigService.setMyNodeInfo(any),
     );
     verifyNever(radioConfigService.setHasOwnNodeInfo());
   });
@@ -203,7 +203,7 @@ void main() {
     );
 
     verify(
-      radioConfigService.setLoraConfig(loraConfig, upload: false),
+      radioConfigService.setLoraConfig(loraConfig),
     );
   });
 }

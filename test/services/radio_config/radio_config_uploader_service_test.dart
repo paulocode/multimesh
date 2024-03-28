@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:multimesh/models/radio_configuration.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/admin.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:multimesh/providers/queued_radio_writer.dart';
+import 'package:multimesh/providers/radio_config/radio_config_service.dart';
 import 'package:multimesh/providers/radio_config/radio_config_uploader_service.dart';
 import 'package:multimesh/services/queued_radio_writer.dart';
 
@@ -22,8 +25,16 @@ void main() {
   setUp(() {
     writer = MockQueuedRadioWriter();
     container = createContainer(
-      overrides: [queuedRadioWriterProvider.overrideWith((_) => writer)],
+      overrides: [
+        queuedRadioWriterProvider.overrideWith((_) => writer),
+        radioConfigServiceProvider.overrideWith(MockRadioConfigService.new),
+      ],
     );
+    container.read(radioConfigServiceProvider.notifier).state =
+        RadioConfiguration(
+      loraConfig: Config_LoRaConfig(),
+      myNodeInfo: NodeInfo(),
+    ).copyWith(myNodeNum: 123);
   });
 
   test('set lora config', () {
@@ -38,7 +49,7 @@ void main() {
 
     container
         .read(radioConfigUploaderServiceProvider)
-        .setLoraConfig(nodeNum: 123, loraConfig: loraConfig);
+        .uploadLoraConfig(loraConfig: loraConfig);
 
     final captured = verify(
       writer.sendMeshPacket(

@@ -69,11 +69,11 @@ class RadioConfigDownloaderService {
     final payloadVariant = packet.whichPayloadVariant();
     switch (payloadVariant) {
       case FromRadio_PayloadVariant.myInfo:
-        await _processMyInfo(packet.myInfo);
+        _processMyInfo(packet.myInfo);
       case FromRadio_PayloadVariant.nodeInfo:
-        await _processNodeInfo(packet.nodeInfo);
+        _processNodeInfo(packet.nodeInfo);
       case FromRadio_PayloadVariant.config:
-        await _processConfigPacket(packet.config);
+        _processConfigPacket(packet.config);
       case FromRadio_PayloadVariant.configCompleteId:
         await _processConfigCompleteId(packet.configCompleteId);
       case _:
@@ -81,28 +81,28 @@ class RadioConfigDownloaderService {
     }
   }
 
-  Future<void> _processMyInfo(MyNodeInfo myInfo) async {
+  void _processMyInfo(MyNodeInfo myInfo) {
     _myNodeNum = myInfo.myNodeNum;
-    await _radioConfigService.setMyNodeNum(myInfo.myNodeNum);
+    _radioConfigService.setMyNodeNum(myInfo.myNodeNum);
   }
 
-  Future<void> _processConfigPacket(Config config) async {
+  void _processConfigPacket(Config config) {
     final payloadVariant = config.whichPayloadVariant();
     if (payloadVariant == Config_PayloadVariant.lora) {
       final lora = config.lora;
 
-      await _radioConfigService.setLoraConfig(lora, upload: false);
+      _radioConfigService.setLoraConfig(lora);
     }
   }
 
-  Future<void> _processNodeInfo(NodeInfo nodeInfo) async {
+  void _processNodeInfo(NodeInfo nodeInfo) {
     if (_myNodeNum == 0) {
       _logger.w('myNodeNum = 0 but received nodeInfo');
     }
     if (_myNodeNum != nodeInfo.num) {
       return;
     }
-    await _radioConfigService.setMyNodeInfo(nodeInfo, upload: false);
+    _radioConfigService.setMyNodeInfo(nodeInfo);
     _radioConfigService.setHasOwnNodeInfo();
   }
 
