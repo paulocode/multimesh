@@ -24,6 +24,13 @@ class ChatScreen extends ConsumerWidget {
       DirectMessageChat() => nodes[_chatType.toNode]?.longName ?? '',
       ChannelChat() => channels[_chatType.channel].name,
     };
+    if (_chatType is DirectMessageChat) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        ref
+            .read(nodeServiceProvider.notifier)
+            .unsetHasUnreadMessages(_chatType.toNode);
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(title),

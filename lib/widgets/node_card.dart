@@ -92,9 +92,6 @@ class NodeCard extends ConsumerWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    ref
-                        .read(nodeServiceProvider.notifier)
-                        .unsetHasUnreadMessages(node.nodeNum);
                     context.push(
                       Uri(
                         path: '/chat',
