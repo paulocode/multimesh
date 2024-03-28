@@ -11,8 +11,11 @@ import 'interfaces/radio_reader.dart';
 import 'interfaces/radio_writer.dart';
 
 class QueuedRadioWriter {
-  QueuedRadioWriter({Duration sendTimeout = const Duration(seconds: 30)})
-      : _sendTimeout = sendTimeout {
+  QueuedRadioWriter({
+    Duration sendTimeout = const Duration(seconds: 30),
+    required int Function() hopLimit,
+  })  : _sendTimeout = sendTimeout,
+        _hopLimit = hopLimit {
     _currentPacketId = _random.nextInt(0xffffffff);
     _logger.i('created queue $hashCode');
   }
@@ -26,6 +29,7 @@ class QueuedRadioWriter {
   int _needAckPacketId = 0;
   var _packetAckCompleter = Completer<void>();
   final Duration _sendTimeout;
+  final int Function() _hopLimit;
 
   void setRadioWriter(RadioWriter radioWriter) {
     _logger.i('received radioWriter for queue $hashCode');
@@ -48,7 +52,7 @@ class QueuedRadioWriter {
     final id = _generatePacketId();
     final meshPacket = MeshPacket(
       to: to,
-      hopLimit: 3,
+      hopLimit: _hopLimit(),
       id: id,
       wantAck: wantAck,
       priority: MeshPacket_Priority.RELIABLE,

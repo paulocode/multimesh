@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/radio_connector_state.dart';
 import '../services/queued_radio_writer.dart';
+import 'radio_config/radio_config_service.dart';
 import 'radio_connector_service.dart';
 import 'radio_reader.dart';
 import 'radio_writer.dart';
@@ -11,7 +12,9 @@ part 'queued_radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
 QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
-  final queuedRadioWriter = QueuedRadioWriter();
+  final queuedRadioWriter = QueuedRadioWriter(
+    hopLimit: () => ref.read(radioConfigServiceProvider).loraConfig.hopLimit,
+  );
   final logger = Logger();
   ref.onDispose(queuedRadioWriter.dispose);
 
