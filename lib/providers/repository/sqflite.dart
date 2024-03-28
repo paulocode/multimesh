@@ -20,11 +20,12 @@ Future<Database> sqflite(
   return openDatabase(
     join(await getDatabasesPath(), 'meshx.db'),
     onCreate: (db, version) {
-      return db.execute(
+      db.execute(
         'CREATE TABLE text_messages (id INTEGER PRIMARY KEY AUTOINCREMENT, '
         'text TEXT, toNode INTEGER, fromNode INTEGER, channel INTEGER, '
         'time INTEGER, state INTEGER, packetId INTEGER)',
       );
+      db.execute('ALTER TABLE text_messages ADD COLUMN owner INTEGER;');
     },
     onUpgrade: (db, oldVersion, newVersion) {
       if (newVersion > 1) {
