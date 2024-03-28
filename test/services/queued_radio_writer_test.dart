@@ -33,12 +33,10 @@ void main() {
 
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
 
-    queuedRadioWriter = QueuedRadioWriter(
-      sendTimeout: const Duration(seconds: 1),
-      hopLimit: () => 7,
-    )
-      ..setRadioWriter(radioWriter)
-      ..setRadioReader(radioReader);
+    queuedRadioWriter =
+        QueuedRadioWriter(sendTimeout: const Duration(seconds: 1))
+          ..setRadioWriter(radioWriter)
+          ..setRadioReader(radioReader);
   });
 
   test('send wantConfig', () {
@@ -64,7 +62,7 @@ void main() {
     expect(capturedPacket.to, equals(123));
     expect(capturedPacket.id, equals(id));
     expect(capturedPacket.channel, equals(456));
-    expect(capturedPacket.hopLimit, equals(7));
+    expect(capturedPacket.hopLimit, equals(3));
     expect(capturedPacket.wantAck, isFalse);
     expect(capturedPacket.priority, MeshPacket_Priority.RELIABLE);
     expect(capturedPacket.decoded.portnum, PortNum.ADMIN_APP);
