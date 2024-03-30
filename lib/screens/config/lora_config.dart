@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:protobuf/protobuf.dart';
 
 import '../../constants/meshtastic_constants.dart';
 import '../../models/radio_connector_state.dart';
@@ -21,7 +22,8 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
   @override
   void initState() {
     loraConfig = ref
-        .read(radioConfigServiceProvider.select((value) => value.loraConfig));
+        .read(radioConfigServiceProvider.select((value) => value.loraConfig))
+        .deepCopy();
     super.initState();
   }
 
