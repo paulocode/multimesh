@@ -17,18 +17,18 @@ class LoraConfigScreen extends ConsumerStatefulWidget {
 }
 
 class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
-  late Config_LoRaConfig loraConfig;
+  late Config_LoRaConfig _loraConfig;
 
   @override
   void initState() {
-    loraConfig = ref
-        .read(radioConfigServiceProvider.select((value) => value.loraConfig))
-        .deepCopy();
+    _loraConfig = ref.read(radioConfigServiceProvider).loraConfig.deepCopy();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final prevLoraConfig = ref
+        .watch(radioConfigServiceProvider.select((value) => value.loraConfig));
     final longName = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeInfo))
         .user
@@ -59,7 +59,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
             children: [
               DropdownButtonFormField(
                 value: Config_LoRaConfig_RegionCode.values
-                    .indexOf(loraConfig.region),
+                    .indexOf(_loraConfig.region),
                 items: [
                   for (final region in Config_LoRaConfig_RegionCode.values)
                     DropdownMenuItem(
@@ -70,7 +70,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 onChanged: radioConnectorState is Connected
                     ? (value) {
                         setState(() {
-                          loraConfig.region = Config_LoRaConfig_RegionCode
+                          _loraConfig.region = Config_LoRaConfig_RegionCode
                               .values[value! as int];
                         });
                       }
@@ -79,7 +79,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
               ),
               DropdownButtonFormField(
                 value: Config_LoRaConfig_ModemPreset.values
-                    .indexOf(loraConfig.modemPreset),
+                    .indexOf(_loraConfig.modemPreset),
                 items: [
                   for (final preset in Config_LoRaConfig_ModemPreset.values)
                     DropdownMenuItem(
@@ -90,15 +90,16 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 onChanged: radioConnectorState is Connected
                     ? (value) {
                         setState(() {
-                          loraConfig.modemPreset = Config_LoRaConfig_ModemPreset
-                              .values[value! as int];
+                          _loraConfig.modemPreset =
+                              Config_LoRaConfig_ModemPreset
+                                  .values[value! as int];
                         });
                       }
                     : null,
                 decoration: const InputDecoration(label: Text('Region')),
               ),
               DropdownButtonFormField(
-                value: loraConfig.hopLimit,
+                value: _loraConfig.hopLimit,
                 items: [
                   for (var i = 0; i <= MESHTASTIC_MAX_HOPS; i++)
                     DropdownMenuItem(
@@ -109,7 +110,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 onChanged: radioConnectorState is Connected
                     ? (value) {
                         setState(() {
-                          loraConfig.hopLimit = value! as int;
+                          _loraConfig.hopLimit = value! as int;
                         });
                       }
                     : null,
@@ -120,23 +121,23 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
               ),
               SwitchListTile(
                 title: const Text('Transmit enabled'),
-                value: loraConfig.txEnabled,
+                value: _loraConfig.txEnabled,
                 onChanged: (value) {
                   setState(() {
-                    loraConfig.txEnabled = value;
+                    _loraConfig.txEnabled = value;
                   });
                 },
               ),
               OutlinedButton.icon(
-                onPressed: radioConnectorState is Connected
+                onPressed: radioConnectorState is Connected && prevLoraConfig != _loraConfig
                     ? () async {
                         ref
                             .read(radioConfigServiceProvider.notifier)
-                            .setLoraConfig(loraConfig);
+                            .setLoraConfig(_loraConfig);
                         await ref
                             .read(radioConfigUploaderServiceProvider)
                             .uploadLoraConfig(
-                              loraConfig: loraConfig,
+                              loraConfig: _loraConfig,
                             );
                       }
                     : null,
