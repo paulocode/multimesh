@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../constants/meshtastic_constants.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
@@ -15,10 +16,17 @@ class LoraConfigScreen extends ConsumerStatefulWidget {
 }
 
 class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
+  late Config_LoRaConfig loraConfig;
+
+  @override
+  void initState() {
+    loraConfig = ref
+        .read(radioConfigServiceProvider.select((value) => value.loraConfig));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final loraConfig = ref
-        .watch(radioConfigServiceProvider.select((value) => value.loraConfig));
     final longName = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeInfo))
         .user
@@ -90,7 +98,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
               DropdownButtonFormField(
                 value: loraConfig.hopLimit,
                 items: [
-                  for (var i = 0; i <= 7; i++)
+                  for (var i = 0; i <= MESHTASTIC_MAX_HOPS; i++)
                     DropdownMenuItem(
                       value: i,
                       child: Text(i.toString()),
@@ -98,7 +106,9 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 ],
                 onChanged: radioConnectorState is Connected
                     ? (value) {
-                        loraConfig.hopLimit = value! as int;
+                        setState(() {
+                          loraConfig.hopLimit = value! as int;
+                        });
                       }
                     : null,
                 decoration: const InputDecoration(label: Text('Hops')),
