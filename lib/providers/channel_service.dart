@@ -144,7 +144,7 @@ class ChannelService extends _$ChannelService {
     );
   }
 
-  void updateChannel(MeshChannel channel) {
+  Future<void> updateChannel(MeshChannel channel) async {
     final adminMessage = AdminMessage(
       setChannel: Channel(
         index: channel.index,
@@ -157,10 +157,15 @@ class ChannelService extends _$ChannelService {
         role: channel.role,
       ),
     );
-    _radioWriter.sendMeshPacket(
+    await _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,
       payload: adminMessage.writeToBuffer(),
     );
+    state = [
+      ...state.sublist(0, channel.index),
+      channel,
+      ...state.sublist(channel.index + 1),
+    ];
   }
 }

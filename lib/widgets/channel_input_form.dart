@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../models/mesh_channel.dart';
+import '../providers/channel_service.dart';
 import '../providers/router.dart';
 
 class ChannelInputForm extends ConsumerStatefulWidget {
@@ -23,6 +26,8 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
   final _formKey = GlobalKey<FormState>();
   final _channelNameController = TextEditingController();
   final _keyController = TextEditingController();
+  final _logger = Logger();
+  bool _saving = false;
 
   @override
   void initState() {
@@ -41,6 +46,7 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
 
   @override
   Widget build(BuildContext context) {
+    final channelService = ref.watch(channelServiceProvider.notifier);
     return Form(
       key: _formKey,
       child: Column(
@@ -89,21 +95,61 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 24,
           ),
-          OutlinedButton.icon(
-            onPressed: () {
-              final formState = _formKey.currentState!;
-              if (formState.validate()) {
-                formState.save();
-                ref.read(goRouterProvider).pop(channel);
-              }
-            },
-            label: const Text('Save'),
-            icon: const Icon(Icons.save_alt),
-          ),
+          if (_saving)
+            const CircularProgressIndicator()
+          else
+            OutlinedButton.icon(
+              onPressed: () async {
+                final formState = _formKey.currentState!;
+                if (formState.validate()) {
+                  formState.save();
+                  _logger.i(channel);
+                  setState(() {
+                    _saving = true;
+                  });
+                  try {
+                    await channelService.updateChannel(channel);
+                  } on TimeoutException {
+                    showError(
+                      context, // ignore: use_build_context_synchronously
+                      'Save timeout',
+                    );
+                  } catch (e) {
+                    showError(
+                      context, // ignore: use_build_context_synchronously
+                      'Unknown error occurred',
+                    );
+                  }
+                  setState(() {
+                    _saving = false;
+                  });
+                  ref.read(goRouterProvider).pop(channel);
+                }
+              },
+              label: const Text('Save'),
+              icon: const Icon(Icons.save_alt),
+            ),
         ],
       ),
     );
+  }
+
+  void showError(BuildContext context, String msg) {
+    if (!context.mounted) {
+      return;
+    }
+    final snackBar = SnackBar(
+      backgroundColor: Theme.of(context).colorScheme.error,
+      content: Text(
+        msg,
+        style: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(color: Theme.of(context).colorScheme.onError),
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

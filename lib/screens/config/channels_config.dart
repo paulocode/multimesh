@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 
 import '../../models/mesh_channel.dart';
 import '../../providers/channel_service.dart';
@@ -16,11 +15,8 @@ class ChannelsConfigScreen extends ConsumerStatefulWidget {
 }
 
 class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
-  final logger = Logger();
-
   @override
   Widget build(BuildContext context) {
-    final channelService = ref.watch(channelServiceProvider.notifier);
     final channels = ref
         .watch(channelServiceProvider)
         .where((element) => element.used)
@@ -41,7 +37,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                   itemBuilder: (ctx, index) {
                     return InkWell(
                       onTap: () async {
-                        final channel = await showModalBottomSheet<MeshChannel>(
+                        await showModalBottomSheet<MeshChannel>(
                           context: context,
                           constraints: BoxConstraints(
                             minWidth: constraints.maxWidth,
@@ -56,16 +52,12 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                             );
                           },
                         );
-                        logger.i(channel);
-                        if (channel != null) {
-                          channelService.updateChannel(channel);
-                        }
                       },
                       child: Card(
                         child: ListTile(
                           leading: Text(index.toString()),
                           title: Text(channels[index].name),
-                          trailing: const Icon(Icons.chevron_right),
+                          trailing: const Icon(Icons.edit),
                         ),
                       ),
                     );
