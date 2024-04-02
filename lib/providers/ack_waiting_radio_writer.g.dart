@@ -7,7 +7,7 @@ part of 'ack_waiting_radio_writer.dart';
 // **************************************************************************
 
 String _$ackWaitingRadioWriterHash() =>
-    r'3b1e16d0244018e7a5a7d88b1b4203fff4afcd5d';
+    r'72beffedeb095194efdbd6bed0a679651c939b89';
 
 /// See also [ackWaitingRadioWriter].
 @ProviderFor(ackWaitingRadioWriter)

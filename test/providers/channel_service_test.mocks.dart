@@ -4,19 +4,18 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:typed_data' as _i10;
+import 'dart:typed_data' as _i9;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/models/radio_configuration.dart' as _i3;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
-    as _i12;
+    as _i11;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
-    as _i9;
+    as _i8;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
-    as _i11;
+    as _i10;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i4;
-import 'package:multimesh/services/interfaces/radio_writer.dart' as _i8;
 import 'package:multimesh/services/queued_radio_writer.dart' as _i7;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
 
@@ -83,30 +82,12 @@ class MockAckWaitingRadioWriter extends _i1.Mock
   }
 
   @override
-  void setRadioWriter(_i8.RadioWriter? radioWriter) => super.noSuchMethod(
-        Invocation.method(
-          #setRadioWriter,
-          [radioWriter],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void setRadioReader(_i4.RadioReader? radioReader) => super.noSuchMethod(
-        Invocation.method(
-          #setRadioReader,
-          [radioReader],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   _i5.Future<void> sendMeshPacket({
     required int? to,
     int? channel = 0,
     bool? wantAck = false,
-    required _i9.PortNum? portNum,
-    required _i10.Uint8List? payload,
+    required _i8.PortNum? portNum,
+    required _i9.Uint8List? payload,
     int? id,
   }) =>
       (super.noSuchMethod(
@@ -148,20 +129,21 @@ class MockAckWaitingRadioWriter extends _i1.Mock
       ) as int);
 
   @override
-  void dispose() => super.noSuchMethod(
+  _i5.Future<void> waitForAck(int? packetId) => (super.noSuchMethod(
         Invocation.method(
-          #dispose,
-          [],
+          #waitForAck,
+          [packetId],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
 
 /// A class which mocks [RadioConfigService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRadioConfigService extends _i1.Mock
-    implements _i11.RadioConfigService {
+    implements _i10.RadioConfigService {
   MockRadioConfigService() {
     _i1.throwOnMissingStub(this);
   }
@@ -210,7 +192,7 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i3.RadioConfiguration);
 
   @override
-  void setLoraConfig(_i12.Config_LoRaConfig? loraConfig) => super.noSuchMethod(
+  void setLoraConfig(_i11.Config_LoRaConfig? loraConfig) => super.noSuchMethod(
         Invocation.method(
           #setLoraConfig,
           [loraConfig],

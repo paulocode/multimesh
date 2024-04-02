@@ -13,31 +13,22 @@ class AckWaitingRadioWriter {
   AckWaitingRadioWriter({
     Duration sendTimeout = const Duration(seconds: 30),
     required int Function() hopLimitProvider,
+    required RadioReader radioReader,
+    required RadioWriter radioWriter,
   })  : _sendTimeout = sendTimeout,
-        _hopLimitProvider = hopLimitProvider {
+        _hopLimitProvider = hopLimitProvider,
+        _radioWriter = radioWriter,
+        _radioReader = radioReader {
     _currentPacketId = _random.nextInt(0xffffffff);
-    _logger.i('created queue $hashCode');
   }
 
-  RadioWriter? _radioWriter;
-  StreamSubscription<FromRadio>? _packetSub;
+  final RadioWriter _radioWriter;
+  final RadioReader _radioReader;
   final _logger = Logger();
   final _random = Random();
   int _currentPacketId = 0;
-  Completer<void>? _packetAckCompleter;
   final Duration _sendTimeout;
   final int Function() _hopLimitProvider;
-
-  void setRadioWriter(RadioWriter radioWriter) {
-    _logger.i('received radioWriter for queue $hashCode');
-    _radioWriter = radioWriter;
-  }
-
-  void setRadioReader(RadioReader radioReader) {
-    _logger.i('received radioReader for queue $hashCode');
-    _packetSub?.cancel();
-    _packetSub = radioReader.onPacketReceived().listen(_packetListener);
-  }
 
   Future<void> sendMeshPacket({
     required int to,
@@ -61,15 +52,14 @@ class AckWaitingRadioWriter {
       ),
     );
     _logger.i('Sending MeshPacket...\n$meshPacket');
-    _packetAckCompleter = Completer();
-    await _radioWriter?.write(ToRadio(packet: meshPacket).writeToBuffer());
-    await _packetAckCompleter?.future.timeout(_sendTimeout);
+    await _radioWriter.write(ToRadio(packet: meshPacket).writeToBuffer());
+    await waitForAck(_id);
   }
 
   Future<void> sendWantConfig({required int wantConfigId}) async {
     final packet = ToRadio(wantConfigId: wantConfigId);
     _logger.i('Requesting config...\n$packet');
-    await _radioWriter?.write(packet.writeToBuffer());
+    await _radioWriter.write(packet.writeToBuffer());
   }
 
   int generatePacketId() {
@@ -85,21 +75,27 @@ class AckWaitingRadioWriter {
     return (_currentPacketId % numPacketIds) + 1;
   }
 
-  void _packetListener(FromRadio packet) {
-    if (packet.whichPayloadVariant() == FromRadio_PayloadVariant.queueStatus) {
-      final id = packet.queueStatus.meshPacketId;
-      _logger.i('QueueStatus: $id');
-      if (_packetAckCompleter?.isCompleted == false) {
-        _packetAckCompleter?.complete();
+  Future<void> waitForAck(int packetId) async {
+    final packetAckCompleter = Completer<void>();
+    final sub = _radioReader.onPacketReceived().listen((packet) {
+      if (packet.whichPayloadVariant() ==
+          FromRadio_PayloadVariant.queueStatus) {
+        final id = packet.queueStatus.meshPacketId;
+        _logger.i('QueueStatus: $id');
+        if (!packetAckCompleter.isCompleted) {
+          packetAckCompleter.complete();
+        }
       }
-    }
-  }
-
-  void dispose() {
-    _logger.i('disposing queue $hashCode');
-    _packetSub?.cancel();
-    if (_packetAckCompleter?.isCompleted == false) {
-      _packetAckCompleter?.complete();
+    });
+    try {
+      await packetAckCompleter.future.timeout(_sendTimeout);
+    } catch (e) {
+      rethrow;
+    } finally {
+      if (!packetAckCompleter.isCompleted) {
+        packetAckCompleter.complete();
+      }
+      await sub.cancel();
     }
   }
 }

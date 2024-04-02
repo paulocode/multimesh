@@ -37,9 +37,9 @@ void main() {
     queuedRadioWriter = AckWaitingRadioWriter(
       sendTimeout: const Duration(seconds: 1),
       hopLimitProvider: () => 7,
-    )
-      ..setRadioWriter(radioWriter)
-      ..setRadioReader(radioReader);
+      radioWriter: radioWriter,
+      radioReader: radioReader,
+    );
   });
 
   test('send wantConfig', () {
