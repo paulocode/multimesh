@@ -44,6 +44,8 @@ class ChannelService extends _$ChannelService {
         role: Channel_Role.DISABLED,
         key: [],
         index: index,
+        uplinkEnabled: false,
+        downlinkEnabled: false,
       ),
     );
   }
@@ -66,6 +68,8 @@ class ChannelService extends _$ChannelService {
         role: channel.role,
         key: channel.settings.psk,
         index: channel.index,
+        uplinkEnabled: channel.settings.uplinkEnabled,
+        downlinkEnabled: channel.settings.downlinkEnabled,
       );
       state = [
         ...state.sublist(0, channel.index),
@@ -73,9 +77,6 @@ class ChannelService extends _$ChannelService {
         ...state.sublist(channel.index + 1),
       ];
       _logger.i('Added channel');
-    } else if (packet.whichPayloadVariant() ==
-        FromRadio_PayloadVariant.queueStatus) {
-      //if (packet.queueStatus.meshPacketId == )
     }
   }
 
@@ -150,6 +151,8 @@ class ChannelService extends _$ChannelService {
         settings: ChannelSettings(
           psk: channel.key,
           name: channel.name,
+          uplinkEnabled: channel.uplinkEnabled,
+          downlinkEnabled: channel.downlinkEnabled,
         ),
         role: channel.role,
       ),

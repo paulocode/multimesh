@@ -20,6 +20,8 @@ mixin _$MeshChannel {
   Channel_Role get role => throw _privateConstructorUsedError;
   List<int> get key => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
+  bool get uplinkEnabled => throw _privateConstructorUsedError;
+  bool get downlinkEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeshChannelCopyWith<MeshChannel> get copyWith =>
@@ -32,7 +34,13 @@ abstract class $MeshChannelCopyWith<$Res> {
           MeshChannel value, $Res Function(MeshChannel) then) =
       _$MeshChannelCopyWithImpl<$Res, MeshChannel>;
   @useResult
-  $Res call({String name, Channel_Role role, List<int> key, int index});
+  $Res call(
+      {String name,
+      Channel_Role role,
+      List<int> key,
+      int index,
+      bool uplinkEnabled,
+      bool downlinkEnabled});
 }
 
 /// @nodoc
@@ -52,6 +60,8 @@ class _$MeshChannelCopyWithImpl<$Res, $Val extends MeshChannel>
     Object? role = null,
     Object? key = null,
     Object? index = null,
+    Object? uplinkEnabled = null,
+    Object? downlinkEnabled = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -70,6 +80,14 @@ class _$MeshChannelCopyWithImpl<$Res, $Val extends MeshChannel>
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
+      uplinkEnabled: null == uplinkEnabled
+          ? _value.uplinkEnabled
+          : uplinkEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downlinkEnabled: null == downlinkEnabled
+          ? _value.downlinkEnabled
+          : downlinkEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,7 +100,13 @@ abstract class _$$MeshChannelImplCopyWith<$Res>
       __$$MeshChannelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, Channel_Role role, List<int> key, int index});
+  $Res call(
+      {String name,
+      Channel_Role role,
+      List<int> key,
+      int index,
+      bool uplinkEnabled,
+      bool downlinkEnabled});
 }
 
 /// @nodoc
@@ -100,6 +124,8 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
     Object? role = null,
     Object? key = null,
     Object? index = null,
+    Object? uplinkEnabled = null,
+    Object? downlinkEnabled = null,
   }) {
     return _then(_$MeshChannelImpl(
       name: null == name
@@ -118,6 +144,14 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
+      uplinkEnabled: null == uplinkEnabled
+          ? _value.uplinkEnabled
+          : uplinkEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downlinkEnabled: null == downlinkEnabled
+          ? _value.downlinkEnabled
+          : downlinkEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -129,7 +163,9 @@ class _$MeshChannelImpl extends _MeshChannel {
       {required this.name,
       required this.role,
       required final List<int> key,
-      required this.index})
+      required this.index,
+      required this.uplinkEnabled,
+      required this.downlinkEnabled})
       : _key = key,
         super._();
 
@@ -147,10 +183,14 @@ class _$MeshChannelImpl extends _MeshChannel {
 
   @override
   final int index;
+  @override
+  final bool uplinkEnabled;
+  @override
+  final bool downlinkEnabled;
 
   @override
   String toString() {
-    return 'MeshChannel(name: $name, role: $role, key: $key, index: $index)';
+    return 'MeshChannel(name: $name, role: $role, key: $key, index: $index, uplinkEnabled: $uplinkEnabled, downlinkEnabled: $downlinkEnabled)';
   }
 
   @override
@@ -161,12 +201,22 @@ class _$MeshChannelImpl extends _MeshChannel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.role, role) || other.role == role) &&
             const DeepCollectionEquality().equals(other._key, _key) &&
-            (identical(other.index, index) || other.index == index));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.uplinkEnabled, uplinkEnabled) ||
+                other.uplinkEnabled == uplinkEnabled) &&
+            (identical(other.downlinkEnabled, downlinkEnabled) ||
+                other.downlinkEnabled == downlinkEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, role,
-      const DeepCollectionEquality().hash(_key), index);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      role,
+      const DeepCollectionEquality().hash(_key),
+      index,
+      uplinkEnabled,
+      downlinkEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +230,9 @@ abstract class _MeshChannel extends MeshChannel {
       {required final String name,
       required final Channel_Role role,
       required final List<int> key,
-      required final int index}) = _$MeshChannelImpl;
+      required final int index,
+      required final bool uplinkEnabled,
+      required final bool downlinkEnabled}) = _$MeshChannelImpl;
   const _MeshChannel._() : super._();
 
   @override
@@ -191,6 +243,10 @@ abstract class _MeshChannel extends MeshChannel {
   List<int> get key;
   @override
   int get index;
+  @override
+  bool get uplinkEnabled;
+  @override
+  bool get downlinkEnabled;
   @override
   @JsonKey(ignore: true)
   _$$MeshChannelImplCopyWith<_$MeshChannelImpl> get copyWith =>

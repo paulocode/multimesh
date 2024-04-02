@@ -10,6 +10,8 @@ class MeshChannel with _$MeshChannel {
     required Channel_Role role,
     required List<int> key,
     required int index,
+    required bool uplinkEnabled,
+    required bool downlinkEnabled,
   }) = _MeshChannel;
 
   const MeshChannel._();
