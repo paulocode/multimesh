@@ -59,16 +59,14 @@ class _ManualNetworkAddressInputState
     return Row(
       children: [
         Expanded(
-          child: SizedBox(
-            height: 50,
-            child: TextField(
-              controller: _manualInputController,
-              textInputAction: TextInputAction.go,
-              onSubmitted: (_) => _connect(),
-              decoration: const InputDecoration(
-                hintText: 'Host/IP Address',
-                filled: true,
-              ),
+          child: TextField(
+            controller: _manualInputController,
+            textInputAction: TextInputAction.go,
+            onSubmitted: (_) => _connect(),
+            decoration: const InputDecoration(
+              floatingLabelBehavior: FloatingLabelBehavior.auto,
+              alignLabelWithHint: true,
+              labelText: 'Host/IP Address',
             ),
           ),
         ),

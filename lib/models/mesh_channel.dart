@@ -1,9 +1,13 @@
-class MeshChannel {
-  MeshChannel({
-    required this.name,
-    required this.used,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'mesh_channel.freezed.dart';
 
-  final String name;
-  final bool used;
+@freezed
+class MeshChannel with _$MeshChannel {
+  const factory MeshChannel({
+    required String name,
+    required bool used,
+    required List<int> key,
+  }) = _MeshChannel;
+
+  const MeshChannel._();
 }

@@ -101,11 +101,6 @@ class _RadioConnectionScreenState extends ConsumerState<RadioConnectionScreen> {
                     ),
                   ),
                   const SliverToBoxAdapter(
-                    child: SizedBox(
-                      height: 16,
-                    ),
-                  ),
-                  const SliverToBoxAdapter(
                     child: ManualNetworkAddressInput(),
                   ),
                 ],

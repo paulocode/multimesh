@@ -46,10 +46,10 @@ class RadioConfigScreen extends ConsumerWidget {
                       style: ListTileStyle.list,
                       onTap: radioConnectorState is Connected
                           ? () {
-                              context.push('/channelQrScanner');
+                              context.push('/channelsConfig');
                             }
                           : null,
-                      title: const Text('Channels (Scan QR)'),
+                      title: const Text('Channels'),
                       trailing: const Icon(Icons.chevron_right),
                     ),
                   ),

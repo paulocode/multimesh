@@ -39,7 +39,7 @@ class ChannelService extends _$ChannelService {
     ref.onDispose(subscription.cancel);
     return List<MeshChannel>.generate(
       MESHTASTIC_MAX_CHANNELS,
-      (index) => MeshChannel(name: 'DISABLED', used: false),
+      (index) => const MeshChannel(name: 'DISABLED', used: false, key: []),
     );
   }
 
@@ -59,6 +59,7 @@ class ChannelService extends _$ChannelService {
       final meshChannel = MeshChannel(
         name: channelName,
         used: channel.role != Channel_Role.DISABLED,
+        key: channel.settings.psk,
       );
       state = [
         ...state.sublist(0, channel.index),
