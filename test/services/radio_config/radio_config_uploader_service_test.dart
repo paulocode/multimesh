@@ -12,7 +12,7 @@ import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
 import 'package:multimesh/providers/radio_config/radio_config_uploader_service.dart';
-import 'package:multimesh/services/queued_radio_writer.dart';
+import 'package:multimesh/services/ack_waiting_radio_writer.dart';
 
 import '../../common.dart';
 import 'radio_config_uploader_service_test.mocks.dart';
@@ -44,7 +44,9 @@ void main() {
         portNum: PortNum.ADMIN_APP,
         payload: anyNamed('payload'),
       ),
-    ).thenAnswer((_) async {});
+    ).thenAnswer((_) async {
+      return;
+    });
     final loraConfig = Config_LoRaConfig(channelNum: 31415);
 
     container

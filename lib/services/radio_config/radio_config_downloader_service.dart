@@ -7,8 +7,8 @@ import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
+import '../ack_waiting_radio_writer.dart';
 import '../interfaces/radio_reader.dart';
-import '../queued_radio_writer.dart';
 
 class RadioConfigDownloaderService {
   RadioConfigDownloaderService({

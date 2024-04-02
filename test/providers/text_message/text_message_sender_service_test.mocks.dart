@@ -18,7 +18,7 @@ import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i9;
 import 'package:multimesh/repository/text_message_repository.dart' as _i12;
-import 'package:multimesh/services/queued_radio_writer.dart' as _i5;
+import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i5;
 import 'package:multimesh/services/text_message/text_message_stream_service.dart'
     as _i14;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;

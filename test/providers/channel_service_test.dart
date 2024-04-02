@@ -14,8 +14,8 @@ import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/channel_service.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
 import 'package:multimesh/providers/radio_reader.dart';
+import 'package:multimesh/services/ack_waiting_radio_writer.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
-import 'package:multimesh/services/queued_radio_writer.dart';
 
 import '../common.dart';
 import '../mock_stream.dart';

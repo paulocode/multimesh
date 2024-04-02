@@ -10,8 +10,8 @@ import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     hide MockRadioConfigService;
 import 'package:multimesh/providers/radio_connector_service.dart'
     hide MockRadioConnectorService;
+import 'package:multimesh/services/ack_waiting_radio_writer.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
-import 'package:multimesh/services/queued_radio_writer.dart';
 import 'package:multimesh/services/radio_config/radio_config_downloader_service.dart';
 
 import '../../mock_stream.dart';

@@ -3,7 +3,7 @@ import 'package:logger/logger.dart';
 import '../../protobufs/generated/meshtastic/admin.pb.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../queued_radio_writer.dart';
+import '../ack_waiting_radio_writer.dart';
 
 class RadioConfigUploaderService {
   RadioConfigUploaderService({

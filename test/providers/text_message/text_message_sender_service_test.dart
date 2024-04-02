@@ -15,7 +15,7 @@ import 'package:multimesh/providers/repository/text_message_repository.dart';
 import 'package:multimesh/providers/text_message/text_message_sender_service.dart';
 import 'package:multimesh/providers/text_message/text_message_stream_service.dart';
 import 'package:multimesh/repository/text_message_repository.dart';
-import 'package:multimesh/services/queued_radio_writer.dart';
+import 'package:multimesh/services/ack_waiting_radio_writer.dart';
 import 'package:multimesh/services/text_message/text_message_stream_service.dart';
 
 import '../../common.dart';

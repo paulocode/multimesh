@@ -12,7 +12,7 @@ import '../protobufs/generated/meshtastic/channel.pb.dart';
 import '../protobufs/generated/meshtastic/config.pb.dart';
 import '../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../services/queued_radio_writer.dart';
+import '../services/ack_waiting_radio_writer.dart';
 import 'ack_waiting_radio_writer.dart';
 import 'radio_config/radio_config_service.dart';
 import 'radio_reader.dart';

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../services/queued_radio_writer.dart';
+import '../services/ack_waiting_radio_writer.dart';
 import 'radio_config/radio_config_service.dart';
 import 'radio_reader.dart';
 import 'radio_writer.dart';

@@ -21,8 +21,8 @@ import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i14;
 import 'package:multimesh/providers/radio_connector_service.dart' as _i18;
+import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i7;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i11;
-import 'package:multimesh/services/queued_radio_writer.dart' as _i7;
 import 'package:multimesh/services/radio_config/radio_config_downloader_service.dart'
     as _i13;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
