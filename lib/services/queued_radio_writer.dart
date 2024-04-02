@@ -69,7 +69,7 @@ class AckWaitingRadioWriter {
     _currentPacketId++;
 
     _currentPacketId =
-        _currentPacketId & 0xffffffff; // keep from exceeding 32 bits
+    _currentPacketId & 0xffffffff; // keep from exceeding 32 bits
 
     // Use modulus and +1 to ensure we skip 0 on any values we return
     return (_currentPacketId % numPacketIds) + 1;
