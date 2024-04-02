@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,18 +34,20 @@ Future<void> sendTextMessage(
     channel: chatType.channel,
     time: DateTime.now(),
     owner: myNodeNum,
+    packetId: radioWriter.generatePacketId(),
   );
 
-  final packetId = radioWriter.sendMeshPacket(
+  await textMessageRepository.add(textMessage: message);
+  await textMessageStreamService.onNewMessage(message);
+  // start the service to receive updates
+  ref.watch(textMessageStatusServiceProvider(textMessage: message));
+
+  await radioWriter.sendMeshPacket(
     channel: message.channel,
     to: message.to,
     wantAck: true,
     portNum: PortNum.TEXT_MESSAGE_APP,
     payload: utf8.encode(text),
+    id: message.packetId,
   );
-  final messageWithPacketId = message.copyWith(packetId: packetId);
-  await textMessageRepository.add(textMessage: messageWithPacketId);
-  await textMessageStreamService.onNewMessage(messageWithPacketId);
-  // start the service to receive updates
-  ref.watch(textMessageStatusServiceProvider(textMessage: messageWithPacketId));
 }

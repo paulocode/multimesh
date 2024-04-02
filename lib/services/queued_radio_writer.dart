@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -22,12 +21,10 @@ class QueuedRadioWriter {
 
   RadioWriter? _radioWriter;
   StreamSubscription<FromRadio>? _packetSub;
-  final _packetQueue = Queue<MeshPacket>();
   final _logger = Logger();
   final _random = Random();
   int _currentPacketId = 0;
-  int _needAckPacketId = 0;
-  var _packetAckCompleter = Completer<void>();
+  Completer<void>? _packetAckCompleter;
   final Duration _sendTimeout;
   final int Function() _hopLimitProvider;
 
@@ -42,18 +39,19 @@ class QueuedRadioWriter {
     _packetSub = radioReader.onPacketReceived().listen(_packetListener);
   }
 
-  int sendMeshPacket({
+  Future<void> sendMeshPacket({
     required int to,
     int channel = 0,
     bool wantAck = false,
     required PortNum portNum,
     required Uint8List payload,
-  }) {
-    final id = _generatePacketId();
+    int? id,
+  }) async {
+    final _id = id ?? generatePacketId();
     final meshPacket = MeshPacket(
       to: to,
       hopLimit: _hopLimitProvider(),
-      id: id,
+      id: _id,
       wantAck: wantAck,
       priority: MeshPacket_Priority.RELIABLE,
       channel: channel,
@@ -62,14 +60,10 @@ class QueuedRadioWriter {
         payload: payload,
       ),
     );
-    _logger.i('Queueing MeshPacket...\n$meshPacket');
-    if (_packetQueue.isEmpty) {
-      _packetQueue.add(meshPacket);
-      _startPacketQueue();
-    } else {
-      _packetQueue.add(meshPacket);
-    }
-    return id;
+    _logger.i('Sending MeshPacket...\n$meshPacket');
+    _packetAckCompleter = Completer();
+    await _radioWriter?.write(ToRadio(packet: meshPacket).writeToBuffer());
+    await _packetAckCompleter?.future.timeout(_sendTimeout);
   }
 
   Future<void> sendWantConfig({required int wantConfigId}) async {
@@ -78,7 +72,7 @@ class QueuedRadioWriter {
     await _radioWriter?.write(packet.writeToBuffer());
   }
 
-  int _generatePacketId() {
+  int generatePacketId() {
     const numPacketIds = (1 << 32) -
         1; // A mask for only the valid packet ID bits, either 255 or maxint
 
@@ -93,43 +87,19 @@ class QueuedRadioWriter {
 
   void _packetListener(FromRadio packet) {
     if (packet.whichPayloadVariant() == FromRadio_PayloadVariant.queueStatus) {
-      _logger.i('QueueStatus: ${packet.queueStatus.meshPacketId}');
-      if (!_packetAckCompleter.isCompleted &&
-          _needAckPacketId == packet.queueStatus.meshPacketId) {
-        _packetAckCompleter.complete();
+      final id = packet.queueStatus.meshPacketId;
+      _logger.i('QueueStatus: $id');
+      if (_packetAckCompleter?.isCompleted == false) {
+        _packetAckCompleter?.complete();
       }
     }
-  }
-
-  Future<void> _startPacketQueue() async {
-    final packetQueue = _packetQueue;
-    _logger.i('Started packet queue');
-    while (packetQueue.isNotEmpty) {
-      _packetAckCompleter = Completer();
-      final packet = packetQueue.first;
-      try {
-        _needAckPacketId = packet.id;
-        await _radioWriter?.write(ToRadio(packet: packet).writeToBuffer());
-        await _packetAckCompleter.future.timeout(_sendTimeout);
-        packetQueue.removeFirst();
-        _logger.i('${packet.id} acknowledged');
-      } catch (e) {
-        _logger.w('Packet queue failed with $e');
-        // possibly empty now due to async
-        if (packetQueue.isNotEmpty) {
-          packetQueue.removeFirst();
-        }
-      }
-    }
-    _logger.i('Packet queue empty');
   }
 
   void dispose() {
     _logger.i('disposing queue $hashCode');
     _packetSub?.cancel();
-    _packetQueue.clear();
-    if (!_packetAckCompleter.isCompleted) {
-      _packetAckCompleter.complete();
+    if (_packetAckCompleter?.isCompleted == false) {
+      _packetAckCompleter?.complete();
     }
   }
 }

@@ -3,8 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:typed_data' as _i9;
+import 'dart:async' as _i8;
+import 'dart:typed_data' as _i10;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/models/radio_configuration.dart' as _i3;
@@ -14,7 +14,7 @@ import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
     as _i12;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i13;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
-    as _i8;
+    as _i9;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i11;
 import 'package:multimesh/repository/text_message_repository.dart' as _i14;
@@ -97,12 +97,13 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
       );
 
   @override
-  int sendMeshPacket({
+  _i8.Future<void> sendMeshPacket({
     required int? to,
     int? channel = 0,
     bool? wantAck = false,
-    required _i8.PortNum? portNum,
-    required _i9.Uint8List? payload,
+    required _i9.PortNum? portNum,
+    required _i10.Uint8List? payload,
+    int? id,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -114,22 +115,33 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
             #wantAck: wantAck,
             #portNum: portNum,
             #payload: payload,
+            #id: id,
           },
         ),
-        returnValue: 0,
-      ) as int);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i10.Future<void> sendWantConfig({required int? wantConfigId}) =>
+  _i8.Future<void> sendWantConfig({required int? wantConfigId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendWantConfig,
           [],
           {#wantConfigId: wantConfigId},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
+
+  @override
+  int generatePacketId() => (super.noSuchMethod(
+        Invocation.method(
+          #generatePacketId,
+          [],
+        ),
+        returnValue: 0,
+      ) as int);
 
   @override
   void dispose() => super.noSuchMethod(
@@ -274,29 +286,28 @@ class MockTextMessageRepository extends _i1.Mock
   }
 
   @override
-  _i10.Future<List<List<_i4.TextMessage>>> getByNodeNum() =>
-      (super.noSuchMethod(
+  _i8.Future<List<List<_i4.TextMessage>>> getByNodeNum() => (super.noSuchMethod(
         Invocation.method(
           #getByNodeNum,
           [],
         ),
-        returnValue: _i10.Future<List<List<_i4.TextMessage>>>.value(
+        returnValue: _i8.Future<List<List<_i4.TextMessage>>>.value(
             <List<_i4.TextMessage>>[]),
-      ) as _i10.Future<List<List<_i4.TextMessage>>>);
+      ) as _i8.Future<List<List<_i4.TextMessage>>>);
 
   @override
-  _i10.Future<int> add({required _i4.TextMessage? textMessage}) =>
+  _i8.Future<int> add({required _i4.TextMessage? textMessage}) =>
       (super.noSuchMethod(
         Invocation.method(
           #add,
           [],
           {#textMessage: textMessage},
         ),
-        returnValue: _i10.Future<int>.value(0),
-      ) as _i10.Future<int>);
+        returnValue: _i8.Future<int>.value(0),
+      ) as _i8.Future<int>);
 
   @override
-  _i10.Future<void> updateStatusByPacketId({
+  _i8.Future<void> updateStatusByPacketId({
     required _i15.TextMessageStatus? status,
     required int? packetId,
   }) =>
@@ -309,19 +320,19 @@ class MockTextMessageRepository extends _i1.Mock
             #packetId: packetId,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i10.Future<_i4.TextMessage> getByPacketId({required int? packetId}) =>
+  _i8.Future<_i4.TextMessage> getByPacketId({required int? packetId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getByPacketId,
           [],
           {#packetId: packetId},
         ),
-        returnValue: _i10.Future<_i4.TextMessage>.value(_FakeTextMessage_2(
+        returnValue: _i8.Future<_i4.TextMessage>.value(_FakeTextMessage_2(
           this,
           Invocation.method(
             #getByPacketId,
@@ -329,10 +340,10 @@ class MockTextMessageRepository extends _i1.Mock
             {#packetId: packetId},
           ),
         )),
-      ) as _i10.Future<_i4.TextMessage>);
+      ) as _i8.Future<_i4.TextMessage>);
 
   @override
-  _i10.Future<List<_i4.TextMessage>> getDirectMessagesBy({
+  _i8.Future<List<_i4.TextMessage>> getDirectMessagesBy({
     required int? myNodeNum,
     required int? otherNodeNum,
     required int? limit,
@@ -352,11 +363,11 @@ class MockTextMessageRepository extends _i1.Mock
           },
         ),
         returnValue:
-            _i10.Future<List<_i4.TextMessage>>.value(<_i4.TextMessage>[]),
-      ) as _i10.Future<List<_i4.TextMessage>>);
+            _i8.Future<List<_i4.TextMessage>>.value(<_i4.TextMessage>[]),
+      ) as _i8.Future<List<_i4.TextMessage>>);
 
   @override
-  _i10.Future<List<_i4.TextMessage>> getBy({
+  _i8.Future<List<_i4.TextMessage>> getBy({
     required int? toNode,
     required int? channel,
     required int? limit,
@@ -376,11 +387,11 @@ class MockTextMessageRepository extends _i1.Mock
           },
         ),
         returnValue:
-            _i10.Future<List<_i4.TextMessage>>.value(<_i4.TextMessage>[]),
-      ) as _i10.Future<List<_i4.TextMessage>>);
+            _i8.Future<List<_i4.TextMessage>>.value(<_i4.TextMessage>[]),
+      ) as _i8.Future<List<_i4.TextMessage>>);
 
   @override
-  _i10.Future<int> countDirectMessagesBy({
+  _i8.Future<int> countDirectMessagesBy({
     required int? myNodeNum,
     required int? otherNodeNum,
     required int? owner,
@@ -395,11 +406,11 @@ class MockTextMessageRepository extends _i1.Mock
             #owner: owner,
           },
         ),
-        returnValue: _i10.Future<int>.value(0),
-      ) as _i10.Future<int>);
+        returnValue: _i8.Future<int>.value(0),
+      ) as _i8.Future<int>);
 
   @override
-  _i10.Future<int> count({
+  _i8.Future<int> count({
     required int? channel,
     required int? toNode,
     required int? owner,
@@ -414,8 +425,8 @@ class MockTextMessageRepository extends _i1.Mock
             #owner: owner,
           },
         ),
-        returnValue: _i10.Future<int>.value(0),
-      ) as _i10.Future<int>);
+        returnValue: _i8.Future<int>.value(0),
+      ) as _i8.Future<int>);
 }
 
 /// A class which mocks [TextMessageStreamService].
@@ -428,37 +439,37 @@ class MockTextMessageStreamService extends _i1.Mock
   }
 
   @override
-  _i10.Stream<List<_i4.TextMessage>> get stream => (super.noSuchMethod(
+  _i8.Stream<List<_i4.TextMessage>> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i10.Stream<List<_i4.TextMessage>>.empty(),
-      ) as _i10.Stream<List<_i4.TextMessage>>);
+        returnValue: _i8.Stream<List<_i4.TextMessage>>.empty(),
+      ) as _i8.Stream<List<_i4.TextMessage>>);
 
   @override
-  _i10.Future<bool> get allMessagesLoaded => (super.noSuchMethod(
+  _i8.Future<bool> get allMessagesLoaded => (super.noSuchMethod(
         Invocation.getter(#allMessagesLoaded),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i10.Future<void> loadOlderMessages() => (super.noSuchMethod(
+  _i8.Future<void> loadOlderMessages() => (super.noSuchMethod(
         Invocation.method(
           #loadOlderMessages,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i10.Future<void> onNewMessage(_i4.TextMessage? textMessage) =>
+  _i8.Future<void> onNewMessage(_i4.TextMessage? textMessage) =>
       (super.noSuchMethod(
         Invocation.method(
           #onNewMessage,
           [textMessage],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
   List<_i4.TextMessage> getMessages() => (super.noSuchMethod(

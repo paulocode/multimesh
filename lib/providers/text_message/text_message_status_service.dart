@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/text_message.dart';
@@ -22,6 +23,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   late KeepAliveLink _link;
   StreamSubscription<FromRadio>? _packetListener;
   late Timer _timer;
+  final _logger = Logger();
 
   @override
   Future<TextMessageStatus> build({
@@ -45,6 +47,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
     _timer = Timer(timeout, () async {
       await _packetListener?.cancel();
       _link.close();
+      _logger.w('Message ${_textMessage.packetId} timed out');
       state = const AsyncValue.data(TextMessageStatus.RADIO_ERROR);
       await _textMessageRepository.updateStatusByPacketId(
         packetId: _textMessage.packetId,

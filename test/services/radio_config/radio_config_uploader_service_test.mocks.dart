@@ -3,12 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:typed_data' as _i6;
+import 'dart:async' as _i5;
+import 'dart:typed_data' as _i7;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
-    as _i5;
+    as _i6;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i4;
 import 'package:multimesh/services/interfaces/radio_writer.dart' as _i3;
 import 'package:multimesh/services/queued_radio_writer.dart' as _i2;
@@ -53,12 +53,13 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i2.QueuedRadioWriter {
       );
 
   @override
-  int sendMeshPacket({
+  _i5.Future<void> sendMeshPacket({
     required int? to,
     int? channel = 0,
     bool? wantAck = false,
-    required _i5.PortNum? portNum,
-    required _i6.Uint8List? payload,
+    required _i6.PortNum? portNum,
+    required _i7.Uint8List? payload,
+    int? id,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -70,22 +71,33 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i2.QueuedRadioWriter {
             #wantAck: wantAck,
             #portNum: portNum,
             #payload: payload,
+            #id: id,
           },
         ),
-        returnValue: 0,
-      ) as int);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i7.Future<void> sendWantConfig({required int? wantConfigId}) =>
+  _i5.Future<void> sendWantConfig({required int? wantConfigId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #sendWantConfig,
           [],
           {#wantConfigId: wantConfigId},
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  int generatePacketId() => (super.noSuchMethod(
+        Invocation.method(
+          #generatePacketId,
+          [],
+        ),
+        returnValue: 0,
+      ) as int);
 
   @override
   void dispose() => super.noSuchMethod(

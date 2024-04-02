@@ -129,7 +129,8 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 },
               ),
               OutlinedButton.icon(
-                onPressed: radioConnectorState is Connected && prevLoraConfig != _loraConfig
+                onPressed: radioConnectorState is Connected &&
+                        prevLoraConfig != _loraConfig
                     ? () async {
                         ref
                             .read(radioConfigServiceProvider.notifier)

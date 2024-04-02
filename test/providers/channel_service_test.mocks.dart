@@ -100,12 +100,13 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i7.QueuedRadioWriter {
       );
 
   @override
-  int sendMeshPacket({
+  _i5.Future<void> sendMeshPacket({
     required int? to,
     int? channel = 0,
     bool? wantAck = false,
     required _i9.PortNum? portNum,
     required _i10.Uint8List? payload,
+    int? id,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -117,10 +118,12 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i7.QueuedRadioWriter {
             #wantAck: wantAck,
             #portNum: portNum,
             #payload: payload,
+            #id: id,
           },
         ),
-        returnValue: 0,
-      ) as int);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   _i5.Future<void> sendWantConfig({required int? wantConfigId}) =>
@@ -133,6 +136,15 @@ class MockQueuedRadioWriter extends _i1.Mock implements _i7.QueuedRadioWriter {
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
       ) as _i5.Future<void>);
+
+  @override
+  int generatePacketId() => (super.noSuchMethod(
+        Invocation.method(
+          #generatePacketId,
+          [],
+        ),
+        returnValue: 0,
+      ) as int);
 
   @override
   void dispose() => super.noSuchMethod(
