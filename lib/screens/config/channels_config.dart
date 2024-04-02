@@ -64,7 +64,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                       child: Card(
                         child: ListTile(
                           leading: Text(index.toString()),
-                          title: Text(channels[index % 2].name),
+                          title: Text(channels[index].name),
                           trailing: const Icon(Icons.chevron_right),
                         ),
                       ),

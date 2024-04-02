@@ -33,6 +33,13 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
   }
 
   @override
+  void dispose() {
+    _channelNameController.dispose();
+    _keyController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
