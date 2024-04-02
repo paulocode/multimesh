@@ -127,11 +127,12 @@ class _FakeBleMeshRadio_7 extends _i1.SmartFake implements _i6.BleMeshRadio {
         );
 }
 
-/// A class which mocks [QueuedRadioWriter].
+/// A class which mocks [AckWaitingRadioWriter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQueuedRadioWriter extends _i1.Mock implements _i7.QueuedRadioWriter {
-  MockQueuedRadioWriter() {
+class MockAckWaitingRadioWriter extends _i1.Mock
+    implements _i7.AckWaitingRadioWriter {
+  MockAckWaitingRadioWriter() {
     _i1.throwOnMissingStub(this);
   }
 

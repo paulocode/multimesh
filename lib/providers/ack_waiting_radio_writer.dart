@@ -8,11 +8,11 @@ import 'radio_connector_service.dart';
 import 'radio_reader.dart';
 import 'radio_writer.dart';
 
-part 'queued_radio_writer.g.dart';
+part 'ack_waiting_radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
-QueuedRadioWriter queuedRadioWriter(QueuedRadioWriterRef ref) {
-  final queuedRadioWriter = QueuedRadioWriter(
+AckWaitingRadioWriter ackWaitingRadioWriter(AckWaitingRadioWriterRef ref) {
+  final queuedRadioWriter = AckWaitingRadioWriter(
     hopLimitProvider: () =>
         ref.read(radioConfigServiceProvider).loraConfig.hopLimit,
   );

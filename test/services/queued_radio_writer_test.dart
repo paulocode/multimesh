@@ -23,7 +23,7 @@ import 'queued_radio_writer_test.mocks.dart';
 ])
 void main() {
   late MockRadioWriter radioWriter;
-  late QueuedRadioWriter queuedRadioWriter;
+  late AckWaitingRadioWriter queuedRadioWriter;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> packetStream;
 
@@ -34,7 +34,7 @@ void main() {
 
     when(radioReader.onPacketReceived()).thenAnswer((_) => packetStream);
 
-    queuedRadioWriter = QueuedRadioWriter(
+    queuedRadioWriter = AckWaitingRadioWriter(
       sendTimeout: const Duration(seconds: 1),
       hopLimitProvider: () => 7,
     )

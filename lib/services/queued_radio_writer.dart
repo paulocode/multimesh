@@ -9,8 +9,8 @@ import '../protobufs/generated/meshtastic/portnums.pb.dart';
 import 'interfaces/radio_reader.dart';
 import 'interfaces/radio_writer.dart';
 
-class QueuedRadioWriter {
-  QueuedRadioWriter({
+class AckWaitingRadioWriter {
+  AckWaitingRadioWriter({
     Duration sendTimeout = const Duration(seconds: 30),
     required int Function() hopLimitProvider,
   })  : _sendTimeout = sendTimeout,

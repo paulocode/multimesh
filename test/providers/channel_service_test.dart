@@ -10,8 +10,8 @@ import 'package:multimesh/protobufs/generated/meshtastic/channel.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
+import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/channel_service.dart';
-import 'package:multimesh/providers/queued_radio_writer.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
 import 'package:multimesh/providers/radio_reader.dart';
 import 'package:multimesh/services/interfaces/radio_reader.dart';
@@ -23,18 +23,18 @@ import 'channel_service_test.mocks.dart';
 
 @GenerateMocks([
   RadioReader,
-  QueuedRadioWriter,
+  AckWaitingRadioWriter,
   RadioConfigService,
 ])
 void main() {
   late ProviderContainer container;
   late MockRadioReader radioReader;
-  late MockQueuedRadioWriter radioWriter;
+  late MockAckWaitingRadioWriter radioWriter;
   late MockStream<FromRadio> stream;
 
   setUp(() {
     radioReader = MockRadioReader();
-    radioWriter = MockQueuedRadioWriter();
+    radioWriter = MockAckWaitingRadioWriter();
     stream = MockStream();
     when(radioReader.onPacketReceived()).thenAnswer((_) => stream);
     when(
@@ -43,11 +43,11 @@ void main() {
         portNum: anyNamed('portNum'),
         payload: anyNamed('payload'),
       ),
-    ).thenReturn(1);
+    ).thenAnswer((async) async {});
     container = createContainer(
       overrides: [
         radioReaderProvider.overrideWith((ref) => radioReader),
-        queuedRadioWriterProvider.overrideWith((ref) => radioWriter),
+        ackWaitingRadioWriterProvider.overrideWith((ref) => radioWriter),
       ],
     );
     container.read(radioConfigServiceProvider.notifier).setMyNodeNum(555);

@@ -9,7 +9,7 @@ import 'package:multimesh/protobufs/generated/meshtastic/admin.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:multimesh/providers/queued_radio_writer.dart';
+import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
 import 'package:multimesh/providers/radio_config/radio_config_uploader_service.dart';
 import 'package:multimesh/services/queued_radio_writer.dart';
@@ -17,16 +17,16 @@ import 'package:multimesh/services/queued_radio_writer.dart';
 import '../../common.dart';
 import 'radio_config_uploader_service_test.mocks.dart';
 
-@GenerateMocks([QueuedRadioWriter])
+@GenerateMocks([AckWaitingRadioWriter])
 void main() {
   late ProviderContainer container;
-  late MockQueuedRadioWriter writer;
+  late MockAckWaitingRadioWriter writer;
 
   setUp(() {
-    writer = MockQueuedRadioWriter();
+    writer = MockAckWaitingRadioWriter();
     container = createContainer(
       overrides: [
-        queuedRadioWriterProvider.overrideWith((_) => writer),
+        ackWaitingRadioWriterProvider.overrideWith((_) => writer),
         radioConfigServiceProvider.overrideWith(MockRadioConfigService.new),
       ],
     );
@@ -44,7 +44,7 @@ void main() {
         portNum: PortNum.ADMIN_APP,
         payload: anyNamed('payload'),
       ),
-    ).thenReturn(9999);
+    ).thenAnswer((_) async {});
     final loraConfig = Config_LoRaConfig(channelNum: 31415);
 
     container

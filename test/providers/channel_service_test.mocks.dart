@@ -73,11 +73,12 @@ class MockRadioReader extends _i1.Mock implements _i4.RadioReader {
       ) as _i5.Stream<_i6.FromRadio>);
 }
 
-/// A class which mocks [QueuedRadioWriter].
+/// A class which mocks [AckWaitingRadioWriter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQueuedRadioWriter extends _i1.Mock implements _i7.QueuedRadioWriter {
-  MockQueuedRadioWriter() {
+class MockAckWaitingRadioWriter extends _i1.Mock
+    implements _i7.AckWaitingRadioWriter {
+  MockAckWaitingRadioWriter() {
     _i1.throwOnMissingStub(this);
   }
 

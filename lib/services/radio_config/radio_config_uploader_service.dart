@@ -7,12 +7,12 @@ import '../queued_radio_writer.dart';
 
 class RadioConfigUploaderService {
   RadioConfigUploaderService({
-    required QueuedRadioWriter radioWriter,
+    required AckWaitingRadioWriter radioWriter,
     required int myNodeNum,
   })  : _radioWriter = radioWriter,
         _myNodeNum = myNodeNum;
 
-  final QueuedRadioWriter _radioWriter;
+  final AckWaitingRadioWriter _radioWriter;
   final int _myNodeNum;
   final _logger = Logger();
 

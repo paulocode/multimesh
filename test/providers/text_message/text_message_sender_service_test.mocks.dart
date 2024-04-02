@@ -70,11 +70,12 @@ class _FakeTextMessage_2 extends _i1.SmartFake implements _i4.TextMessage {
         );
 }
 
-/// A class which mocks [QueuedRadioWriter].
+/// A class which mocks [AckWaitingRadioWriter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQueuedRadioWriter extends _i1.Mock implements _i5.QueuedRadioWriter {
-  MockQueuedRadioWriter() {
+class MockAckWaitingRadioWriter extends _i1.Mock
+    implements _i5.AckWaitingRadioWriter {
+  MockAckWaitingRadioWriter() {
     _i1.throwOnMissingStub(this);
   }
 

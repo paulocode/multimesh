@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
-import '../queued_radio_writer.dart';
+import '../ack_waiting_radio_writer.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/text_message_repository.dart';
 import 'text_message_status_service.dart';
@@ -20,7 +20,7 @@ Future<void> sendTextMessage(
   required ChatType chatType,
   required String text,
 }) async {
-  final radioWriter = ref.watch(queuedRadioWriterProvider);
+  final radioWriter = ref.watch(ackWaitingRadioWriterProvider);
   final myNodeNum =
       ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum));
   final textMessageRepository = ref.watch(textMessageRepositoryProvider);
@@ -40,7 +40,7 @@ Future<void> sendTextMessage(
   await textMessageRepository.add(textMessage: message);
   await textMessageStreamService.onNewMessage(message);
   // start the service to receive updates
-  ref.watch(textMessageStatusServiceProvider(textMessage: message));
+  ref.read(textMessageStatusServiceProvider(textMessage: message));
 
   await radioWriter.sendMeshPacket(
     channel: message.channel,

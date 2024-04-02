@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:multimesh/models/mesh_radio.dart';
 import 'package:multimesh/models/radio_connector_state.dart';
-import 'package:multimesh/providers/queued_radio_writer.dart';
+import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/radio_connector_service.dart';
 import 'package:multimesh/providers/radio_reader.dart';
 import 'package:multimesh/providers/radio_writer.dart';
@@ -17,7 +17,8 @@ import 'package:multimesh/services/null/null_writer.dart';
 
 import '../common.dart';
 import '../mock_stream.dart';
-import 'queued_radio_writer_test.mocks.dart';
+
+import 'ack_waiting_radio_writer_test.mocks.dart';
 
 @GenerateMocks([Socket, RadioWriter, RadioReader])
 void main() {
@@ -35,11 +36,11 @@ void main() {
       );
     });
     test('init', () {
-      container.read(queuedRadioWriterProvider);
+      container.read(ackWaitingRadioWriterProvider);
     });
 
     test('new connection & new radio', () {
-      final writer = container.read(queuedRadioWriterProvider);
+      final writer = container.read(ackWaitingRadioWriterProvider);
       container.read(radioConnectorServiceProvider.notifier).state =
           TcpConnected(
         socket: MockSocket(),
@@ -48,13 +49,13 @@ void main() {
         isNewRadio: true,
       );
 
-      final newWriter = container.read(queuedRadioWriterProvider);
+      final newWriter = container.read(ackWaitingRadioWriterProvider);
 
       expect(writer, isNot(equals(newWriter)));
     });
 
     test('new connection but same radio', () {
-      final writer = container.read(queuedRadioWriterProvider);
+      final writer = container.read(ackWaitingRadioWriterProvider);
       container.read(radioConnectorServiceProvider.notifier).state =
           TcpConnected(
         socket: MockSocket(),
@@ -63,7 +64,7 @@ void main() {
         isNewRadio: false, // ignore: avoid_redundant_argument_values
       );
 
-      final newWriter = container.read(queuedRadioWriterProvider);
+      final newWriter = container.read(ackWaitingRadioWriterProvider);
       expect(writer, equals(newWriter));
     });
   });
@@ -90,17 +91,17 @@ void main() {
     });
 
     test('new reader', () {
-      container.read(queuedRadioWriterProvider);
+      container.read(ackWaitingRadioWriterProvider);
       container.invalidate(radioReaderProvider);
       final newReader = container.read(radioReaderProvider);
       verify(newReader.onPacketReceived());
     });
 
     test('new writer', () async {
-      container.read(queuedRadioWriterProvider);
+      container.read(ackWaitingRadioWriterProvider);
       container.invalidate(radioWriterProvider);
       await container
-          .read(queuedRadioWriterProvider)
+          .read(ackWaitingRadioWriterProvider)
           .sendWantConfig(wantConfigId: 123);
       final newWriter = container.read(radioWriterProvider) as MockRadioWriter;
       verify(newWriter.write(any));

@@ -18,7 +18,7 @@ import '../../mock_stream.dart';
 import 'radio_config_downloader_service_test.mocks.dart';
 
 @GenerateMocks([
-  QueuedRadioWriter,
+  AckWaitingRadioWriter,
   RadioReader,
   RadioConfigDownloaderService,
   RadioConfigService,
@@ -30,14 +30,14 @@ import 'radio_config_downloader_service_test.mocks.dart';
 ])
 void main() {
   late MockRadioConfigService radioConfigService;
-  late MockQueuedRadioWriter radioWriter;
+  late MockAckWaitingRadioWriter radioWriter;
   late MockRadioReader radioReader;
   late MockRadioConnectorService radioConnectorService;
   late MockStream<FromRadio> fromRadioStream;
   final diposers = <void Function()>[];
 
   setUp(() {
-    radioWriter = MockQueuedRadioWriter();
+    radioWriter = MockAckWaitingRadioWriter();
     radioReader = MockRadioReader();
     radioConfigService = MockRadioConfigService();
     radioConnectorService = MockRadioConnectorService();

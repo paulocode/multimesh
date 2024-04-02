@@ -13,7 +13,7 @@ import '../protobufs/generated/meshtastic/config.pb.dart';
 import '../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../services/queued_radio_writer.dart';
-import 'queued_radio_writer.dart';
+import 'ack_waiting_radio_writer.dart';
 import 'radio_config/radio_config_service.dart';
 import 'radio_reader.dart';
 
@@ -22,7 +22,7 @@ part 'channel_service.g.dart';
 @Riverpod(keepAlive: true)
 class ChannelService extends _$ChannelService {
   final _logger = Logger();
-  late QueuedRadioWriter _radioWriter;
+  late AckWaitingRadioWriter _radioWriter;
   late int _myNodeNum;
 
   @override
@@ -32,7 +32,7 @@ class ChannelService extends _$ChannelService {
         .onPacketReceived()
         .listen(_processPacket);
 
-    _radioWriter = ref.watch(queuedRadioWriterProvider);
+    _radioWriter = ref.watch(ackWaitingRadioWriterProvider);
     _myNodeNum = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
 

@@ -26,11 +26,12 @@ import 'package:multimesh/services/queued_radio_writer.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [QueuedRadioWriter].
+/// A class which mocks [AckWaitingRadioWriter].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQueuedRadioWriter extends _i1.Mock implements _i2.QueuedRadioWriter {
-  MockQueuedRadioWriter() {
+class MockAckWaitingRadioWriter extends _i1.Mock
+    implements _i2.AckWaitingRadioWriter {
+  MockAckWaitingRadioWriter() {
     _i1.throwOnMissingStub(this);
   }
 

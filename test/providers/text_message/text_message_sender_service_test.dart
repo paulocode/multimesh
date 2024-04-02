@@ -9,7 +9,7 @@ import 'package:multimesh/constants/ble_constants.dart';
 import 'package:multimesh/models/chat_type.dart';
 import 'package:multimesh/models/text_message.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
-import 'package:multimesh/providers/queued_radio_writer.dart';
+import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
 import 'package:multimesh/providers/repository/text_message_repository.dart';
 import 'package:multimesh/providers/text_message/text_message_sender_service.dart';
@@ -22,26 +22,26 @@ import '../../common.dart';
 import 'text_message_sender_service_test.mocks.dart';
 
 @GenerateMocks([
-  QueuedRadioWriter,
+  AckWaitingRadioWriter,
   RadioConfigService,
   TextMessageRepository,
   TextMessageStreamService,
 ])
 void main() {
   late MockTextMessageRepository textMessageRepository;
-  late MockQueuedRadioWriter radioWriter;
+  late MockAckWaitingRadioWriter radioWriter;
   late MockTextMessageStreamService textMessageStreamService;
   late ProviderContainer container;
 
   setUp(() {
     textMessageRepository = MockTextMessageRepository();
-    radioWriter = MockQueuedRadioWriter();
+    radioWriter = MockAckWaitingRadioWriter();
     textMessageStreamService = MockTextMessageStreamService();
     container = createContainer(
       overrides: [
         textMessageRepositoryProvider
             .overrideWith((ref) => textMessageRepository),
-        queuedRadioWriterProvider.overrideWith((ref) => radioWriter),
+        ackWaitingRadioWriterProvider.overrideWith((ref) => radioWriter),
         textMessageStreamServiceProvider(
           chatType: const ChannelChat(channel: 1),
         ).overrideWith((ref) => textMessageStreamService),
@@ -59,7 +59,7 @@ void main() {
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: anyNamed('payload'),
       ),
-    ).thenReturn(765);
+    ).thenAnswer((_) async {});
 
     when(
       radioWriter.sendMeshPacket(
@@ -70,7 +70,11 @@ void main() {
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: anyNamed('payload'),
       ),
-    ).thenReturn(654);
+    ).thenAnswer((_) async {});
+
+    when(
+      radioWriter.generatePacketId(),
+    ).thenReturn(31415);
 
     when(
       textMessageRepository.add(textMessage: anyNamed('textMessage')),
@@ -98,6 +102,7 @@ void main() {
         wantAck: true,
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: captureAnyNamed('payload'),
+        id: 31415,
       ),
     ).captured.first as Uint8List;
 
@@ -120,6 +125,7 @@ void main() {
         wantAck: true,
         portNum: PortNum.TEXT_MESSAGE_APP,
         payload: captureAnyNamed('payload'),
+        id: 31415,
       ),
     ).captured.first as Uint8List;
 

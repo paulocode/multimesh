@@ -12,7 +12,7 @@ import '../queued_radio_writer.dart';
 
 class RadioConfigDownloaderService {
   RadioConfigDownloaderService({
-    required QueuedRadioWriter radioWriter,
+    required AckWaitingRadioWriter radioWriter,
     required RadioReader radioReader,
     required RadioConnectorState radioConnectorState,
     required RadioConfigService Function() radioConfigServiceProvider,
@@ -31,7 +31,7 @@ class RadioConfigDownloaderService {
     onDispose(subscription.cancel);
   }
 
-  final QueuedRadioWriter _radioWriter;
+  final AckWaitingRadioWriter _radioWriter;
   final RadioReader _radioReader;
   final RadioConnectorState _radioConnectorState;
   final RadioConfigService Function() _radioConfigServiceProvider;

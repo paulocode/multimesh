@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/radio_connector_state.dart';
 import '../../services/radio_config/radio_config_downloader_service.dart';
-import '../queued_radio_writer.dart';
+import '../ack_waiting_radio_writer.dart';
 import '../radio_connector_service.dart';
 import '../radio_reader.dart';
 import 'radio_config_service.dart';
@@ -20,7 +20,7 @@ RadioConfigDownloaderService radioConfigDownloaderService(
     }
   });
   return RadioConfigDownloaderService(
-    radioWriter: ref.watch(queuedRadioWriterProvider),
+    radioWriter: ref.watch(ackWaitingRadioWriterProvider),
     radioReader: ref.watch(radioReaderProvider),
     radioConnectorState: sub.read(),
     // riverpod requires us to read the notifier
