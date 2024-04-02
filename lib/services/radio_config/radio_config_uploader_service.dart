@@ -27,7 +27,7 @@ class RadioConfigUploaderService {
 
     _logger.i('Setting loraConfig:\n$loraConfig');
 
-    _radioWriter.sendMeshPacket(
+    await _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,
       payload: adminMessage.writeToBuffer(),
