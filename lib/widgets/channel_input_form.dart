@@ -40,6 +40,7 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
         children: [
           TextFormField(
             controller: _channelNameController,
+            textInputAction: TextInputAction.done,
             onSaved: (value) {
               channel = channel.copyWith(name: value!);
             },
@@ -57,7 +58,23 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
           ),
           TextFormField(
             controller: _keyController,
+            textInputAction: TextInputAction.done,
+            minLines: 1,
             maxLines: 2,
+            onSaved: (value) {
+              channel = channel.copyWith(key: base64.decode(value!));
+            },
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Input key';
+              }
+              try {
+                base64.decode(value);
+              } on FormatException {
+                return 'Input valid key';
+              }
+              return null;
+            },
             decoration: const InputDecoration(
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               alignLabelWithHint: true,

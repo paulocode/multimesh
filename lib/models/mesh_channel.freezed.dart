@@ -17,8 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MeshChannel {
   String get name => throw _privateConstructorUsedError;
-  bool get used => throw _privateConstructorUsedError;
+  Channel_Role get role => throw _privateConstructorUsedError;
   List<int> get key => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeshChannelCopyWith<MeshChannel> get copyWith =>
@@ -31,7 +32,7 @@ abstract class $MeshChannelCopyWith<$Res> {
           MeshChannel value, $Res Function(MeshChannel) then) =
       _$MeshChannelCopyWithImpl<$Res, MeshChannel>;
   @useResult
-  $Res call({String name, bool used, List<int> key});
+  $Res call({String name, Channel_Role role, List<int> key, int index});
 }
 
 /// @nodoc
@@ -48,22 +49,27 @@ class _$MeshChannelCopyWithImpl<$Res, $Val extends MeshChannel>
   @override
   $Res call({
     Object? name = null,
-    Object? used = null,
+    Object? role = null,
     Object? key = null,
+    Object? index = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      used: null == used
-          ? _value.used
-          : used // ignore: cast_nullable_to_non_nullable
-              as bool,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Channel_Role,
       key: null == key
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$MeshChannelImplCopyWith<$Res>
       __$$MeshChannelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, bool used, List<int> key});
+  $Res call({String name, Channel_Role role, List<int> key, int index});
 }
 
 /// @nodoc
@@ -91,22 +97,27 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? used = null,
+    Object? role = null,
     Object? key = null,
+    Object? index = null,
   }) {
     return _then(_$MeshChannelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      used: null == used
-          ? _value.used
-          : used // ignore: cast_nullable_to_non_nullable
-              as bool,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Channel_Role,
       key: null == key
           ? _value._key
           : key // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -115,14 +126,17 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
 
 class _$MeshChannelImpl extends _MeshChannel {
   const _$MeshChannelImpl(
-      {required this.name, required this.used, required final List<int> key})
+      {required this.name,
+      required this.role,
+      required final List<int> key,
+      required this.index})
       : _key = key,
         super._();
 
   @override
   final String name;
   @override
-  final bool used;
+  final Channel_Role role;
   final List<int> _key;
   @override
   List<int> get key {
@@ -132,8 +146,11 @@ class _$MeshChannelImpl extends _MeshChannel {
   }
 
   @override
+  final int index;
+
+  @override
   String toString() {
-    return 'MeshChannel(name: $name, used: $used, key: $key)';
+    return 'MeshChannel(name: $name, role: $role, key: $key, index: $index)';
   }
 
   @override
@@ -142,13 +159,14 @@ class _$MeshChannelImpl extends _MeshChannel {
         (other.runtimeType == runtimeType &&
             other is _$MeshChannelImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.used, used) || other.used == used) &&
-            const DeepCollectionEquality().equals(other._key, _key));
+            (identical(other.role, role) || other.role == role) &&
+            const DeepCollectionEquality().equals(other._key, _key) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, name, used, const DeepCollectionEquality().hash(_key));
+  int get hashCode => Object.hash(runtimeType, name, role,
+      const DeepCollectionEquality().hash(_key), index);
 
   @JsonKey(ignore: true)
   @override
@@ -160,16 +178,19 @@ class _$MeshChannelImpl extends _MeshChannel {
 abstract class _MeshChannel extends MeshChannel {
   const factory _MeshChannel(
       {required final String name,
-      required final bool used,
-      required final List<int> key}) = _$MeshChannelImpl;
+      required final Channel_Role role,
+      required final List<int> key,
+      required final int index}) = _$MeshChannelImpl;
   const _MeshChannel._() : super._();
 
   @override
   String get name;
   @override
-  bool get used;
+  Channel_Role get role;
   @override
   List<int> get key;
+  @override
+  int get index;
   @override
   @JsonKey(ignore: true)
   _$$MeshChannelImplCopyWith<_$MeshChannelImpl> get copyWith =>

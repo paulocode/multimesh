@@ -39,7 +39,8 @@ class ChannelService extends _$ChannelService {
     ref.onDispose(subscription.cancel);
     return List<MeshChannel>.generate(
       MESHTASTIC_MAX_CHANNELS,
-      (index) => const MeshChannel(name: 'DISABLED', used: false, key: []),
+      (index) =>
+          MeshChannel(name: 'DISABLED', role: Channel_Role.DISABLED, key: [], index: index),
     );
   }
 
@@ -58,8 +59,9 @@ class ChannelService extends _$ChannelService {
           : channel.settings.name;
       final meshChannel = MeshChannel(
         name: channelName,
-        used: channel.role != Channel_Role.DISABLED,
+        role: channel.role,
         key: channel.settings.psk,
+        index: channel.index,
       );
       state = [
         ...state.sublist(0, channel.index),
@@ -67,6 +69,8 @@ class ChannelService extends _$ChannelService {
         ...state.sublist(channel.index + 1),
       ];
       _logger.i('Added channel');
+    } else if (packet.whichPayloadVariant() == FromRadio_PayloadVariant.queueStatus) {
+      //if (packet.queueStatus.meshPacketId == )
     }
   }
 
@@ -128,6 +132,24 @@ class ChannelService extends _$ChannelService {
     final adminMessage =
         AdminMessage(setConfig: Config(lora: channelSet.loraConfig));
     await _radioWriter.sendMeshPacket(
+      to: _myNodeNum,
+      portNum: PortNum.ADMIN_APP,
+      payload: adminMessage.writeToBuffer(),
+    );
+  }
+
+  void updateChannel(MeshChannel channel) {
+    final adminMessage = AdminMessage(
+      setChannel: Channel(
+        index: channel.index,
+        settings: ChannelSettings(
+          psk: channel.key,
+          name: channel.name,
+        ),
+        role: channel.role,
+      ),
+    );
+    _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,
       payload: adminMessage.writeToBuffer(),
