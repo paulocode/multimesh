@@ -123,7 +123,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
     showModalBottomSheet<MeshChannel>(
       context: context,
       constraints: BoxConstraints(
-        minWidth: constraints.maxWidth,
+        minWidth: constraints.maxWidth > 600 ? 600 : constraints.maxWidth,
         maxWidth: 600,
       ),
       builder: (context) {
