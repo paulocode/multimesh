@@ -131,6 +131,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                         ref
                             .read(radioConfigServiceProvider.notifier)
                             .setLoraConfig(_loraConfig);
+                        // TODO: add error handling
                         await ref
                             .read(radioConfigUploaderServiceProvider)
                             .uploadLoraConfig(
