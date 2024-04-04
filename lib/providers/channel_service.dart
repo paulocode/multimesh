@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -25,6 +26,7 @@ class ChannelService extends _$ChannelService {
   final _logger = Logger();
   late AckWaitingRadioWriter _radioWriter;
   late int _myNodeNum;
+  final _random = Random.secure();
 
   @override
   List<MeshChannel> build() {
@@ -195,4 +197,6 @@ class ChannelService extends _$ChannelService {
     return MESHTASTIC_PREFIX_URL +
         base64.encode(channelSet.writeToBuffer()).replaceAll('=', '');
   }
+
+  List<int> generate256Key() => List.generate(32, (_) => _random.nextInt(0xff));
 }

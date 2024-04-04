@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,7 +50,6 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
 
   @override
   Widget build(BuildContext context) {
-    final channelService = ref.watch(channelServiceProvider.notifier);
     return Form(
       key: _formKey,
       child: Column(
@@ -168,7 +166,7 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
                           if (formState.validate()) {
                             formState.save();
                             _logger.i(channel);
-                            await saveChannel(channelService, context);
+                            await saveChannel(context);
                             ref.read(goRouterProvider).pop(channel);
                           }
                         }
@@ -182,7 +180,7 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
                       : () async {
                           channel =
                               channel.copyWith(role: Channel_Role.DISABLED);
-                          await saveChannel(channelService, context);
+                          await saveChannel(context);
                           ref.read(goRouterProvider).pop(channel);
                         },
                   icon: const Icon(Icons.delete),
@@ -196,14 +194,13 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
   }
 
   Future<void> saveChannel(
-    ChannelService channelService,
     BuildContext context,
   ) async {
     setState(() {
       _saving = true;
     });
     try {
-      await channelService.updateChannel(channel);
+      await ref.read(channelServiceProvider.notifier).updateChannel(channel);
     } on TimeoutException {
       showError(
         context, // ignore: use_build_context_synchronously
@@ -238,9 +235,8 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
   }
 
   void _createRandom256Key() {
-    final random = Random();
-    final key = List.generate(32, (_) => random.nextInt(0xff));
-    _keyController.text = base64.encode(key);
+    _keyController.text = base64
+        .encode(ref.read(channelServiceProvider.notifier).generate256Key());
     setState(() {
       _edited = true;
     });
