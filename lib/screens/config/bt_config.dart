@@ -57,7 +57,7 @@ class _BtConfigScreenState extends ConsumerState<BtConfigScreen> {
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   title: const Text('Enabled'),
-                  value: true,
+                  value: _bluetoothConfig.enabled,
                   onChanged: (value) {
                     setState(() {
                       _bluetoothConfig.enabled = value;
