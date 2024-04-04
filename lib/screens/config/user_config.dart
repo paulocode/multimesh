@@ -73,6 +73,7 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                 TextFormField(
                   controller: _longNameController,
                   textInputAction: TextInputAction.done,
+                  maxLength: 36,
                   onChanged: (value) {
                     setState(() {
                       _user.longName = value;
@@ -81,6 +82,9 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Input long name';
+                    }
+                    if (value.length > 36) {
+                      return 'Long name must be >= 36 bytes';
                     }
                     return null;
                   },
@@ -93,6 +97,7 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                 TextFormField(
                   controller: _shortNameController,
                   textInputAction: TextInputAction.done,
+                  maxLength: 4,
                   onChanged: (value) {
                     setState(() {
                       _user.shortName = value;
@@ -101,6 +106,9 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Input short name';
+                    }
+                    if (value.length > 4) {
+                      return 'Short name must be >= 4 bytes';
                     }
                     return null;
                   },
