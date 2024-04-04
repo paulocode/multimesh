@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class ChannelQrShow extends StatefulWidget {
@@ -26,7 +27,9 @@ class _ChannelQrShowState extends State<ChannelQrShow> {
           height: 8,
         ),
         InkWell(
-          onTap: () {},
+          onTap: () async {
+            await Clipboard.setData(ClipboardData(text: _urlController.text));
+          },
           child: TextField(
             enabled: false,
             controller: _urlController,
