@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:multimesh/constants/meshtastic_constants.dart';
+import 'package:multimesh/models/mesh_channel.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/admin.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/channel.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
@@ -175,7 +176,114 @@ void main() {
       radioWriter.sendMeshPacket(
         to: anyNamed('to'),
         portNum: anyNamed('portNum'),
+        payload: anyNamed('payload'),
+      ),
+    );
+  });
+
+  test('update channel', () async {
+    const channel = MeshChannel(
+      name: 'name123',
+      role: Channel_Role.SECONDARY,
+      key: [1, 2, 3],
+      index: 7,
+      uplinkEnabled: false,
+      downlinkEnabled: true,
+    );
+    await container
+        .read(channelServiceProvider.notifier)
+        .updateChannel(channel);
+
+    final captured = verify(
+      radioWriter.sendMeshPacket(
+        to: anyNamed('to'),
+        portNum: PortNum.ADMIN_APP,
         payload: captureAnyNamed('payload'),
+      ),
+    ).captured.first as List<int>;
+
+    final adminMessage = AdminMessage.fromBuffer(captured);
+    final setChannel = adminMessage.setChannel;
+    final settings = setChannel.settings;
+    expect(setChannel.index, equals(7));
+    expect(settings.name, equals('name123'));
+    expect(settings.uplinkEnabled, isFalse);
+    expect(settings.downlinkEnabled, isTrue);
+    expect(setChannel.role, equals(Channel_Role.SECONDARY));
+    expect(container.read(channelServiceProvider)[7], equals(channel));
+  });
+
+  test('generate url', () async {
+    container.read(radioConfigServiceProvider.notifier).setLoraConfig(
+          Config_LoRaConfig(
+            usePreset: true,
+            region: Config_LoRaConfig_RegionCode.US,
+            hopLimit: 3,
+            txEnabled: true,
+            txPower: 30,
+            channelNum: 20,
+            sx126xRxBoostedGain: true,
+          ),
+        );
+    await stream.emit(
+      FromRadio(
+        channel: Channel(
+          index: 0,
+          role: Channel_Role.PRIMARY,
+          settings: ChannelSettings(
+            psk: base64.decode('isDhHrNpJPlGX3GBJBX6kjuK7KQNp4Z0M7OTDpnX5N4='),
+            name: 'private',
+          ),
+        ),
+      ),
+    );
+    await stream.emit(
+      FromRadio(
+        channel: Channel(
+          index: 1,
+          role: Channel_Role.SECONDARY,
+          settings: ChannelSettings(psk: [1], name: ''),
+        ),
+      ),
+    );
+
+    expect(
+      container.read(channelServiceProvider.notifier).generateUrl(),
+      equals(
+        'https://meshtastic.org/e/#CisSIIrA4R6zaST5Rl9xgSQV-pI7iuykDaeGdDOzkw6Z1-TeGgdwcml2YXRlCgMSAQESDggBOAFAA0gBUB5YFGgB',
+      ),
+    );
+  });
+
+  test('generate url, must remove padding', () async {
+    container.read(radioConfigServiceProvider.notifier).setLoraConfig(
+          Config_LoRaConfig(
+            usePreset: true,
+            region: Config_LoRaConfig_RegionCode.US,
+            hopLimit: 3,
+            txEnabled: true,
+            txPower: 30,
+            channelNum: 20,
+            sx126xRxBoostedGain: true,
+          ),
+        );
+    await stream.emit(
+      FromRadio(
+        channel: Channel(
+          index: 0,
+          role: Channel_Role.PRIMARY,
+          settings: ChannelSettings(
+            psk: base64.decode('isDhHrNpJPlGX3GBJBX6kjuK7KQNp4Z0M7OTDpnX5N4='),
+            name: 'private',
+          ),
+        ),
+      ),
+    );
+
+    expect(
+      container.read(channelServiceProvider.notifier).generateUrl(),
+      equals(
+        'https://meshtastic.org/e/#CisSIIrA4R6zaST5Rl9xgSQV-pI7iuykDaeGdDOzkw6Z1-TeGgdwcml2YXRlEg4IATgBQANIAVAeWBRoAQ',
       ),
     );
   });

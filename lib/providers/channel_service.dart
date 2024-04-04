@@ -183,19 +183,22 @@ class ChannelService extends _$ChannelService {
       final channel = state[i];
       if (channel.role != Channel_Role.DISABLED) {
         channelSet.settings.add(
+          // setting fields to null saves us QR space.
+          // protobuf will decode these as default values.
           ChannelSettings(
             psk: channel.key,
-            name: channel.hasBlankActualName ? '' : channel.name,
-            uplinkEnabled: channel.uplinkEnabled,
-            downlinkEnabled: channel.downlinkEnabled,
+            name: channel.hasBlankActualName ? null : channel.name,
+            uplinkEnabled: channel.uplinkEnabled ? true : null,
+            downlinkEnabled: channel.downlinkEnabled ? true : null,
           ),
         );
       }
     }
 
     channelSet.loraConfig = ref.read(radioConfigServiceProvider).loraConfig;
+    _logger.i('generating QR: \n$channelSet');
     return MESHTASTIC_PREFIX_URL +
-        base64.encode(channelSet.writeToBuffer()).replaceAll('=', '');
+        base64Url.encode(channelSet.writeToBuffer()).replaceAll('=', '');
   }
 
   List<int> generate256Key() => List.generate(32, (_) => _random.nextInt(0xff));

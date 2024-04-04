@@ -105,26 +105,18 @@ void main() {
     );
   });
 
-  test('acknowledged', () async {
+  test('recvd by radio', () async {
     await untilCalled(radioReader.onPacketReceived())
         .timeout(const Duration(seconds: 1));
     await mockStream.emit(
       FromRadio(
-        packet: MeshPacket(
-          decoded: Data(
-            requestId: 123,
-            portnum: PortNum.ROUTING_APP,
-            payload: Routing(
-              errorReason: Routing_Error.NONE,
-            ).writeToBuffer(),
-          ),
-        ),
+        queueStatus: QueueStatus(meshPacketId: 123),
       ),
     );
 
     await expectLater(
       statusSubscription.read(),
-      completion(TextMessageStatus.OK),
+      completion(TextMessageStatus.RECVD_BY_RADIO),
     );
   });
 
