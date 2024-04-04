@@ -31,6 +31,7 @@ dependencies:
   permission_handler: ^11.1.0
   platform: ^3.1.4
   protobuf: ^3.1.0
+  qr_flutter: ^4.1.0
   riverpod_annotation: ^2.3.3
   scrollview_observer: ^1.19.0
   shimmer: ^3.0.0

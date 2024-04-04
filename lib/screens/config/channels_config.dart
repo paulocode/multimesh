@@ -7,6 +7,7 @@ import '../../models/mesh_channel.dart';
 import '../../protobufs/generated/meshtastic/channel.pb.dart';
 import '../../providers/channel_service.dart';
 import '../../widgets/channel_input_form.dart';
+import '../../widgets/channel_qr_show.dart';
 
 class ChannelsConfigScreen extends ConsumerStatefulWidget {
   const ChannelsConfigScreen({super.key});
@@ -20,6 +21,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
   @override
   Widget build(BuildContext context) {
     final channels = ref.watch(channelServiceProvider).toList();
+    final channelService = ref.watch(channelServiceProvider.notifier);
     final activeChannels = channels.where((element) => element.used).toList();
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +39,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                   itemBuilder: (ctx, index) {
                     return InkWell(
                       onTap: () async {
-                        showModalForChannel(
+                        _showModalForChannel(
                           context,
                           constraints,
                           activeChannels[index],
@@ -64,7 +66,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                   onPressed: activeChannels.length == 8
                       ? null
                       : () {
-                          showModalForChannel(
+                          _showModalForChannel(
                             context,
                             constraints,
                             isNew: true,
@@ -97,11 +99,20 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                       icon: const Icon(Icons.camera),
                     ),
                     OutlinedButton.icon(
-                      onPressed: null,
+                      onPressed: () {
+                        _showModalForQr(
+                          context,
+                          constraints,
+                          channelService.generateUrl(),
+                        );
+                      },
                       label: const Text('Show QR'),
                       icon: const Icon(Icons.qr_code),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 16,
                 ),
               ],
             ),
@@ -114,7 +125,7 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
   int _firstDisabledSlot(List<MeshChannel> channels) =>
       channels.indexOf(channels.firstWhere((element) => !element.used));
 
-  void showModalForChannel(
+  void _showModalForChannel(
     BuildContext context,
     BoxConstraints constraints,
     MeshChannel channel, {
@@ -133,6 +144,26 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
             channel: channel.copyWith(),
             isNew: isNew,
           ),
+        );
+      },
+    );
+  }
+
+  void _showModalForQr(
+    BuildContext context,
+    BoxConstraints constraints,
+    String url,
+  ) {
+    showModalBottomSheet<MeshChannel>(
+      context: context,
+      constraints: BoxConstraints(
+        minWidth: constraints.maxWidth > 600 ? 600 : constraints.maxWidth,
+        maxWidth: 600,
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: ChannelQrShow(url),
         );
       },
     );

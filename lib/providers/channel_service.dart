@@ -81,7 +81,7 @@ class ChannelService extends _$ChannelService {
   }
 
   bool validateQr(String? qrValue) {
-    return qrValue?.startsWith('https://meshtastic.org/e/#') ?? false;
+    return qrValue?.startsWith(MESHTASTIC_PREFIX_URL) ?? false;
   }
 
   Future<void> processQr(String? qrValue) async {
@@ -167,5 +167,26 @@ class ChannelService extends _$ChannelService {
       channel,
       ...state.sublist(channel.index + 1),
     ];
+  }
+
+  String generateUrl() {
+    final channelSet = ChannelSet();
+    for (var i = 0; i < MESHTASTIC_MAX_CHANNELS; i++) {
+      final channel = state[i];
+      if (channel.role != Channel_Role.DISABLED) {
+        channelSet.settings.add(
+          ChannelSettings(
+            psk: channel.key,
+            name: channel.name,
+            uplinkEnabled: channel.uplinkEnabled,
+            downlinkEnabled: channel.downlinkEnabled,
+          ),
+        );
+      }
+    }
+
+    channelSet.loraConfig = ref.read(radioConfigServiceProvider).loraConfig;
+    return MESHTASTIC_PREFIX_URL +
+        base64.encode(channelSet.writeToBuffer()).replaceAll('=', '');
   }
 }
