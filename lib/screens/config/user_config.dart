@@ -69,7 +69,7 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                       return 'Input long name';
                     }
                     if (value.length > 36) {
-                      return 'Long name must be >= 36 bytes';
+                      return 'Long name must be <= 36 bytes';
                     }
                     return null;
                   },
@@ -93,7 +93,7 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                       return 'Input short name';
                     }
                     if (value.length > 4) {
-                      return 'Short name must be >= 4 bytes';
+                      return 'Short name must be <= 4 bytes';
                     }
                     return null;
                   },
