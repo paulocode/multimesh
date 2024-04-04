@@ -122,7 +122,7 @@ class _ChannelQrScannerState extends ConsumerState<ChannelQrScanner> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Error'),
+          title: const Text('Channel Upload Failed'),
           content: Text(msg),
           actions: [
             TextButton(
