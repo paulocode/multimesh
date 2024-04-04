@@ -41,38 +41,39 @@ class _ChannelQrScannerState extends ConsumerState<ChannelQrScanner> {
                   final isValid = ref
                       .read(channelServiceProvider.notifier)
                       .validateQr(qrValue);
-                  if (isValid) {
-                    await controller.stop();
-                    // ignore: use_build_context_synchronously
-                    final confirmed = await _showConfirmationDialog(context);
-                    if (confirmed) {
-                      setState(() {
-                        _isUploadingChannels = true;
-                      });
-                      try {
-                        await ref
-                            .read(channelServiceProvider.notifier)
-                            .processQr(qrValue);
-                      } on TimeoutException {
-                        await _showErrorDialog(
-                          // ignore: use_build_context_synchronously
-                          context,
-                          'Save timeout. Reconnect and try again.',
-                        );
-                      } catch (e) {
-                        _logger.e(e.toString());
-                        await _showErrorDialog(
-                          // ignore: use_build_context_synchronously
-                          context,
-                          'Unknown error. Reconnect and try again.',
-                        );
-                      }
-                      if (context.mounted) {
-                        context.go('/');
-                      }
-                    } else {
-                      await controller.start();
-                    }
+                  if (!isValid) {
+                    return;
+                  }
+                  await controller.stop();
+                  // ignore: use_build_context_synchronously
+                  final confirmed = await _showConfirmationDialog(context);
+                  if (!confirmed) {
+                    await controller.start();
+                    return;
+                  }
+                  setState(() {
+                    _isUploadingChannels = true;
+                  });
+                  try {
+                    await ref
+                        .read(channelServiceProvider.notifier)
+                        .processQr(qrValue);
+                  } on TimeoutException {
+                    await _showErrorDialog(
+                      // ignore: use_build_context_synchronously
+                      context,
+                      'Save timeout. Reconnect and try again.',
+                    );
+                  } catch (e) {
+                    _logger.e(e.toString());
+                    await _showErrorDialog(
+                      // ignore: use_build_context_synchronously
+                      context,
+                      'Unknown error. Reconnect and try again.',
+                    );
+                  }
+                  if (context.mounted) {
+                    context.go('/');
                   }
                 }
               },
