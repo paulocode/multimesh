@@ -15,7 +15,7 @@ class _ChannelQrShowState extends State<ChannelQrShow> {
 
   @override
   Widget build(BuildContext context) {
-    _urlController.text = widget.url;
+    _urlController.text = '${widget.url.substring(0, 35)}...';
     return Column(
       children: [
         QrImageView(
@@ -28,14 +28,30 @@ class _ChannelQrShowState extends State<ChannelQrShow> {
         ),
         InkWell(
           onTap: () async {
-            await Clipboard.setData(ClipboardData(text: _urlController.text));
+            await Clipboard.setData(ClipboardData(text: widget.url));
           },
-          child: TextField(
-            enabled: false,
-            controller: _urlController,
+          child: Column(
+            children: [
+              TextField(
+                enabled: false,
+                controller: _urlController,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Tap to Copy URL',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ],
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _urlController.dispose();
+    super.dispose();
   }
 }
