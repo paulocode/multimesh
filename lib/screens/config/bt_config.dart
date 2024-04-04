@@ -84,6 +84,7 @@ class _BtConfigScreenState extends ConsumerState<BtConfigScreen> {
                     Config_BluetoothConfig_PairingMode.FIXED_PIN)
                   TextFormField(
                     controller: _pinController,
+                    maxLength: 6,
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
