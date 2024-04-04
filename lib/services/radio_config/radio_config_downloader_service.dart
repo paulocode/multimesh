@@ -76,6 +76,7 @@ class RadioConfigDownloaderService {
         _processConfigPacket(packet.config);
       case FromRadio_PayloadVariant.configCompleteId:
         await _processConfigCompleteId(packet.configCompleteId);
+
       case _:
         break;
     }
@@ -88,10 +89,23 @@ class RadioConfigDownloaderService {
 
   void _processConfigPacket(Config config) {
     final payloadVariant = config.whichPayloadVariant();
-    if (payloadVariant == Config_PayloadVariant.lora) {
-      final lora = config.lora;
-
-      _radioConfigService.setLoraConfig(lora);
+    switch (payloadVariant) {
+      case Config_PayloadVariant.lora:
+        _radioConfigService.setLoraConfig(config.lora);
+      case Config_PayloadVariant.bluetooth:
+        _radioConfigService.setBluetoothConfig(config.bluetooth);
+      case Config_PayloadVariant.device:
+      // TODO: Handle this case.
+      case Config_PayloadVariant.position:
+      // TODO: Handle this case.
+      case Config_PayloadVariant.power:
+      // TODO: Handle this case.
+      case Config_PayloadVariant.network:
+      // TODO: Handle this case.
+      case Config_PayloadVariant.display:
+      // TODO: Handle this case.
+      case Config_PayloadVariant.notSet:
+        break;
     }
   }
 

@@ -11,6 +11,7 @@ class RadioConfiguration with _$RadioConfiguration {
   const factory RadioConfiguration({
     @Default(0) int myNodeNum,
     required Config_LoRaConfig loraConfig,
+    required Config_BluetoothConfig bluetoothConfig,
     required NodeInfo myNodeInfo,
     @Default(false) bool hasOwnNodeInfo,
     @Default(false) bool configDownloaded,

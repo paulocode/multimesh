@@ -131,6 +131,7 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
             height: 8,
           ),
           SwitchListTile(
+            contentPadding: EdgeInsets.zero,
             title: const Text('Uplink enabled'),
             value: channel.uplinkEnabled,
             onChanged: (value) {
@@ -141,6 +142,7 @@ class _ChannelInputFormState extends ConsumerState<ChannelInputForm> {
             },
           ),
           SwitchListTile(
+            contentPadding: EdgeInsets.zero,
             title: const Text('Downlink enabled'),
             value: channel.downlinkEnabled,
             onChanged: (value) {

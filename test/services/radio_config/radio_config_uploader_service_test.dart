@@ -34,6 +34,7 @@ void main() {
         RadioConfiguration(
       loraConfig: Config_LoRaConfig(),
       myNodeInfo: NodeInfo(),
+      bluetoothConfig: Config_BluetoothConfig(),
     ).copyWith(myNodeNum: 123);
   });
 

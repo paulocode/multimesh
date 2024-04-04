@@ -8,6 +8,7 @@ import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
 import '../../providers/radio_config/radio_config_uploader_service.dart';
 import '../../providers/radio_connector_service.dart';
+import '../../widgets/app_bar_connection_indicator.dart';
 import 'confirmation_dialog.dart';
 
 class UserConfigScreen extends ConsumerStatefulWidget {
@@ -46,23 +47,7 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
     _longNameController.text = _user.longName;
     _shortNameController.text = _user.shortName;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('User ⚙️'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: radioConnectorState is Connected
-                ? Icon(
-                    Icons.cloud_done_outlined,
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                : Icon(
-                    Icons.cloud_off,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-          ),
-        ],
-      ),
+      appBar: const AppBarWithConnectionIndicator(title: 'User ⚙️'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),

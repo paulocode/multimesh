@@ -9,6 +9,7 @@ import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
 import '../../providers/radio_config/radio_config_uploader_service.dart';
 import '../../providers/radio_connector_service.dart';
+import '../../widgets/app_bar_connection_indicator.dart';
 import 'confirmation_dialog.dart';
 
 class LoraConfigScreen extends ConsumerStatefulWidget {
@@ -34,23 +35,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
 
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('LoRa ⚙️'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: radioConnectorState is Connected
-                ? Icon(
-                    Icons.cloud_done_outlined,
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                : Icon(
-                    Icons.cloud_off,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-          ),
-        ],
-      ),
+      appBar: const AppBarWithConnectionIndicator(title: 'LoRa ⚙️'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -119,6 +104,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 height: 16,
               ),
               SwitchListTile(
+                contentPadding: EdgeInsets.zero,
                 title: const Text('Transmit enabled'),
                 value: _loraConfig.txEnabled,
                 onChanged: (value) {

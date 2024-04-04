@@ -6,6 +6,7 @@ import '../models/radio_connector_state.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/radio_config/radio_config_uploader_service.dart';
 import '../providers/radio_connector_service.dart';
+import '../widgets/app_bar_connection_indicator.dart';
 import 'config/confirmation_dialog.dart';
 
 class RadioConfigScreen extends ConsumerWidget {
@@ -20,23 +21,7 @@ class RadioConfigScreen extends ConsumerWidget {
         : 'Settings';
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(longName),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: radioConnectorState is Connected
-                ? Icon(
-                    Icons.cloud_done_outlined,
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                : Icon(
-                    Icons.cloud_off,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-          ),
-        ],
-      ),
+      appBar: AppBarWithConnectionIndicator(title: longName),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -80,7 +65,11 @@ class RadioConfigScreen extends ConsumerWidget {
                   ),
                   Card(
                     child: ListTile(
-                      onTap: () {},
+                      onTap: radioConnectorState is Connected
+                          ? () {
+                              context.push('/btConfig');
+                            }
+                          : null,
                       title: const Text('Bluetooth'),
                       trailing: const Icon(Icons.chevron_right),
                     ),

@@ -319,6 +319,16 @@ class MockRadioConfigService extends _i1.Mock
       );
 
   @override
+  void setBluetoothConfig(_i15.Config_BluetoothConfig? bluetoothConfig) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setBluetoothConfig,
+          [bluetoothConfig],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void clear() => super.noSuchMethod(
         Invocation.method(
           #clear,

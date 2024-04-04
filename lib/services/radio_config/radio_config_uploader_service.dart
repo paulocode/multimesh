@@ -49,6 +49,22 @@ class RadioConfigUploaderService {
     );
   }
 
+  Future<void> uploadBluetoothConfig({
+    required Config_BluetoothConfig bluetoothConfig,
+  }) async {
+    _logger.i('Setting bt config: \n$bluetoothConfig');
+    final adminMessage = AdminMessage(
+      setConfig: Config(
+        bluetooth: bluetoothConfig,
+      ),
+    );
+    await _radioWriter.sendMeshPacket(
+      to: _myNodeNum,
+      portNum: PortNum.ADMIN_APP,
+      payload: adminMessage.writeToBuffer(),
+    );
+  }
+
   Future<void> sendShutdown() async {
     final adminMessage = AdminMessage(shutdownSeconds: 5);
     await _radioWriter.sendMeshPacket(

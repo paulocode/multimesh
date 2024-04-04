@@ -16,6 +16,7 @@ class RadioConfigService extends _$RadioConfigService {
     return RadioConfiguration(
       loraConfig: Config_LoRaConfig(),
       myNodeInfo: NodeInfo(),
+      bluetoothConfig: Config_BluetoothConfig(),
     );
   }
 
@@ -39,6 +40,10 @@ class RadioConfigService extends _$RadioConfigService {
 
   void setConfigDownloaded() {
     state = state.copyWith(configDownloaded: true);
+  }
+
+  void setBluetoothConfig(Config_BluetoothConfig bluetoothConfig) {
+    state = state.copyWith(bluetoothConfig: bluetoothConfig);
   }
 
   void clear() {
