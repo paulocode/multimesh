@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MeshChannel {
   String get name => throw _privateConstructorUsedError;
+  bool get hasBlankActualName => throw _privateConstructorUsedError;
   Channel_Role get role => throw _privateConstructorUsedError;
   List<int> get key => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
@@ -36,6 +37,7 @@ abstract class $MeshChannelCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
+      bool hasBlankActualName,
       Channel_Role role,
       List<int> key,
       int index,
@@ -57,6 +59,7 @@ class _$MeshChannelCopyWithImpl<$Res, $Val extends MeshChannel>
   @override
   $Res call({
     Object? name = null,
+    Object? hasBlankActualName = null,
     Object? role = null,
     Object? key = null,
     Object? index = null,
@@ -68,6 +71,10 @@ class _$MeshChannelCopyWithImpl<$Res, $Val extends MeshChannel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      hasBlankActualName: null == hasBlankActualName
+          ? _value.hasBlankActualName
+          : hasBlankActualName // ignore: cast_nullable_to_non_nullable
+              as bool,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -102,6 +109,7 @@ abstract class _$$MeshChannelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
+      bool hasBlankActualName,
       Channel_Role role,
       List<int> key,
       int index,
@@ -121,6 +129,7 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? hasBlankActualName = null,
     Object? role = null,
     Object? key = null,
     Object? index = null,
@@ -132,6 +141,10 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      hasBlankActualName: null == hasBlankActualName
+          ? _value.hasBlankActualName
+          : hasBlankActualName // ignore: cast_nullable_to_non_nullable
+              as bool,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -161,6 +174,7 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
 class _$MeshChannelImpl extends _MeshChannel {
   const _$MeshChannelImpl(
       {required this.name,
+      this.hasBlankActualName = false,
       required this.role,
       required final List<int> key,
       required this.index,
@@ -171,6 +185,9 @@ class _$MeshChannelImpl extends _MeshChannel {
 
   @override
   final String name;
+  @override
+  @JsonKey()
+  final bool hasBlankActualName;
   @override
   final Channel_Role role;
   final List<int> _key;
@@ -190,7 +207,7 @@ class _$MeshChannelImpl extends _MeshChannel {
 
   @override
   String toString() {
-    return 'MeshChannel(name: $name, role: $role, key: $key, index: $index, uplinkEnabled: $uplinkEnabled, downlinkEnabled: $downlinkEnabled)';
+    return 'MeshChannel(name: $name, hasBlankActualName: $hasBlankActualName, role: $role, key: $key, index: $index, uplinkEnabled: $uplinkEnabled, downlinkEnabled: $downlinkEnabled)';
   }
 
   @override
@@ -199,6 +216,8 @@ class _$MeshChannelImpl extends _MeshChannel {
         (other.runtimeType == runtimeType &&
             other is _$MeshChannelImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.hasBlankActualName, hasBlankActualName) ||
+                other.hasBlankActualName == hasBlankActualName) &&
             (identical(other.role, role) || other.role == role) &&
             const DeepCollectionEquality().equals(other._key, _key) &&
             (identical(other.index, index) || other.index == index) &&
@@ -212,6 +231,7 @@ class _$MeshChannelImpl extends _MeshChannel {
   int get hashCode => Object.hash(
       runtimeType,
       name,
+      hasBlankActualName,
       role,
       const DeepCollectionEquality().hash(_key),
       index,
@@ -228,6 +248,7 @@ class _$MeshChannelImpl extends _MeshChannel {
 abstract class _MeshChannel extends MeshChannel {
   const factory _MeshChannel(
       {required final String name,
+      final bool hasBlankActualName,
       required final Channel_Role role,
       required final List<int> key,
       required final int index,
@@ -237,6 +258,8 @@ abstract class _MeshChannel extends MeshChannel {
 
   @override
   String get name;
+  @override
+  bool get hasBlankActualName;
   @override
   Channel_Role get role;
   @override

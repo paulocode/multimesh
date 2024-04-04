@@ -7,6 +7,7 @@ part 'mesh_channel.freezed.dart';
 class MeshChannel with _$MeshChannel {
   const factory MeshChannel({
     required String name,
+    @Default(false) bool hasBlankActualName,
     required Channel_Role role,
     required List<int> key,
     required int index,

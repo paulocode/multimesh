@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../constants/meshtastic_constants.dart';
+import '../extensions.dart';
 import '../models/mesh_channel.dart';
 import '../protobufs/generated/meshtastic/admin.pb.dart';
 import '../protobufs/generated/meshtastic/apponly.pb.dart';
@@ -56,15 +57,18 @@ class ChannelService extends _$ChannelService {
       if (channel.index < 0) {
         return;
       }
-      final channelName = channel.settings.name.isEmpty
+      final hasBlankActualName = channel.settings.name.isEmpty;
+      final channelName = hasBlankActualName
           ? ref
               .read(radioConfigServiceProvider)
               .loraConfig
               .modemPreset
               .toString()
+              .snakeToUpperCamelCase()
           : channel.settings.name;
       final meshChannel = MeshChannel(
         name: channelName,
+        hasBlankActualName: hasBlankActualName,
         role: channel.role,
         key: channel.settings.psk,
         index: channel.index,
@@ -128,6 +132,7 @@ class ChannelService extends _$ChannelService {
         );
       }
 
+      _logger.i('Uploading channel \n$adminMessage');
       await _radioWriter.sendMeshPacket(
         to: _myNodeNum,
         portNum: PortNum.ADMIN_APP,
@@ -137,6 +142,7 @@ class ChannelService extends _$ChannelService {
 
     final adminMessage =
         AdminMessage(setConfig: Config(lora: channelSet.loraConfig));
+    _logger.i('Uploading loraConfig \n$adminMessage');
     await _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,
@@ -177,7 +183,7 @@ class ChannelService extends _$ChannelService {
         channelSet.settings.add(
           ChannelSettings(
             psk: channel.key,
-            name: channel.name,
+            name: channel.hasBlankActualName ? '' : channel.name,
             uplinkEnabled: channel.uplinkEnabled,
             downlinkEnabled: channel.downlinkEnabled,
           ),

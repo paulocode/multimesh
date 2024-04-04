@@ -68,7 +68,7 @@ void main() {
       FromRadio(channel: Channel(index: 0, role: Channel_Role.PRIMARY)),
     );
     final channels = container.read(channelServiceProvider);
-    expect(channels[0].name, equals('LONG_FAST'));
+    expect(channels[0].name, equals('LongFast'));
   });
 
   test('add multiple channels from radio', () async {
@@ -86,7 +86,7 @@ void main() {
     );
 
     final channels = container.read(channelServiceProvider);
-    expect(channels[0].name, equals('LONG_FAST'));
+    expect(channels[0].name, equals('LongFast'));
     expect(channels[1].name, equals('second'));
   });
 
