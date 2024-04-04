@@ -33,4 +33,22 @@ class RadioConfigUploaderService {
       payload: adminMessage.writeToBuffer(),
     );
   }
+
+  Future<void> sendShutdown() async {
+    final adminMessage = AdminMessage(shutdownSeconds: 5);
+    await _radioWriter.sendMeshPacket(
+      to: _myNodeNum,
+      portNum: PortNum.ADMIN_APP,
+      payload: adminMessage.writeToBuffer(),
+    );
+  }
+
+  Future<void> sendReboot() async {
+    final adminMessage = AdminMessage(rebootSeconds: 5);
+    await _radioWriter.sendMeshPacket(
+      to: _myNodeNum,
+      portNum: PortNum.ADMIN_APP,
+      payload: adminMessage.writeToBuffer(),
+    );
+  }
 }

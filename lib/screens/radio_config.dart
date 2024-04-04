@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../models/radio_connector_state.dart';
 import '../providers/radio_config/radio_config_service.dart';
+import '../providers/radio_config/radio_config_uploader_service.dart';
 import '../providers/radio_connector_service.dart';
 
 class RadioConfigScreen extends ConsumerWidget {
@@ -12,6 +13,7 @@ class RadioConfigScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
+    final radioConfigUploader = ref.watch(radioConfigUploaderServiceProvider);
     final longName = radioConfig.configDownloaded
         ? '${radioConfig.myNodeInfo.user.longName} ⚙️'
         : 'Settings';
@@ -125,12 +127,36 @@ class RadioConfigScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   OutlinedButton.icon(
-                    onPressed: null,
+                    onPressed: () async {
+                      final confirmed = await _showConfirmationDialog(
+                        context,
+                        'Shutdown device?',
+                      );
+                      if (!confirmed) {
+                        return;
+                      }
+                      await radioConfigUploader.sendShutdown();
+                      if (context.mounted) {
+                        context.go('/');
+                      }
+                    },
                     label: const Text('Power Off'),
                     icon: const Icon(Icons.power_settings_new_rounded),
                   ),
                   OutlinedButton.icon(
-                    onPressed: null,
+                    onPressed: () async {
+                      final confirmed = await _showConfirmationDialog(
+                        context,
+                        'Reboot device?',
+                      );
+                      if (!confirmed) {
+                        return;
+                      }
+                      await radioConfigUploader.sendReboot();
+                      if (context.mounted) {
+                        context.go('/');
+                      }
+                    },
                     label: const Text('Reboot'),
                     icon: const Icon(Icons.restart_alt),
                   ),
@@ -153,5 +179,36 @@ class RadioConfigScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<bool> _showConfirmationDialog(BuildContext context, String msg) async {
+    if (!context.mounted) {
+      return false;
+    }
+    return await showDialog<bool>(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Confirmation'),
+              content: Text(msg),
+              actions: [
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    context.pop(false);
+                  },
+                ),
+                TextButton(
+                  child: const Text('Continue'),
+                  onPressed: () {
+                    context.pop(true);
+                  },
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
   }
 }
