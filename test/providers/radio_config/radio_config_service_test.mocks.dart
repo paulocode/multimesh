@@ -7,6 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart' as _i4;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i5;
 import 'package:multimesh/services/radio_config/radio_config_uploader_service.dart'
     as _i2;
 
@@ -40,6 +41,17 @@ class MockRadioConfigUploaderService extends _i1.Mock
           #uploadLoraConfig,
           [],
           {#loraConfig: loraConfig},
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> uploadUser({required _i5.User? user}) => (super.noSuchMethod(
+        Invocation.method(
+          #uploadUser,
+          [],
+          {#user: user},
         ),
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),

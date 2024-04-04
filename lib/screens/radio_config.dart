@@ -6,6 +6,7 @@ import '../models/radio_connector_state.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/radio_config/radio_config_uploader_service.dart';
 import '../providers/radio_connector_service.dart';
+import 'config/confirmation_dialog.dart';
 
 class RadioConfigScreen extends ConsumerWidget {
   const RadioConfigScreen({super.key});
@@ -68,7 +69,11 @@ class RadioConfigScreen extends ConsumerWidget {
                   ),
                   Card(
                     child: ListTile(
-                      onTap: () {},
+                      onTap: radioConnectorState is Connected
+                          ? () {
+                              context.push('/userConfig');
+                            }
+                          : null,
                       title: const Text('User'),
                       trailing: const Icon(Icons.chevron_right),
                     ),
@@ -128,7 +133,7 @@ class RadioConfigScreen extends ConsumerWidget {
                 children: [
                   OutlinedButton.icon(
                     onPressed: () async {
-                      final confirmed = await _showConfirmationDialog(
+                      final confirmed = await showConfirmationDialog(
                         context,
                         'Shutdown device?',
                       );
@@ -145,7 +150,7 @@ class RadioConfigScreen extends ConsumerWidget {
                   ),
                   OutlinedButton.icon(
                     onPressed: () async {
-                      final confirmed = await _showConfirmationDialog(
+                      final confirmed = await showConfirmationDialog(
                         context,
                         'Reboot device?',
                       );
@@ -179,36 +184,5 @@ class RadioConfigScreen extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  Future<bool> _showConfirmationDialog(BuildContext context, String msg) async {
-    if (!context.mounted) {
-      return false;
-    }
-    return await showDialog<bool>(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Confirmation'),
-              content: Text(msg),
-              actions: [
-                TextButton(
-                  child: const Text('Cancel'),
-                  onPressed: () {
-                    context.pop(false);
-                  },
-                ),
-                TextButton(
-                  child: const Text('Continue'),
-                  onPressed: () {
-                    context.pop(true);
-                  },
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
   }
 }

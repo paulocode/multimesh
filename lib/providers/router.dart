@@ -6,6 +6,7 @@ import '../screens/chat.dart';
 import '../screens/config/channel_qr_scanner.dart';
 import '../screens/config/channels_config.dart';
 import '../screens/config/lora_config.dart';
+import '../screens/config/user_config.dart';
 import '../screens/radio_config.dart';
 import '../screens/tab_parent.dart';
 
@@ -26,6 +27,12 @@ GoRouter goRouter(GoRouterRef ref) {
         path: '/radioConfig',
         builder: (context, state) {
           return const RadioConfigScreen();
+        },
+      ),
+      GoRoute(
+        path: '/userConfig',
+        builder: (context, state) {
+          return const UserConfigScreen();
         },
       ),
       GoRoute(

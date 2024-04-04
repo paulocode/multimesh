@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:protobuf/protobuf.dart';
 
 import '../../constants/meshtastic_constants.dart';
@@ -8,6 +9,7 @@ import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
 import '../../providers/radio_config/radio_config_uploader_service.dart';
 import '../../providers/radio_connector_service.dart';
+import 'confirmation_dialog.dart';
 
 class LoraConfigScreen extends ConsumerStatefulWidget {
   const LoraConfigScreen({super.key});
@@ -29,6 +31,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
   Widget build(BuildContext context) {
     final prevLoraConfig = ref
         .watch(radioConfigServiceProvider.select((value) => value.loraConfig));
+
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return Scaffold(
       appBar: AppBar(
@@ -128,15 +131,24 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                 onPressed: radioConnectorState is Connected &&
                         prevLoraConfig != _loraConfig
                     ? () async {
-                        ref
-                            .read(radioConfigServiceProvider.notifier)
-                            .setLoraConfig(_loraConfig);
+                        // device will reset after setting lora config
+                        // so we do not have to update local config here.
+                        final confirmed = await showConfirmationDialog(
+                          context,
+                          'Save will reboot device. Continue?',
+                        );
+                        if (!confirmed) {
+                          return;
+                        }
                         // TODO: add error handling
                         await ref
                             .read(radioConfigUploaderServiceProvider)
                             .uploadLoraConfig(
                               loraConfig: _loraConfig,
                             );
+                        if (context.mounted) {
+                          context.go('/');
+                        }
                       }
                     : null,
                 label: const Text('Save'),

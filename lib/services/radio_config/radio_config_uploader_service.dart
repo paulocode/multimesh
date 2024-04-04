@@ -2,6 +2,7 @@ import 'package:logger/logger.dart';
 
 import '../../protobufs/generated/meshtastic/admin.pb.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
+import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ack_waiting_radio_writer.dart';
 
@@ -27,6 +28,20 @@ class RadioConfigUploaderService {
 
     _logger.i('Setting loraConfig:\n$loraConfig');
 
+    await _radioWriter.sendMeshPacket(
+      to: _myNodeNum,
+      portNum: PortNum.ADMIN_APP,
+      payload: adminMessage.writeToBuffer(),
+    );
+  }
+
+  Future<void> uploadUser({
+    required User user,
+  }) async {
+    _logger.i('Setting user: $user');
+    final adminMessage = AdminMessage(
+      setOwner: user,
+    );
     await _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,
