@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../protobufs/generated/meshtastic/mesh.pb.dart';
 import 'text_message_status.dart';
 
 part 'text_message.freezed.dart';
@@ -15,6 +16,7 @@ class TextMessage with _$TextMessage {
     required DateTime time,
     @Default(TextMessageStatus.SENDING) TextMessageStatus state,
     required int owner,
+    @Default(Routing_Error.NONE) Routing_Error routingError,
   }) = _TextMessage;
 
   const TextMessage._();

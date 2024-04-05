@@ -6,12 +6,13 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:multimesh/models/chat_type.dart' as _i7;
+import 'package:multimesh/models/chat_type.dart' as _i8;
 import 'package:multimesh/models/text_message.dart' as _i2;
 import 'package:multimesh/models/text_message_status.dart' as _i5;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
 import 'package:multimesh/repository/text_message_repository.dart' as _i4;
 import 'package:multimesh/services/text_message/text_message_receiver_service.dart'
-    as _i6;
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -81,6 +82,7 @@ class MockTextMessageRepository extends _i1.Mock
   _i3.Future<void> updateStatusByPacketId({
     required _i5.TextMessageStatus? status,
     required int? packetId,
+    _i6.Routing_Error? routingError = _i6.Routing_Error.NONE,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -89,6 +91,7 @@ class MockTextMessageRepository extends _i1.Mock
           {
             #status: status,
             #packetId: packetId,
+            #routingError: routingError,
           },
         ),
         returnValue: _i3.Future<void>.value(),
@@ -204,14 +207,14 @@ class MockTextMessageRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTextMessageReceiverService extends _i1.Mock
-    implements _i6.TextMessageReceiverService {
+    implements _i7.TextMessageReceiverService {
   MockTextMessageReceiverService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i3.StreamSubscription<_i2.TextMessage> addMessageListener({
-    required _i7.ChatType? chatType,
+    required _i8.ChatType? chatType,
     required void Function(_i2.TextMessage)? listener,
   }) =>
       (super.noSuchMethod(

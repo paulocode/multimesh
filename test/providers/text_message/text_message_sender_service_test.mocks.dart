@@ -302,6 +302,7 @@ class MockTextMessageRepository extends _i1.Mock
   _i6.Future<void> updateStatusByPacketId({
     required _i13.TextMessageStatus? status,
     required int? packetId,
+    _i11.Routing_Error? routingError = _i11.Routing_Error.NONE,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -310,6 +311,7 @@ class MockTextMessageRepository extends _i1.Mock
           {
             #status: status,
             #packetId: packetId,
+            #routingError: routingError,
           },
         ),
         returnValue: _i6.Future<void>.value(),

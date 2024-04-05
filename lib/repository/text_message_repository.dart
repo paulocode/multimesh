@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/text_message.dart';
 import '../models/text_message_status.dart';
+import '../protobufs/generated/meshtastic/mesh.pb.dart';
 
 class TextMessageRepository {
   TextMessageRepository({required Database database}) : _database = database;
@@ -26,6 +27,7 @@ class TextMessageRepository {
         'time': textMessage.time.millisecondsSinceEpoch,
         'state': textMessage.state.index,
         'owner': textMessage.owner,
+        'routingError': textMessage.routingError.value,
       },
     );
   }
@@ -33,10 +35,14 @@ class TextMessageRepository {
   Future<void> updateStatusByPacketId({
     required TextMessageStatus status,
     required int packetId,
+    Routing_Error routingError = Routing_Error.NONE,
   }) async {
     await _database.update(
       'text_messages',
-      {'state': status.index},
+      {
+        'state': status.index,
+        'routingError': routingError.value,
+      },
       where: 'packetId = ?',
       whereArgs: [packetId],
     );
@@ -131,7 +137,8 @@ class TextMessageRepository {
             'channel': channel as int,
             'time': time as int,
             'state': state as int,
-            'owner': owner as int
+            'owner': owner as int,
+            'routingError': routingError as int,
           } in result)
         TextMessage(
           packetId: packetId,
@@ -142,6 +149,7 @@ class TextMessageRepository {
           time: DateTime.fromMillisecondsSinceEpoch(time),
           state: TextMessageStatus.values[state],
           owner: owner,
+          routingError: Routing_Error.values[routingError],
         ),
     ];
   }

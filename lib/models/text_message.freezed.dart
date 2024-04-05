@@ -24,6 +24,7 @@ mixin _$TextMessage {
   DateTime get time => throw _privateConstructorUsedError;
   TextMessageStatus get state => throw _privateConstructorUsedError;
   int get owner => throw _privateConstructorUsedError;
+  Routing_Error get routingError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TextMessageCopyWith<TextMessage> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $TextMessageCopyWith<$Res> {
       int channel,
       DateTime time,
       TextMessageStatus state,
-      int owner});
+      int owner,
+      Routing_Error routingError});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
     Object? time = null,
     Object? state = null,
     Object? owner = null,
+    Object? routingError = null,
   }) {
     return _then(_value.copyWith(
       packetId: null == packetId
@@ -102,6 +105,10 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as int,
+      routingError: null == routingError
+          ? _value.routingError
+          : routingError // ignore: cast_nullable_to_non_nullable
+              as Routing_Error,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$TextMessageImplCopyWith<$Res>
       int channel,
       DateTime time,
       TextMessageStatus state,
-      int owner});
+      int owner,
+      Routing_Error routingError});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$TextMessageImplCopyWithImpl<$Res>
     Object? time = null,
     Object? state = null,
     Object? owner = null,
+    Object? routingError = null,
   }) {
     return _then(_$TextMessageImpl(
       packetId: null == packetId
@@ -178,6 +187,10 @@ class __$$TextMessageImplCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as int,
+      routingError: null == routingError
+          ? _value.routingError
+          : routingError // ignore: cast_nullable_to_non_nullable
+              as Routing_Error,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$TextMessageImpl extends _TextMessage {
       required this.channel,
       required this.time,
       this.state = TextMessageStatus.SENDING,
-      required this.owner})
+      required this.owner,
+      this.routingError = Routing_Error.NONE})
       : super._();
 
   @override
@@ -214,10 +228,13 @@ class _$TextMessageImpl extends _TextMessage {
   final TextMessageStatus state;
   @override
   final int owner;
+  @override
+  @JsonKey()
+  final Routing_Error routingError;
 
   @override
   String toString() {
-    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state, owner: $owner)';
+    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state, owner: $owner, routingError: $routingError)';
   }
 
   @override
@@ -233,12 +250,14 @@ class _$TextMessageImpl extends _TextMessage {
             (identical(other.channel, channel) || other.channel == channel) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.state, state) || other.state == state) &&
-            (identical(other.owner, owner) || other.owner == owner));
+            (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.routingError, routingError) ||
+                other.routingError == routingError));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, packetId, text, from, to, channel, time, state, owner);
+  int get hashCode => Object.hash(runtimeType, packetId, text, from, to,
+      channel, time, state, owner, routingError);
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +275,8 @@ abstract class _TextMessage extends TextMessage {
       required final int channel,
       required final DateTime time,
       final TextMessageStatus state,
-      required final int owner}) = _$TextMessageImpl;
+      required final int owner,
+      final Routing_Error routingError}) = _$TextMessageImpl;
   const _TextMessage._() : super._();
 
   @override
@@ -275,6 +295,8 @@ abstract class _TextMessage extends TextMessage {
   TextMessageStatus get state;
   @override
   int get owner;
+  @override
+  Routing_Error get routingError;
   @override
   @JsonKey(ignore: true)
   _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>

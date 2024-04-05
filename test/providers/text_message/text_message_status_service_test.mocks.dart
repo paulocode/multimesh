@@ -8,9 +8,9 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/models/text_message.dart' as _i2;
 import 'package:multimesh/models/text_message_status.dart' as _i5;
-import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i7;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
 import 'package:multimesh/repository/text_message_repository.dart' as _i3;
-import 'package:multimesh/services/interfaces/radio_reader.dart' as _i6;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -69,6 +69,7 @@ class MockTextMessageRepository extends _i1.Mock
   _i4.Future<void> updateStatusByPacketId({
     required _i5.TextMessageStatus? status,
     required int? packetId,
+    _i6.Routing_Error? routingError = _i6.Routing_Error.NONE,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -77,6 +78,7 @@ class MockTextMessageRepository extends _i1.Mock
           {
             #status: status,
             #packetId: packetId,
+            #routingError: routingError,
           },
         ),
         returnValue: _i4.Future<void>.value(),
@@ -191,17 +193,17 @@ class MockTextMessageRepository extends _i1.Mock
 /// A class which mocks [RadioReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRadioReader extends _i1.Mock implements _i6.RadioReader {
+class MockRadioReader extends _i1.Mock implements _i7.RadioReader {
   MockRadioReader() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Stream<_i7.FromRadio> onPacketReceived() => (super.noSuchMethod(
+  _i4.Stream<_i6.FromRadio> onPacketReceived() => (super.noSuchMethod(
         Invocation.method(
           #onPacketReceived,
           [],
         ),
-        returnValue: _i4.Stream<_i7.FromRadio>.empty(),
-      ) as _i4.Stream<_i7.FromRadio>);
+        returnValue: _i4.Stream<_i6.FromRadio>.empty(),
+      ) as _i4.Stream<_i6.FromRadio>);
 }

@@ -10,10 +10,10 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/models/mesh_node.dart' as _i11;
 import 'package:multimesh/models/text_message.dart' as _i2;
 import 'package:multimesh/models/text_message_status.dart' as _i6;
-import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i8;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i7;
 import 'package:multimesh/providers/node/node_service.dart' as _i10;
 import 'package:multimesh/repository/text_message_repository.dart' as _i4;
-import 'package:multimesh/services/interfaces/radio_reader.dart' as _i7;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i8;
 
 import '../../common.dart' as _i9;
 
@@ -85,6 +85,7 @@ class MockTextMessageRepository extends _i1.Mock
   _i5.Future<void> updateStatusByPacketId({
     required _i6.TextMessageStatus? status,
     required int? packetId,
+    _i7.Routing_Error? routingError = _i7.Routing_Error.NONE,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -93,6 +94,7 @@ class MockTextMessageRepository extends _i1.Mock
           {
             #status: status,
             #packetId: packetId,
+            #routingError: routingError,
           },
         ),
         returnValue: _i5.Future<void>.value(),
@@ -207,19 +209,19 @@ class MockTextMessageRepository extends _i1.Mock
 /// A class which mocks [RadioReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRadioReader extends _i1.Mock implements _i7.RadioReader {
+class MockRadioReader extends _i1.Mock implements _i8.RadioReader {
   MockRadioReader() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Stream<_i8.FromRadio> onPacketReceived() => (super.noSuchMethod(
+  _i5.Stream<_i7.FromRadio> onPacketReceived() => (super.noSuchMethod(
         Invocation.method(
           #onPacketReceived,
           [],
         ),
-        returnValue: _i5.Stream<_i8.FromRadio>.empty(),
-      ) as _i5.Stream<_i8.FromRadio>);
+        returnValue: _i5.Stream<_i7.FromRadio>.empty(),
+      ) as _i5.Stream<_i7.FromRadio>);
 }
 
 /// A class which mocks [ShowNotification].

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../models/text_message.dart';
 import '../../models/text_message_status.dart';
@@ -26,21 +27,24 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   final _logger = Logger();
 
   @override
-  Future<TextMessageStatus> build({
-    required TextMessage textMessage,
+  Future<Tuple2<TextMessageStatus, Routing_Error>> build({
+    required int packetId,
     Duration timeout = const Duration(minutes: 1),
   }) async {
+    _textMessageRepository = ref.watch(textMessageRepositoryProvider);
+    final textMessage = await _textMessageRepository.getByPacketId(
+      packetId: packetId,
+    );
     if (textMessage.state != TextMessageStatus.SENDING) {
-      return textMessage.state;
+      return Tuple2(textMessage.state, textMessage.routingError);
     }
 
     _radioReader = ref.watch(radioReaderProvider);
-    _textMessageRepository = ref.watch(textMessageRepositoryProvider);
     _textMessage = textMessage;
     _link = ref.keepAlive();
     _setTimeout(timeout);
     _listenToStatusUpdates();
-    return _textMessage.state;
+    return Tuple2(textMessage.state, textMessage.routingError);
   }
 
   void _setTimeout(Duration timeout) {
@@ -48,10 +52,13 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       await _packetListener?.cancel();
       _link.close();
       _logger.w('Message ${_textMessage.packetId} timed out');
-      state = const AsyncValue.data(TextMessageStatus.RADIO_ERROR);
+      state = const AsyncValue.data(
+        Tuple2(TextMessageStatus.RADIO_ERROR, Routing_Error.TIMEOUT),
+      );
       await _textMessageRepository.updateStatusByPacketId(
         packetId: _textMessage.packetId,
         status: TextMessageStatus.RADIO_ERROR,
+        routingError: Routing_Error.TIMEOUT,
       );
     });
     ref.onDispose(_timer.cancel);
@@ -63,22 +70,29 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       if (decoded.portnum == PortNum.ROUTING_APP &&
           decoded.requestId == _textMessage.packetId) {
         final routing = Routing.fromBuffer(decoded.payload);
-        final status = switch (routing.errorReason) {
-          Routing_Error.NONE => TextMessageStatus.OK,
-          Routing_Error.MAX_RETRANSMIT => TextMessageStatus.MAX_RETRANSMIT,
-          _ => TextMessageStatus.RADIO_ERROR
-        };
-        state = AsyncValue.data(status);
+        _logger.i(routing);
+        late final TextMessageStatus status;
+        switch (routing.errorReason) {
+          case Routing_Error.NONE:
+            status = TextMessageStatus.OK;
+          default:
+            status = TextMessageStatus.RADIO_ERROR;
+        }
+        state = AsyncValue.data(Tuple2(status, routing.errorReason));
+
         await _textMessageRepository.updateStatusByPacketId(
           packetId: _textMessage.packetId,
           status: status,
+          routingError: routing.errorReason,
         );
         _link.close();
         _timer.cancel();
       } else if (event.whichPayloadVariant() ==
               FromRadio_PayloadVariant.queueStatus &&
           event.queueStatus.meshPacketId == _textMessage.packetId) {
-        state = const AsyncValue.data(TextMessageStatus.RECVD_BY_RADIO);
+        state = const AsyncValue.data(
+          Tuple2(TextMessageStatus.RECVD_BY_RADIO, Routing_Error.NONE),
+        );
         await _textMessageRepository.updateStatusByPacketId(
           packetId: _textMessage.packetId,
           status: TextMessageStatus.RECVD_BY_RADIO,
