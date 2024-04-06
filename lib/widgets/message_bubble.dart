@@ -123,7 +123,7 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
               ),
               if (widget.isSender)
                 Positioned(
-                  top: 24,
+                  bottom: 5,
                   right: 40,
                   child: TextMessageStatusIndicator(
                     textMessage: widget.textMessage,
