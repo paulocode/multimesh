@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tuple/tuple.dart';
 
 import '../../models/text_message.dart';
 import '../../models/text_message_status.dart';
@@ -27,16 +26,20 @@ class TextMessageStatusService extends _$TextMessageStatusService {
   final _logger = Logger();
 
   @override
-  Future<Tuple2<TextMessageStatus, Routing_Error>> build({
-    required int packetId,
+  Future<TextMessage> build({
+    required TextMessage textMessage,
     Duration timeout = const Duration(minutes: 1),
   }) async {
     _textMessageRepository = ref.watch(textMessageRepositoryProvider);
-    final textMessage = await _textMessageRepository.getByPacketId(
-      packetId: packetId,
-    );
+    // status might be stale, so read here
+    if (textMessage.state == TextMessageStatus.SENDING) {
+      textMessage = await _textMessageRepository.getByPacketId(
+        packetId: textMessage.packetId,
+      );
+    }
+
     if (textMessage.state != TextMessageStatus.SENDING) {
-      return Tuple2(textMessage.state, textMessage.routingError);
+      return textMessage;
     }
 
     _radioReader = ref.watch(radioReaderProvider);
@@ -44,7 +47,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
     _link = ref.keepAlive();
     _setTimeout(timeout);
     _listenToStatusUpdates();
-    return Tuple2(textMessage.state, textMessage.routingError);
+    return textMessage;
   }
 
   void _setTimeout(Duration timeout) {
@@ -52,8 +55,11 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       await _packetListener?.cancel();
       _link.close();
       _logger.w('Message ${_textMessage.packetId} timed out');
-      state = const AsyncValue.data(
-        Tuple2(TextMessageStatus.RADIO_ERROR, Routing_Error.TIMEOUT),
+      state = AsyncValue.data(
+        textMessage.copyWith(
+          state: TextMessageStatus.RADIO_ERROR,
+          routingError: Routing_Error.TIMEOUT,
+        ),
       );
       await _textMessageRepository.updateStatusByPacketId(
         packetId: _textMessage.packetId,
@@ -78,7 +84,12 @@ class TextMessageStatusService extends _$TextMessageStatusService {
           default:
             status = TextMessageStatus.RADIO_ERROR;
         }
-        state = AsyncValue.data(Tuple2(status, routing.errorReason));
+        state = AsyncValue.data(
+          textMessage.copyWith(
+            state: status,
+            routingError: routing.errorReason,
+          ),
+        );
 
         await _textMessageRepository.updateStatusByPacketId(
           packetId: _textMessage.packetId,
@@ -90,8 +101,11 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       } else if (event.whichPayloadVariant() ==
               FromRadio_PayloadVariant.queueStatus &&
           event.queueStatus.meshPacketId == _textMessage.packetId) {
-        state = const AsyncValue.data(
-          Tuple2(TextMessageStatus.RECVD_BY_RADIO, Routing_Error.NONE),
+        state = AsyncValue.data(
+          textMessage.copyWith(
+            state: TextMessageStatus.RECVD_BY_RADIO,
+            routingError: Routing_Error.NONE,
+          ),
         );
         await _textMessageRepository.updateStatusByPacketId(
           packetId: _textMessage.packetId,

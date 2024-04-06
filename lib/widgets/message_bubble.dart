@@ -35,9 +35,12 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
     final nodes = ref.watch(nodeServiceProvider);
     final node = nodes[widget.textMessage.from];
     final showSenderAvatarOrNodeNull = widget.showSenderAvatar || node == null;
-    final status = ref.watch(
-      textMessageStatusServiceProvider(packetId: widget.textMessage.packetId),
-    );
+    final routingError = ref
+        .watch(
+          textMessageStatusServiceProvider(textMessage: widget.textMessage),
+        )
+        .value
+        ?.routingError;
     final theme = Theme.of(context);
 
     return GestureDetector(
@@ -135,11 +138,11 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
               style: theme.textTheme.bodySmall,
             ),
           ),
-          if (_showError && status.value?.item2 != Routing_Error.NONE)
+          if (_showError && routingError != Routing_Error.NONE)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Text(
-                status.value?.item2.toString() ?? 'Unknown error',
+                routingError?.toString() ?? 'Unknown error',
                 style: theme.textTheme.bodySmall!
                     .copyWith(color: theme.colorScheme.error),
               ),

@@ -7,7 +7,7 @@ part of 'text_message_status_service.dart';
 // **************************************************************************
 
 String _$textMessageStatusServiceHash() =>
-    r'a1f1aca5bef316034a1be6380fb5dfc255e85b42';
+    r'6bcee6881415cffc114ef642ca90ce0bfbbf8f09';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,13 +31,12 @@ class _SystemHash {
 }
 
 abstract class _$TextMessageStatusService
-    extends BuildlessAutoDisposeAsyncNotifier<
-        Tuple2<TextMessageStatus, Routing_Error>> {
-  late final int packetId;
+    extends BuildlessAutoDisposeAsyncNotifier<TextMessage> {
+  late final TextMessage textMessage;
   late final Duration timeout;
 
-  FutureOr<Tuple2<TextMessageStatus, Routing_Error>> build({
-    required int packetId,
+  FutureOr<TextMessage> build({
+    required TextMessage textMessage,
     Duration timeout = const Duration(minutes: 1),
   });
 }
@@ -47,18 +46,17 @@ abstract class _$TextMessageStatusService
 const textMessageStatusServiceProvider = TextMessageStatusServiceFamily();
 
 /// See also [TextMessageStatusService].
-class TextMessageStatusServiceFamily
-    extends Family<AsyncValue<Tuple2<TextMessageStatus, Routing_Error>>> {
+class TextMessageStatusServiceFamily extends Family<AsyncValue<TextMessage>> {
   /// See also [TextMessageStatusService].
   const TextMessageStatusServiceFamily();
 
   /// See also [TextMessageStatusService].
   TextMessageStatusServiceProvider call({
-    required int packetId,
+    required TextMessage textMessage,
     Duration timeout = const Duration(minutes: 1),
   }) {
     return TextMessageStatusServiceProvider(
-      packetId: packetId,
+      textMessage: textMessage,
       timeout: timeout,
     );
   }
@@ -68,7 +66,7 @@ class TextMessageStatusServiceFamily
     covariant TextMessageStatusServiceProvider provider,
   ) {
     return call(
-      packetId: provider.packetId,
+      textMessage: provider.textMessage,
       timeout: provider.timeout,
     );
   }
@@ -91,14 +89,14 @@ class TextMessageStatusServiceFamily
 /// See also [TextMessageStatusService].
 class TextMessageStatusServiceProvider
     extends AutoDisposeAsyncNotifierProviderImpl<TextMessageStatusService,
-        Tuple2<TextMessageStatus, Routing_Error>> {
+        TextMessage> {
   /// See also [TextMessageStatusService].
   TextMessageStatusServiceProvider({
-    required int packetId,
+    required TextMessage textMessage,
     Duration timeout = const Duration(minutes: 1),
   }) : this._internal(
           () => TextMessageStatusService()
-            ..packetId = packetId
+            ..textMessage = textMessage
             ..timeout = timeout,
           from: textMessageStatusServiceProvider,
           name: r'textMessageStatusServiceProvider',
@@ -109,7 +107,7 @@ class TextMessageStatusServiceProvider
           dependencies: TextMessageStatusServiceFamily._dependencies,
           allTransitiveDependencies:
               TextMessageStatusServiceFamily._allTransitiveDependencies,
-          packetId: packetId,
+          textMessage: textMessage,
           timeout: timeout,
         );
 
@@ -120,19 +118,19 @@ class TextMessageStatusServiceProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.packetId,
+    required this.textMessage,
     required this.timeout,
   }) : super.internal();
 
-  final int packetId;
+  final TextMessage textMessage;
   final Duration timeout;
 
   @override
-  FutureOr<Tuple2<TextMessageStatus, Routing_Error>> runNotifierBuild(
+  FutureOr<TextMessage> runNotifierBuild(
     covariant TextMessageStatusService notifier,
   ) {
     return notifier.build(
-      packetId: packetId,
+      textMessage: textMessage,
       timeout: timeout,
     );
   }
@@ -143,46 +141,46 @@ class TextMessageStatusServiceProvider
       origin: this,
       override: TextMessageStatusServiceProvider._internal(
         () => create()
-          ..packetId = packetId
+          ..textMessage = textMessage
           ..timeout = timeout,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        packetId: packetId,
+        textMessage: textMessage,
         timeout: timeout,
       ),
     );
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<TextMessageStatusService,
-      Tuple2<TextMessageStatus, Routing_Error>> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<TextMessageStatusService, TextMessage>
+      createElement() {
     return _TextMessageStatusServiceProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
     return other is TextMessageStatusServiceProvider &&
-        other.packetId == packetId &&
+        other.textMessage == textMessage &&
         other.timeout == timeout;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, packetId.hashCode);
+    hash = _SystemHash.combine(hash, textMessage.hashCode);
     hash = _SystemHash.combine(hash, timeout.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin TextMessageStatusServiceRef on AutoDisposeAsyncNotifierProviderRef<
-    Tuple2<TextMessageStatus, Routing_Error>> {
-  /// The parameter `packetId` of this provider.
-  int get packetId;
+mixin TextMessageStatusServiceRef
+    on AutoDisposeAsyncNotifierProviderRef<TextMessage> {
+  /// The parameter `textMessage` of this provider.
+  TextMessage get textMessage;
 
   /// The parameter `timeout` of this provider.
   Duration get timeout;
@@ -190,12 +188,12 @@ mixin TextMessageStatusServiceRef on AutoDisposeAsyncNotifierProviderRef<
 
 class _TextMessageStatusServiceProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<TextMessageStatusService,
-        Tuple2<TextMessageStatus, Routing_Error>>
-    with TextMessageStatusServiceRef {
+        TextMessage> with TextMessageStatusServiceRef {
   _TextMessageStatusServiceProviderElement(super.provider);
 
   @override
-  int get packetId => (origin as TextMessageStatusServiceProvider).packetId;
+  TextMessage get textMessage =>
+      (origin as TextMessageStatusServiceProvider).textMessage;
   @override
   Duration get timeout => (origin as TextMessageStatusServiceProvider).timeout;
 }

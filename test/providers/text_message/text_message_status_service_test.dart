@@ -25,7 +25,7 @@ void main() {
   late MockTextMessageRepository textMessageRepository;
   late MockRadioReader radioReader;
   late MockStream<FromRadio> mockStream;
-  late ProviderSubscription<Future<TextMessageStatus>> statusSubscription;
+  late ProviderSubscription<Future<TextMessage>> statusSubscription;
   final textMessage = TextMessage(
     text: '',
     channel: 0,
@@ -64,7 +64,9 @@ void main() {
   test('initial state', () async {
     await expectLater(
       statusSubscription.read(),
-      completion(TextMessageStatus.SENDING),
+      completion(
+        stateEquals(TextMessageStatus.SENDING),
+      ),
     );
   });
 
@@ -85,7 +87,9 @@ void main() {
     );
     await expectLater(
       subscription.read(),
-      completion(TextMessageStatus.OK),
+      completion(
+        stateEquals(TextMessageStatus.OK),
+      ),
     );
   });
 
@@ -101,7 +105,9 @@ void main() {
     await Future<void>.delayed(const Duration(seconds: 6));
     await expectLater(
       timedSubscription.read(),
-      completion(TextMessageStatus.RADIO_ERROR),
+      completion(
+        stateEquals(TextMessageStatus.RADIO_ERROR),
+      ),
     );
   });
 
@@ -116,7 +122,9 @@ void main() {
 
     await expectLater(
       statusSubscription.read(),
-      completion(TextMessageStatus.RECVD_BY_RADIO),
+      completion(
+        stateEquals(TextMessageStatus.RECVD_BY_RADIO),
+      ),
     );
   });
 
@@ -164,7 +172,9 @@ void main() {
 
     await expectLater(
       statusSubscription.read(),
-      completion(TextMessageStatus.SENDING),
+      completion(
+        stateEquals(TextMessageStatus.SENDING),
+      ),
     );
   });
 
@@ -187,7 +197,9 @@ void main() {
 
     await expectLater(
       statusSubscription.read(),
-      completion(TextMessageStatus.MAX_RETRANSMIT),
+      completion(
+        stateEquals(TextMessageStatus.RADIO_ERROR),
+      ),
     );
   });
 
@@ -210,7 +222,12 @@ void main() {
 
     await expectLater(
       statusSubscription.read(),
-      completion(TextMessageStatus.RADIO_ERROR),
+      completion(
+        stateEquals(TextMessageStatus.RADIO_ERROR),
+      ),
     );
   });
 }
+
+Matcher stateEquals(TextMessageStatus expected) =>
+    predicate<TextMessage>((s) => s.state == expected);

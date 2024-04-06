@@ -41,7 +41,7 @@ Future<void> sendTextMessage(
   await textMessageStreamService.onNewMessage(message);
 
   // start the service to receive updates
-  ref.read(textMessageStatusServiceProvider(packetId: message.packetId));
+  ref.read(textMessageStatusServiceProvider(textMessage: message));
 
   await radioWriter.sendMeshPacket(
     channel: message.channel,
