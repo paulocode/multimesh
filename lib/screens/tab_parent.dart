@@ -1,20 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/radio_connector_state.dart';
 import '../providers/radio_connector_service.dart';
+import '../providers/telemetry_logger.dart';
 import 'channel_list.dart';
+import 'config/confirmation_dialog.dart';
 import 'map.dart';
 import 'nodes.dart';
 import 'radio_connection.dart';
 
-class TabParent extends ConsumerWidget {
+class TabParent extends ConsumerStatefulWidget {
   const TabParent({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<TabParent> createState() => _TabParentState();
+}
+
+class _TabParentState extends ConsumerState<TabParent> {
+  final _logger = Logger();
+
+  @override
+  void initState() {
+    _confirmTelemetryFromUser();
+    super.initState();
+  }
+
+  Future<void> _confirmTelemetryFromUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('telemetryEnabled')) {
+      final enabled = prefs.getBool('telemetryEnabled') ?? false;
+      _logger.i('telemetry enabled $enabled');
+      await ref.read(telemetryLoggerProvider).setEnabled(enabled);
+    } else {
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
+        final telemetryEnabled = await showConfirmationDialog(
+          context,
+          'Upload anonymized crash data?\nThis can be later changed in settings.',
+          title: 'Telemetry Uploader',
+          positive: 'Enable',
+        );
+        await prefs.setBool('telemetryEnabled', telemetryEnabled);
+        await ref.read(telemetryLoggerProvider).setEnabled(telemetryEnabled);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final radioConnectorState = ref.watch(radioConnectorServiceProvider);
     return DefaultTabController(
       length: 4,

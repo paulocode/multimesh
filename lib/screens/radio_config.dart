@@ -1,20 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/radio_connector_state.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/radio_config/radio_config_uploader_service.dart';
 import '../providers/radio_connector_service.dart';
+import '../providers/telemetry_logger.dart';
 import '../widgets/app_bar_connection_indicator.dart';
 import 'config/confirmation_dialog.dart';
 
-class RadioConfigScreen extends ConsumerWidget {
+class RadioConfigScreen extends ConsumerStatefulWidget {
   const RadioConfigScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<RadioConfigScreen> createState() => _RadioConfigScreenState();
+}
+
+class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
+  late SharedPreferences prefs;
+  bool _telemetryEnabled = false;
+  final _logger = Logger();
+
+  @override
+  void initState() {
+    getPrefs();
+    _telemetryEnabled = ref.read(telemetryLoggerProvider).isEnabled();
+    _logger.i('telemetry enabled $_telemetryEnabled');
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
+    final telemetryLogger = ref.watch(telemetryLoggerProvider);
     final radioConfigUploader = ref.watch(radioConfigUploaderServiceProvider);
     final longName = radioConfig.configDownloaded
         ? '${radioConfig.myNodeInfo.user.longName} ⚙️'
@@ -114,6 +135,18 @@ class RadioConfigScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+              SwitchListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                title: const Text('Upload anonymized crash logs'),
+                value: _telemetryEnabled,
+                onChanged: (value) async {
+                  await prefs.setBool('telemetryEnabled', value);
+                  await telemetryLogger.setEnabled(_telemetryEnabled);
+                  setState(() {
+                    _telemetryEnabled = value;
+                  });
+                },
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -173,5 +206,9 @@ class RadioConfigScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> getPrefs() async {
+    prefs = await SharedPreferences.getInstance();
   }
 }

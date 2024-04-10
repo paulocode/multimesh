@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,12 +11,17 @@ import '../screens/config/lora_config.dart';
 import '../screens/config/user_config.dart';
 import '../screens/radio_config.dart';
 import '../screens/tab_parent.dart';
+import '../services/telemetry_logger.dart';
+import 'telemetry_logger.dart';
 
 part 'router.g.dart';
 
 @riverpod
 GoRouter goRouter(GoRouterRef ref) {
   return GoRouter(
+    observers: [
+      GoRouterObserver(logger: ref.watch(telemetryLoggerProvider)),
+    ],
     initialLocation: '/',
     routes: <RouteBase>[
       GoRoute(
@@ -82,4 +88,23 @@ GoRouter goRouter(GoRouterRef ref) {
       ),
     ],
   );
+}
+
+class GoRouterObserver extends NavigatorObserver {
+  GoRouterObserver({required TelemetryLogger logger}) : _logger = logger;
+
+  final TelemetryLogger _logger;
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _logger.i(
+      'nav push ${previousRoute?.settings.name} -> ${route.settings.name}',
+    );
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _logger
+        .i('nav pop ${route.settings.name} -> ${previousRoute?.settings.name}');
+  }
 }

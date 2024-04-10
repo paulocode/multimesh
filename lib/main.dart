@@ -1,7 +1,12 @@
+import 'dart:ui';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'firebase_options.dart';
 import 'providers/channel_service.dart';
 import 'providers/node/node_service.dart';
 import 'providers/notifications.dart';
@@ -14,8 +19,23 @@ import 'providers/wrap/flutter_blue_plus_mockable.dart';
 import 'providers/wrap/local_platform.dart';
 import 'theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await _initFirebase();
   runApp(const ProviderScope(child: MyApp()));
+}
+
+Future<void> _initFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 }
 
 class MyApp extends ConsumerStatefulWidget {

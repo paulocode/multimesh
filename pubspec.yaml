@@ -10,7 +10,12 @@ environment:
 
 dependencies:
   chat_bubbles: ^1.6.0
+  convert: ^3.1.1
+  crypto: ^3.0.3
   easy_debounce: ^2.0.3
+  firebase_analytics: ^10.10.1
+  firebase_core: ^2.29.0
+  firebase_crashlytics: ^3.5.1
   flutter:
     sdk: flutter
   flutter_blue_plus: ^1.31.7
@@ -34,6 +39,7 @@ dependencies:
   qr_flutter: ^4.1.0
   riverpod_annotation: ^2.3.3
   scrollview_observer: ^1.19.0
+  shared_preferences: ^2.2.2
   shimmer: ^3.0.0
   sqflite: ^2.3.2
   sqflite_common_ffi: ^2.3.3

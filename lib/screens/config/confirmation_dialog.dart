@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-Future<bool> showConfirmationDialog(BuildContext context, String msg) async {
+Future<bool> showConfirmationDialog(
+  BuildContext context,
+  String msg, {
+  String negative = 'Cancel',
+  String positive = 'Continue',
+  String title = 'Confirmation',
+}) async {
   if (!context.mounted) {
     return false;
   }
@@ -10,17 +16,17 @@ Future<bool> showConfirmationDialog(BuildContext context, String msg) async {
         barrierDismissible: false,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Confirmation'),
+            title: Text(title),
             content: Text(msg),
             actions: [
               TextButton(
-                child: const Text('Cancel'),
+                child: Text(negative),
                 onPressed: () {
                   context.pop(false);
                 },
               ),
               TextButton(
-                child: const Text('Continue'),
+                child: Text(positive),
                 onPressed: () {
                   context.pop(true);
                 },
