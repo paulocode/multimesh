@@ -10,13 +10,21 @@ import 'package:multimesh/models/radio_connector_state.dart';
 import 'package:multimesh/providers/ble/ble_radio_connector.dart';
 import 'package:multimesh/providers/radio_connector_service.dart';
 import 'package:multimesh/providers/tcp/tcp_radio_connector.dart';
+import 'package:multimesh/providers/telemetry_logger.dart';
+import 'package:multimesh/services/telemetry_logger.dart';
 
 import '../common.dart';
 import '../mock_stream.dart';
 import 'radio_connector_service_test.mocks.dart';
 
 @GenerateMocks(
-  [TcpRadioConnector, BleRadioConnector, BluetoothDevice, Socket],
+  [
+    TcpRadioConnector,
+    BleRadioConnector,
+    BluetoothDevice,
+    Socket,
+    TelemetryLogger,
+  ],
 )
 void main() {
   late ProviderContainer container;
@@ -39,6 +47,7 @@ void main() {
             bleRadioConnector: bleRadioConnector,
           ),
         ),
+        telemetryLoggerProvider.overrideWith((_) => MockTelemetryLogger()),
       ],
     );
     radioConnectorService =

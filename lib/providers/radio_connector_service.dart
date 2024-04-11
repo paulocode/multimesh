@@ -7,8 +7,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../models/mesh_radio.dart';
 import '../models/radio_connector_state.dart';
 import '../services/interfaces/radio_connector.dart';
+import '../services/telemetry_logger.dart';
 import 'ble/ble_radio_connector.dart';
 import 'tcp/tcp_radio_connector.dart';
+import 'telemetry_logger.dart';
 
 part 'radio_connector_service.g.dart';
 
@@ -17,9 +19,12 @@ class RadioConnectorService extends _$RadioConnectorService
     implements RadioConnector {
   NotifierProvider<RadioConnector, RadioConnectorState>? _lastUsedConnector;
   String? _currentRadioId;
+  late TelemetryLogger _telemetryLogger;
 
   @override
   RadioConnectorState build() {
+    _telemetryLogger = ref.watch(telemetryLoggerProvider);
+
     if (_lastUsedConnector == null) {
       return Disconnected();
     }
@@ -51,8 +56,10 @@ class RadioConnectorService extends _$RadioConnectorService
     }
     switch (radio) {
       case BleMeshRadio():
+        await _telemetryLogger.i('BLE connect');
         _lastUsedConnector = bleRadioConnectorProvider;
       case TcpMeshRadio():
+        await _telemetryLogger.i('TCP connect');
         _lastUsedConnector = tcpRadioConnectorProvider;
     }
 

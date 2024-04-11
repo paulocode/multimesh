@@ -15,6 +15,7 @@ import 'package:multimesh/models/mesh_radio.dart' as _i10;
 import 'package:multimesh/models/radio_connector_state.dart' as _i8;
 import 'package:multimesh/providers/ble/ble_radio_connector.dart' as _i11;
 import 'package:multimesh/providers/tcp/tcp_radio_connector.dart' as _i7;
+import 'package:multimesh/services/telemetry_logger.dart' as _i13;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -1244,4 +1245,95 @@ class MockSocket extends _i1.Mock implements _i4.Socket {
         ),
         returnValue: _i6.Future<dynamic>.value(),
       ) as _i6.Future<dynamic>);
+}
+
+/// A class which mocks [TelemetryLogger].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTelemetryLogger extends _i1.Mock implements _i13.TelemetryLogger {
+  MockTelemetryLogger() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<void> i(String? string) => (super.noSuchMethod(
+        Invocation.method(
+          #i,
+          [string],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> w(String? string) => (super.noSuchMethod(
+        Invocation.method(
+          #w,
+          [string],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> e(Object? e) => (super.noSuchMethod(
+        Invocation.method(
+          #e,
+          [e],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  int anonymizeInt(int? value) => (super.noSuchMethod(
+        Invocation.method(
+          #anonymizeInt,
+          [value],
+        ),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  List<int> anonymizeBytes(List<int>? bytes) => (super.noSuchMethod(
+        Invocation.method(
+          #anonymizeBytes,
+          [bytes],
+        ),
+        returnValue: <int>[],
+      ) as List<int>);
+
+  @override
+  String anonymizeString(String? value) => (super.noSuchMethod(
+        Invocation.method(
+          #anonymizeString,
+          [value],
+        ),
+        returnValue: _i9.dummyValue<String>(
+          this,
+          Invocation.method(
+            #anonymizeString,
+            [value],
+          ),
+        ),
+      ) as String);
+
+  @override
+  _i6.Future<void> setEnabled(bool? telemetryEnabled) => (super.noSuchMethod(
+        Invocation.method(
+          #setEnabled,
+          [telemetryEnabled],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  bool isEnabled() => (super.noSuchMethod(
+        Invocation.method(
+          #isEnabled,
+          [],
+        ),
+        returnValue: false,
+      ) as bool);
 }
