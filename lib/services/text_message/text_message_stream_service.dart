@@ -52,6 +52,8 @@ class TextMessageStreamService {
         ),
     };
 
+    _currentStreamState = _currentStreamState.reversed.toList();
+
     _logger.i('Loaded initial messages: ${_currentStreamState.length}');
     _streamController.add(_currentStreamState);
   }
@@ -102,7 +104,7 @@ class TextMessageStreamService {
         )
     };
     _currentStreamState = [
-      ...oldMessages,
+      ...oldMessages.reversed,
       ..._currentStreamState,
     ];
     _logger.i('Loaded messages: ${_currentStreamState.length}');

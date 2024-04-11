@@ -75,7 +75,7 @@ class TextMessageRepository {
           '((toNode = ? AND fromNode = ?) OR (toNode = ? AND fromNode = ?)) AND owner = ?',
       whereArgs: [myNodeNum, otherNodeNum, otherNodeNum, myNodeNum, owner],
       offset: offset,
-      orderBy: 'id ASC',
+      orderBy: 'id DESC',
       limit: limit,
     );
 
@@ -94,7 +94,7 @@ class TextMessageRepository {
       where: 'toNode = ? AND channel = ? AND owner = ?',
       whereArgs: [toNode, channel, owner],
       offset: offset,
-      orderBy: 'id ASC',
+      orderBy: 'id DESC',
       limit: limit,
     );
 
