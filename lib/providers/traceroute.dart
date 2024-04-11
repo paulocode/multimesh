@@ -18,7 +18,7 @@ Future<List<int>> traceroute(
 }) async {
   final logger = Logger();
   final radioWriter = ref.watch(ackWaitingRadioWriterProvider);
-  final node = ref.watch(nodeServiceProvider)[nodeNum];
+  final node = ref.read(nodeServiceProvider)[nodeNum];
   final packetId = radioWriter.generatePacketId();
   final completer = Completer<List<int>>();
 

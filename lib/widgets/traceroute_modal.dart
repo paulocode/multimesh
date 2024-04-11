@@ -16,7 +16,8 @@ class TracerouteModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final route = ref.watch(tracerouteProvider(nodeNum));
-    final nodes = ref.watch(nodeServiceProvider);
+    // use node.read here to prevent retriggers when new nodes arrive
+    final nodes = ref.read(nodeServiceProvider);
     final myNodeNum =
         ref.watch(radioConfigServiceProvider.select((it) => it.myNodeNum));
     final body = switch (route) {
