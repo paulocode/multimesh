@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../models/text_message.dart';
+import '../models/text_message_status.dart';
 import '../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../providers/node/node_service.dart';
-import '../providers/radio_config/radio_config_service.dart';
 import '../providers/text_message/text_message_status_service.dart';
 import 'text_message_status_indicator.dart';
 
@@ -35,19 +35,9 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
   Widget build(BuildContext context) {
     final textMessage = widget.textMessage;
     final nodes = ref.watch(nodeServiceProvider);
-    final myNodeNum =
-        ref.watch(radioConfigServiceProvider.select((c) => c.myNodeNum));
     final node = nodes[textMessage.from];
-    final isOwnMessage = textMessage.from == myNodeNum;
     final showSenderAvatarOrNodeNull = widget.showSenderAvatar || node == null;
-    final routingError = isOwnMessage
-        ? ref
-            .watch(
-              textMessageStatusServiceProvider(textMessage: textMessage),
-            )
-            .value
-            ?.routingError
-        : Routing_Error.NONE;
+    final routingError = _getRoutingError(textMessage);
 
     final theme = Theme.of(context);
     return GestureDetector(
@@ -145,7 +135,9 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
               style: theme.textTheme.bodySmall,
             ),
           ),
-          if (_showError && routingError != Routing_Error.NONE)
+          if (widget.isSender &&
+              _showError &&
+              routingError != Routing_Error.NONE)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Text(
@@ -160,5 +152,20 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
         ],
       ),
     );
+  }
+
+  Routing_Error? _getRoutingError(TextMessage textMessage) {
+    if (!widget.isSender) {
+      return Routing_Error.NONE;
+    } else if (textMessage.state == TextMessageStatus.SENDING) {
+      return ref
+          .watch(
+            textMessageStatusServiceProvider(packetId: textMessage.packetId),
+          )
+          .value
+          ?.routingError;
+    } else {
+      return textMessage.routingError;
+    }
   }
 }

@@ -32,6 +32,7 @@ class _MessageListState extends ConsumerState<MessageList> {
   bool _showNewMessageAlert = false;
   int _oldMessagesLength = BATCH_NUM_MESSAGES_TO_LOAD;
   int _lastPacketId = 0;
+  bool _allMessagesLoaded = false;
 
   late final ListObserverController observerController;
   late final ChatScrollObserver chatObserver;
@@ -207,10 +208,16 @@ class _MessageListState extends ConsumerState<MessageList> {
     );
   }
 
-  void _listObserver(
+  Future<void> _listObserver(
     ListViewObserveModel resultModel,
     List<TextMessage> textMessages,
-  ) {
+  ) async {
+    if (_allMessagesLoaded ||
+        await _textMessageStreamService.allMessagesLoaded) {
+      _allMessagesLoaded = true;
+      return;
+    }
+
     final firstChildIndex = resultModel.firstChild?.index ?? 0;
     final isScrolledToBottom = firstChildIndex == 0;
     final twoThirdsPoint = textMessages.length - BATCH_NUM_MESSAGES_TO_LOAD / 3;
@@ -229,7 +236,6 @@ class _MessageListState extends ConsumerState<MessageList> {
         });
       }
     }
-
     if (isScrolledUpwardsToTwoThirds) {
       EasyThrottle.throttle(
         'load-older-messages-throttler',

@@ -15,14 +15,20 @@ class TextMessageStatusIndicator extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref
-        .watch(
-          textMessageStatusServiceProvider(textMessage: _textMessage),
-        )
-        .value
-        ?.state;
+    late TextMessageStatus? state;
+    if (_textMessage.state != TextMessageStatus.SENDING) {
+      state = _textMessage.state;
+    } else {
+      final statusUpdate = ref.watch(
+        textMessageStatusServiceProvider(packetId: _textMessage.packetId),
+      );
+      state = switch (statusUpdate) {
+        AsyncValue(:final valueOrNull?) => valueOrNull.state,
+        _ => null
+      };
+    }
 
-    final icon = switch (status) {
+    final icon = switch (state) {
       TextMessageStatus.RADIO_ERROR => Icons.error_outline,
       TextMessageStatus.OK => Icons.check_circle,
       TextMessageStatus.RECVD_BY_RADIO => Icons.check_circle_outline,

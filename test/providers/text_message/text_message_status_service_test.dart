@@ -55,7 +55,7 @@ void main() {
     );
     statusSubscription = container.listen(
       textMessageStatusServiceProvider(
-        textMessage: textMessage,
+        packetId: textMessage.packetId,
       ).future,
       (_, __) {},
     );
@@ -81,7 +81,7 @@ void main() {
 
     final subscription = container.listen(
       textMessageStatusServiceProvider(
-        textMessage: okTextMessage,
+        packetId: okTextMessage.packetId,
       ).future,
       (_, __) {},
     );
@@ -96,7 +96,7 @@ void main() {
   test('timeout', () async {
     final timedSubscription = container.listen(
       textMessageStatusServiceProvider(
-        textMessage: textMessage,
+        packetId: textMessage.packetId,
         timeout: const Duration(seconds: 5),
       ).future,
       (_, __) {},

@@ -6,6 +6,7 @@ import '../../constants/app_constants.dart';
 import '../../constants/ble_constants.dart';
 import '../../models/chat_type.dart';
 import '../../models/text_message.dart';
+import '../../models/text_message_status.dart';
 import '../../repository/text_message_repository.dart';
 import 'text_message_receiver_service.dart';
 
@@ -33,6 +34,7 @@ class TextMessageStreamService {
   final void Function(void Function() cb) _onDispose;
   List<TextMessage> _currentStreamState = [];
   final _logger = Logger();
+  bool _needsFullDispose = false;
 
   Future<void> _loadInitialMessagesFromLocal() async {
     _currentStreamState = switch (_chatType) {
@@ -113,6 +115,12 @@ class TextMessageStreamService {
       textMessage,
     ];
     _streamController.add(_currentStreamState);
+    // because this class does not listen to status updates,
+    // we must clear the messages cache to not serve stale
+    // statuses.
+    if (textMessage.from == _myNodeNum) {
+      _needsFullDispose = true;
+    }
   }
 
   void _listenToRemoteMessages() {
@@ -126,11 +134,18 @@ class TextMessageStreamService {
   List<TextMessage> getMessages() => List.unmodifiable(_currentStreamState);
 
   void disposeOldMessages() {
-    final length = _currentStreamState.length;
-    _currentStreamState = length < BATCH_NUM_MESSAGES_TO_LOAD
-        ? _currentStreamState
-        : _currentStreamState.sublist(length - BATCH_NUM_MESSAGES_TO_LOAD);
-    _logger
-        .i('Old messages disposed. New length: ${_currentStreamState.length}');
+    if (_needsFullDispose) {
+      _loadInitialMessagesFromLocal();
+      _needsFullDispose = _currentStreamState
+          .any((element) => element.state == TextMessageStatus.SENDING);
+    } else {
+      final length = _currentStreamState.length;
+      _currentStreamState = length < BATCH_NUM_MESSAGES_TO_LOAD
+          ? _currentStreamState
+          : _currentStreamState.sublist(length - BATCH_NUM_MESSAGES_TO_LOAD);
+      _logger.i(
+        'Old messages disposed. New length: ${_currentStreamState.length}',
+      );
+    }
   }
 }

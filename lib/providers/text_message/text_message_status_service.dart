@@ -27,27 +27,40 @@ class TextMessageStatusService extends _$TextMessageStatusService {
 
   @override
   Future<TextMessage> build({
-    required TextMessage textMessage,
+    required int packetId,
     Duration timeout = const Duration(minutes: 1),
   }) async {
     _textMessageRepository = ref.watch(textMessageRepositoryProvider);
-    // status might be stale, so read here
-    if (textMessage.state == TextMessageStatus.SENDING) {
-      textMessage = await _textMessageRepository.getByPacketId(
-        packetId: textMessage.packetId,
+    _textMessage = await _textMessageRepository.getByPacketId(
+      packetId: packetId,
+    );
+
+    if (_textMessage.state != TextMessageStatus.SENDING) {
+      return _textMessage;
+    }
+
+    if (DateTime.now().difference(_textMessage.time).compareTo(timeout) == 1) {
+      _logger.w('Stale message ${_textMessage.packetId} timed out');
+
+      await _textMessageRepository.updateStatusByPacketId(
+        packetId: _textMessage.packetId,
+        status: TextMessageStatus.RADIO_ERROR,
+        routingError: Routing_Error.TIMEOUT,
+      );
+
+      return _textMessage.copyWith(
+        state: TextMessageStatus.RADIO_ERROR,
+        routingError: Routing_Error.TIMEOUT,
       );
     }
 
-    if (textMessage.state != TextMessageStatus.SENDING) {
-      return textMessage;
-    }
+    _logger.i('Message status service for ${_textMessage.packetId} started');
 
     _radioReader = ref.watch(radioReaderProvider);
-    _textMessage = textMessage;
     _link = ref.keepAlive();
     _setTimeout(timeout);
     _listenToStatusUpdates();
-    return textMessage;
+    return _textMessage;
   }
 
   void _setTimeout(Duration timeout) {
@@ -56,7 +69,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
       _link.close();
       _logger.w('Message ${_textMessage.packetId} timed out');
       state = AsyncValue.data(
-        textMessage.copyWith(
+        _textMessage.copyWith(
           state: TextMessageStatus.RADIO_ERROR,
           routingError: Routing_Error.TIMEOUT,
         ),
@@ -85,7 +98,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
             status = TextMessageStatus.RADIO_ERROR;
         }
         state = AsyncValue.data(
-          textMessage.copyWith(
+          _textMessage.copyWith(
             state: status,
             routingError: routing.errorReason,
           ),
@@ -102,7 +115,7 @@ class TextMessageStatusService extends _$TextMessageStatusService {
               FromRadio_PayloadVariant.queueStatus &&
           event.queueStatus.meshPacketId == _textMessage.packetId) {
         state = AsyncValue.data(
-          textMessage.copyWith(
+          _textMessage.copyWith(
             state: TextMessageStatus.RECVD_BY_RADIO,
             routingError: Routing_Error.NONE,
           ),
