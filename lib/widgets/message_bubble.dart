@@ -33,21 +33,23 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
 
   @override
   Widget build(BuildContext context) {
+    final textMessage = widget.textMessage;
     final nodes = ref.watch(nodeServiceProvider);
     final myNodeNum =
         ref.watch(radioConfigServiceProvider.select((c) => c.myNodeNum));
-    final node = nodes[widget.textMessage.from];
+    final node = nodes[textMessage.from];
+    final isOwnMessage = textMessage.from == myNodeNum;
     final showSenderAvatarOrNodeNull = widget.showSenderAvatar || node == null;
-    final routingError = widget.textMessage.from == myNodeNum
+    final routingError = isOwnMessage
         ? ref
             .watch(
-              textMessageStatusServiceProvider(textMessage: widget.textMessage),
+              textMessageStatusServiceProvider(textMessage: textMessage),
             )
             .value
             ?.routingError
         : Routing_Error.NONE;
-    final theme = Theme.of(context);
 
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -61,7 +63,7 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
           if (widget.showDate)
             Center(
               child: Text(
-                DateFormat.yMMMd().format(widget.textMessage.time),
+                DateFormat.yMMMd().format(textMessage.time),
                 style: theme.textTheme.bodyLarge,
               ),
             ),
@@ -113,7 +115,7 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: BubbleSpecialOne(
-                  text: widget.textMessage.text,
+                  text: textMessage.text,
                   color: widget.isSender
                       ? theme.colorScheme.primary
                       : theme.colorScheme.tertiary,
@@ -131,7 +133,7 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
                   bottom: 5,
                   right: 40,
                   child: TextMessageStatusIndicator(
-                    textMessage: widget.textMessage,
+                    textMessage: textMessage,
                   ),
                 ),
             ],
@@ -139,7 +141,7 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
             child: Text(
-              DateFormat.Hm().format(widget.textMessage.time),
+              DateFormat.Hm().format(textMessage.time),
               style: theme.textTheme.bodySmall,
             ),
           ),

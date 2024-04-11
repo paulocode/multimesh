@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -41,7 +40,12 @@ class NodeCard extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 4, top: 8, bottom: 8,),
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  right: 4,
+                  top: 8,
+                  bottom: 8,
+                ),
                 child: Row(
                   children: [
                     CircleAvatar(
@@ -82,19 +86,21 @@ class NodeCard extends ConsumerWidget {
                               ],
                             ),
                           if (lastMessage != null)
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.message,
-                                size: 20,
-                              ),
-                              Text(
-                                '$lastSenderShortName: ',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(lastMessage.text),
-                            ],
-                          )
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.message,
+                                  size: 20,
+                                ),
+                                Text(
+                                  '$lastSenderShortName: ',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(lastMessage.text),
+                              ],
+                            ),
                         ],
                       ),
                     ),

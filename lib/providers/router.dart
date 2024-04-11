@@ -90,7 +90,8 @@ GoRouter goRouter(GoRouterRef ref) {
       GoRoute(
         path: '/nodeInfo',
         builder: (context, state) {
-          final id = int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
+          final id =
+              int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
           return NodeInfoScreen(id);
         },
       ),
