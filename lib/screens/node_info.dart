@@ -28,9 +28,13 @@ class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
             node: node,
             showChevron: false,
           ),
-          OutlinedButton(
-            child: const Text('Traceroute'),
-            onPressed: () {},
+          const OutlinedButton(
+            onPressed:
+                null /* () {
+              ref.read(tracerouteProvider(widget.nodeNum));
+            }*/
+            ,
+            child: Text('Traceroute'),
           ),
         ],
       ),
