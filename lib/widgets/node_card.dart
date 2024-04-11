@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -32,103 +33,118 @@ class NodeCard extends ConsumerWidget {
         final lastMessage = snapshot.data!.lastOrNull;
         final lastSender = lastMessage?.from;
         final lastSenderShortName = nodes[lastSender]?.shortName ?? '';
-        return Card(
-          child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(vertical: 4),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  node.longName,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                if (node.batteryLevel != null && node.batteryLevel != 0)
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.battery_charging_full_sharp,
-                        size: 20,
+        return Hero(
+          tag: node.nodeNum,
+          child: SizedBox(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 4, top: 8, bottom: 8,),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      child: Text(node.shortName),
+                    ),
+                    const SizedBox(width: 16),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            node.longName,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          if (node.batteryLevel != null &&
+                              node.batteryLevel != 0)
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.battery_charging_full_sharp,
+                                  size: 20,
+                                ),
+                                Text('${node.batteryLevel}%'),
+                              ],
+                            ),
+                          if (node.hwModel != null)
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.radio,
+                                  size: 20,
+                                ),
+                                Text('${node.hwModel}'),
+                              ],
+                            ),
+                          if (lastMessage != null)
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.message,
+                                size: 20,
+                              ),
+                              Text(
+                                '$lastSenderShortName: ',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(lastMessage.text),
+                            ],
+                          )
+                        ],
                       ),
-                      Text('${node.batteryLevel}%'),
-                    ],
-                  ),
-                if (node.hwModel != null)
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.radio,
-                        size: 20,
-                      ),
-                      Text('${node.hwModel}'),
-                    ],
-                  ),
-              ],
-            ),
-            subtitle: lastMessage != null
-                ? Row(
-                    children: [
-                      const Icon(
-                        Icons.message,
-                        size: 20,
-                      ),
-                      Text(
-                        '$lastSenderShortName: ',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(lastMessage.text),
-                    ],
-                  )
-                : Container(),
-            leading: CircleAvatar(
-              radius: 40,
-              child: Text(node.shortName),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    context.push(
-                      Uri(
-                        path: '/chat',
-                        queryParameters: {
-                          'channel': node.channel.toString(),
-                          'dmNode': node.nodeNum.toString(),
-                        },
-                      ).toString(),
-                    );
-                  },
-                  icon: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      const Icon(Icons.mail),
-                      if (node.hasUnreadMessages)
-                        const Positioned(
-                          right: -2,
-                          child: Icon(
-                            Icons.circle,
-                            color: Colors.red,
-                            size: 10,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context.push(
+                              Uri(
+                                path: '/chat',
+                                queryParameters: {
+                                  'channel': node.channel.toString(),
+                                  'dmNode': node.nodeNum.toString(),
+                                },
+                              ).toString(),
+                            );
+                          },
+                          icon: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              const Icon(Icons.mail),
+                              if (node.hasUnreadMessages)
+                                const Positioned(
+                                  right: -2,
+                                  child: Icon(
+                                    Icons.circle,
+                                    color: Colors.red,
+                                    size: 10,
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
-                    ],
-                  ),
+                        if (showChevron)
+                          IconButton(
+                            onPressed: () {
+                              context.push('/nodeInfo?nodeNum=${node.nodeNum}');
+                            },
+                            icon: const Icon(Icons.chevron_right),
+                          )
+                        else
+                          const SizedBox(
+                            width: 24,
+                          ),
+                      ],
+                    ),
+                  ],
                 ),
-                if (showChevron)
-                  IconButton(
-                    onPressed: () {
-                      context.push('/nodeInfo?nodeNum=${node.nodeNum}');
-                    },
-                    icon: const Icon(Icons.chevron_right),
-                  )
-                else const SizedBox(width: 24,),
-              ],
+              ),
             ),
           ),
         );

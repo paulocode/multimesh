@@ -24,12 +24,10 @@ class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
       ),
       body: Column(
         children: [
-          Hero(
-              tag: node.nodeNum,
-              child: NodeCard(
-                node: node,
-                showChevron: false,
-              )),
+          NodeCard(
+            node: node,
+            showChevron: false,
+          ),
           OutlinedButton(
             child: const Text('Traceroute'),
             onPressed: () {},

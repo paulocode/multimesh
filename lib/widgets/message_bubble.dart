@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../models/text_message.dart';
 import '../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../providers/node/node_service.dart';
+import '../providers/radio_config/radio_config_service.dart';
 import '../providers/text_message/text_message_status_service.dart';
 import 'text_message_status_indicator.dart';
 
@@ -33,14 +34,18 @@ class _MessageBubbleState extends ConsumerState<MessageBubble> {
   @override
   Widget build(BuildContext context) {
     final nodes = ref.watch(nodeServiceProvider);
+    final myNodeNum =
+        ref.watch(radioConfigServiceProvider.select((c) => c.myNodeNum));
     final node = nodes[widget.textMessage.from];
     final showSenderAvatarOrNodeNull = widget.showSenderAvatar || node == null;
-    final routingError = ref
-        .watch(
-          textMessageStatusServiceProvider(textMessage: widget.textMessage),
-        )
-        .value
-        ?.routingError;
+    final routingError = widget.textMessage.from == myNodeNum
+        ? ref
+            .watch(
+              textMessageStatusServiceProvider(textMessage: widget.textMessage),
+            )
+            .value
+            ?.routingError
+        : Routing_Error.NONE;
     final theme = Theme.of(context);
 
     return GestureDetector(
