@@ -9,6 +9,7 @@ import '../screens/config/channel_qr_scanner.dart';
 import '../screens/config/channels_config.dart';
 import '../screens/config/lora_config.dart';
 import '../screens/config/user_config.dart';
+import '../screens/node_info.dart';
 import '../screens/radio_config.dart';
 import '../screens/tab_parent.dart';
 import '../services/telemetry_logger.dart';
@@ -84,6 +85,13 @@ GoRouter goRouter(GoRouterRef ref) {
           return ChatScreen(
             chatType: chatType,
           );
+        },
+      ),
+      GoRoute(
+        path: '/nodeInfo',
+        builder: (context, state) {
+          final id = int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
+          return NodeInfoScreen(id);
         },
       ),
     ],

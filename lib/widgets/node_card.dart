@@ -11,9 +11,11 @@ class NodeCard extends ConsumerWidget {
   const NodeCard({
     super.key,
     required this.node,
+    required this.showChevron,
   });
 
   final MeshNode node;
+  final bool showChevron;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -118,10 +120,14 @@ class NodeCard extends ConsumerWidget {
                     ],
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.chevron_right),
-                ),
+                if (showChevron)
+                  IconButton(
+                    onPressed: () {
+                      context.push('/nodeInfo?nodeNum=${node.nodeNum}');
+                    },
+                    icon: const Icon(Icons.chevron_right),
+                  )
+                else const SizedBox(width: 24,),
               ],
             ),
           ),

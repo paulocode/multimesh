@@ -49,7 +49,13 @@ class _NodesScreenState extends ConsumerState<NodesScreen> {
                   if (node.nodeNum == myNodeNum) {
                     return Container();
                   }
-                  return NodeCard(node: node);
+                  return Hero(
+                    tag: node.nodeNum,
+                    child: NodeCard(
+                      node: node,
+                      showChevron: true,
+                    ),
+                  );
                 },
               ),
             ),
