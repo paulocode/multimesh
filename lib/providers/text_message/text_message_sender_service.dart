@@ -9,7 +9,6 @@ import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ack_waiting_radio_writer.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/text_message_repository.dart';
-import 'text_message_status_service.dart';
 import 'text_message_stream_service.dart';
 
 part 'text_message_sender_service.g.dart';
