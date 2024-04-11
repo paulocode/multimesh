@@ -4,19 +4,19 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:typed_data' as _i8;
+import 'dart:typed_data' as _i9;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/models/radio_configuration.dart' as _i3;
 import 'package:multimesh/models/text_message.dart' as _i4;
 import 'package:multimesh/models/text_message_status.dart' as _i13;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
-    as _i10;
-import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i11;
+    as _i11;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i8;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i7;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
-    as _i9;
+    as _i10;
 import 'package:multimesh/repository/text_message_repository.dart' as _i12;
 import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i5;
 import 'package:multimesh/services/text_message/text_message_stream_service.dart'
@@ -83,7 +83,9 @@ class MockAckWaitingRadioWriter extends _i1.Mock
     int? channel = 0,
     bool? wantAck = false,
     required _i7.PortNum? portNum,
-    required _i8.Uint8List? payload,
+    _i8.MeshPacket_Priority? priority = _i8.MeshPacket_Priority.RELIABLE,
+    bool? wantResponse,
+    _i9.Uint8List? payload,
     int? id,
   }) =>
       (super.noSuchMethod(
@@ -95,6 +97,8 @@ class MockAckWaitingRadioWriter extends _i1.Mock
             #channel: channel,
             #wantAck: wantAck,
             #portNum: portNum,
+            #priority: priority,
+            #wantResponse: wantResponse,
             #payload: payload,
             #id: id,
           },
@@ -139,7 +143,7 @@ class MockAckWaitingRadioWriter extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRadioConfigService extends _i1.Mock
-    implements _i9.RadioConfigService {
+    implements _i10.RadioConfigService {
   MockRadioConfigService() {
     _i1.throwOnMissingStub(this);
   }
@@ -188,7 +192,7 @@ class MockRadioConfigService extends _i1.Mock
       ) as _i3.RadioConfiguration);
 
   @override
-  void setLoraConfig(_i10.Config_LoRaConfig? loraConfig) => super.noSuchMethod(
+  void setLoraConfig(_i11.Config_LoRaConfig? loraConfig) => super.noSuchMethod(
         Invocation.method(
           #setLoraConfig,
           [loraConfig],
@@ -197,7 +201,7 @@ class MockRadioConfigService extends _i1.Mock
       );
 
   @override
-  void setMyNodeInfo(_i11.NodeInfo? myNodeInfo) => super.noSuchMethod(
+  void setMyNodeInfo(_i8.NodeInfo? myNodeInfo) => super.noSuchMethod(
         Invocation.method(
           #setMyNodeInfo,
           [myNodeInfo],
@@ -233,7 +237,7 @@ class MockRadioConfigService extends _i1.Mock
       );
 
   @override
-  void setBluetoothConfig(_i10.Config_BluetoothConfig? bluetoothConfig) =>
+  void setBluetoothConfig(_i11.Config_BluetoothConfig? bluetoothConfig) =>
       super.noSuchMethod(
         Invocation.method(
           #setBluetoothConfig,
@@ -302,7 +306,7 @@ class MockTextMessageRepository extends _i1.Mock
   _i6.Future<void> updateStatusByPacketId({
     required _i13.TextMessageStatus? status,
     required int? packetId,
-    _i11.Routing_Error? routingError = _i11.Routing_Error.NONE,
+    _i8.Routing_Error? routingError = _i8.Routing_Error.NONE,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

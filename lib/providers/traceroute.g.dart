@@ -6,7 +6,7 @@ part of 'traceroute.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tracerouteHash() => r'da8b540177f7d42dafe1a4797f3dc30dceb780a5';
+String _$tracerouteHash() => r'e9a8b925fc7e1f5280d1bd8bd1709db921722512';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -40,10 +40,12 @@ class TracerouteFamily extends Family<AsyncValue<List<int>>> {
 
   /// See also [traceroute].
   TracerouteProvider call(
-    int nodeNum,
-  ) {
+    int nodeNum, {
+    Duration timeout = const Duration(minutes: 5),
+  }) {
     return TracerouteProvider(
       nodeNum,
+      timeout: timeout,
     );
   }
 
@@ -53,6 +55,7 @@ class TracerouteFamily extends Family<AsyncValue<List<int>>> {
   ) {
     return call(
       provider.nodeNum,
+      timeout: provider.timeout,
     );
   }
 
@@ -75,11 +78,13 @@ class TracerouteFamily extends Family<AsyncValue<List<int>>> {
 class TracerouteProvider extends AutoDisposeFutureProvider<List<int>> {
   /// See also [traceroute].
   TracerouteProvider(
-    int nodeNum,
-  ) : this._internal(
+    int nodeNum, {
+    Duration timeout = const Duration(minutes: 5),
+  }) : this._internal(
           (ref) => traceroute(
             ref as TracerouteRef,
             nodeNum,
+            timeout: timeout,
           ),
           from: tracerouteProvider,
           name: r'tracerouteProvider',
@@ -91,6 +96,7 @@ class TracerouteProvider extends AutoDisposeFutureProvider<List<int>> {
           allTransitiveDependencies:
               TracerouteFamily._allTransitiveDependencies,
           nodeNum: nodeNum,
+          timeout: timeout,
         );
 
   TracerouteProvider._internal(
@@ -101,9 +107,11 @@ class TracerouteProvider extends AutoDisposeFutureProvider<List<int>> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.nodeNum,
+    required this.timeout,
   }) : super.internal();
 
   final int nodeNum;
+  final Duration timeout;
 
   @override
   Override overrideWith(
@@ -119,6 +127,7 @@ class TracerouteProvider extends AutoDisposeFutureProvider<List<int>> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         nodeNum: nodeNum,
+        timeout: timeout,
       ),
     );
   }
@@ -130,13 +139,16 @@ class TracerouteProvider extends AutoDisposeFutureProvider<List<int>> {
 
   @override
   bool operator ==(Object other) {
-    return other is TracerouteProvider && other.nodeNum == nodeNum;
+    return other is TracerouteProvider &&
+        other.nodeNum == nodeNum &&
+        other.timeout == timeout;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, nodeNum.hashCode);
+    hash = _SystemHash.combine(hash, timeout.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -145,6 +157,9 @@ class TracerouteProvider extends AutoDisposeFutureProvider<List<int>> {
 mixin TracerouteRef on AutoDisposeFutureProviderRef<List<int>> {
   /// The parameter `nodeNum` of this provider.
   int get nodeNum;
+
+  /// The parameter `timeout` of this provider.
+  Duration get timeout;
 }
 
 class _TracerouteProviderElement
@@ -153,6 +168,8 @@ class _TracerouteProviderElement
 
   @override
   int get nodeNum => (origin as TracerouteProvider).nodeNum;
+  @override
+  Duration get timeout => (origin as TracerouteProvider).timeout;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

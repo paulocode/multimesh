@@ -4,7 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:typed_data' as _i10;
+import 'dart:typed_data' as _i11;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
@@ -15,14 +15,14 @@ import 'package:multimesh/models/radio_configuration.dart' as _i3;
 import 'package:multimesh/models/radio_connector_state.dart' as _i17;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
     as _i15;
-import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i12;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i10;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i9;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i14;
 import 'package:multimesh/providers/radio_connector_service.dart' as _i18;
 import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i7;
-import 'package:multimesh/services/interfaces/radio_reader.dart' as _i11;
+import 'package:multimesh/services/interfaces/radio_reader.dart' as _i12;
 import 'package:multimesh/services/radio_config/radio_config_downloader_service.dart'
     as _i13;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
@@ -141,7 +141,9 @@ class MockAckWaitingRadioWriter extends _i1.Mock
     int? channel = 0,
     bool? wantAck = false,
     required _i9.PortNum? portNum,
-    required _i10.Uint8List? payload,
+    _i10.MeshPacket_Priority? priority = _i10.MeshPacket_Priority.RELIABLE,
+    bool? wantResponse,
+    _i11.Uint8List? payload,
     int? id,
   }) =>
       (super.noSuchMethod(
@@ -153,6 +155,8 @@ class MockAckWaitingRadioWriter extends _i1.Mock
             #channel: channel,
             #wantAck: wantAck,
             #portNum: portNum,
+            #priority: priority,
+            #wantResponse: wantResponse,
             #payload: payload,
             #id: id,
           },
@@ -196,19 +200,19 @@ class MockAckWaitingRadioWriter extends _i1.Mock
 /// A class which mocks [RadioReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRadioReader extends _i1.Mock implements _i11.RadioReader {
+class MockRadioReader extends _i1.Mock implements _i12.RadioReader {
   MockRadioReader() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i8.Stream<_i12.FromRadio> onPacketReceived() => (super.noSuchMethod(
+  _i8.Stream<_i10.FromRadio> onPacketReceived() => (super.noSuchMethod(
         Invocation.method(
           #onPacketReceived,
           [],
         ),
-        returnValue: _i8.Stream<_i12.FromRadio>.empty(),
-      ) as _i8.Stream<_i12.FromRadio>);
+        returnValue: _i8.Stream<_i10.FromRadio>.empty(),
+      ) as _i8.Stream<_i10.FromRadio>);
 }
 
 /// A class which mocks [RadioConfigDownloaderService].
@@ -283,7 +287,7 @@ class MockRadioConfigService extends _i1.Mock
       );
 
   @override
-  void setMyNodeInfo(_i12.NodeInfo? myNodeInfo) => super.noSuchMethod(
+  void setMyNodeInfo(_i10.NodeInfo? myNodeInfo) => super.noSuchMethod(
         Invocation.method(
           #setMyNodeInfo,
           [myNodeInfo],

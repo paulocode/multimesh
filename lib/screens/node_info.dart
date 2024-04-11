@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/mesh_node.dart';
 import '../providers/node/node_service.dart';
@@ -17,26 +18,29 @@ class NodeInfoScreen extends ConsumerStatefulWidget {
 class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
   @override
   Widget build(BuildContext context) {
-    final node = ref.watch(nodeServiceProvider)[widget.nodeNum] ?? _defaultNode;
+    final nodes = ref.watch(nodeServiceProvider);
+    final node = nodes[widget.nodeNum] ?? _defaultNode;
     return Scaffold(
       appBar: AppBar(
         title: Text(node.longName),
       ),
-      body: Column(
-        children: [
-          NodeCard(
-            node: node,
-            showChevron: false,
-          ),
-          const OutlinedButton(
-            onPressed:
-                null /* () {
-              ref.read(tracerouteProvider(widget.nodeNum));
-            }*/
-            ,
-            child: Text('Traceroute'),
-          ),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            children: [
+              NodeCard(
+                node: node,
+                showChevron: false,
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  context.push('/traceroute?nodeNum=${widget.nodeNum}');
+                },
+                child: const Text('Traceroute'),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -35,7 +35,9 @@ class AckWaitingRadioWriter {
     int channel = 0,
     bool wantAck = false,
     required PortNum portNum,
-    required Uint8List payload,
+    MeshPacket_Priority? priority = MeshPacket_Priority.RELIABLE,
+    bool? wantResponse,
+    Uint8List? payload,
     int? id,
   }) async {
     final _id = id ?? generatePacketId();
@@ -44,15 +46,17 @@ class AckWaitingRadioWriter {
       hopLimit: _hopLimitProvider(),
       id: _id,
       wantAck: wantAck,
-      priority: MeshPacket_Priority.RELIABLE,
+      priority: priority,
       channel: channel,
       decoded: Data(
         portnum: portNum,
         payload: payload,
+        wantResponse: wantResponse,
       ),
     );
-    _logger.i('Sending MeshPacket...\n$meshPacket');
-    await _radioWriter.write(ToRadio(packet: meshPacket).writeToBuffer());
+    final toRadio = ToRadio(packet: meshPacket);
+    _logger.i('Sending MeshPacket...\n$toRadio');
+    await _radioWriter.write(toRadio.writeToBuffer());
     await waitForAck(_id);
   }
 

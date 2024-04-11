@@ -13,6 +13,7 @@ import '../screens/node_info.dart';
 import '../screens/radio_config.dart';
 import '../screens/tab_parent.dart';
 import '../services/telemetry_logger.dart';
+import '../widgets/traceroute_modal.dart';
 import 'telemetry_logger.dart';
 
 part 'router.g.dart';
@@ -93,6 +94,14 @@ GoRouter goRouter(GoRouterRef ref) {
           final id =
               int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
           return NodeInfoScreen(id);
+        },
+      ),
+      GoRoute(
+        path: '/traceroute',
+        builder: (context, state) {
+          final id =
+              int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
+          return TracerouteModal(id);
         },
       ),
     ],

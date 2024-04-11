@@ -87,7 +87,9 @@ class MockAckWaitingRadioWriter extends _i1.Mock
     int? channel = 0,
     bool? wantAck = false,
     required _i8.PortNum? portNum,
-    required _i9.Uint8List? payload,
+    _i6.MeshPacket_Priority? priority = _i6.MeshPacket_Priority.RELIABLE,
+    bool? wantResponse,
+    _i9.Uint8List? payload,
     int? id,
   }) =>
       (super.noSuchMethod(
@@ -99,6 +101,8 @@ class MockAckWaitingRadioWriter extends _i1.Mock
             #channel: channel,
             #wantAck: wantAck,
             #portNum: portNum,
+            #priority: priority,
+            #wantResponse: wantResponse,
             #payload: payload,
             #id: id,
           },

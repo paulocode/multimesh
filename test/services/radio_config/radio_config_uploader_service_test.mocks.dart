@@ -4,9 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
-import 'dart:typed_data' as _i5;
+import 'dart:typed_data' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i5;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i4;
 import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i2;
@@ -39,7 +40,9 @@ class MockAckWaitingRadioWriter extends _i1.Mock
     int? channel = 0,
     bool? wantAck = false,
     required _i4.PortNum? portNum,
-    required _i5.Uint8List? payload,
+    _i5.MeshPacket_Priority? priority = _i5.MeshPacket_Priority.RELIABLE,
+    bool? wantResponse,
+    _i6.Uint8List? payload,
     int? id,
   }) =>
       (super.noSuchMethod(
@@ -51,6 +54,8 @@ class MockAckWaitingRadioWriter extends _i1.Mock
             #channel: channel,
             #wantAck: wantAck,
             #portNum: portNum,
+            #priority: priority,
+            #wantResponse: wantResponse,
             #payload: payload,
             #id: id,
           },
