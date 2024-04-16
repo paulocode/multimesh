@@ -32,6 +32,9 @@ class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
                 node: node,
                 showChevron: false,
               ),
+              const Text('<more node info...>'),
+              const Text('<more node info...>'),
+              const Text('<more node info...>'),
               OutlinedButton(
                 onPressed: () {
                   context.push('/traceroute?nodeNum=${widget.nodeNum}');

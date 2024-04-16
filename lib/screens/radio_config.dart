@@ -95,39 +95,34 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
                       trailing: const Icon(Icons.chevron_right),
                     ),
                   ),
-                  Card(
+                  const Card(
                     child: ListTile(
-                      onTap: () {},
-                      title: const Text('Device'),
-                      trailing: const Icon(Icons.chevron_right),
+                      title: Text('Device'),
+                      trailing: Icon(Icons.chevron_right),
                     ),
                   ),
-                  Card(
+                  const Card(
                     child: ListTile(
-                      onTap: () {},
-                      title: const Text('Display'),
-                      trailing: const Icon(Icons.chevron_right),
+                      title: Text('Display'),
+                      trailing: Icon(Icons.chevron_right),
                     ),
                   ),
-                  Card(
+                  const Card(
                     child: ListTile(
-                      onTap: () {},
-                      title: const Text('Network'),
-                      trailing: const Icon(Icons.chevron_right),
+                      title: Text('Network'),
+                      trailing: Icon(Icons.chevron_right),
                     ),
                   ),
-                  Card(
+                  const Card(
                     child: ListTile(
-                      onTap: () {},
-                      title: const Text('Position'),
-                      trailing: const Icon(Icons.chevron_right),
+                      title: Text('Position'),
+                      trailing: Icon(Icons.chevron_right),
                     ),
                   ),
-                  Card(
+                  const Card(
                     child: ListTile(
-                      onTap: () {},
-                      title: const Text('Power'),
-                      trailing: const Icon(Icons.chevron_right),
+                      title: Text('Power'),
+                      trailing: Icon(Icons.chevron_right),
                     ),
                   ),
                   const SizedBox(
