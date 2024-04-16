@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../models/chat_type.dart';
 import '../models/mesh_node.dart';
 import '../providers/node/node_service.dart';
+import '../providers/radio_config/radio_config_service.dart';
 import '../providers/text_message/text_message_stream_service.dart';
 
 class NodeCard extends ConsumerWidget {
@@ -20,6 +21,7 @@ class NodeCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nodes = ref.watch(nodeServiceProvider);
+    final myNodeNum = ref.watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
     final textMessageStreamService = ref.watch(
       textMessageStreamServiceProvider(
         chatType: DirectMessageChat(dmNode: node.nodeNum),
@@ -107,7 +109,8 @@ class NodeCard extends ConsumerWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
+                        if (myNodeNum != node.nodeNum)
+                          IconButton(
                           onPressed: () {
                             context.push(
                               Uri(
@@ -135,7 +138,7 @@ class NodeCard extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        if (showChevron)
+                        if (showChevron && myNodeNum != node.nodeNum)
                           IconButton(
                             onPressed: () {
                               context.push('/nodeInfo?nodeNum=${node.nodeNum}');
