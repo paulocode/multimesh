@@ -5,7 +5,6 @@ package meshtastic;
 import "meshtastic/channel.proto";
 import "meshtastic/config.proto";
 import "meshtastic/connection_status.proto";
-import "meshtastic/deviceonly.proto";
 import "meshtastic/mesh.proto";
 import "meshtastic/module_config.proto";
 
@@ -238,6 +237,11 @@ message AdminMessage {
     bool enter_dfu_mode_request = 21;
 
     /*
+     * Delete the file by the specified path from the device
+     */
+    string delete_file_request = 22;
+
+    /*
      * Set the owner for this node
      */
     User set_owner = 32;
@@ -275,6 +279,26 @@ message AdminMessage {
      * Remove the node by the specified node-num from the NodeDB on the device
      */
     uint32 remove_by_nodenum = 38;
+
+    /*
+     * Set specified node-num to be favorited on the NodeDB on the device
+     */
+    uint32 set_favorite_node = 39;
+
+    /*
+     * Set specified node-num to be un-favorited on the NodeDB on the device
+     */
+    uint32 remove_favorite_node = 40;
+
+    /*
+     * Set fixed position data on the node and then set the position.fixed_position = true
+     */
+    Position set_fixed_position = 41;
+
+    /*
+     * Clear fixed position coordinates and then set position.fixed_position = false
+     */
+    bool remove_fixed_position = 42;
 
     /*
      * Begins an edit transaction for config, module config, owner, and channel settings changes

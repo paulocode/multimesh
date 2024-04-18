@@ -27,56 +27,35 @@ import 'package:protobuf/protobuf.dart' as $pb;
 ///  We have change to this 'portnum' based scheme for specifying app handlers for particular payloads.
 ///  This change is backwards compatible by treating the legacy OPAQUE/CLEAR_TEXT values identically.
 class PortNum extends $pb.ProtobufEnum {
-  static const PortNum UNKNOWN_APP =
-      PortNum._(0, _omitEnumNames ? '' : 'UNKNOWN_APP');
-  static const PortNum TEXT_MESSAGE_APP =
-      PortNum._(1, _omitEnumNames ? '' : 'TEXT_MESSAGE_APP');
-  static const PortNum REMOTE_HARDWARE_APP =
-      PortNum._(2, _omitEnumNames ? '' : 'REMOTE_HARDWARE_APP');
-  static const PortNum POSITION_APP =
-      PortNum._(3, _omitEnumNames ? '' : 'POSITION_APP');
-  static const PortNum NODEINFO_APP =
-      PortNum._(4, _omitEnumNames ? '' : 'NODEINFO_APP');
-  static const PortNum ROUTING_APP =
-      PortNum._(5, _omitEnumNames ? '' : 'ROUTING_APP');
-  static const PortNum ADMIN_APP =
-      PortNum._(6, _omitEnumNames ? '' : 'ADMIN_APP');
-  static const PortNum TEXT_MESSAGE_COMPRESSED_APP =
-      PortNum._(7, _omitEnumNames ? '' : 'TEXT_MESSAGE_COMPRESSED_APP');
-  static const PortNum WAYPOINT_APP =
-      PortNum._(8, _omitEnumNames ? '' : 'WAYPOINT_APP');
-  static const PortNum AUDIO_APP =
-      PortNum._(9, _omitEnumNames ? '' : 'AUDIO_APP');
-  static const PortNum DETECTION_SENSOR_APP =
-      PortNum._(10, _omitEnumNames ? '' : 'DETECTION_SENSOR_APP');
-  static const PortNum REPLY_APP =
-      PortNum._(32, _omitEnumNames ? '' : 'REPLY_APP');
-  static const PortNum IP_TUNNEL_APP =
-      PortNum._(33, _omitEnumNames ? '' : 'IP_TUNNEL_APP');
-  static const PortNum PAXCOUNTER_APP =
-      PortNum._(34, _omitEnumNames ? '' : 'PAXCOUNTER_APP');
-  static const PortNum SERIAL_APP =
-      PortNum._(64, _omitEnumNames ? '' : 'SERIAL_APP');
-  static const PortNum STORE_FORWARD_APP =
-      PortNum._(65, _omitEnumNames ? '' : 'STORE_FORWARD_APP');
-  static const PortNum RANGE_TEST_APP =
-      PortNum._(66, _omitEnumNames ? '' : 'RANGE_TEST_APP');
-  static const PortNum TELEMETRY_APP =
-      PortNum._(67, _omitEnumNames ? '' : 'TELEMETRY_APP');
+  static const PortNum UNKNOWN_APP = PortNum._(0, _omitEnumNames ? '' : 'UNKNOWN_APP');
+  static const PortNum TEXT_MESSAGE_APP = PortNum._(1, _omitEnumNames ? '' : 'TEXT_MESSAGE_APP');
+  static const PortNum REMOTE_HARDWARE_APP = PortNum._(2, _omitEnumNames ? '' : 'REMOTE_HARDWARE_APP');
+  static const PortNum POSITION_APP = PortNum._(3, _omitEnumNames ? '' : 'POSITION_APP');
+  static const PortNum NODEINFO_APP = PortNum._(4, _omitEnumNames ? '' : 'NODEINFO_APP');
+  static const PortNum ROUTING_APP = PortNum._(5, _omitEnumNames ? '' : 'ROUTING_APP');
+  static const PortNum ADMIN_APP = PortNum._(6, _omitEnumNames ? '' : 'ADMIN_APP');
+  static const PortNum TEXT_MESSAGE_COMPRESSED_APP = PortNum._(7, _omitEnumNames ? '' : 'TEXT_MESSAGE_COMPRESSED_APP');
+  static const PortNum WAYPOINT_APP = PortNum._(8, _omitEnumNames ? '' : 'WAYPOINT_APP');
+  static const PortNum AUDIO_APP = PortNum._(9, _omitEnumNames ? '' : 'AUDIO_APP');
+  static const PortNum DETECTION_SENSOR_APP = PortNum._(10, _omitEnumNames ? '' : 'DETECTION_SENSOR_APP');
+  static const PortNum REPLY_APP = PortNum._(32, _omitEnumNames ? '' : 'REPLY_APP');
+  static const PortNum IP_TUNNEL_APP = PortNum._(33, _omitEnumNames ? '' : 'IP_TUNNEL_APP');
+  static const PortNum PAXCOUNTER_APP = PortNum._(34, _omitEnumNames ? '' : 'PAXCOUNTER_APP');
+  static const PortNum SERIAL_APP = PortNum._(64, _omitEnumNames ? '' : 'SERIAL_APP');
+  static const PortNum STORE_FORWARD_APP = PortNum._(65, _omitEnumNames ? '' : 'STORE_FORWARD_APP');
+  static const PortNum RANGE_TEST_APP = PortNum._(66, _omitEnumNames ? '' : 'RANGE_TEST_APP');
+  static const PortNum TELEMETRY_APP = PortNum._(67, _omitEnumNames ? '' : 'TELEMETRY_APP');
   static const PortNum ZPS_APP = PortNum._(68, _omitEnumNames ? '' : 'ZPS_APP');
-  static const PortNum SIMULATOR_APP =
-      PortNum._(69, _omitEnumNames ? '' : 'SIMULATOR_APP');
-  static const PortNum TRACEROUTE_APP =
-      PortNum._(70, _omitEnumNames ? '' : 'TRACEROUTE_APP');
-  static const PortNum NEIGHBORINFO_APP =
-      PortNum._(71, _omitEnumNames ? '' : 'NEIGHBORINFO_APP');
-  static const PortNum PRIVATE_APP =
-      PortNum._(256, _omitEnumNames ? '' : 'PRIVATE_APP');
-  static const PortNum ATAK_FORWARDER =
-      PortNum._(257, _omitEnumNames ? '' : 'ATAK_FORWARDER');
+  static const PortNum SIMULATOR_APP = PortNum._(69, _omitEnumNames ? '' : 'SIMULATOR_APP');
+  static const PortNum TRACEROUTE_APP = PortNum._(70, _omitEnumNames ? '' : 'TRACEROUTE_APP');
+  static const PortNum NEIGHBORINFO_APP = PortNum._(71, _omitEnumNames ? '' : 'NEIGHBORINFO_APP');
+  static const PortNum ATAK_PLUGIN = PortNum._(72, _omitEnumNames ? '' : 'ATAK_PLUGIN');
+  static const PortNum MAP_REPORT_APP = PortNum._(73, _omitEnumNames ? '' : 'MAP_REPORT_APP');
+  static const PortNum PRIVATE_APP = PortNum._(256, _omitEnumNames ? '' : 'PRIVATE_APP');
+  static const PortNum ATAK_FORWARDER = PortNum._(257, _omitEnumNames ? '' : 'ATAK_FORWARDER');
   static const PortNum MAX = PortNum._(511, _omitEnumNames ? '' : 'MAX');
 
-  static const $core.List<PortNum> values = <PortNum>[
+  static const $core.List<PortNum> values = <PortNum> [
     UNKNOWN_APP,
     TEXT_MESSAGE_APP,
     REMOTE_HARDWARE_APP,
@@ -99,17 +78,18 @@ class PortNum extends $pb.ProtobufEnum {
     SIMULATOR_APP,
     TRACEROUTE_APP,
     NEIGHBORINFO_APP,
+    ATAK_PLUGIN,
+    MAP_REPORT_APP,
     PRIVATE_APP,
     ATAK_FORWARDER,
     MAX,
   ];
 
-  static final $core.Map<$core.int, PortNum> _byValue =
-      $pb.ProtobufEnum.initByValue(values);
-
+  static final $core.Map<$core.int, PortNum> _byValue = $pb.ProtobufEnum.initByValue(values);
   static PortNum? valueOf($core.int value) => _byValue[value];
 
   const PortNum._($core.int v, $core.String n) : super(v, n);
 }
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

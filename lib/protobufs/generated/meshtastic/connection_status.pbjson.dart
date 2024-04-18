@@ -17,46 +17,10 @@ import 'dart:typed_data' as $typed_data;
 const DeviceConnectionStatus$json = {
   '1': 'DeviceConnectionStatus',
   '2': [
-    {
-      '1': 'wifi',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.WifiConnectionStatus',
-      '9': 0,
-      '10': 'wifi',
-      '17': true
-    },
-    {
-      '1': 'ethernet',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.EthernetConnectionStatus',
-      '9': 1,
-      '10': 'ethernet',
-      '17': true
-    },
-    {
-      '1': 'bluetooth',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.BluetoothConnectionStatus',
-      '9': 2,
-      '10': 'bluetooth',
-      '17': true
-    },
-    {
-      '1': 'serial',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.SerialConnectionStatus',
-      '9': 3,
-      '10': 'serial',
-      '17': true
-    },
+    {'1': 'wifi', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.WifiConnectionStatus', '9': 0, '10': 'wifi', '17': true},
+    {'1': 'ethernet', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.EthernetConnectionStatus', '9': 1, '10': 'ethernet', '17': true},
+    {'1': 'bluetooth', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.BluetoothConnectionStatus', '9': 2, '10': 'bluetooth', '17': true},
+    {'1': 'serial', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.SerialConnectionStatus', '9': 3, '10': 'serial', '17': true},
   ],
   '8': [
     {'1': '_wifi'},
@@ -80,14 +44,7 @@ final $typed_data.Uint8List deviceConnectionStatusDescriptor = $convert.base64De
 const WifiConnectionStatus$json = {
   '1': 'WifiConnectionStatus',
   '2': [
-    {
-      '1': 'status',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.NetworkConnectionStatus',
-      '10': 'status'
-    },
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.NetworkConnectionStatus', '10': 'status'},
     {'1': 'ssid', '3': 2, '4': 1, '5': 9, '10': 'ssid'},
     {'1': 'rssi', '3': 3, '4': 1, '5': 5, '10': 'rssi'},
   ],
@@ -103,22 +60,14 @@ final $typed_data.Uint8List wifiConnectionStatusDescriptor = $convert.base64Deco
 const EthernetConnectionStatus$json = {
   '1': 'EthernetConnectionStatus',
   '2': [
-    {
-      '1': 'status',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.NetworkConnectionStatus',
-      '10': 'status'
-    },
+    {'1': 'status', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.NetworkConnectionStatus', '10': 'status'},
   ],
 };
 
 /// Descriptor for `EthernetConnectionStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List ethernetConnectionStatusDescriptor =
-    $convert.base64Decode(
-        'ChhFdGhlcm5ldENvbm5lY3Rpb25TdGF0dXMSOwoGc3RhdHVzGAEgASgLMiMubWVzaHRhc3RpYy'
-        '5OZXR3b3JrQ29ubmVjdGlvblN0YXR1c1IGc3RhdHVz');
+final $typed_data.Uint8List ethernetConnectionStatusDescriptor = $convert.base64Decode(
+    'ChhFdGhlcm5ldENvbm5lY3Rpb25TdGF0dXMSOwoGc3RhdHVzGAEgASgLMiMubWVzaHRhc3RpYy'
+    '5OZXR3b3JrQ29ubmVjdGlvblN0YXR1c1IGc3RhdHVz');
 
 @$core.Deprecated('Use networkConnectionStatusDescriptor instead')
 const NetworkConnectionStatus$json = {
@@ -127,13 +76,7 @@ const NetworkConnectionStatus$json = {
     {'1': 'ip_address', '3': 1, '4': 1, '5': 7, '10': 'ipAddress'},
     {'1': 'is_connected', '3': 2, '4': 1, '5': 8, '10': 'isConnected'},
     {'1': 'is_mqtt_connected', '3': 3, '4': 1, '5': 8, '10': 'isMqttConnected'},
-    {
-      '1': 'is_syslog_connected',
-      '3': 4,
-      '4': 1,
-      '5': 8,
-      '10': 'isSyslogConnected'
-    },
+    {'1': 'is_syslog_connected', '3': 4, '4': 1, '5': 8, '10': 'isSyslogConnected'},
   ],
 };
 
@@ -155,10 +98,9 @@ const BluetoothConnectionStatus$json = {
 };
 
 /// Descriptor for `BluetoothConnectionStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List bluetoothConnectionStatusDescriptor =
-    $convert.base64Decode(
-        'ChlCbHVldG9vdGhDb25uZWN0aW9uU3RhdHVzEhAKA3BpbhgBIAEoDVIDcGluEhIKBHJzc2kYAi'
-        'ABKAVSBHJzc2kSIQoMaXNfY29ubmVjdGVkGAMgASgIUgtpc0Nvbm5lY3RlZA==');
+final $typed_data.Uint8List bluetoothConnectionStatusDescriptor = $convert.base64Decode(
+    'ChlCbHVldG9vdGhDb25uZWN0aW9uU3RhdHVzEhAKA3BpbhgBIAEoDVIDcGluEhIKBHJzc2kYAi'
+    'ABKAVSBHJzc2kSIQoMaXNfY29ubmVjdGVkGAMgASgIUgtpc0Nvbm5lY3RlZA==');
 
 @$core.Deprecated('Use serialConnectionStatusDescriptor instead')
 const SerialConnectionStatus$json = {
@@ -170,7 +112,7 @@ const SerialConnectionStatus$json = {
 };
 
 /// Descriptor for `SerialConnectionStatus`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List serialConnectionStatusDescriptor =
-    $convert.base64Decode(
-        'ChZTZXJpYWxDb25uZWN0aW9uU3RhdHVzEhIKBGJhdWQYASABKA1SBGJhdWQSIQoMaXNfY29ubm'
-        'VjdGVkGAIgASgIUgtpc0Nvbm5lY3RlZA==');
+final $typed_data.Uint8List serialConnectionStatusDescriptor = $convert.base64Decode(
+    'ChZTZXJpYWxDb25uZWN0aW9uU3RhdHVzEhIKBGJhdWQYASABKA1SBGJhdWQSIQoMaXNfY29ubm'
+    'VjdGVkGAIgASgIUgtpc0Nvbm5lY3RlZA==');
+

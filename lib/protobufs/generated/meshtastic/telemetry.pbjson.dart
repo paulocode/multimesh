@@ -32,6 +32,7 @@ const TelemetrySensorType$json = {
     {'1': 'SHT31', '2': 12},
     {'1': 'PMSA003I', '2': 13},
     {'1': 'INA3221', '2': 14},
+    {'1': 'BMP085', '2': 15},
   ],
 };
 
@@ -40,7 +41,8 @@ final $typed_data.Uint8List telemetrySensorTypeDescriptor = $convert.base64Decod
     'ChNUZWxlbWV0cnlTZW5zb3JUeXBlEhAKDFNFTlNPUl9VTlNFVBAAEgoKBkJNRTI4MBABEgoKBk'
     'JNRTY4MBACEgsKB01DUDk4MDgQAxIKCgZJTkEyNjAQBBIKCgZJTkEyMTkQBRIKCgZCTVAyODAQ'
     'BhIJCgVTSFRDMxAHEgkKBUxQUzIyEAgSCwoHUU1DNjMxMBAJEgsKB1FNSTg2NTgQChIMCghRTU'
-    'M1ODgzTBALEgkKBVNIVDMxEAwSDAoIUE1TQTAwM0kQDRILCgdJTkEzMjIxEA4=');
+    'M1ODgzTBALEgkKBVNIVDMxEAwSDAoIUE1TQTAwM0kQDRILCgdJTkEzMjIxEA4SCgoGQk1QMDg1'
+    'EA8=');
 
 @$core.Deprecated('Use deviceMetricsDescriptor instead')
 const DeviceMetrics$json = {
@@ -48,14 +50,9 @@ const DeviceMetrics$json = {
   '2': [
     {'1': 'battery_level', '3': 1, '4': 1, '5': 13, '10': 'batteryLevel'},
     {'1': 'voltage', '3': 2, '4': 1, '5': 2, '10': 'voltage'},
-    {
-      '1': 'channel_utilization',
-      '3': 3,
-      '4': 1,
-      '5': 2,
-      '10': 'channelUtilization'
-    },
+    {'1': 'channel_utilization', '3': 3, '4': 1, '5': 2, '10': 'channelUtilization'},
     {'1': 'air_util_tx', '3': 4, '4': 1, '5': 2, '10': 'airUtilTx'},
+    {'1': 'uptime_seconds', '3': 5, '4': 1, '5': 13, '10': 'uptimeSeconds'},
   ],
 };
 
@@ -63,30 +60,20 @@ const DeviceMetrics$json = {
 final $typed_data.Uint8List deviceMetricsDescriptor = $convert.base64Decode(
     'Cg1EZXZpY2VNZXRyaWNzEiMKDWJhdHRlcnlfbGV2ZWwYASABKA1SDGJhdHRlcnlMZXZlbBIYCg'
     'd2b2x0YWdlGAIgASgCUgd2b2x0YWdlEi8KE2NoYW5uZWxfdXRpbGl6YXRpb24YAyABKAJSEmNo'
-    'YW5uZWxVdGlsaXphdGlvbhIeCgthaXJfdXRpbF90eBgEIAEoAlIJYWlyVXRpbFR4');
+    'YW5uZWxVdGlsaXphdGlvbhIeCgthaXJfdXRpbF90eBgEIAEoAlIJYWlyVXRpbFR4EiUKDnVwdG'
+    'ltZV9zZWNvbmRzGAUgASgNUg11cHRpbWVTZWNvbmRz');
 
 @$core.Deprecated('Use environmentMetricsDescriptor instead')
 const EnvironmentMetrics$json = {
   '1': 'EnvironmentMetrics',
   '2': [
     {'1': 'temperature', '3': 1, '4': 1, '5': 2, '10': 'temperature'},
-    {
-      '1': 'relative_humidity',
-      '3': 2,
-      '4': 1,
-      '5': 2,
-      '10': 'relativeHumidity'
-    },
-    {
-      '1': 'barometric_pressure',
-      '3': 3,
-      '4': 1,
-      '5': 2,
-      '10': 'barometricPressure'
-    },
+    {'1': 'relative_humidity', '3': 2, '4': 1, '5': 2, '10': 'relativeHumidity'},
+    {'1': 'barometric_pressure', '3': 3, '4': 1, '5': 2, '10': 'barometricPressure'},
     {'1': 'gas_resistance', '3': 4, '4': 1, '5': 2, '10': 'gasResistance'},
     {'1': 'voltage', '3': 5, '4': 1, '5': 2, '10': 'voltage'},
     {'1': 'current', '3': 6, '4': 1, '5': 2, '10': 'current'},
+    {'1': 'iaq', '3': 7, '4': 1, '5': 13, '10': 'iaq'},
   ],
 };
 
@@ -96,7 +83,7 @@ final $typed_data.Uint8List environmentMetricsDescriptor = $convert.base64Decode
     'sKEXJlbGF0aXZlX2h1bWlkaXR5GAIgASgCUhByZWxhdGl2ZUh1bWlkaXR5Ei8KE2Jhcm9tZXRy'
     'aWNfcHJlc3N1cmUYAyABKAJSEmJhcm9tZXRyaWNQcmVzc3VyZRIlCg5nYXNfcmVzaXN0YW5jZR'
     'gEIAEoAlINZ2FzUmVzaXN0YW5jZRIYCgd2b2x0YWdlGAUgASgCUgd2b2x0YWdlEhgKB2N1cnJl'
-    'bnQYBiABKAJSB2N1cnJlbnQ=');
+    'bnQYBiABKAJSB2N1cnJlbnQSEAoDaWFxGAcgASgNUgNpYXE=');
 
 @$core.Deprecated('Use powerMetricsDescriptor instead')
 const PowerMetrics$json = {
@@ -125,27 +112,9 @@ const AirQualityMetrics$json = {
     {'1': 'pm10_standard', '3': 1, '4': 1, '5': 13, '10': 'pm10Standard'},
     {'1': 'pm25_standard', '3': 2, '4': 1, '5': 13, '10': 'pm25Standard'},
     {'1': 'pm100_standard', '3': 3, '4': 1, '5': 13, '10': 'pm100Standard'},
-    {
-      '1': 'pm10_environmental',
-      '3': 4,
-      '4': 1,
-      '5': 13,
-      '10': 'pm10Environmental'
-    },
-    {
-      '1': 'pm25_environmental',
-      '3': 5,
-      '4': 1,
-      '5': 13,
-      '10': 'pm25Environmental'
-    },
-    {
-      '1': 'pm100_environmental',
-      '3': 6,
-      '4': 1,
-      '5': 13,
-      '10': 'pm100Environmental'
-    },
+    {'1': 'pm10_environmental', '3': 4, '4': 1, '5': 13, '10': 'pm10Environmental'},
+    {'1': 'pm25_environmental', '3': 5, '4': 1, '5': 13, '10': 'pm25Environmental'},
+    {'1': 'pm100_environmental', '3': 6, '4': 1, '5': 13, '10': 'pm100Environmental'},
     {'1': 'particles_03um', '3': 7, '4': 1, '5': 13, '10': 'particles03um'},
     {'1': 'particles_05um', '3': 8, '4': 1, '5': 13, '10': 'particles05um'},
     {'1': 'particles_10um', '3': 9, '4': 1, '5': 13, '10': 'particles10um'},
@@ -173,42 +142,10 @@ const Telemetry$json = {
   '1': 'Telemetry',
   '2': [
     {'1': 'time', '3': 1, '4': 1, '5': 7, '10': 'time'},
-    {
-      '1': 'device_metrics',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.DeviceMetrics',
-      '9': 0,
-      '10': 'deviceMetrics'
-    },
-    {
-      '1': 'environment_metrics',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.EnvironmentMetrics',
-      '9': 0,
-      '10': 'environmentMetrics'
-    },
-    {
-      '1': 'air_quality_metrics',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.AirQualityMetrics',
-      '9': 0,
-      '10': 'airQualityMetrics'
-    },
-    {
-      '1': 'power_metrics',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.PowerMetrics',
-      '9': 0,
-      '10': 'powerMetrics'
-    },
+    {'1': 'device_metrics', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.DeviceMetrics', '9': 0, '10': 'deviceMetrics'},
+    {'1': 'environment_metrics', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.EnvironmentMetrics', '9': 0, '10': 'environmentMetrics'},
+    {'1': 'air_quality_metrics', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.AirQualityMetrics', '9': 0, '10': 'airQualityMetrics'},
+    {'1': 'power_metrics', '3': 5, '4': 1, '5': 11, '6': '.meshtastic.PowerMetrics', '9': 0, '10': 'powerMetrics'},
   ],
   '8': [
     {'1': 'variant'},
@@ -224,3 +161,4 @@ final $typed_data.Uint8List telemetryDescriptor = $convert.base64Decode(
     'aWMuQWlyUXVhbGl0eU1ldHJpY3NIAFIRYWlyUXVhbGl0eU1ldHJpY3MSPwoNcG93ZXJfbWV0cm'
     'ljcxgFIAEoCzIYLm1lc2h0YXN0aWMuUG93ZXJNZXRyaWNzSABSDHBvd2VyTWV0cmljc0IJCgd2'
     'YXJpYW50');
+

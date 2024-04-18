@@ -35,12 +35,14 @@ export 'channel.pbenum.dart';
 ///  explain how remote settings and remote gpio are managed as an example
 class ChannelSettings extends $pb.GeneratedMessage {
   factory ChannelSettings({
-    @$core.Deprecated('This field is deprecated.') $core.int? channelNum,
+  @$core.Deprecated('This field is deprecated.')
+    $core.int? channelNum,
     $core.List<$core.int>? psk,
     $core.String? name,
     $core.int? id,
     $core.bool? uplinkEnabled,
     $core.bool? downlinkEnabled,
+    ModuleSettings? moduleSettings,
   }) {
     final $result = create();
     if (channelNum != null) {
@@ -62,57 +64,45 @@ class ChannelSettings extends $pb.GeneratedMessage {
     if (downlinkEnabled != null) {
       $result.downlinkEnabled = downlinkEnabled;
     }
+    if (moduleSettings != null) {
+      $result.moduleSettings = moduleSettings;
+    }
     return $result;
   }
-
   ChannelSettings._() : super();
+  factory ChannelSettings.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ChannelSettings.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  factory ChannelSettings.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-
-  factory ChannelSettings.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ChannelSettings',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelSettings', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'channelNum', $pb.PbFieldType.OU3)
-    ..a<$core.List<$core.int>>(
-        2, _omitFieldNames ? '' : 'psk', $pb.PbFieldType.OY)
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'psk', $pb.PbFieldType.OY)
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'id', $pb.PbFieldType.OF3)
     ..aOB(5, _omitFieldNames ? '' : 'uplinkEnabled')
     ..aOB(6, _omitFieldNames ? '' : 'downlinkEnabled')
-    ..hasRequiredFields = false;
+    ..aOM<ModuleSettings>(7, _omitFieldNames ? '' : 'moduleSettings', subBuilder: ModuleSettings.create)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   ChannelSettings clone() => ChannelSettings()..mergeFromMessage(this);
-
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  ChannelSettings copyWith(void Function(ChannelSettings) updates) =>
-      super.copyWith((message) => updates(message as ChannelSettings))
-          as ChannelSettings;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ChannelSettings copyWith(void Function(ChannelSettings) updates) => super.copyWith((message) => updates(message as ChannelSettings)) as ChannelSettings;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ChannelSettings create() => ChannelSettings._();
-
   ChannelSettings createEmptyInstance() => create();
-
-  static $pb.PbList<ChannelSettings> createRepeated() =>
-      $pb.PbList<ChannelSettings>();
-
+  static $pb.PbList<ChannelSettings> createRepeated() => $pb.PbList<ChannelSettings>();
   @$core.pragma('dart2js:noInline')
-  static ChannelSettings getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ChannelSettings>(create);
+  static ChannelSettings getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelSettings>(create);
   static ChannelSettings? _defaultInstance;
 
   ///
@@ -120,17 +110,12 @@ class ChannelSettings extends $pb.GeneratedMessage {
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   $core.int get channelNum => $_getIZ(0);
-
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
-  set channelNum($core.int v) {
-    $_setUnsignedInt32(0, v);
-  }
-
+  set channelNum($core.int v) { $_setUnsignedInt32(0, v); }
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   $core.bool hasChannelNum() => $_has(0);
-
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(1)
   void clearChannelNum() => clearField(1);
@@ -148,15 +133,10 @@ class ChannelSettings extends $pb.GeneratedMessage {
   ///  Shown to user as simple1 through 10
   @$pb.TagNumber(2)
   $core.List<$core.int> get psk => $_getN(1);
-
   @$pb.TagNumber(2)
-  set psk($core.List<$core.int> v) {
-    $_setBytes(1, v);
-  }
-
+  set psk($core.List<$core.int> v) { $_setBytes(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasPsk() => $_has(1);
-
   @$pb.TagNumber(2)
   void clearPsk() => clearField(2);
 
@@ -171,15 +151,10 @@ class ChannelSettings extends $pb.GeneratedMessage {
   ///  Where "X" is selected based on the English words listed above for ModemPreset
   @$pb.TagNumber(3)
   $core.String get name => $_getSZ(2);
-
   @$pb.TagNumber(3)
-  set name($core.String v) {
-    $_setString(2, v);
-  }
-
+  set name($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasName() => $_has(2);
-
   @$pb.TagNumber(3)
   void clearName() => clearField(3);
 
@@ -197,15 +172,10 @@ class ChannelSettings extends $pb.GeneratedMessage {
   ///  (see Well Known Channels FIXME)
   @$pb.TagNumber(4)
   $core.int get id => $_getIZ(3);
-
   @$pb.TagNumber(4)
-  set id($core.int v) {
-    $_setUnsignedInt32(3, v);
-  }
-
+  set id($core.int v) { $_setUnsignedInt32(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasId() => $_has(3);
-
   @$pb.TagNumber(4)
   void clearId() => clearField(4);
 
@@ -213,15 +183,10 @@ class ChannelSettings extends $pb.GeneratedMessage {
   ///  If true, messages on the mesh will be sent to the *public* internet by any gateway ndoe
   @$pb.TagNumber(5)
   $core.bool get uplinkEnabled => $_getBF(4);
-
   @$pb.TagNumber(5)
-  set uplinkEnabled($core.bool v) {
-    $_setBool(4, v);
-  }
-
+  set uplinkEnabled($core.bool v) { $_setBool(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasUplinkEnabled() => $_has(4);
-
   @$pb.TagNumber(5)
   void clearUplinkEnabled() => clearField(5);
 
@@ -229,17 +194,79 @@ class ChannelSettings extends $pb.GeneratedMessage {
   ///  If true, messages seen on the internet will be forwarded to the local mesh.
   @$pb.TagNumber(6)
   $core.bool get downlinkEnabled => $_getBF(5);
-
   @$pb.TagNumber(6)
-  set downlinkEnabled($core.bool v) {
-    $_setBool(5, v);
-  }
-
+  set downlinkEnabled($core.bool v) { $_setBool(5, v); }
   @$pb.TagNumber(6)
   $core.bool hasDownlinkEnabled() => $_has(5);
-
   @$pb.TagNumber(6)
   void clearDownlinkEnabled() => clearField(6);
+
+  ///
+  ///  Per-channel module settings.
+  @$pb.TagNumber(7)
+  ModuleSettings get moduleSettings => $_getN(6);
+  @$pb.TagNumber(7)
+  set moduleSettings(ModuleSettings v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasModuleSettings() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearModuleSettings() => clearField(7);
+  @$pb.TagNumber(7)
+  ModuleSettings ensureModuleSettings() => $_ensure(6);
+}
+
+///
+///  This message is specifically for modules to store per-channel configuration data.
+class ModuleSettings extends $pb.GeneratedMessage {
+  factory ModuleSettings({
+    $core.int? positionPrecision,
+  }) {
+    final $result = create();
+    if (positionPrecision != null) {
+      $result.positionPrecision = positionPrecision;
+    }
+    return $result;
+  }
+  ModuleSettings._() : super();
+  factory ModuleSettings.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ModuleSettings.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ModuleSettings', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'positionPrecision', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ModuleSettings clone() => ModuleSettings()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ModuleSettings copyWith(void Function(ModuleSettings) updates) => super.copyWith((message) => updates(message as ModuleSettings)) as ModuleSettings;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static ModuleSettings create() => ModuleSettings._();
+  ModuleSettings createEmptyInstance() => create();
+  static $pb.PbList<ModuleSettings> createRepeated() => $pb.PbList<ModuleSettings>();
+  @$core.pragma('dart2js:noInline')
+  static ModuleSettings getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ModuleSettings>(create);
+  static ModuleSettings? _defaultInstance;
+
+  ///
+  ///  Bits of precision for the location sent in position packets.
+  @$pb.TagNumber(1)
+  $core.int get positionPrecision => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set positionPrecision($core.int v) { $_setUnsignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPositionPrecision() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPositionPrecision() => clearField(1);
 }
 
 ///
@@ -262,53 +289,36 @@ class Channel extends $pb.GeneratedMessage {
     }
     return $result;
   }
-
   Channel._() : super();
+  factory Channel.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Channel.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  factory Channel.fromBuffer($core.List<$core.int> i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromBuffer(i, r);
-
-  factory Channel.fromJson($core.String i,
-          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
-      create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Channel',
-      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
-      createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Channel', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'index', $pb.PbFieldType.O3)
-    ..aOM<ChannelSettings>(2, _omitFieldNames ? '' : 'settings',
-        subBuilder: ChannelSettings.create)
-    ..e<Channel_Role>(3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE,
-        defaultOrMaker: Channel_Role.DISABLED,
-        valueOf: Channel_Role.valueOf,
-        enumValues: Channel_Role.values)
-    ..hasRequiredFields = false;
+    ..aOM<ChannelSettings>(2, _omitFieldNames ? '' : 'settings', subBuilder: ChannelSettings.create)
+    ..e<Channel_Role>(3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: Channel_Role.DISABLED, valueOf: Channel_Role.valueOf, enumValues: Channel_Role.values)
+    ..hasRequiredFields = false
+  ;
 
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-      'Will be removed in next major version')
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
   Channel clone() => Channel()..mergeFromMessage(this);
-
-  @$core.Deprecated('Using this can add significant overhead to your binary. '
-      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-      'Will be removed in next major version')
-  Channel copyWith(void Function(Channel) updates) =>
-      super.copyWith((message) => updates(message as Channel)) as Channel;
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Channel copyWith(void Function(Channel) updates) => super.copyWith((message) => updates(message as Channel)) as Channel;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static Channel create() => Channel._();
-
   Channel createEmptyInstance() => create();
-
   static $pb.PbList<Channel> createRepeated() => $pb.PbList<Channel>();
-
   @$core.pragma('dart2js:noInline')
-  static Channel getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Channel>(create);
+  static Channel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Channel>(create);
   static Channel? _defaultInstance;
 
   ///
@@ -317,15 +327,10 @@ class Channel extends $pb.GeneratedMessage {
   ///  in which case the target node will find and set the channel by settings.name.
   @$pb.TagNumber(1)
   $core.int get index => $_getIZ(0);
-
   @$pb.TagNumber(1)
-  set index($core.int v) {
-    $_setSignedInt32(0, v);
-  }
-
+  set index($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasIndex() => $_has(0);
-
   @$pb.TagNumber(1)
   void clearIndex() => clearField(1);
 
@@ -333,18 +338,12 @@ class Channel extends $pb.GeneratedMessage {
   ///  The new settings, or NULL to disable that channel
   @$pb.TagNumber(2)
   ChannelSettings get settings => $_getN(1);
-
   @$pb.TagNumber(2)
-  set settings(ChannelSettings v) {
-    setField(2, v);
-  }
-
+  set settings(ChannelSettings v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSettings() => $_has(1);
-
   @$pb.TagNumber(2)
   void clearSettings() => clearField(2);
-
   @$pb.TagNumber(2)
   ChannelSettings ensureSettings() => $_ensure(1);
 
@@ -352,19 +351,14 @@ class Channel extends $pb.GeneratedMessage {
   ///  TODO: REPLACE
   @$pb.TagNumber(3)
   Channel_Role get role => $_getN(2);
-
   @$pb.TagNumber(3)
-  set role(Channel_Role v) {
-    setField(3, v);
-  }
-
+  set role(Channel_Role v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRole() => $_has(2);
-
   @$pb.TagNumber(3)
   void clearRole() => clearField(3);
 }
 
+
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames =
-    $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

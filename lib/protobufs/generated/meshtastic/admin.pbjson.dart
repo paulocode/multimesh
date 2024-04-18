@@ -17,300 +17,46 @@ import 'dart:typed_data' as $typed_data;
 const AdminMessage$json = {
   '1': 'AdminMessage',
   '2': [
-    {
-      '1': 'get_channel_request',
-      '3': 1,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'getChannelRequest'
-    },
-    {
-      '1': 'get_channel_response',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Channel',
-      '9': 0,
-      '10': 'getChannelResponse'
-    },
-    {
-      '1': 'get_owner_request',
-      '3': 3,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'getOwnerRequest'
-    },
-    {
-      '1': 'get_owner_response',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.User',
-      '9': 0,
-      '10': 'getOwnerResponse'
-    },
-    {
-      '1': 'get_config_request',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.AdminMessage.ConfigType',
-      '9': 0,
-      '10': 'getConfigRequest'
-    },
-    {
-      '1': 'get_config_response',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Config',
-      '9': 0,
-      '10': 'getConfigResponse'
-    },
-    {
-      '1': 'get_module_config_request',
-      '3': 7,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.AdminMessage.ModuleConfigType',
-      '9': 0,
-      '10': 'getModuleConfigRequest'
-    },
-    {
-      '1': 'get_module_config_response',
-      '3': 8,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.ModuleConfig',
-      '9': 0,
-      '10': 'getModuleConfigResponse'
-    },
-    {
-      '1': 'get_canned_message_module_messages_request',
-      '3': 10,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'getCannedMessageModuleMessagesRequest'
-    },
-    {
-      '1': 'get_canned_message_module_messages_response',
-      '3': 11,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'getCannedMessageModuleMessagesResponse'
-    },
-    {
-      '1': 'get_device_metadata_request',
-      '3': 12,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'getDeviceMetadataRequest'
-    },
-    {
-      '1': 'get_device_metadata_response',
-      '3': 13,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.DeviceMetadata',
-      '9': 0,
-      '10': 'getDeviceMetadataResponse'
-    },
-    {
-      '1': 'get_ringtone_request',
-      '3': 14,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'getRingtoneRequest'
-    },
-    {
-      '1': 'get_ringtone_response',
-      '3': 15,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'getRingtoneResponse'
-    },
-    {
-      '1': 'get_device_connection_status_request',
-      '3': 16,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'getDeviceConnectionStatusRequest'
-    },
-    {
-      '1': 'get_device_connection_status_response',
-      '3': 17,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.DeviceConnectionStatus',
-      '9': 0,
-      '10': 'getDeviceConnectionStatusResponse'
-    },
-    {
-      '1': 'set_ham_mode',
-      '3': 18,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.HamParameters',
-      '9': 0,
-      '10': 'setHamMode'
-    },
-    {
-      '1': 'get_node_remote_hardware_pins_request',
-      '3': 19,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'getNodeRemoteHardwarePinsRequest'
-    },
-    {
-      '1': 'get_node_remote_hardware_pins_response',
-      '3': 20,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.NodeRemoteHardwarePinsResponse',
-      '9': 0,
-      '10': 'getNodeRemoteHardwarePinsResponse'
-    },
-    {
-      '1': 'enter_dfu_mode_request',
-      '3': 21,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'enterDfuModeRequest'
-    },
-    {
-      '1': 'set_owner',
-      '3': 32,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.User',
-      '9': 0,
-      '10': 'setOwner'
-    },
-    {
-      '1': 'set_channel',
-      '3': 33,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Channel',
-      '9': 0,
-      '10': 'setChannel'
-    },
-    {
-      '1': 'set_config',
-      '3': 34,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Config',
-      '9': 0,
-      '10': 'setConfig'
-    },
-    {
-      '1': 'set_module_config',
-      '3': 35,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.ModuleConfig',
-      '9': 0,
-      '10': 'setModuleConfig'
-    },
-    {
-      '1': 'set_canned_message_module_messages',
-      '3': 36,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'setCannedMessageModuleMessages'
-    },
-    {
-      '1': 'set_ringtone_message',
-      '3': 37,
-      '4': 1,
-      '5': 9,
-      '9': 0,
-      '10': 'setRingtoneMessage'
-    },
-    {
-      '1': 'remove_by_nodenum',
-      '3': 38,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'removeByNodenum'
-    },
-    {
-      '1': 'begin_edit_settings',
-      '3': 64,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'beginEditSettings'
-    },
-    {
-      '1': 'commit_edit_settings',
-      '3': 65,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'commitEditSettings'
-    },
-    {
-      '1': 'reboot_ota_seconds',
-      '3': 95,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'rebootOtaSeconds'
-    },
-    {
-      '1': 'exit_simulator',
-      '3': 96,
-      '4': 1,
-      '5': 8,
-      '9': 0,
-      '10': 'exitSimulator'
-    },
-    {
-      '1': 'reboot_seconds',
-      '3': 97,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'rebootSeconds'
-    },
-    {
-      '1': 'shutdown_seconds',
-      '3': 98,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'shutdownSeconds'
-    },
-    {
-      '1': 'factory_reset',
-      '3': 99,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'factoryReset'
-    },
-    {
-      '1': 'nodedb_reset',
-      '3': 100,
-      '4': 1,
-      '5': 5,
-      '9': 0,
-      '10': 'nodedbReset'
-    },
+    {'1': 'get_channel_request', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'getChannelRequest'},
+    {'1': 'get_channel_response', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.Channel', '9': 0, '10': 'getChannelResponse'},
+    {'1': 'get_owner_request', '3': 3, '4': 1, '5': 8, '9': 0, '10': 'getOwnerRequest'},
+    {'1': 'get_owner_response', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.User', '9': 0, '10': 'getOwnerResponse'},
+    {'1': 'get_config_request', '3': 5, '4': 1, '5': 14, '6': '.meshtastic.AdminMessage.ConfigType', '9': 0, '10': 'getConfigRequest'},
+    {'1': 'get_config_response', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.Config', '9': 0, '10': 'getConfigResponse'},
+    {'1': 'get_module_config_request', '3': 7, '4': 1, '5': 14, '6': '.meshtastic.AdminMessage.ModuleConfigType', '9': 0, '10': 'getModuleConfigRequest'},
+    {'1': 'get_module_config_response', '3': 8, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig', '9': 0, '10': 'getModuleConfigResponse'},
+    {'1': 'get_canned_message_module_messages_request', '3': 10, '4': 1, '5': 8, '9': 0, '10': 'getCannedMessageModuleMessagesRequest'},
+    {'1': 'get_canned_message_module_messages_response', '3': 11, '4': 1, '5': 9, '9': 0, '10': 'getCannedMessageModuleMessagesResponse'},
+    {'1': 'get_device_metadata_request', '3': 12, '4': 1, '5': 8, '9': 0, '10': 'getDeviceMetadataRequest'},
+    {'1': 'get_device_metadata_response', '3': 13, '4': 1, '5': 11, '6': '.meshtastic.DeviceMetadata', '9': 0, '10': 'getDeviceMetadataResponse'},
+    {'1': 'get_ringtone_request', '3': 14, '4': 1, '5': 8, '9': 0, '10': 'getRingtoneRequest'},
+    {'1': 'get_ringtone_response', '3': 15, '4': 1, '5': 9, '9': 0, '10': 'getRingtoneResponse'},
+    {'1': 'get_device_connection_status_request', '3': 16, '4': 1, '5': 8, '9': 0, '10': 'getDeviceConnectionStatusRequest'},
+    {'1': 'get_device_connection_status_response', '3': 17, '4': 1, '5': 11, '6': '.meshtastic.DeviceConnectionStatus', '9': 0, '10': 'getDeviceConnectionStatusResponse'},
+    {'1': 'set_ham_mode', '3': 18, '4': 1, '5': 11, '6': '.meshtastic.HamParameters', '9': 0, '10': 'setHamMode'},
+    {'1': 'get_node_remote_hardware_pins_request', '3': 19, '4': 1, '5': 8, '9': 0, '10': 'getNodeRemoteHardwarePinsRequest'},
+    {'1': 'get_node_remote_hardware_pins_response', '3': 20, '4': 1, '5': 11, '6': '.meshtastic.NodeRemoteHardwarePinsResponse', '9': 0, '10': 'getNodeRemoteHardwarePinsResponse'},
+    {'1': 'enter_dfu_mode_request', '3': 21, '4': 1, '5': 8, '9': 0, '10': 'enterDfuModeRequest'},
+    {'1': 'delete_file_request', '3': 22, '4': 1, '5': 9, '9': 0, '10': 'deleteFileRequest'},
+    {'1': 'set_owner', '3': 32, '4': 1, '5': 11, '6': '.meshtastic.User', '9': 0, '10': 'setOwner'},
+    {'1': 'set_channel', '3': 33, '4': 1, '5': 11, '6': '.meshtastic.Channel', '9': 0, '10': 'setChannel'},
+    {'1': 'set_config', '3': 34, '4': 1, '5': 11, '6': '.meshtastic.Config', '9': 0, '10': 'setConfig'},
+    {'1': 'set_module_config', '3': 35, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig', '9': 0, '10': 'setModuleConfig'},
+    {'1': 'set_canned_message_module_messages', '3': 36, '4': 1, '5': 9, '9': 0, '10': 'setCannedMessageModuleMessages'},
+    {'1': 'set_ringtone_message', '3': 37, '4': 1, '5': 9, '9': 0, '10': 'setRingtoneMessage'},
+    {'1': 'remove_by_nodenum', '3': 38, '4': 1, '5': 13, '9': 0, '10': 'removeByNodenum'},
+    {'1': 'set_favorite_node', '3': 39, '4': 1, '5': 13, '9': 0, '10': 'setFavoriteNode'},
+    {'1': 'remove_favorite_node', '3': 40, '4': 1, '5': 13, '9': 0, '10': 'removeFavoriteNode'},
+    {'1': 'set_fixed_position', '3': 41, '4': 1, '5': 11, '6': '.meshtastic.Position', '9': 0, '10': 'setFixedPosition'},
+    {'1': 'remove_fixed_position', '3': 42, '4': 1, '5': 8, '9': 0, '10': 'removeFixedPosition'},
+    {'1': 'begin_edit_settings', '3': 64, '4': 1, '5': 8, '9': 0, '10': 'beginEditSettings'},
+    {'1': 'commit_edit_settings', '3': 65, '4': 1, '5': 8, '9': 0, '10': 'commitEditSettings'},
+    {'1': 'reboot_ota_seconds', '3': 95, '4': 1, '5': 5, '9': 0, '10': 'rebootOtaSeconds'},
+    {'1': 'exit_simulator', '3': 96, '4': 1, '5': 8, '9': 0, '10': 'exitSimulator'},
+    {'1': 'reboot_seconds', '3': 97, '4': 1, '5': 5, '9': 0, '10': 'rebootSeconds'},
+    {'1': 'shutdown_seconds', '3': 98, '4': 1, '5': 5, '9': 0, '10': 'shutdownSeconds'},
+    {'1': 'factory_reset', '3': 99, '4': 1, '5': 5, '9': 0, '10': 'factoryReset'},
+    {'1': 'nodedb_reset', '3': 100, '4': 1, '5': 5, '9': 0, '10': 'nodedbReset'},
   ],
   '4': [AdminMessage_ConfigType$json, AdminMessage_ModuleConfigType$json],
   '8': [
@@ -382,30 +128,34 @@ final $typed_data.Uint8List adminMessageDescriptor = $convert.base64Decode(
     'VQaW5zUmVxdWVzdBJ/CiZnZXRfbm9kZV9yZW1vdGVfaGFyZHdhcmVfcGluc19yZXNwb25zZRgU'
     'IAEoCzIqLm1lc2h0YXN0aWMuTm9kZVJlbW90ZUhhcmR3YXJlUGluc1Jlc3BvbnNlSABSIWdldE'
     '5vZGVSZW1vdGVIYXJkd2FyZVBpbnNSZXNwb25zZRI1ChZlbnRlcl9kZnVfbW9kZV9yZXF1ZXN0'
-    'GBUgASgISABSE2VudGVyRGZ1TW9kZVJlcXVlc3QSLwoJc2V0X293bmVyGCAgASgLMhAubWVzaH'
-    'Rhc3RpYy5Vc2VySABSCHNldE93bmVyEjYKC3NldF9jaGFubmVsGCEgASgLMhMubWVzaHRhc3Rp'
-    'Yy5DaGFubmVsSABSCnNldENoYW5uZWwSMwoKc2V0X2NvbmZpZxgiIAEoCzISLm1lc2h0YXN0aW'
-    'MuQ29uZmlnSABSCXNldENvbmZpZxJGChFzZXRfbW9kdWxlX2NvbmZpZxgjIAEoCzIYLm1lc2h0'
-    'YXN0aWMuTW9kdWxlQ29uZmlnSABSD3NldE1vZHVsZUNvbmZpZxJMCiJzZXRfY2FubmVkX21lc3'
-    'NhZ2VfbW9kdWxlX21lc3NhZ2VzGCQgASgJSABSHnNldENhbm5lZE1lc3NhZ2VNb2R1bGVNZXNz'
-    'YWdlcxIyChRzZXRfcmluZ3RvbmVfbWVzc2FnZRglIAEoCUgAUhJzZXRSaW5ndG9uZU1lc3NhZ2'
-    'USLAoRcmVtb3ZlX2J5X25vZGVudW0YJiABKA1IAFIPcmVtb3ZlQnlOb2RlbnVtEjAKE2JlZ2lu'
-    'X2VkaXRfc2V0dGluZ3MYQCABKAhIAFIRYmVnaW5FZGl0U2V0dGluZ3MSMgoUY29tbWl0X2VkaX'
-    'Rfc2V0dGluZ3MYQSABKAhIAFISY29tbWl0RWRpdFNldHRpbmdzEi4KEnJlYm9vdF9vdGFfc2Vj'
-    'b25kcxhfIAEoBUgAUhByZWJvb3RPdGFTZWNvbmRzEicKDmV4aXRfc2ltdWxhdG9yGGAgASgISA'
-    'BSDWV4aXRTaW11bGF0b3ISJwoOcmVib290X3NlY29uZHMYYSABKAVIAFINcmVib290U2Vjb25k'
-    'cxIrChBzaHV0ZG93bl9zZWNvbmRzGGIgASgFSABSD3NodXRkb3duU2Vjb25kcxIlCg1mYWN0b3'
-    'J5X3Jlc2V0GGMgASgFSABSDGZhY3RvcnlSZXNldBIjCgxub2RlZGJfcmVzZXQYZCABKAVIAFIL'
-    'bm9kZWRiUmVzZXQilQEKCkNvbmZpZ1R5cGUSEQoNREVWSUNFX0NPTkZJRxAAEhMKD1BPU0lUSU'
-    '9OX0NPTkZJRxABEhAKDFBPV0VSX0NPTkZJRxACEhIKDk5FVFdPUktfQ09ORklHEAMSEgoORElT'
-    'UExBWV9DT05GSUcQBBIPCgtMT1JBX0NPTkZJRxAFEhQKEEJMVUVUT09USF9DT05GSUcQBiK7Ag'
-    'oQTW9kdWxlQ29uZmlnVHlwZRIPCgtNUVRUX0NPTkZJRxAAEhEKDVNFUklBTF9DT05GSUcQARIT'
-    'Cg9FWFROT1RJRl9DT05GSUcQAhIXChNTVE9SRUZPUldBUkRfQ09ORklHEAMSFAoQUkFOR0VURV'
-    'NUX0NPTkZJRxAEEhQKEFRFTEVNRVRSWV9DT05GSUcQBRIUChBDQU5ORURNU0dfQ09ORklHEAYS'
-    'EAoMQVVESU9fQ09ORklHEAcSGQoVUkVNT1RFSEFSRFdBUkVfQ09ORklHEAgSFwoTTkVJR0hCT1'
-    'JJTkZPX0NPTkZJRxAJEhoKFkFNQklFTlRMSUdIVElOR19DT05GSUcQChIaChZERVRFQ1RJT05T'
-    'RU5TT1JfQ09ORklHEAsSFQoRUEFYQ09VTlRFUl9DT05GSUcQDEIRCg9wYXlsb2FkX3Zhcmlhbn'
-    'Q=');
+    'GBUgASgISABSE2VudGVyRGZ1TW9kZVJlcXVlc3QSMAoTZGVsZXRlX2ZpbGVfcmVxdWVzdBgWIA'
+    'EoCUgAUhFkZWxldGVGaWxlUmVxdWVzdBIvCglzZXRfb3duZXIYICABKAsyEC5tZXNodGFzdGlj'
+    'LlVzZXJIAFIIc2V0T3duZXISNgoLc2V0X2NoYW5uZWwYISABKAsyEy5tZXNodGFzdGljLkNoYW'
+    '5uZWxIAFIKc2V0Q2hhbm5lbBIzCgpzZXRfY29uZmlnGCIgASgLMhIubWVzaHRhc3RpYy5Db25m'
+    'aWdIAFIJc2V0Q29uZmlnEkYKEXNldF9tb2R1bGVfY29uZmlnGCMgASgLMhgubWVzaHRhc3RpYy'
+    '5Nb2R1bGVDb25maWdIAFIPc2V0TW9kdWxlQ29uZmlnEkwKInNldF9jYW5uZWRfbWVzc2FnZV9t'
+    'b2R1bGVfbWVzc2FnZXMYJCABKAlIAFIec2V0Q2FubmVkTWVzc2FnZU1vZHVsZU1lc3NhZ2VzEj'
+    'IKFHNldF9yaW5ndG9uZV9tZXNzYWdlGCUgASgJSABSEnNldFJpbmd0b25lTWVzc2FnZRIsChFy'
+    'ZW1vdmVfYnlfbm9kZW51bRgmIAEoDUgAUg9yZW1vdmVCeU5vZGVudW0SLAoRc2V0X2Zhdm9yaX'
+    'RlX25vZGUYJyABKA1IAFIPc2V0RmF2b3JpdGVOb2RlEjIKFHJlbW92ZV9mYXZvcml0ZV9ub2Rl'
+    'GCggASgNSABSEnJlbW92ZUZhdm9yaXRlTm9kZRJEChJzZXRfZml4ZWRfcG9zaXRpb24YKSABKA'
+    'syFC5tZXNodGFzdGljLlBvc2l0aW9uSABSEHNldEZpeGVkUG9zaXRpb24SNAoVcmVtb3ZlX2Zp'
+    'eGVkX3Bvc2l0aW9uGCogASgISABSE3JlbW92ZUZpeGVkUG9zaXRpb24SMAoTYmVnaW5fZWRpdF'
+    '9zZXR0aW5ncxhAIAEoCEgAUhFiZWdpbkVkaXRTZXR0aW5ncxIyChRjb21taXRfZWRpdF9zZXR0'
+    'aW5ncxhBIAEoCEgAUhJjb21taXRFZGl0U2V0dGluZ3MSLgoScmVib290X290YV9zZWNvbmRzGF'
+    '8gASgFSABSEHJlYm9vdE90YVNlY29uZHMSJwoOZXhpdF9zaW11bGF0b3IYYCABKAhIAFINZXhp'
+    'dFNpbXVsYXRvchInCg5yZWJvb3Rfc2Vjb25kcxhhIAEoBUgAUg1yZWJvb3RTZWNvbmRzEisKEH'
+    'NodXRkb3duX3NlY29uZHMYYiABKAVIAFIPc2h1dGRvd25TZWNvbmRzEiUKDWZhY3RvcnlfcmVz'
+    'ZXQYYyABKAVIAFIMZmFjdG9yeVJlc2V0EiMKDG5vZGVkYl9yZXNldBhkIAEoBUgAUgtub2RlZG'
+    'JSZXNldCKVAQoKQ29uZmlnVHlwZRIRCg1ERVZJQ0VfQ09ORklHEAASEwoPUE9TSVRJT05fQ09O'
+    'RklHEAESEAoMUE9XRVJfQ09ORklHEAISEgoOTkVUV09SS19DT05GSUcQAxISCg5ESVNQTEFZX0'
+    'NPTkZJRxAEEg8KC0xPUkFfQ09ORklHEAUSFAoQQkxVRVRPT1RIX0NPTkZJRxAGIrsCChBNb2R1'
+    'bGVDb25maWdUeXBlEg8KC01RVFRfQ09ORklHEAASEQoNU0VSSUFMX0NPTkZJRxABEhMKD0VYVE'
+    '5PVElGX0NPTkZJRxACEhcKE1NUT1JFRk9SV0FSRF9DT05GSUcQAxIUChBSQU5HRVRFU1RfQ09O'
+    'RklHEAQSFAoQVEVMRU1FVFJZX0NPTkZJRxAFEhQKEENBTk5FRE1TR19DT05GSUcQBhIQCgxBVU'
+    'RJT19DT05GSUcQBxIZChVSRU1PVEVIQVJEV0FSRV9DT05GSUcQCBIXChNORUlHSEJPUklORk9f'
+    'Q09ORklHEAkSGgoWQU1CSUVOVExJR0hUSU5HX0NPTkZJRxAKEhoKFkRFVEVDVElPTlNFTlNPUl'
+    '9DT05GSUcQCxIVChFQQVhDT1VOVEVSX0NPTkZJRxAMQhEKD3BheWxvYWRfdmFyaWFudA==');
 
 @$core.Deprecated('Use hamParametersDescriptor instead')
 const HamParameters$json = {
@@ -428,20 +178,13 @@ final $typed_data.Uint8List hamParametersDescriptor = $convert.base64Decode(
 const NodeRemoteHardwarePinsResponse$json = {
   '1': 'NodeRemoteHardwarePinsResponse',
   '2': [
-    {
-      '1': 'node_remote_hardware_pins',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.meshtastic.NodeRemoteHardwarePin',
-      '10': 'nodeRemoteHardwarePins'
-    },
+    {'1': 'node_remote_hardware_pins', '3': 1, '4': 3, '5': 11, '6': '.meshtastic.NodeRemoteHardwarePin', '10': 'nodeRemoteHardwarePins'},
   ],
 };
 
 /// Descriptor for `NodeRemoteHardwarePinsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List nodeRemoteHardwarePinsResponseDescriptor =
-    $convert.base64Decode(
-        'Ch5Ob2RlUmVtb3RlSGFyZHdhcmVQaW5zUmVzcG9uc2USXAoZbm9kZV9yZW1vdGVfaGFyZHdhcm'
-        'VfcGlucxgBIAMoCzIhLm1lc2h0YXN0aWMuTm9kZVJlbW90ZUhhcmR3YXJlUGluUhZub2RlUmVt'
-        'b3RlSGFyZHdhcmVQaW5z');
+final $typed_data.Uint8List nodeRemoteHardwarePinsResponseDescriptor = $convert.base64Decode(
+    'Ch5Ob2RlUmVtb3RlSGFyZHdhcmVQaW5zUmVzcG9uc2USXAoZbm9kZV9yZW1vdGVfaGFyZHdhcm'
+    'VfcGlucxgBIAMoCzIhLm1lc2h0YXN0aWMuTm9kZVJlbW90ZUhhcmR3YXJlUGluUhZub2RlUmVt'
+    'b3RlSGFyZHdhcmVQaW5z');
+

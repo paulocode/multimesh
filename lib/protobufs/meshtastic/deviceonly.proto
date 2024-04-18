@@ -5,14 +5,127 @@ package meshtastic;
 import "meshtastic/channel.proto";
 import "meshtastic/localonly.proto";
 import "meshtastic/mesh.proto";
-import "meshtastic/telemetry.proto";
 import "meshtastic/module_config.proto";
+import "meshtastic/telemetry.proto";
+import "nanopb.proto";
 
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
 option java_outer_classname = "DeviceOnly";
 option java_package = "com.geeksville.mesh";
 option swift_prefix = "";
+option (nanopb_fileopt).include = "<vector>";
+
+
+/*
+ * Position with static location information only for NodeDBLite
+ */
+message PositionLite {
+  /*
+   * The new preferred location encoding, multiply by 1e-7 to get degrees
+   * in floating point
+   */
+  sfixed32 latitude_i = 1;
+
+  /*
+   * TODO: REPLACE
+   */
+  sfixed32 longitude_i = 2;
+
+  /*
+   * In meters above MSL (but see issue #359)
+   */
+  int32 altitude = 3;
+
+  /*
+   * This is usually not sent over the mesh (to save space), but it is sent
+   * from the phone so that the local device can set its RTC If it is sent over
+   * the mesh (because there are devices on the mesh without GPS), it will only
+   * be sent by devices which has a hardware GPS clock.
+   * seconds since 1970
+   */
+  fixed32 time = 4;
+
+  /*
+   * TODO: REPLACE
+   */
+  Position.LocSource location_source = 5;
+}
+
+message NodeInfoLite {
+  /*
+   * The node number
+   */
+  uint32 num = 1;
+
+  /*
+   * The user info for this node
+   */
+  User user = 2;
+
+  /*
+   * This position data. Note: before 1.2.14 we would also store the last time we've heard from this node in position.time, that is no longer true.
+   * Position.time now indicates the last time we received a POSITION from that node.
+   */
+  PositionLite position = 3;
+
+  /*
+   * Returns the Signal-to-noise ratio (SNR) of the last received message,
+   * as measured by the receiver. Return SNR of the last received message in dB
+   */
+  float snr = 4;
+
+  /*
+   * Set to indicate the last time we received a packet from this node
+   */
+  fixed32 last_heard = 5;
+  /*
+   * The latest device metrics for the node.
+   */
+  DeviceMetrics device_metrics = 6;
+
+  /*
+   * local channel index we heard that node on. Only populated if its not the default channel.
+   */
+  uint32 channel = 7;
+
+  /*
+   * True if we witnessed the node over MQTT instead of LoRA transport
+   */
+  bool via_mqtt = 8;
+
+  /*
+   * Number of hops away from us this node is (0 if adjacent)
+   */
+  uint32 hops_away = 9;
+
+  /*
+   * True if node is in our favorites list
+   * Persists between NodeDB internal clean ups
+   */
+  bool is_favorite = 10;
+}
+
+/*
+ * Font sizes for the device screen
+ */
+enum ScreenFonts {
+  /*
+   * TODO: REPLACE
+   */
+  FONT_SMALL = 0;
+
+  /*
+   * TODO: REPLACE
+   */
+  FONT_MEDIUM = 1;
+
+  /*
+   * TODO: REPLACE
+   */
+  FONT_LARGE = 2;
+}
+
 
 /*
  * This message is never sent over the wire, but it is used for serializing DB
@@ -54,8 +167,9 @@ message DeviceState {
   /*
    * Used only during development.
    * Indicates developer is testing and changes should never be saved to flash.
+   * Deprecated in 2.3.1
    */
-  bool no_save = 9;
+  bool no_save = 9 [deprecated = true];
 
   /*
    * Some GPS receivers seem to have bogus settings from the factory, so we always do one factory reset.
@@ -77,80 +191,7 @@ message DeviceState {
   /*
    * New lite version of NodeDB to decrease memory footprint
    */
-  repeated NodeInfoLite node_db_lite = 14;
-}
-
-message NodeInfoLite {
-  /*
-   * The node number
-   */
-  uint32 num = 1;
-
-  /*
-   * The user info for this node
-   */
-  User user = 2;
-
-  /*
-   * This position data. Note: before 1.2.14 we would also store the last time we've heard from this node in position.time, that is no longer true.
-   * Position.time now indicates the last time we received a POSITION from that node.
-   */
-  PositionLite position = 3;
-
-  /*
-   * Returns the Signal-to-noise ratio (SNR) of the last received message,
-   * as measured by the receiver. Return SNR of the last received message in dB
-   */
-  float snr = 4;
-
-  /*
-   * Set to indicate the last time we received a packet from this node
-   */
-  fixed32 last_heard = 5;
-  /*
-   * The latest device metrics for the node.
-   */
-  DeviceMetrics device_metrics = 6;
-
-  /*
-   * local channel index we heard that node on. Only populated if its not the default channel.
-   */
-  uint32 channel = 7;
-}
-
-/*
- * Position with static location information only for NodeDBLite
- */
-message PositionLite {
-  /*
-   * The new preferred location encoding, multiply by 1e-7 to get degrees
-   * in floating point
-   */
-  sfixed32 latitude_i = 1;
-
-  /*
-   * TODO: REPLACE
-   */
-  sfixed32 longitude_i = 2;
-
-  /*
-   * In meters above MSL (but see issue #359)
-   */
-  int32 altitude = 3;
-
-  /*
-   * This is usually not sent over the mesh (to save space), but it is sent
-   * from the phone so that the local device can set its RTC If it is sent over
-   * the mesh (because there are devices on the mesh without GPS), it will only
-   * be sent by devices which has a hardware GPS clock.
-   * seconds since 1970
-   */
-  fixed32 time = 4;
-
-  /*
-   * TODO: REPLACE
-   */
-  Position.LocSource location_source = 5;
+  repeated NodeInfoLite node_db_lite = 14 [(nanopb).callback_datatype = "std::vector<meshtastic_NodeInfoLite>"];
 }
 
 /*
@@ -168,26 +209,6 @@ message ChannelFile {
    * NodeDB.cpp in the device code.
    */
   uint32 version = 2;
-}
-
-/*
- * TODO: REPLACE
- */
-enum ScreenFonts {
-  /*
-   * TODO: REPLACE
-   */
-  FONT_SMALL = 0;
-
-  /*
-   * TODO: REPLACE
-   */
-  FONT_MEDIUM = 1;
-
-  /*
-   * TODO: REPLACE
-   */
-  FONT_LARGE = 2;
 }
 
 /*
@@ -234,19 +255,4 @@ message OEMStore {
    * A Preset LocalModuleConfig to apply during factory reset
    */
   LocalModuleConfig oem_local_module_config = 8;
-}
-
-/*
- * RemoteHardwarePins associated with a node
- */
-message NodeRemoteHardwarePin {
-  /*
-   * The node_num exposing the available gpio pin
-   */
-  uint32 node_num = 1;
-
-  /*
-   * The the available gpio pin for usage with RemoteHardware module
-   */
-  RemoteHardwarePin pin = 2;
 }

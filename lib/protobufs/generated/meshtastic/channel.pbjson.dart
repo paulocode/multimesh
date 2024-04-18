@@ -30,6 +30,7 @@ const ChannelSettings$json = {
     {'1': 'id', '3': 4, '4': 1, '5': 7, '10': 'id'},
     {'1': 'uplink_enabled', '3': 5, '4': 1, '5': 8, '10': 'uplinkEnabled'},
     {'1': 'downlink_enabled', '3': 6, '4': 1, '5': 8, '10': 'downlinkEnabled'},
+    {'1': 'module_settings', '3': 7, '4': 1, '5': 11, '6': '.meshtastic.ModuleSettings', '10': 'moduleSettings'},
   ],
 };
 
@@ -38,29 +39,29 @@ final $typed_data.Uint8List channelSettingsDescriptor = $convert.base64Decode(
     'Cg9DaGFubmVsU2V0dGluZ3MSIwoLY2hhbm5lbF9udW0YASABKA1CAhgBUgpjaGFubmVsTnVtEh'
     'AKA3BzaxgCIAEoDFIDcHNrEhIKBG5hbWUYAyABKAlSBG5hbWUSDgoCaWQYBCABKAdSAmlkEiUK'
     'DnVwbGlua19lbmFibGVkGAUgASgIUg11cGxpbmtFbmFibGVkEikKEGRvd25saW5rX2VuYWJsZW'
-    'QYBiABKAhSD2Rvd25saW5rRW5hYmxlZA==');
+    'QYBiABKAhSD2Rvd25saW5rRW5hYmxlZBJDCg9tb2R1bGVfc2V0dGluZ3MYByABKAsyGi5tZXNo'
+    'dGFzdGljLk1vZHVsZVNldHRpbmdzUg5tb2R1bGVTZXR0aW5ncw==');
+
+@$core.Deprecated('Use moduleSettingsDescriptor instead')
+const ModuleSettings$json = {
+  '1': 'ModuleSettings',
+  '2': [
+    {'1': 'position_precision', '3': 1, '4': 1, '5': 13, '10': 'positionPrecision'},
+  ],
+};
+
+/// Descriptor for `ModuleSettings`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List moduleSettingsDescriptor = $convert.base64Decode(
+    'Cg5Nb2R1bGVTZXR0aW5ncxItChJwb3NpdGlvbl9wcmVjaXNpb24YASABKA1SEXBvc2l0aW9uUH'
+    'JlY2lzaW9u');
 
 @$core.Deprecated('Use channelDescriptor instead')
 const Channel$json = {
   '1': 'Channel',
   '2': [
     {'1': 'index', '3': 1, '4': 1, '5': 5, '10': 'index'},
-    {
-      '1': 'settings',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.ChannelSettings',
-      '10': 'settings'
-    },
-    {
-      '1': 'role',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.Channel.Role',
-      '10': 'role'
-    },
+    {'1': 'settings', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.ChannelSettings', '10': 'settings'},
+    {'1': 'role', '3': 3, '4': 1, '5': 14, '6': '.meshtastic.Channel.Role', '10': 'role'},
   ],
   '4': [Channel_Role$json],
 };
@@ -81,3 +82,4 @@ final $typed_data.Uint8List channelDescriptor = $convert.base64Decode(
     'h0YXN0aWMuQ2hhbm5lbFNldHRpbmdzUghzZXR0aW5ncxIsCgRyb2xlGAMgASgOMhgubWVzaHRh'
     'c3RpYy5DaGFubmVsLlJvbGVSBHJvbGUiMAoEUm9sZRIMCghESVNBQkxFRBAAEgsKB1BSSU1BUl'
     'kQARINCglTRUNPTkRBUlkQAg==');
+

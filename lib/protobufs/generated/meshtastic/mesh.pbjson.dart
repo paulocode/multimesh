@@ -41,6 +41,9 @@ const HardwareModel$json = {
     {'1': 'RAK11310', '2': 26},
     {'1': 'SENSELORA_RP2040', '2': 27},
     {'1': 'SENSELORA_S3', '2': 28},
+    {'1': 'CANARYONE', '2': 29},
+    {'1': 'RP2040_LORA', '2': 30},
+    {'1': 'STATION_G2', '2': 31},
     {'1': 'LORA_RELAY_V1', '2': 32},
     {'1': 'NRF52840DK', '2': 33},
     {'1': 'PPR', '2': 34},
@@ -65,6 +68,12 @@ const HardwareModel$json = {
     {'1': 'HELTEC_HT62', '2': 53},
     {'1': 'EBYTE_ESP32_S3', '2': 54},
     {'1': 'ESP32_S3_PICO', '2': 55},
+    {'1': 'CHATTER_2', '2': 56},
+    {'1': 'HELTEC_WIRELESS_PAPER_V1_0', '2': 57},
+    {'1': 'HELTEC_WIRELESS_TRACKER_V1_0', '2': 58},
+    {'1': 'UNPHONE', '2': 59},
+    {'1': 'TD_LORAC', '2': 60},
+    {'1': 'CDEBYTE_EORA_S3', '2': 61},
     {'1': 'PRIVATE_HW', '2': 255},
   ],
 };
@@ -78,15 +87,18 @@ final $typed_data.Uint8List hardwareModelDescriptor = $convert.base64Decode(
     'CFJBSzExMjAwEA0SCwoHTkFOT19HMRAOEhIKDlRMT1JBX1YyXzFfMVA4EA8SDwoLVExPUkFfVD'
     'NfUzMQEBIUChBOQU5PX0cxX0VYUExPUkVSEBESEQoNTkFOT19HMl9VTFRSQRASEg0KCUxPUkFf'
     'VFlQRRATEg4KClNUQVRJT05fRzEQGRIMCghSQUsxMTMxMBAaEhQKEFNFTlNFTE9SQV9SUDIwND'
-    'AQGxIQCgxTRU5TRUxPUkFfUzMQHBIRCg1MT1JBX1JFTEFZX1YxECASDgoKTlJGNTI4NDBESxAh'
-    'EgcKA1BQUhAiEg8KC0dFTklFQkxPQ0tTECMSEQoNTlJGNTJfVU5LTk9XThAkEg0KCVBPUlREVU'
-    'lOTxAlEg8KC0FORFJPSURfU0lNECYSCgoGRElZX1YxECcSFQoRTlJGNTI4NDBfUENBMTAwNTkQ'
-    'KBIKCgZEUl9ERVYQKRILCgdNNVNUQUNLECoSDQoJSEVMVEVDX1YzECsSEQoNSEVMVEVDX1dTTF'
-    '9WMxAsEhMKD0JFVEFGUFZfMjQwMF9UWBAtEhcKE0JFVEFGUFZfOTAwX05BTk9fVFgQLhIMCghS'
-    'UElfUElDTxAvEhsKF0hFTFRFQ19XSVJFTEVTU19UUkFDS0VSEDASGQoVSEVMVEVDX1dJUkVMRV'
-    'NTX1BBUEVSEDESCgoGVF9ERUNLEDISDgoKVF9XQVRDSF9TMxAzEhEKDVBJQ09NUFVURVJfUzMQ'
-    'NBIPCgtIRUxURUNfSFQ2MhA1EhIKDkVCWVRFX0VTUDMyX1MzEDYSEQoNRVNQMzJfUzNfUElDTx'
-    'A3Eg8KClBSSVZBVEVfSFcQ/wE=');
+    'AQGxIQCgxTRU5TRUxPUkFfUzMQHBINCglDQU5BUllPTkUQHRIPCgtSUDIwNDBfTE9SQRAeEg4K'
+    'ClNUQVRJT05fRzIQHxIRCg1MT1JBX1JFTEFZX1YxECASDgoKTlJGNTI4NDBESxAhEgcKA1BQUh'
+    'AiEg8KC0dFTklFQkxPQ0tTECMSEQoNTlJGNTJfVU5LTk9XThAkEg0KCVBPUlREVUlOTxAlEg8K'
+    'C0FORFJPSURfU0lNECYSCgoGRElZX1YxECcSFQoRTlJGNTI4NDBfUENBMTAwNTkQKBIKCgZEUl'
+    '9ERVYQKRILCgdNNVNUQUNLECoSDQoJSEVMVEVDX1YzECsSEQoNSEVMVEVDX1dTTF9WMxAsEhMK'
+    'D0JFVEFGUFZfMjQwMF9UWBAtEhcKE0JFVEFGUFZfOTAwX05BTk9fVFgQLhIMCghSUElfUElDTx'
+    'AvEhsKF0hFTFRFQ19XSVJFTEVTU19UUkFDS0VSEDASGQoVSEVMVEVDX1dJUkVMRVNTX1BBUEVS'
+    'EDESCgoGVF9ERUNLEDISDgoKVF9XQVRDSF9TMxAzEhEKDVBJQ09NUFVURVJfUzMQNBIPCgtIRU'
+    'xURUNfSFQ2MhA1EhIKDkVCWVRFX0VTUDMyX1MzEDYSEQoNRVNQMzJfUzNfUElDTxA3Eg0KCUNI'
+    'QVRURVJfMhA4Eh4KGkhFTFRFQ19XSVJFTEVTU19QQVBFUl9WMV8wEDkSIAocSEVMVEVDX1dJUk'
+    'VMRVNTX1RSQUNLRVJfVjFfMBA6EgsKB1VOUEhPTkUQOxIMCghURF9MT1JBQxA8EhMKD0NERUJZ'
+    'VEVfRU9SQV9TMxA9Eg8KClBSSVZBVEVfSFcQ/wE=');
 
 @$core.Deprecated('Use constantsDescriptor instead')
 const Constants$json = {
@@ -136,38 +148,12 @@ const Position$json = {
     {'1': 'longitude_i', '3': 2, '4': 1, '5': 15, '10': 'longitudeI'},
     {'1': 'altitude', '3': 3, '4': 1, '5': 5, '10': 'altitude'},
     {'1': 'time', '3': 4, '4': 1, '5': 7, '10': 'time'},
-    {
-      '1': 'location_source',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.Position.LocSource',
-      '10': 'locationSource'
-    },
-    {
-      '1': 'altitude_source',
-      '3': 6,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.Position.AltSource',
-      '10': 'altitudeSource'
-    },
+    {'1': 'location_source', '3': 5, '4': 1, '5': 14, '6': '.meshtastic.Position.LocSource', '10': 'locationSource'},
+    {'1': 'altitude_source', '3': 6, '4': 1, '5': 14, '6': '.meshtastic.Position.AltSource', '10': 'altitudeSource'},
     {'1': 'timestamp', '3': 7, '4': 1, '5': 7, '10': 'timestamp'},
-    {
-      '1': 'timestamp_millis_adjust',
-      '3': 8,
-      '4': 1,
-      '5': 5,
-      '10': 'timestampMillisAdjust'
-    },
+    {'1': 'timestamp_millis_adjust', '3': 8, '4': 1, '5': 5, '10': 'timestampMillisAdjust'},
     {'1': 'altitude_hae', '3': 9, '4': 1, '5': 17, '10': 'altitudeHae'},
-    {
-      '1': 'altitude_geoidal_separation',
-      '3': 10,
-      '4': 1,
-      '5': 17,
-      '10': 'altitudeGeoidalSeparation'
-    },
+    {'1': 'altitude_geoidal_separation', '3': 10, '4': 1, '5': 17, '10': 'altitudeGeoidalSeparation'},
     {'1': 'PDOP', '3': 11, '4': 1, '5': 13, '10': 'PDOP'},
     {'1': 'HDOP', '3': 12, '4': 1, '5': 13, '10': 'HDOP'},
     {'1': 'VDOP', '3': 13, '4': 1, '5': 13, '10': 'VDOP'},
@@ -180,6 +166,7 @@ const Position$json = {
     {'1': 'sensor_id', '3': 20, '4': 1, '5': 13, '10': 'sensorId'},
     {'1': 'next_update', '3': 21, '4': 1, '5': 13, '10': 'nextUpdate'},
     {'1': 'seq_number', '3': 22, '4': 1, '5': 13, '10': 'seqNumber'},
+    {'1': 'precision_bits', '3': 23, '4': 1, '5': 13, '10': 'precisionBits'},
   ],
   '4': [Position_LocSource$json, Position_AltSource$json],
 };
@@ -223,10 +210,11 @@ final $typed_data.Uint8List positionDescriptor = $convert.base64Decode(
     'VuZFRyYWNrEh8KC2ZpeF9xdWFsaXR5GBEgASgNUgpmaXhRdWFsaXR5EhkKCGZpeF90eXBlGBIg'
     'ASgNUgdmaXhUeXBlEiAKDHNhdHNfaW5fdmlldxgTIAEoDVIKc2F0c0luVmlldxIbCglzZW5zb3'
     'JfaWQYFCABKA1SCHNlbnNvcklkEh8KC25leHRfdXBkYXRlGBUgASgNUgpuZXh0VXBkYXRlEh0K'
-    'CnNlcV9udW1iZXIYFiABKA1SCXNlcU51bWJlciJOCglMb2NTb3VyY2USDQoJTE9DX1VOU0VUEA'
-    'ASDgoKTE9DX01BTlVBTBABEhAKDExPQ19JTlRFUk5BTBACEhAKDExPQ19FWFRFUk5BTBADImIK'
-    'CUFsdFNvdXJjZRINCglBTFRfVU5TRVQQABIOCgpBTFRfTUFOVUFMEAESEAoMQUxUX0lOVEVSTk'
-    'FMEAISEAoMQUxUX0VYVEVSTkFMEAMSEgoOQUxUX0JBUk9NRVRSSUMQBA==');
+    'CnNlcV9udW1iZXIYFiABKA1SCXNlcU51bWJlchIlCg5wcmVjaXNpb25fYml0cxgXIAEoDVINcH'
+    'JlY2lzaW9uQml0cyJOCglMb2NTb3VyY2USDQoJTE9DX1VOU0VUEAASDgoKTE9DX01BTlVBTBAB'
+    'EhAKDExPQ19JTlRFUk5BTBACEhAKDExPQ19FWFRFUk5BTBADImIKCUFsdFNvdXJjZRINCglBTF'
+    'RfVU5TRVQQABIOCgpBTFRfTUFOVUFMEAESEAoMQUxUX0lOVEVSTkFMEAISEAoMQUxUX0VYVEVS'
+    'TkFMEAMSEgoOQUxUX0JBUk9NRVRSSUMQBA==');
 
 @$core.Deprecated('Use userDescriptor instead')
 const User$json = {
@@ -243,23 +231,9 @@ const User$json = {
       '8': {'3': true},
       '10': 'macaddr',
     },
-    {
-      '1': 'hw_model',
-      '3': 5,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.HardwareModel',
-      '10': 'hwModel'
-    },
+    {'1': 'hw_model', '3': 5, '4': 1, '5': 14, '6': '.meshtastic.HardwareModel', '10': 'hwModel'},
     {'1': 'is_licensed', '3': 6, '4': 1, '5': 8, '10': 'isLicensed'},
-    {
-      '1': 'role',
-      '3': 7,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.Config.DeviceConfig.Role',
-      '10': 'role'
-    },
+    {'1': 'role', '3': 7, '4': 1, '5': 14, '6': '.meshtastic.Config.DeviceConfig.Role', '10': 'role'},
   ],
 };
 
@@ -280,40 +254,16 @@ const RouteDiscovery$json = {
 };
 
 /// Descriptor for `RouteDiscovery`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List routeDiscoveryDescriptor = $convert
-    .base64Decode('Cg5Sb3V0ZURpc2NvdmVyeRIUCgVyb3V0ZRgBIAMoB1IFcm91dGU=');
+final $typed_data.Uint8List routeDiscoveryDescriptor = $convert.base64Decode(
+    'Cg5Sb3V0ZURpc2NvdmVyeRIUCgVyb3V0ZRgBIAMoB1IFcm91dGU=');
 
 @$core.Deprecated('Use routingDescriptor instead')
 const Routing$json = {
   '1': 'Routing',
   '2': [
-    {
-      '1': 'route_request',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.RouteDiscovery',
-      '9': 0,
-      '10': 'routeRequest'
-    },
-    {
-      '1': 'route_reply',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.RouteDiscovery',
-      '9': 0,
-      '10': 'routeReply'
-    },
-    {
-      '1': 'error_reason',
-      '3': 3,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.Routing.Error',
-      '9': 0,
-      '10': 'errorReason'
-    },
+    {'1': 'route_request', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.RouteDiscovery', '9': 0, '10': 'routeRequest'},
+    {'1': 'route_reply', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.RouteDiscovery', '9': 0, '10': 'routeReply'},
+    {'1': 'error_reason', '3': 3, '4': 1, '5': 14, '6': '.meshtastic.Routing.Error', '9': 0, '10': 'errorReason'},
   ],
   '4': [Routing_Error$json],
   '8': [
@@ -355,14 +305,7 @@ final $typed_data.Uint8List routingDescriptor = $convert.base64Decode(
 const Data$json = {
   '1': 'Data',
   '2': [
-    {
-      '1': 'portnum',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.PortNum',
-      '10': 'portnum'
-    },
+    {'1': 'portnum', '3': 1, '4': 1, '5': 14, '6': '.meshtastic.PortNum', '10': 'portnum'},
     {'1': 'payload', '3': 2, '4': 1, '5': 12, '10': 'payload'},
     {'1': 'want_response', '3': 3, '4': 1, '5': 8, '10': 'wantResponse'},
     {'1': 'dest', '3': 4, '4': 1, '5': 7, '10': 'dest'},
@@ -430,29 +373,14 @@ const MeshPacket$json = {
     {'1': 'from', '3': 1, '4': 1, '5': 7, '10': 'from'},
     {'1': 'to', '3': 2, '4': 1, '5': 7, '10': 'to'},
     {'1': 'channel', '3': 3, '4': 1, '5': 13, '10': 'channel'},
-    {
-      '1': 'decoded',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Data',
-      '9': 0,
-      '10': 'decoded'
-    },
+    {'1': 'decoded', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.Data', '9': 0, '10': 'decoded'},
     {'1': 'encrypted', '3': 5, '4': 1, '5': 12, '9': 0, '10': 'encrypted'},
     {'1': 'id', '3': 6, '4': 1, '5': 7, '10': 'id'},
     {'1': 'rx_time', '3': 7, '4': 1, '5': 7, '10': 'rxTime'},
     {'1': 'rx_snr', '3': 8, '4': 1, '5': 2, '10': 'rxSnr'},
     {'1': 'hop_limit', '3': 9, '4': 1, '5': 13, '10': 'hopLimit'},
     {'1': 'want_ack', '3': 10, '4': 1, '5': 8, '10': 'wantAck'},
-    {
-      '1': 'priority',
-      '3': 11,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.MeshPacket.Priority',
-      '10': 'priority'
-    },
+    {'1': 'priority', '3': 11, '4': 1, '5': 14, '6': '.meshtastic.MeshPacket.Priority', '10': 'priority'},
     {'1': 'rx_rssi', '3': 12, '4': 1, '5': 5, '10': 'rxRssi'},
     {
       '1': 'delayed',
@@ -463,6 +391,8 @@ const MeshPacket$json = {
       '8': {'3': true},
       '10': 'delayed',
     },
+    {'1': 'via_mqtt', '3': 14, '4': 1, '5': 8, '10': 'viaMqtt'},
+    {'1': 'hop_start', '3': 15, '4': 1, '5': 13, '10': 'hopStart'},
   ],
   '4': [MeshPacket_Priority$json, MeshPacket_Delayed$json],
   '8': [
@@ -503,43 +433,26 @@ final $typed_data.Uint8List meshPacketDescriptor = $convert.base64Decode(
     'cF9saW1pdBgJIAEoDVIIaG9wTGltaXQSGQoId2FudF9hY2sYCiABKAhSB3dhbnRBY2sSOwoIcH'
     'Jpb3JpdHkYCyABKA4yHy5tZXNodGFzdGljLk1lc2hQYWNrZXQuUHJpb3JpdHlSCHByaW9yaXR5'
     'EhcKB3J4X3Jzc2kYDCABKAVSBnJ4UnNzaRI8CgdkZWxheWVkGA0gASgOMh4ubWVzaHRhc3RpYy'
-    '5NZXNoUGFja2V0LkRlbGF5ZWRCAhgBUgdkZWxheWVkIlsKCFByaW9yaXR5EgkKBVVOU0VUEAAS'
-    'BwoDTUlOEAESDgoKQkFDS0dST1VORBAKEgsKB0RFRkFVTFQQQBIMCghSRUxJQUJMRRBGEgcKA0'
-    'FDSxB4EgcKA01BWBB/IkIKB0RlbGF5ZWQSDAoITk9fREVMQVkQABIVChFERUxBWUVEX0JST0FE'
-    'Q0FTVBABEhIKDkRFTEFZRURfRElSRUNUEAJCEQoPcGF5bG9hZF92YXJpYW50');
+    '5NZXNoUGFja2V0LkRlbGF5ZWRCAhgBUgdkZWxheWVkEhkKCHZpYV9tcXR0GA4gASgIUgd2aWFN'
+    'cXR0EhsKCWhvcF9zdGFydBgPIAEoDVIIaG9wU3RhcnQiWwoIUHJpb3JpdHkSCQoFVU5TRVQQAB'
+    'IHCgNNSU4QARIOCgpCQUNLR1JPVU5EEAoSCwoHREVGQVVMVBBAEgwKCFJFTElBQkxFEEYSBwoD'
+    'QUNLEHgSBwoDTUFYEH8iQgoHRGVsYXllZBIMCghOT19ERUxBWRAAEhUKEURFTEFZRURfQlJPQU'
+    'RDQVNUEAESEgoOREVMQVlFRF9ESVJFQ1QQAkIRCg9wYXlsb2FkX3ZhcmlhbnQ=');
 
 @$core.Deprecated('Use nodeInfoDescriptor instead')
 const NodeInfo$json = {
   '1': 'NodeInfo',
   '2': [
     {'1': 'num', '3': 1, '4': 1, '5': 13, '10': 'num'},
-    {
-      '1': 'user',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.User',
-      '10': 'user'
-    },
-    {
-      '1': 'position',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Position',
-      '10': 'position'
-    },
+    {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.User', '10': 'user'},
+    {'1': 'position', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.Position', '10': 'position'},
     {'1': 'snr', '3': 4, '4': 1, '5': 2, '10': 'snr'},
     {'1': 'last_heard', '3': 5, '4': 1, '5': 7, '10': 'lastHeard'},
-    {
-      '1': 'device_metrics',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.DeviceMetrics',
-      '10': 'deviceMetrics'
-    },
+    {'1': 'device_metrics', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.DeviceMetrics', '10': 'deviceMetrics'},
     {'1': 'channel', '3': 7, '4': 1, '5': 13, '10': 'channel'},
+    {'1': 'via_mqtt', '3': 8, '4': 1, '5': 8, '10': 'viaMqtt'},
+    {'1': 'hops_away', '3': 9, '4': 1, '5': 13, '10': 'hopsAway'},
+    {'1': 'is_favorite', '3': 10, '4': 1, '5': 8, '10': 'isFavorite'},
   ],
 };
 
@@ -549,7 +462,9 @@ final $typed_data.Uint8List nodeInfoDescriptor = $convert.base64Decode(
     '5Vc2VyUgR1c2VyEjAKCHBvc2l0aW9uGAMgASgLMhQubWVzaHRhc3RpYy5Qb3NpdGlvblIIcG9z'
     'aXRpb24SEAoDc25yGAQgASgCUgNzbnISHQoKbGFzdF9oZWFyZBgFIAEoB1IJbGFzdEhlYXJkEk'
     'AKDmRldmljZV9tZXRyaWNzGAYgASgLMhkubWVzaHRhc3RpYy5EZXZpY2VNZXRyaWNzUg1kZXZp'
-    'Y2VNZXRyaWNzEhgKB2NoYW5uZWwYByABKA1SB2NoYW5uZWw=');
+    'Y2VNZXRyaWNzEhgKB2NoYW5uZWwYByABKA1SB2NoYW5uZWwSGQoIdmlhX21xdHQYCCABKAhSB3'
+    'ZpYU1xdHQSGwoJaG9wc19hd2F5GAkgASgNUghob3BzQXdheRIfCgtpc19mYXZvcml0ZRgKIAEo'
+    'CFIKaXNGYXZvcml0ZQ==');
 
 @$core.Deprecated('Use myNodeInfoDescriptor instead')
 const MyNodeInfo$json = {
@@ -574,14 +489,7 @@ const LogRecord$json = {
     {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
     {'1': 'time', '3': 2, '4': 1, '5': 7, '10': 'time'},
     {'1': 'source', '3': 3, '4': 1, '5': 9, '10': 'source'},
-    {
-      '1': 'level',
-      '3': 4,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.LogRecord.Level',
-      '10': 'level'
-    },
+    {'1': 'level', '3': 4, '4': 1, '5': 14, '6': '.meshtastic.LogRecord.Level', '10': 'level'},
   ],
   '4': [LogRecord_Level$json],
 };
@@ -629,114 +537,19 @@ const FromRadio$json = {
   '1': 'FromRadio',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 13, '10': 'id'},
-    {
-      '1': 'packet',
-      '3': 2,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.MeshPacket',
-      '9': 0,
-      '10': 'packet'
-    },
-    {
-      '1': 'my_info',
-      '3': 3,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.MyNodeInfo',
-      '9': 0,
-      '10': 'myInfo'
-    },
-    {
-      '1': 'node_info',
-      '3': 4,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.NodeInfo',
-      '9': 0,
-      '10': 'nodeInfo'
-    },
-    {
-      '1': 'config',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Config',
-      '9': 0,
-      '10': 'config'
-    },
-    {
-      '1': 'log_record',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.LogRecord',
-      '9': 0,
-      '10': 'logRecord'
-    },
-    {
-      '1': 'config_complete_id',
-      '3': 7,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'configCompleteId'
-    },
+    {'1': 'packet', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.MeshPacket', '9': 0, '10': 'packet'},
+    {'1': 'my_info', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.MyNodeInfo', '9': 0, '10': 'myInfo'},
+    {'1': 'node_info', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.NodeInfo', '9': 0, '10': 'nodeInfo'},
+    {'1': 'config', '3': 5, '4': 1, '5': 11, '6': '.meshtastic.Config', '9': 0, '10': 'config'},
+    {'1': 'log_record', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.LogRecord', '9': 0, '10': 'logRecord'},
+    {'1': 'config_complete_id', '3': 7, '4': 1, '5': 13, '9': 0, '10': 'configCompleteId'},
     {'1': 'rebooted', '3': 8, '4': 1, '5': 8, '9': 0, '10': 'rebooted'},
-    {
-      '1': 'moduleConfig',
-      '3': 9,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.ModuleConfig',
-      '9': 0,
-      '10': 'moduleConfig'
-    },
-    {
-      '1': 'channel',
-      '3': 10,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.Channel',
-      '9': 0,
-      '10': 'channel'
-    },
-    {
-      '1': 'queueStatus',
-      '3': 11,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.QueueStatus',
-      '9': 0,
-      '10': 'queueStatus'
-    },
-    {
-      '1': 'xmodemPacket',
-      '3': 12,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.XModem',
-      '9': 0,
-      '10': 'xmodemPacket'
-    },
-    {
-      '1': 'metadata',
-      '3': 13,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.DeviceMetadata',
-      '9': 0,
-      '10': 'metadata'
-    },
-    {
-      '1': 'mqttClientProxyMessage',
-      '3': 14,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.MqttClientProxyMessage',
-      '9': 0,
-      '10': 'mqttClientProxyMessage'
-    },
+    {'1': 'moduleConfig', '3': 9, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig', '9': 0, '10': 'moduleConfig'},
+    {'1': 'channel', '3': 10, '4': 1, '5': 11, '6': '.meshtastic.Channel', '9': 0, '10': 'channel'},
+    {'1': 'queueStatus', '3': 11, '4': 1, '5': 11, '6': '.meshtastic.QueueStatus', '9': 0, '10': 'queueStatus'},
+    {'1': 'xmodemPacket', '3': 12, '4': 1, '5': 11, '6': '.meshtastic.XModem', '9': 0, '10': 'xmodemPacket'},
+    {'1': 'metadata', '3': 13, '4': 1, '5': 11, '6': '.meshtastic.DeviceMetadata', '9': 0, '10': 'metadata'},
+    {'1': 'mqttClientProxyMessage', '3': 14, '4': 1, '5': 11, '6': '.meshtastic.MqttClientProxyMessage', '9': 0, '10': 'mqttClientProxyMessage'},
   ],
   '8': [
     {'1': 'payload_variant'},
@@ -764,42 +577,12 @@ final $typed_data.Uint8List fromRadioDescriptor = $convert.base64Decode(
 const ToRadio$json = {
   '1': 'ToRadio',
   '2': [
-    {
-      '1': 'packet',
-      '3': 1,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.MeshPacket',
-      '9': 0,
-      '10': 'packet'
-    },
-    {
-      '1': 'want_config_id',
-      '3': 3,
-      '4': 1,
-      '5': 13,
-      '9': 0,
-      '10': 'wantConfigId'
-    },
+    {'1': 'packet', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.MeshPacket', '9': 0, '10': 'packet'},
+    {'1': 'want_config_id', '3': 3, '4': 1, '5': 13, '9': 0, '10': 'wantConfigId'},
     {'1': 'disconnect', '3': 4, '4': 1, '5': 8, '9': 0, '10': 'disconnect'},
-    {
-      '1': 'xmodemPacket',
-      '3': 5,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.XModem',
-      '9': 0,
-      '10': 'xmodemPacket'
-    },
-    {
-      '1': 'mqttClientProxyMessage',
-      '3': 6,
-      '4': 1,
-      '5': 11,
-      '6': '.meshtastic.MqttClientProxyMessage',
-      '9': 0,
-      '10': 'mqttClientProxyMessage'
-    },
+    {'1': 'xmodemPacket', '3': 5, '4': 1, '5': 11, '6': '.meshtastic.XModem', '9': 0, '10': 'xmodemPacket'},
+    {'1': 'mqttClientProxyMessage', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.MqttClientProxyMessage', '9': 0, '10': 'mqttClientProxyMessage'},
+    {'1': 'heartbeat', '3': 7, '4': 1, '5': 11, '6': '.meshtastic.Heartbeat', '9': 0, '10': 'heartbeat'},
   ],
   '8': [
     {'1': 'payload_variant'},
@@ -813,20 +596,14 @@ final $typed_data.Uint8List toRadioDescriptor = $convert.base64Decode(
     'Y3QYBCABKAhIAFIKZGlzY29ubmVjdBI4Cgx4bW9kZW1QYWNrZXQYBSABKAsyEi5tZXNodGFzdG'
     'ljLlhNb2RlbUgAUgx4bW9kZW1QYWNrZXQSXAoWbXF0dENsaWVudFByb3h5TWVzc2FnZRgGIAEo'
     'CzIiLm1lc2h0YXN0aWMuTXF0dENsaWVudFByb3h5TWVzc2FnZUgAUhZtcXR0Q2xpZW50UHJveH'
-    'lNZXNzYWdlQhEKD3BheWxvYWRfdmFyaWFudA==');
+    'lNZXNzYWdlEjUKCWhlYXJ0YmVhdBgHIAEoCzIVLm1lc2h0YXN0aWMuSGVhcnRiZWF0SABSCWhl'
+    'YXJ0YmVhdEIRCg9wYXlsb2FkX3ZhcmlhbnQ=');
 
 @$core.Deprecated('Use compressedDescriptor instead')
 const Compressed$json = {
   '1': 'Compressed',
   '2': [
-    {
-      '1': 'portnum',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.PortNum',
-      '10': 'portnum'
-    },
+    {'1': 'portnum', '3': 1, '4': 1, '5': 14, '6': '.meshtastic.PortNum', '10': 'portnum'},
     {'1': 'data', '3': 2, '4': 1, '5': 12, '10': 'data'},
   ],
 };
@@ -842,21 +619,8 @@ const NeighborInfo$json = {
   '2': [
     {'1': 'node_id', '3': 1, '4': 1, '5': 13, '10': 'nodeId'},
     {'1': 'last_sent_by_id', '3': 2, '4': 1, '5': 13, '10': 'lastSentById'},
-    {
-      '1': 'node_broadcast_interval_secs',
-      '3': 3,
-      '4': 1,
-      '5': 13,
-      '10': 'nodeBroadcastIntervalSecs'
-    },
-    {
-      '1': 'neighbors',
-      '3': 4,
-      '4': 3,
-      '5': 11,
-      '6': '.meshtastic.Neighbor',
-      '10': 'neighbors'
-    },
+    {'1': 'node_broadcast_interval_secs', '3': 3, '4': 1, '5': 13, '10': 'nodeBroadcastIntervalSecs'},
+    {'1': 'neighbors', '3': 4, '4': 3, '5': 11, '6': '.meshtastic.Neighbor', '10': 'neighbors'},
   ],
 };
 
@@ -874,13 +638,7 @@ const Neighbor$json = {
     {'1': 'node_id', '3': 1, '4': 1, '5': 13, '10': 'nodeId'},
     {'1': 'snr', '3': 2, '4': 1, '5': 2, '10': 'snr'},
     {'1': 'last_rx_time', '3': 3, '4': 1, '5': 7, '10': 'lastRxTime'},
-    {
-      '1': 'node_broadcast_interval_secs',
-      '3': 4,
-      '4': 1,
-      '5': 13,
-      '10': 'nodeBroadcastIntervalSecs'
-    },
+    {'1': 'node_broadcast_interval_secs', '3': 4, '4': 1, '5': 13, '10': 'nodeBroadcastIntervalSecs'},
   ],
 };
 
@@ -895,41 +653,15 @@ const DeviceMetadata$json = {
   '1': 'DeviceMetadata',
   '2': [
     {'1': 'firmware_version', '3': 1, '4': 1, '5': 9, '10': 'firmwareVersion'},
-    {
-      '1': 'device_state_version',
-      '3': 2,
-      '4': 1,
-      '5': 13,
-      '10': 'deviceStateVersion'
-    },
+    {'1': 'device_state_version', '3': 2, '4': 1, '5': 13, '10': 'deviceStateVersion'},
     {'1': 'canShutdown', '3': 3, '4': 1, '5': 8, '10': 'canShutdown'},
     {'1': 'hasWifi', '3': 4, '4': 1, '5': 8, '10': 'hasWifi'},
     {'1': 'hasBluetooth', '3': 5, '4': 1, '5': 8, '10': 'hasBluetooth'},
     {'1': 'hasEthernet', '3': 6, '4': 1, '5': 8, '10': 'hasEthernet'},
-    {
-      '1': 'role',
-      '3': 7,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.Config.DeviceConfig.Role',
-      '10': 'role'
-    },
+    {'1': 'role', '3': 7, '4': 1, '5': 14, '6': '.meshtastic.Config.DeviceConfig.Role', '10': 'role'},
     {'1': 'position_flags', '3': 8, '4': 1, '5': 13, '10': 'positionFlags'},
-    {
-      '1': 'hw_model',
-      '3': 9,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.HardwareModel',
-      '10': 'hwModel'
-    },
-    {
-      '1': 'hasRemoteHardware',
-      '3': 10,
-      '4': 1,
-      '5': 8,
-      '10': 'hasRemoteHardware'
-    },
+    {'1': 'hw_model', '3': 9, '4': 1, '5': 14, '6': '.meshtastic.HardwareModel', '10': 'hwModel'},
+    {'1': 'hasRemoteHardware', '3': 10, '4': 1, '5': 8, '10': 'hasRemoteHardware'},
   ],
 };
 
@@ -943,3 +675,27 @@ final $typed_data.Uint8List deviceMetadataDescriptor = $convert.base64Decode(
     'ljZUNvbmZpZy5Sb2xlUgRyb2xlEiUKDnBvc2l0aW9uX2ZsYWdzGAggASgNUg1wb3NpdGlvbkZs'
     'YWdzEjQKCGh3X21vZGVsGAkgASgOMhkubWVzaHRhc3RpYy5IYXJkd2FyZU1vZGVsUgdod01vZG'
     'VsEiwKEWhhc1JlbW90ZUhhcmR3YXJlGAogASgIUhFoYXNSZW1vdGVIYXJkd2FyZQ==');
+
+@$core.Deprecated('Use heartbeatDescriptor instead')
+const Heartbeat$json = {
+  '1': 'Heartbeat',
+};
+
+/// Descriptor for `Heartbeat`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List heartbeatDescriptor = $convert.base64Decode(
+    'CglIZWFydGJlYXQ=');
+
+@$core.Deprecated('Use nodeRemoteHardwarePinDescriptor instead')
+const NodeRemoteHardwarePin$json = {
+  '1': 'NodeRemoteHardwarePin',
+  '2': [
+    {'1': 'node_num', '3': 1, '4': 1, '5': 13, '10': 'nodeNum'},
+    {'1': 'pin', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.RemoteHardwarePin', '10': 'pin'},
+  ],
+};
+
+/// Descriptor for `NodeRemoteHardwarePin`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List nodeRemoteHardwarePinDescriptor = $convert.base64Decode(
+    'ChVOb2RlUmVtb3RlSGFyZHdhcmVQaW4SGQoIbm9kZV9udW0YASABKA1SB25vZGVOdW0SLwoDcG'
+    'luGAIgASgLMh0ubWVzaHRhc3RpYy5SZW1vdGVIYXJkd2FyZVBpblIDcGlu');
+

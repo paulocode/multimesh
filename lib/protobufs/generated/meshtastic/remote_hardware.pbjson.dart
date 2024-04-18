@@ -17,14 +17,7 @@ import 'dart:typed_data' as $typed_data;
 const HardwareMessage$json = {
   '1': 'HardwareMessage',
   '2': [
-    {
-      '1': 'type',
-      '3': 1,
-      '4': 1,
-      '5': 14,
-      '6': '.meshtastic.HardwareMessage.Type',
-      '10': 'type'
-    },
+    {'1': 'type', '3': 1, '4': 1, '5': 14, '6': '.meshtastic.HardwareMessage.Type', '10': 'type'},
     {'1': 'gpio_mask', '3': 2, '4': 1, '5': 4, '10': 'gpioMask'},
     {'1': 'gpio_value', '3': 3, '4': 1, '5': 4, '10': 'gpioValue'},
   ],
@@ -51,3 +44,4 @@ final $typed_data.Uint8List hardwareMessageDescriptor = $convert.base64Decode(
     'bHVlGAMgASgEUglncGlvVmFsdWUibAoEVHlwZRIJCgVVTlNFVBAAEg8KC1dSSVRFX0dQSU9TEA'
     'ESDwoLV0FUQ0hfR1BJT1MQAhIRCg1HUElPU19DSEFOR0VEEAMSDgoKUkVBRF9HUElPUxAEEhQK'
     'EFJFQURfR1BJT1NfUkVQTFkQBQ==');
+
