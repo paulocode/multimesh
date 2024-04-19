@@ -46,9 +46,6 @@ class _NodesScreenState extends ConsumerState<NodesScreen> {
                 itemCount: nodes.length,
                 itemBuilder: (context, index) {
                   final node = nodes[index];
-                  if (node.nodeNum == myNodeNum) {
-                    return Container();
-                  }
                   return NodeCard(
                     node: node,
                     showChevron: true,
