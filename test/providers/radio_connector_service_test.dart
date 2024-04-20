@@ -23,7 +23,7 @@ import 'radio_connector_service_test.mocks.dart';
     BleRadioConnector,
     BluetoothDevice,
     Socket,
-    TelemetryLogger,
+    BreadcrumbLogger,
   ],
 )
 void main() {
@@ -47,7 +47,7 @@ void main() {
             bleRadioConnector: bleRadioConnector,
           ),
         ),
-        telemetryLoggerProvider.overrideWith((_) => MockTelemetryLogger()),
+        breadcrumbLoggerProvider.overrideWith((_) => MockBreadcrumbLogger()),
       ],
     );
     radioConnectorService =

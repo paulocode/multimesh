@@ -22,6 +22,5 @@ const RTTTLConfig$json = {
 };
 
 /// Descriptor for `RTTTLConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List rTTTLConfigDescriptor = $convert.base64Decode(
-    'CgtSVFRUTENvbmZpZxIaCghyaW5ndG9uZRgBIAEoCVIIcmluZ3RvbmU=');
-
+final $typed_data.Uint8List rTTTLConfigDescriptor = $convert
+    .base64Decode('CgtSVFRUTENvbmZpZxIaCghyaW5ndG9uZRgBIAEoCVIIcmluZ3RvbmU=');

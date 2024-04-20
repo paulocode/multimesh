@@ -34,26 +34,31 @@ class Paxcount extends $pb.GeneratedMessage {
     return $result;
   }
   Paxcount._() : super();
-  factory Paxcount.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Paxcount.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Paxcount.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Paxcount.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Paxcount', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'Paxcount',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'wifi', $pb.PbFieldType.OU3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'ble', $pb.PbFieldType.OU3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'uptime', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Paxcount clone() => Paxcount()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Paxcount copyWith(void Function(Paxcount) updates) => super.copyWith((message) => updates(message as Paxcount)) as Paxcount;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Paxcount copyWith(void Function(Paxcount) updates) =>
+      super.copyWith((message) => updates(message as Paxcount)) as Paxcount;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -62,7 +67,8 @@ class Paxcount extends $pb.GeneratedMessage {
   Paxcount createEmptyInstance() => create();
   static $pb.PbList<Paxcount> createRepeated() => $pb.PbList<Paxcount>();
   @$core.pragma('dart2js:noInline')
-  static Paxcount getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Paxcount>(create);
+  static Paxcount getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Paxcount>(create);
   static Paxcount? _defaultInstance;
 
   ///
@@ -70,7 +76,10 @@ class Paxcount extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get wifi => $_getIZ(0);
   @$pb.TagNumber(1)
-  set wifi($core.int v) { $_setUnsignedInt32(0, v); }
+  set wifi($core.int v) {
+    $_setUnsignedInt32(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasWifi() => $_has(0);
   @$pb.TagNumber(1)
@@ -81,7 +90,10 @@ class Paxcount extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get ble => $_getIZ(1);
   @$pb.TagNumber(2)
-  set ble($core.int v) { $_setUnsignedInt32(1, v); }
+  set ble($core.int v) {
+    $_setUnsignedInt32(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasBle() => $_has(1);
   @$pb.TagNumber(2)
@@ -92,13 +104,16 @@ class Paxcount extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.int get uptime => $_getIZ(2);
   @$pb.TagNumber(3)
-  set uptime($core.int v) { $_setUnsignedInt32(2, v); }
+  set uptime($core.int v) {
+    $_setUnsignedInt32(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasUptime() => $_has(2);
   @$pb.TagNumber(3)
   void clearUptime() => clearField(3);
 }
 
-
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/telemetry_state.dart';
@@ -9,6 +10,8 @@ part 'telemetry.g.dart';
 
 @Riverpod(keepAlive: true)
 class TelemetryReceiver extends _$TelemetryReceiver {
+  final _logger = Logger();
+
   @override
   TelemetryState build(int nodeNum) {
     final sub =
@@ -19,7 +22,11 @@ class TelemetryReceiver extends _$TelemetryReceiver {
       final decoded = event.packet.decoded;
       if (decoded.portnum == PortNum.TELEMETRY_APP) {
         final telemetry = Telemetry.fromBuffer(decoded.payload);
-        state = state.copyWith(temp: telemetry.environmentMetrics.temperature);
+        _logger.i(telemetry.toString());
+        if (telemetry.hasEnvironmentMetrics()) {
+          state =
+              state.copyWith(temp: telemetry.environmentMetrics.temperature);
+        }
       }
     });
 

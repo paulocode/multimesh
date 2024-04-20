@@ -17,7 +17,14 @@ import 'dart:typed_data' as $typed_data;
 const ServiceEnvelope$json = {
   '1': 'ServiceEnvelope',
   '2': [
-    {'1': 'packet', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.MeshPacket', '10': 'packet'},
+    {
+      '1': 'packet',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.MeshPacket',
+      '10': 'packet'
+    },
     {'1': 'channel_id', '3': 2, '4': 1, '5': 9, '10': 'channelId'},
     {'1': 'gateway_id', '3': 3, '4': 1, '5': 9, '10': 'gatewayId'},
   ],
@@ -35,17 +42,63 @@ const MapReport$json = {
   '2': [
     {'1': 'long_name', '3': 1, '4': 1, '5': 9, '10': 'longName'},
     {'1': 'short_name', '3': 2, '4': 1, '5': 9, '10': 'shortName'},
-    {'1': 'role', '3': 3, '4': 1, '5': 14, '6': '.meshtastic.Config.DeviceConfig.Role', '10': 'role'},
-    {'1': 'hw_model', '3': 4, '4': 1, '5': 14, '6': '.meshtastic.HardwareModel', '10': 'hwModel'},
+    {
+      '1': 'role',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.Config.DeviceConfig.Role',
+      '10': 'role'
+    },
+    {
+      '1': 'hw_model',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.HardwareModel',
+      '10': 'hwModel'
+    },
     {'1': 'firmware_version', '3': 5, '4': 1, '5': 9, '10': 'firmwareVersion'},
-    {'1': 'region', '3': 6, '4': 1, '5': 14, '6': '.meshtastic.Config.LoRaConfig.RegionCode', '10': 'region'},
-    {'1': 'modem_preset', '3': 7, '4': 1, '5': 14, '6': '.meshtastic.Config.LoRaConfig.ModemPreset', '10': 'modemPreset'},
-    {'1': 'has_default_channel', '3': 8, '4': 1, '5': 8, '10': 'hasDefaultChannel'},
+    {
+      '1': 'region',
+      '3': 6,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.Config.LoRaConfig.RegionCode',
+      '10': 'region'
+    },
+    {
+      '1': 'modem_preset',
+      '3': 7,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.Config.LoRaConfig.ModemPreset',
+      '10': 'modemPreset'
+    },
+    {
+      '1': 'has_default_channel',
+      '3': 8,
+      '4': 1,
+      '5': 8,
+      '10': 'hasDefaultChannel'
+    },
     {'1': 'latitude_i', '3': 9, '4': 1, '5': 15, '10': 'latitudeI'},
     {'1': 'longitude_i', '3': 10, '4': 1, '5': 15, '10': 'longitudeI'},
     {'1': 'altitude', '3': 11, '4': 1, '5': 5, '10': 'altitude'},
-    {'1': 'position_precision', '3': 12, '4': 1, '5': 13, '10': 'positionPrecision'},
-    {'1': 'num_online_local_nodes', '3': 13, '4': 1, '5': 13, '10': 'numOnlineLocalNodes'},
+    {
+      '1': 'position_precision',
+      '3': 12,
+      '4': 1,
+      '5': 13,
+      '10': 'positionPrecision'
+    },
+    {
+      '1': 'num_online_local_nodes',
+      '3': 13,
+      '4': 1,
+      '5': 13,
+      '10': 'numOnlineLocalNodes'
+    },
   ],
 };
 
@@ -63,4 +116,3 @@ final $typed_data.Uint8List mapReportDescriptor = $convert.base64Decode(
     'VSCGFsdGl0dWRlEi0KEnBvc2l0aW9uX3ByZWNpc2lvbhgMIAEoDVIRcG9zaXRpb25QcmVjaXNp'
     'b24SMwoWbnVtX29ubGluZV9sb2NhbF9ub2RlcxgNIAEoDVITbnVtT25saW5lTG9jYWxOb2Rlcw'
     '==');
-

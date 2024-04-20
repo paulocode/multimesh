@@ -51,37 +51,49 @@ class PositionLite extends $pb.GeneratedMessage {
     return $result;
   }
   PositionLite._() : super();
-  factory PositionLite.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PositionLite.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory PositionLite.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PositionLite.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PositionLite', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PositionLite',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'latitudeI', $pb.PbFieldType.OSF3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'longitudeI', $pb.PbFieldType.OSF3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'altitude', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'time', $pb.PbFieldType.OF3)
-    ..e<$6.Position_LocSource>(5, _omitFieldNames ? '' : 'locationSource', $pb.PbFieldType.OE, defaultOrMaker: $6.Position_LocSource.LOC_UNSET, valueOf: $6.Position_LocSource.valueOf, enumValues: $6.Position_LocSource.values)
-    ..hasRequiredFields = false
-  ;
+    ..e<$6.Position_LocSource>(
+        5, _omitFieldNames ? '' : 'locationSource', $pb.PbFieldType.OE,
+        defaultOrMaker: $6.Position_LocSource.LOC_UNSET,
+        valueOf: $6.Position_LocSource.valueOf,
+        enumValues: $6.Position_LocSource.values)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   PositionLite clone() => PositionLite()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PositionLite copyWith(void Function(PositionLite) updates) => super.copyWith((message) => updates(message as PositionLite)) as PositionLite;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PositionLite copyWith(void Function(PositionLite) updates) =>
+      super.copyWith((message) => updates(message as PositionLite))
+          as PositionLite;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static PositionLite create() => PositionLite._();
   PositionLite createEmptyInstance() => create();
-  static $pb.PbList<PositionLite> createRepeated() => $pb.PbList<PositionLite>();
+  static $pb.PbList<PositionLite> createRepeated() =>
+      $pb.PbList<PositionLite>();
   @$core.pragma('dart2js:noInline')
-  static PositionLite getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PositionLite>(create);
+  static PositionLite getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PositionLite>(create);
   static PositionLite? _defaultInstance;
 
   ///
@@ -90,7 +102,10 @@ class PositionLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get latitudeI => $_getIZ(0);
   @$pb.TagNumber(1)
-  set latitudeI($core.int v) { $_setSignedInt32(0, v); }
+  set latitudeI($core.int v) {
+    $_setSignedInt32(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasLatitudeI() => $_has(0);
   @$pb.TagNumber(1)
@@ -101,7 +116,10 @@ class PositionLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get longitudeI => $_getIZ(1);
   @$pb.TagNumber(2)
-  set longitudeI($core.int v) { $_setSignedInt32(1, v); }
+  set longitudeI($core.int v) {
+    $_setSignedInt32(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasLongitudeI() => $_has(1);
   @$pb.TagNumber(2)
@@ -112,7 +130,10 @@ class PositionLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.int get altitude => $_getIZ(2);
   @$pb.TagNumber(3)
-  set altitude($core.int v) { $_setSignedInt32(2, v); }
+  set altitude($core.int v) {
+    $_setSignedInt32(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasAltitude() => $_has(2);
   @$pb.TagNumber(3)
@@ -127,7 +148,10 @@ class PositionLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.int get time => $_getIZ(3);
   @$pb.TagNumber(4)
-  set time($core.int v) { $_setUnsignedInt32(3, v); }
+  set time($core.int v) {
+    $_setUnsignedInt32(3, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasTime() => $_has(3);
   @$pb.TagNumber(4)
@@ -138,7 +162,10 @@ class PositionLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $6.Position_LocSource get locationSource => $_getN(4);
   @$pb.TagNumber(5)
-  set locationSource($6.Position_LocSource v) { setField(5, v); }
+  set locationSource($6.Position_LocSource v) {
+    setField(5, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasLocationSource() => $_has(4);
   @$pb.TagNumber(5)
@@ -192,42 +219,52 @@ class NodeInfoLite extends $pb.GeneratedMessage {
     return $result;
   }
   NodeInfoLite._() : super();
-  factory NodeInfoLite.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory NodeInfoLite.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory NodeInfoLite.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory NodeInfoLite.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'NodeInfoLite', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'NodeInfoLite',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'num', $pb.PbFieldType.OU3)
     ..aOM<$6.User>(2, _omitFieldNames ? '' : 'user', subBuilder: $6.User.create)
-    ..aOM<PositionLite>(3, _omitFieldNames ? '' : 'position', subBuilder: PositionLite.create)
+    ..aOM<PositionLite>(3, _omitFieldNames ? '' : 'position',
+        subBuilder: PositionLite.create)
     ..a<$core.double>(4, _omitFieldNames ? '' : 'snr', $pb.PbFieldType.OF)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'lastHeard', $pb.PbFieldType.OF3)
-    ..aOM<$0.DeviceMetrics>(6, _omitFieldNames ? '' : 'deviceMetrics', subBuilder: $0.DeviceMetrics.create)
+    ..aOM<$0.DeviceMetrics>(6, _omitFieldNames ? '' : 'deviceMetrics',
+        subBuilder: $0.DeviceMetrics.create)
     ..a<$core.int>(7, _omitFieldNames ? '' : 'channel', $pb.PbFieldType.OU3)
     ..aOB(8, _omitFieldNames ? '' : 'viaMqtt')
     ..a<$core.int>(9, _omitFieldNames ? '' : 'hopsAway', $pb.PbFieldType.OU3)
     ..aOB(10, _omitFieldNames ? '' : 'isFavorite')
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   NodeInfoLite clone() => NodeInfoLite()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  NodeInfoLite copyWith(void Function(NodeInfoLite) updates) => super.copyWith((message) => updates(message as NodeInfoLite)) as NodeInfoLite;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  NodeInfoLite copyWith(void Function(NodeInfoLite) updates) =>
+      super.copyWith((message) => updates(message as NodeInfoLite))
+          as NodeInfoLite;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static NodeInfoLite create() => NodeInfoLite._();
   NodeInfoLite createEmptyInstance() => create();
-  static $pb.PbList<NodeInfoLite> createRepeated() => $pb.PbList<NodeInfoLite>();
+  static $pb.PbList<NodeInfoLite> createRepeated() =>
+      $pb.PbList<NodeInfoLite>();
   @$core.pragma('dart2js:noInline')
-  static NodeInfoLite getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NodeInfoLite>(create);
+  static NodeInfoLite getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<NodeInfoLite>(create);
   static NodeInfoLite? _defaultInstance;
 
   ///
@@ -235,7 +272,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get num => $_getIZ(0);
   @$pb.TagNumber(1)
-  set num($core.int v) { $_setUnsignedInt32(0, v); }
+  set num($core.int v) {
+    $_setUnsignedInt32(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasNum() => $_has(0);
   @$pb.TagNumber(1)
@@ -246,7 +286,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $6.User get user => $_getN(1);
   @$pb.TagNumber(2)
-  set user($6.User v) { setField(2, v); }
+  set user($6.User v) {
+    setField(2, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasUser() => $_has(1);
   @$pb.TagNumber(2)
@@ -260,7 +303,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   PositionLite get position => $_getN(2);
   @$pb.TagNumber(3)
-  set position(PositionLite v) { setField(3, v); }
+  set position(PositionLite v) {
+    setField(3, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasPosition() => $_has(2);
   @$pb.TagNumber(3)
@@ -274,7 +320,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.double get snr => $_getN(3);
   @$pb.TagNumber(4)
-  set snr($core.double v) { $_setFloat(3, v); }
+  set snr($core.double v) {
+    $_setFloat(3, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasSnr() => $_has(3);
   @$pb.TagNumber(4)
@@ -285,7 +334,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.int get lastHeard => $_getIZ(4);
   @$pb.TagNumber(5)
-  set lastHeard($core.int v) { $_setUnsignedInt32(4, v); }
+  set lastHeard($core.int v) {
+    $_setUnsignedInt32(4, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasLastHeard() => $_has(4);
   @$pb.TagNumber(5)
@@ -296,7 +348,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $0.DeviceMetrics get deviceMetrics => $_getN(5);
   @$pb.TagNumber(6)
-  set deviceMetrics($0.DeviceMetrics v) { setField(6, v); }
+  set deviceMetrics($0.DeviceMetrics v) {
+    setField(6, v);
+  }
+
   @$pb.TagNumber(6)
   $core.bool hasDeviceMetrics() => $_has(5);
   @$pb.TagNumber(6)
@@ -309,7 +364,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $core.int get channel => $_getIZ(6);
   @$pb.TagNumber(7)
-  set channel($core.int v) { $_setUnsignedInt32(6, v); }
+  set channel($core.int v) {
+    $_setUnsignedInt32(6, v);
+  }
+
   @$pb.TagNumber(7)
   $core.bool hasChannel() => $_has(6);
   @$pb.TagNumber(7)
@@ -320,7 +378,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.bool get viaMqtt => $_getBF(7);
   @$pb.TagNumber(8)
-  set viaMqtt($core.bool v) { $_setBool(7, v); }
+  set viaMqtt($core.bool v) {
+    $_setBool(7, v);
+  }
+
   @$pb.TagNumber(8)
   $core.bool hasViaMqtt() => $_has(7);
   @$pb.TagNumber(8)
@@ -331,7 +392,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.int get hopsAway => $_getIZ(8);
   @$pb.TagNumber(9)
-  set hopsAway($core.int v) { $_setUnsignedInt32(8, v); }
+  set hopsAway($core.int v) {
+    $_setUnsignedInt32(8, v);
+  }
+
   @$pb.TagNumber(9)
   $core.bool hasHopsAway() => $_has(8);
   @$pb.TagNumber(9)
@@ -343,7 +407,10 @@ class NodeInfoLite extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.bool get isFavorite => $_getBF(9);
   @$pb.TagNumber(10)
-  set isFavorite($core.bool v) { $_setBool(9, v); }
+  set isFavorite($core.bool v) {
+    $_setBool(9, v);
+  }
+
   @$pb.TagNumber(10)
   $core.bool hasIsFavorite() => $_has(9);
   @$pb.TagNumber(10)
@@ -363,8 +430,7 @@ class DeviceState extends $pb.GeneratedMessage {
     $core.Iterable<$6.MeshPacket>? receiveQueue,
     $6.MeshPacket? rxTextMessage,
     $core.int? version,
-  @$core.Deprecated('This field is deprecated.')
-    $core.bool? noSave,
+    @$core.Deprecated('This field is deprecated.') $core.bool? noSave,
     $core.bool? didGpsReset,
     $6.MeshPacket? rxWaypoint,
     $core.Iterable<$6.NodeRemoteHardwarePin>? nodeRemoteHardwarePins,
@@ -405,33 +471,49 @@ class DeviceState extends $pb.GeneratedMessage {
     return $result;
   }
   DeviceState._() : super();
-  factory DeviceState.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeviceState.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory DeviceState.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeviceState.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeviceState', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
-    ..aOM<$6.MyNodeInfo>(2, _omitFieldNames ? '' : 'myNode', subBuilder: $6.MyNodeInfo.create)
-    ..aOM<$6.User>(3, _omitFieldNames ? '' : 'owner', subBuilder: $6.User.create)
-    ..pc<$6.MeshPacket>(5, _omitFieldNames ? '' : 'receiveQueue', $pb.PbFieldType.PM, subBuilder: $6.MeshPacket.create)
-    ..aOM<$6.MeshPacket>(7, _omitFieldNames ? '' : 'rxTextMessage', subBuilder: $6.MeshPacket.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeviceState',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
+    ..aOM<$6.MyNodeInfo>(2, _omitFieldNames ? '' : 'myNode',
+        subBuilder: $6.MyNodeInfo.create)
+    ..aOM<$6.User>(3, _omitFieldNames ? '' : 'owner',
+        subBuilder: $6.User.create)
+    ..pc<$6.MeshPacket>(
+        5, _omitFieldNames ? '' : 'receiveQueue', $pb.PbFieldType.PM,
+        subBuilder: $6.MeshPacket.create)
+    ..aOM<$6.MeshPacket>(7, _omitFieldNames ? '' : 'rxTextMessage',
+        subBuilder: $6.MeshPacket.create)
     ..a<$core.int>(8, _omitFieldNames ? '' : 'version', $pb.PbFieldType.OU3)
     ..aOB(9, _omitFieldNames ? '' : 'noSave')
     ..aOB(11, _omitFieldNames ? '' : 'didGpsReset')
-    ..aOM<$6.MeshPacket>(12, _omitFieldNames ? '' : 'rxWaypoint', subBuilder: $6.MeshPacket.create)
-    ..pc<$6.NodeRemoteHardwarePin>(13, _omitFieldNames ? '' : 'nodeRemoteHardwarePins', $pb.PbFieldType.PM, subBuilder: $6.NodeRemoteHardwarePin.create)
-    ..pc<NodeInfoLite>(14, _omitFieldNames ? '' : 'nodeDbLite', $pb.PbFieldType.PM, subBuilder: NodeInfoLite.create)
-    ..hasRequiredFields = false
-  ;
+    ..aOM<$6.MeshPacket>(12, _omitFieldNames ? '' : 'rxWaypoint',
+        subBuilder: $6.MeshPacket.create)
+    ..pc<$6.NodeRemoteHardwarePin>(
+        13, _omitFieldNames ? '' : 'nodeRemoteHardwarePins', $pb.PbFieldType.PM,
+        subBuilder: $6.NodeRemoteHardwarePin.create)
+    ..pc<NodeInfoLite>(
+        14, _omitFieldNames ? '' : 'nodeDbLite', $pb.PbFieldType.PM,
+        subBuilder: NodeInfoLite.create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   DeviceState clone() => DeviceState()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  DeviceState copyWith(void Function(DeviceState) updates) => super.copyWith((message) => updates(message as DeviceState)) as DeviceState;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  DeviceState copyWith(void Function(DeviceState) updates) =>
+      super.copyWith((message) => updates(message as DeviceState))
+          as DeviceState;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -440,7 +522,8 @@ class DeviceState extends $pb.GeneratedMessage {
   DeviceState createEmptyInstance() => create();
   static $pb.PbList<DeviceState> createRepeated() => $pb.PbList<DeviceState>();
   @$core.pragma('dart2js:noInline')
-  static DeviceState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeviceState>(create);
+  static DeviceState getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeviceState>(create);
   static DeviceState? _defaultInstance;
 
   ///
@@ -448,7 +531,10 @@ class DeviceState extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $6.MyNodeInfo get myNode => $_getN(0);
   @$pb.TagNumber(2)
-  set myNode($6.MyNodeInfo v) { setField(2, v); }
+  set myNode($6.MyNodeInfo v) {
+    setField(2, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasMyNode() => $_has(0);
   @$pb.TagNumber(2)
@@ -461,7 +547,10 @@ class DeviceState extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $6.User get owner => $_getN(1);
   @$pb.TagNumber(3)
-  set owner($6.User v) { setField(3, v); }
+  set owner($6.User v) {
+    setField(3, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasOwner() => $_has(1);
   @$pb.TagNumber(3)
@@ -481,7 +570,10 @@ class DeviceState extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $6.MeshPacket get rxTextMessage => $_getN(3);
   @$pb.TagNumber(7)
-  set rxTextMessage($6.MeshPacket v) { setField(7, v); }
+  set rxTextMessage($6.MeshPacket v) {
+    setField(7, v);
+  }
+
   @$pb.TagNumber(7)
   $core.bool hasRxTextMessage() => $_has(3);
   @$pb.TagNumber(7)
@@ -496,7 +588,10 @@ class DeviceState extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.int get version => $_getIZ(4);
   @$pb.TagNumber(8)
-  set version($core.int v) { $_setUnsignedInt32(4, v); }
+  set version($core.int v) {
+    $_setUnsignedInt32(4, v);
+  }
+
   @$pb.TagNumber(8)
   $core.bool hasVersion() => $_has(4);
   @$pb.TagNumber(8)
@@ -511,7 +606,10 @@ class DeviceState extends $pb.GeneratedMessage {
   $core.bool get noSave => $_getBF(5);
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(9)
-  set noSave($core.bool v) { $_setBool(5, v); }
+  set noSave($core.bool v) {
+    $_setBool(5, v);
+  }
+
   @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(9)
   $core.bool hasNoSave() => $_has(5);
@@ -524,7 +622,10 @@ class DeviceState extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.bool get didGpsReset => $_getBF(6);
   @$pb.TagNumber(11)
-  set didGpsReset($core.bool v) { $_setBool(6, v); }
+  set didGpsReset($core.bool v) {
+    $_setBool(6, v);
+  }
+
   @$pb.TagNumber(11)
   $core.bool hasDidGpsReset() => $_has(6);
   @$pb.TagNumber(11)
@@ -537,7 +638,10 @@ class DeviceState extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $6.MeshPacket get rxWaypoint => $_getN(7);
   @$pb.TagNumber(12)
-  set rxWaypoint($6.MeshPacket v) { setField(12, v); }
+  set rxWaypoint($6.MeshPacket v) {
+    setField(12, v);
+  }
+
   @$pb.TagNumber(12)
   $core.bool hasRxWaypoint() => $_has(7);
   @$pb.TagNumber(12)
@@ -548,7 +652,8 @@ class DeviceState extends $pb.GeneratedMessage {
   ///
   ///  The mesh's nodes with their available gpio pins for RemoteHardware module
   @$pb.TagNumber(13)
-  $core.List<$6.NodeRemoteHardwarePin> get nodeRemoteHardwarePins => $_getList(8);
+  $core.List<$6.NodeRemoteHardwarePin> get nodeRemoteHardwarePins =>
+      $_getList(8);
 
   ///
   ///  New lite version of NodeDB to decrease memory footprint
@@ -573,25 +678,32 @@ class ChannelFile extends $pb.GeneratedMessage {
     return $result;
   }
   ChannelFile._() : super();
-  factory ChannelFile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ChannelFile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ChannelFile.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ChannelFile.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChannelFile', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
-    ..pc<$3.Channel>(1, _omitFieldNames ? '' : 'channels', $pb.PbFieldType.PM, subBuilder: $3.Channel.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ChannelFile',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
+    ..pc<$3.Channel>(1, _omitFieldNames ? '' : 'channels', $pb.PbFieldType.PM,
+        subBuilder: $3.Channel.create)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'version', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   ChannelFile clone() => ChannelFile()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ChannelFile copyWith(void Function(ChannelFile) updates) => super.copyWith((message) => updates(message as ChannelFile)) as ChannelFile;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ChannelFile copyWith(void Function(ChannelFile) updates) =>
+      super.copyWith((message) => updates(message as ChannelFile))
+          as ChannelFile;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -600,7 +712,8 @@ class ChannelFile extends $pb.GeneratedMessage {
   ChannelFile createEmptyInstance() => create();
   static $pb.PbList<ChannelFile> createRepeated() => $pb.PbList<ChannelFile>();
   @$core.pragma('dart2js:noInline')
-  static ChannelFile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelFile>(create);
+  static ChannelFile getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ChannelFile>(create);
   static ChannelFile? _defaultInstance;
 
   ///
@@ -615,7 +728,10 @@ class ChannelFile extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get version => $_getIZ(1);
   @$pb.TagNumber(2)
-  set version($core.int v) { $_setUnsignedInt32(1, v); }
+  set version($core.int v) {
+    $_setUnsignedInt32(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasVersion() => $_has(1);
   @$pb.TagNumber(2)
@@ -664,31 +780,46 @@ class OEMStore extends $pb.GeneratedMessage {
     return $result;
   }
   OEMStore._() : super();
-  factory OEMStore.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory OEMStore.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory OEMStore.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory OEMStore.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OEMStore', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'oemIconWidth', $pb.PbFieldType.OU3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'oemIconHeight', $pb.PbFieldType.OU3)
-    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'oemIconBits', $pb.PbFieldType.OY)
-    ..e<ScreenFonts>(4, _omitFieldNames ? '' : 'oemFont', $pb.PbFieldType.OE, defaultOrMaker: ScreenFonts.FONT_SMALL, valueOf: ScreenFonts.valueOf, enumValues: ScreenFonts.values)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'OEMStore',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
+    ..a<$core.int>(
+        1, _omitFieldNames ? '' : 'oemIconWidth', $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        2, _omitFieldNames ? '' : 'oemIconHeight', $pb.PbFieldType.OU3)
+    ..a<$core.List<$core.int>>(
+        3, _omitFieldNames ? '' : 'oemIconBits', $pb.PbFieldType.OY)
+    ..e<ScreenFonts>(4, _omitFieldNames ? '' : 'oemFont', $pb.PbFieldType.OE,
+        defaultOrMaker: ScreenFonts.FONT_SMALL,
+        valueOf: ScreenFonts.valueOf,
+        enumValues: ScreenFonts.values)
     ..aOS(5, _omitFieldNames ? '' : 'oemText')
-    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'oemAesKey', $pb.PbFieldType.OY)
-    ..aOM<$8.LocalConfig>(7, _omitFieldNames ? '' : 'oemLocalConfig', subBuilder: $8.LocalConfig.create)
-    ..aOM<$8.LocalModuleConfig>(8, _omitFieldNames ? '' : 'oemLocalModuleConfig', subBuilder: $8.LocalModuleConfig.create)
-    ..hasRequiredFields = false
-  ;
+    ..a<$core.List<$core.int>>(
+        6, _omitFieldNames ? '' : 'oemAesKey', $pb.PbFieldType.OY)
+    ..aOM<$8.LocalConfig>(7, _omitFieldNames ? '' : 'oemLocalConfig',
+        subBuilder: $8.LocalConfig.create)
+    ..aOM<$8.LocalModuleConfig>(
+        8, _omitFieldNames ? '' : 'oemLocalModuleConfig',
+        subBuilder: $8.LocalModuleConfig.create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   OEMStore clone() => OEMStore()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  OEMStore copyWith(void Function(OEMStore) updates) => super.copyWith((message) => updates(message as OEMStore)) as OEMStore;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  OEMStore copyWith(void Function(OEMStore) updates) =>
+      super.copyWith((message) => updates(message as OEMStore)) as OEMStore;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -697,7 +828,8 @@ class OEMStore extends $pb.GeneratedMessage {
   OEMStore createEmptyInstance() => create();
   static $pb.PbList<OEMStore> createRepeated() => $pb.PbList<OEMStore>();
   @$core.pragma('dart2js:noInline')
-  static OEMStore getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OEMStore>(create);
+  static OEMStore getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OEMStore>(create);
   static OEMStore? _defaultInstance;
 
   ///
@@ -705,7 +837,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get oemIconWidth => $_getIZ(0);
   @$pb.TagNumber(1)
-  set oemIconWidth($core.int v) { $_setUnsignedInt32(0, v); }
+  set oemIconWidth($core.int v) {
+    $_setUnsignedInt32(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasOemIconWidth() => $_has(0);
   @$pb.TagNumber(1)
@@ -716,7 +851,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get oemIconHeight => $_getIZ(1);
   @$pb.TagNumber(2)
-  set oemIconHeight($core.int v) { $_setUnsignedInt32(1, v); }
+  set oemIconHeight($core.int v) {
+    $_setUnsignedInt32(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasOemIconHeight() => $_has(1);
   @$pb.TagNumber(2)
@@ -727,7 +865,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.List<$core.int> get oemIconBits => $_getN(2);
   @$pb.TagNumber(3)
-  set oemIconBits($core.List<$core.int> v) { $_setBytes(2, v); }
+  set oemIconBits($core.List<$core.int> v) {
+    $_setBytes(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasOemIconBits() => $_has(2);
   @$pb.TagNumber(3)
@@ -738,7 +879,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   ScreenFonts get oemFont => $_getN(3);
   @$pb.TagNumber(4)
-  set oemFont(ScreenFonts v) { setField(4, v); }
+  set oemFont(ScreenFonts v) {
+    setField(4, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasOemFont() => $_has(3);
   @$pb.TagNumber(4)
@@ -749,7 +893,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.String get oemText => $_getSZ(4);
   @$pb.TagNumber(5)
-  set oemText($core.String v) { $_setString(4, v); }
+  set oemText($core.String v) {
+    $_setString(4, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasOemText() => $_has(4);
   @$pb.TagNumber(5)
@@ -760,7 +907,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $core.List<$core.int> get oemAesKey => $_getN(5);
   @$pb.TagNumber(6)
-  set oemAesKey($core.List<$core.int> v) { $_setBytes(5, v); }
+  set oemAesKey($core.List<$core.int> v) {
+    $_setBytes(5, v);
+  }
+
   @$pb.TagNumber(6)
   $core.bool hasOemAesKey() => $_has(5);
   @$pb.TagNumber(6)
@@ -771,7 +921,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $8.LocalConfig get oemLocalConfig => $_getN(6);
   @$pb.TagNumber(7)
-  set oemLocalConfig($8.LocalConfig v) { setField(7, v); }
+  set oemLocalConfig($8.LocalConfig v) {
+    setField(7, v);
+  }
+
   @$pb.TagNumber(7)
   $core.bool hasOemLocalConfig() => $_has(6);
   @$pb.TagNumber(7)
@@ -784,7 +937,10 @@ class OEMStore extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $8.LocalModuleConfig get oemLocalModuleConfig => $_getN(7);
   @$pb.TagNumber(8)
-  set oemLocalModuleConfig($8.LocalModuleConfig v) { setField(8, v); }
+  set oemLocalModuleConfig($8.LocalModuleConfig v) {
+    setField(8, v);
+  }
+
   @$pb.TagNumber(8)
   $core.bool hasOemLocalModuleConfig() => $_has(7);
   @$pb.TagNumber(8)
@@ -793,6 +949,6 @@ class OEMStore extends $pb.GeneratedMessage {
   $8.LocalModuleConfig ensureOemLocalModuleConfig() => $_ensure(7);
 }
 
-
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

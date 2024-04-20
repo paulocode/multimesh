@@ -16,14 +16,20 @@ import 'package:protobuf/protobuf.dart' as $pb;
 ///
 ///  TODO: REPLACE
 class HardwareMessage_Type extends $pb.ProtobufEnum {
-  static const HardwareMessage_Type UNSET = HardwareMessage_Type._(0, _omitEnumNames ? '' : 'UNSET');
-  static const HardwareMessage_Type WRITE_GPIOS = HardwareMessage_Type._(1, _omitEnumNames ? '' : 'WRITE_GPIOS');
-  static const HardwareMessage_Type WATCH_GPIOS = HardwareMessage_Type._(2, _omitEnumNames ? '' : 'WATCH_GPIOS');
-  static const HardwareMessage_Type GPIOS_CHANGED = HardwareMessage_Type._(3, _omitEnumNames ? '' : 'GPIOS_CHANGED');
-  static const HardwareMessage_Type READ_GPIOS = HardwareMessage_Type._(4, _omitEnumNames ? '' : 'READ_GPIOS');
-  static const HardwareMessage_Type READ_GPIOS_REPLY = HardwareMessage_Type._(5, _omitEnumNames ? '' : 'READ_GPIOS_REPLY');
+  static const HardwareMessage_Type UNSET =
+      HardwareMessage_Type._(0, _omitEnumNames ? '' : 'UNSET');
+  static const HardwareMessage_Type WRITE_GPIOS =
+      HardwareMessage_Type._(1, _omitEnumNames ? '' : 'WRITE_GPIOS');
+  static const HardwareMessage_Type WATCH_GPIOS =
+      HardwareMessage_Type._(2, _omitEnumNames ? '' : 'WATCH_GPIOS');
+  static const HardwareMessage_Type GPIOS_CHANGED =
+      HardwareMessage_Type._(3, _omitEnumNames ? '' : 'GPIOS_CHANGED');
+  static const HardwareMessage_Type READ_GPIOS =
+      HardwareMessage_Type._(4, _omitEnumNames ? '' : 'READ_GPIOS');
+  static const HardwareMessage_Type READ_GPIOS_REPLY =
+      HardwareMessage_Type._(5, _omitEnumNames ? '' : 'READ_GPIOS_REPLY');
 
-  static const $core.List<HardwareMessage_Type> values = <HardwareMessage_Type> [
+  static const $core.List<HardwareMessage_Type> values = <HardwareMessage_Type>[
     UNSET,
     WRITE_GPIOS,
     WATCH_GPIOS,
@@ -32,11 +38,11 @@ class HardwareMessage_Type extends $pb.ProtobufEnum {
     READ_GPIOS_REPLY,
   ];
 
-  static final $core.Map<$core.int, HardwareMessage_Type> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, HardwareMessage_Type> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static HardwareMessage_Type? valueOf($core.int value) => _byValue[value];
 
   const HardwareMessage_Type._($core.int v, $core.String n) : super(v, n);
 }
-
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');

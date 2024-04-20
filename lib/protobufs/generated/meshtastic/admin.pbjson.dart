@@ -17,46 +17,341 @@ import 'dart:typed_data' as $typed_data;
 const AdminMessage$json = {
   '1': 'AdminMessage',
   '2': [
-    {'1': 'get_channel_request', '3': 1, '4': 1, '5': 13, '9': 0, '10': 'getChannelRequest'},
-    {'1': 'get_channel_response', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.Channel', '9': 0, '10': 'getChannelResponse'},
-    {'1': 'get_owner_request', '3': 3, '4': 1, '5': 8, '9': 0, '10': 'getOwnerRequest'},
-    {'1': 'get_owner_response', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.User', '9': 0, '10': 'getOwnerResponse'},
-    {'1': 'get_config_request', '3': 5, '4': 1, '5': 14, '6': '.meshtastic.AdminMessage.ConfigType', '9': 0, '10': 'getConfigRequest'},
-    {'1': 'get_config_response', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.Config', '9': 0, '10': 'getConfigResponse'},
-    {'1': 'get_module_config_request', '3': 7, '4': 1, '5': 14, '6': '.meshtastic.AdminMessage.ModuleConfigType', '9': 0, '10': 'getModuleConfigRequest'},
-    {'1': 'get_module_config_response', '3': 8, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig', '9': 0, '10': 'getModuleConfigResponse'},
-    {'1': 'get_canned_message_module_messages_request', '3': 10, '4': 1, '5': 8, '9': 0, '10': 'getCannedMessageModuleMessagesRequest'},
-    {'1': 'get_canned_message_module_messages_response', '3': 11, '4': 1, '5': 9, '9': 0, '10': 'getCannedMessageModuleMessagesResponse'},
-    {'1': 'get_device_metadata_request', '3': 12, '4': 1, '5': 8, '9': 0, '10': 'getDeviceMetadataRequest'},
-    {'1': 'get_device_metadata_response', '3': 13, '4': 1, '5': 11, '6': '.meshtastic.DeviceMetadata', '9': 0, '10': 'getDeviceMetadataResponse'},
-    {'1': 'get_ringtone_request', '3': 14, '4': 1, '5': 8, '9': 0, '10': 'getRingtoneRequest'},
-    {'1': 'get_ringtone_response', '3': 15, '4': 1, '5': 9, '9': 0, '10': 'getRingtoneResponse'},
-    {'1': 'get_device_connection_status_request', '3': 16, '4': 1, '5': 8, '9': 0, '10': 'getDeviceConnectionStatusRequest'},
-    {'1': 'get_device_connection_status_response', '3': 17, '4': 1, '5': 11, '6': '.meshtastic.DeviceConnectionStatus', '9': 0, '10': 'getDeviceConnectionStatusResponse'},
-    {'1': 'set_ham_mode', '3': 18, '4': 1, '5': 11, '6': '.meshtastic.HamParameters', '9': 0, '10': 'setHamMode'},
-    {'1': 'get_node_remote_hardware_pins_request', '3': 19, '4': 1, '5': 8, '9': 0, '10': 'getNodeRemoteHardwarePinsRequest'},
-    {'1': 'get_node_remote_hardware_pins_response', '3': 20, '4': 1, '5': 11, '6': '.meshtastic.NodeRemoteHardwarePinsResponse', '9': 0, '10': 'getNodeRemoteHardwarePinsResponse'},
-    {'1': 'enter_dfu_mode_request', '3': 21, '4': 1, '5': 8, '9': 0, '10': 'enterDfuModeRequest'},
-    {'1': 'delete_file_request', '3': 22, '4': 1, '5': 9, '9': 0, '10': 'deleteFileRequest'},
-    {'1': 'set_owner', '3': 32, '4': 1, '5': 11, '6': '.meshtastic.User', '9': 0, '10': 'setOwner'},
-    {'1': 'set_channel', '3': 33, '4': 1, '5': 11, '6': '.meshtastic.Channel', '9': 0, '10': 'setChannel'},
-    {'1': 'set_config', '3': 34, '4': 1, '5': 11, '6': '.meshtastic.Config', '9': 0, '10': 'setConfig'},
-    {'1': 'set_module_config', '3': 35, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig', '9': 0, '10': 'setModuleConfig'},
-    {'1': 'set_canned_message_module_messages', '3': 36, '4': 1, '5': 9, '9': 0, '10': 'setCannedMessageModuleMessages'},
-    {'1': 'set_ringtone_message', '3': 37, '4': 1, '5': 9, '9': 0, '10': 'setRingtoneMessage'},
-    {'1': 'remove_by_nodenum', '3': 38, '4': 1, '5': 13, '9': 0, '10': 'removeByNodenum'},
-    {'1': 'set_favorite_node', '3': 39, '4': 1, '5': 13, '9': 0, '10': 'setFavoriteNode'},
-    {'1': 'remove_favorite_node', '3': 40, '4': 1, '5': 13, '9': 0, '10': 'removeFavoriteNode'},
-    {'1': 'set_fixed_position', '3': 41, '4': 1, '5': 11, '6': '.meshtastic.Position', '9': 0, '10': 'setFixedPosition'},
-    {'1': 'remove_fixed_position', '3': 42, '4': 1, '5': 8, '9': 0, '10': 'removeFixedPosition'},
-    {'1': 'begin_edit_settings', '3': 64, '4': 1, '5': 8, '9': 0, '10': 'beginEditSettings'},
-    {'1': 'commit_edit_settings', '3': 65, '4': 1, '5': 8, '9': 0, '10': 'commitEditSettings'},
-    {'1': 'reboot_ota_seconds', '3': 95, '4': 1, '5': 5, '9': 0, '10': 'rebootOtaSeconds'},
-    {'1': 'exit_simulator', '3': 96, '4': 1, '5': 8, '9': 0, '10': 'exitSimulator'},
-    {'1': 'reboot_seconds', '3': 97, '4': 1, '5': 5, '9': 0, '10': 'rebootSeconds'},
-    {'1': 'shutdown_seconds', '3': 98, '4': 1, '5': 5, '9': 0, '10': 'shutdownSeconds'},
-    {'1': 'factory_reset', '3': 99, '4': 1, '5': 5, '9': 0, '10': 'factoryReset'},
-    {'1': 'nodedb_reset', '3': 100, '4': 1, '5': 5, '9': 0, '10': 'nodedbReset'},
+    {
+      '1': 'get_channel_request',
+      '3': 1,
+      '4': 1,
+      '5': 13,
+      '9': 0,
+      '10': 'getChannelRequest'
+    },
+    {
+      '1': 'get_channel_response',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Channel',
+      '9': 0,
+      '10': 'getChannelResponse'
+    },
+    {
+      '1': 'get_owner_request',
+      '3': 3,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'getOwnerRequest'
+    },
+    {
+      '1': 'get_owner_response',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.User',
+      '9': 0,
+      '10': 'getOwnerResponse'
+    },
+    {
+      '1': 'get_config_request',
+      '3': 5,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.AdminMessage.ConfigType',
+      '9': 0,
+      '10': 'getConfigRequest'
+    },
+    {
+      '1': 'get_config_response',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config',
+      '9': 0,
+      '10': 'getConfigResponse'
+    },
+    {
+      '1': 'get_module_config_request',
+      '3': 7,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.AdminMessage.ModuleConfigType',
+      '9': 0,
+      '10': 'getModuleConfigRequest'
+    },
+    {
+      '1': 'get_module_config_response',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig',
+      '9': 0,
+      '10': 'getModuleConfigResponse'
+    },
+    {
+      '1': 'get_canned_message_module_messages_request',
+      '3': 10,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'getCannedMessageModuleMessagesRequest'
+    },
+    {
+      '1': 'get_canned_message_module_messages_response',
+      '3': 11,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'getCannedMessageModuleMessagesResponse'
+    },
+    {
+      '1': 'get_device_metadata_request',
+      '3': 12,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'getDeviceMetadataRequest'
+    },
+    {
+      '1': 'get_device_metadata_response',
+      '3': 13,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.DeviceMetadata',
+      '9': 0,
+      '10': 'getDeviceMetadataResponse'
+    },
+    {
+      '1': 'get_ringtone_request',
+      '3': 14,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'getRingtoneRequest'
+    },
+    {
+      '1': 'get_ringtone_response',
+      '3': 15,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'getRingtoneResponse'
+    },
+    {
+      '1': 'get_device_connection_status_request',
+      '3': 16,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'getDeviceConnectionStatusRequest'
+    },
+    {
+      '1': 'get_device_connection_status_response',
+      '3': 17,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.DeviceConnectionStatus',
+      '9': 0,
+      '10': 'getDeviceConnectionStatusResponse'
+    },
+    {
+      '1': 'set_ham_mode',
+      '3': 18,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.HamParameters',
+      '9': 0,
+      '10': 'setHamMode'
+    },
+    {
+      '1': 'get_node_remote_hardware_pins_request',
+      '3': 19,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'getNodeRemoteHardwarePinsRequest'
+    },
+    {
+      '1': 'get_node_remote_hardware_pins_response',
+      '3': 20,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.NodeRemoteHardwarePinsResponse',
+      '9': 0,
+      '10': 'getNodeRemoteHardwarePinsResponse'
+    },
+    {
+      '1': 'enter_dfu_mode_request',
+      '3': 21,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'enterDfuModeRequest'
+    },
+    {
+      '1': 'delete_file_request',
+      '3': 22,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'deleteFileRequest'
+    },
+    {
+      '1': 'set_owner',
+      '3': 32,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.User',
+      '9': 0,
+      '10': 'setOwner'
+    },
+    {
+      '1': 'set_channel',
+      '3': 33,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Channel',
+      '9': 0,
+      '10': 'setChannel'
+    },
+    {
+      '1': 'set_config',
+      '3': 34,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config',
+      '9': 0,
+      '10': 'setConfig'
+    },
+    {
+      '1': 'set_module_config',
+      '3': 35,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig',
+      '9': 0,
+      '10': 'setModuleConfig'
+    },
+    {
+      '1': 'set_canned_message_module_messages',
+      '3': 36,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'setCannedMessageModuleMessages'
+    },
+    {
+      '1': 'set_ringtone_message',
+      '3': 37,
+      '4': 1,
+      '5': 9,
+      '9': 0,
+      '10': 'setRingtoneMessage'
+    },
+    {
+      '1': 'remove_by_nodenum',
+      '3': 38,
+      '4': 1,
+      '5': 13,
+      '9': 0,
+      '10': 'removeByNodenum'
+    },
+    {
+      '1': 'set_favorite_node',
+      '3': 39,
+      '4': 1,
+      '5': 13,
+      '9': 0,
+      '10': 'setFavoriteNode'
+    },
+    {
+      '1': 'remove_favorite_node',
+      '3': 40,
+      '4': 1,
+      '5': 13,
+      '9': 0,
+      '10': 'removeFavoriteNode'
+    },
+    {
+      '1': 'set_fixed_position',
+      '3': 41,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Position',
+      '9': 0,
+      '10': 'setFixedPosition'
+    },
+    {
+      '1': 'remove_fixed_position',
+      '3': 42,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'removeFixedPosition'
+    },
+    {
+      '1': 'begin_edit_settings',
+      '3': 64,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'beginEditSettings'
+    },
+    {
+      '1': 'commit_edit_settings',
+      '3': 65,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'commitEditSettings'
+    },
+    {
+      '1': 'reboot_ota_seconds',
+      '3': 95,
+      '4': 1,
+      '5': 5,
+      '9': 0,
+      '10': 'rebootOtaSeconds'
+    },
+    {
+      '1': 'exit_simulator',
+      '3': 96,
+      '4': 1,
+      '5': 8,
+      '9': 0,
+      '10': 'exitSimulator'
+    },
+    {
+      '1': 'reboot_seconds',
+      '3': 97,
+      '4': 1,
+      '5': 5,
+      '9': 0,
+      '10': 'rebootSeconds'
+    },
+    {
+      '1': 'shutdown_seconds',
+      '3': 98,
+      '4': 1,
+      '5': 5,
+      '9': 0,
+      '10': 'shutdownSeconds'
+    },
+    {
+      '1': 'factory_reset',
+      '3': 99,
+      '4': 1,
+      '5': 5,
+      '9': 0,
+      '10': 'factoryReset'
+    },
+    {
+      '1': 'nodedb_reset',
+      '3': 100,
+      '4': 1,
+      '5': 5,
+      '9': 0,
+      '10': 'nodedbReset'
+    },
   ],
   '4': [AdminMessage_ConfigType$json, AdminMessage_ModuleConfigType$json],
   '8': [
@@ -178,13 +473,20 @@ final $typed_data.Uint8List hamParametersDescriptor = $convert.base64Decode(
 const NodeRemoteHardwarePinsResponse$json = {
   '1': 'NodeRemoteHardwarePinsResponse',
   '2': [
-    {'1': 'node_remote_hardware_pins', '3': 1, '4': 3, '5': 11, '6': '.meshtastic.NodeRemoteHardwarePin', '10': 'nodeRemoteHardwarePins'},
+    {
+      '1': 'node_remote_hardware_pins',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.meshtastic.NodeRemoteHardwarePin',
+      '10': 'nodeRemoteHardwarePins'
+    },
   ],
 };
 
 /// Descriptor for `NodeRemoteHardwarePinsResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List nodeRemoteHardwarePinsResponseDescriptor = $convert.base64Decode(
-    'Ch5Ob2RlUmVtb3RlSGFyZHdhcmVQaW5zUmVzcG9uc2USXAoZbm9kZV9yZW1vdGVfaGFyZHdhcm'
-    'VfcGlucxgBIAMoCzIhLm1lc2h0YXN0aWMuTm9kZVJlbW90ZUhhcmR3YXJlUGluUhZub2RlUmVt'
-    'b3RlSGFyZHdhcmVQaW5z');
-
+final $typed_data.Uint8List nodeRemoteHardwarePinsResponseDescriptor =
+    $convert.base64Decode(
+        'Ch5Ob2RlUmVtb3RlSGFyZHdhcmVQaW5zUmVzcG9uc2USXAoZbm9kZV9yZW1vdGVfaGFyZHdhcm'
+        'VfcGlucxgBIAMoCzIhLm1lc2h0YXN0aWMuTm9kZVJlbW90ZUhhcmR3YXJlUGluUhZub2RlUmVt'
+        'b3RlSGFyZHdhcmVQaW5z');

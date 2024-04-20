@@ -36,7 +36,14 @@ const PositionLite$json = {
     {'1': 'longitude_i', '3': 2, '4': 1, '5': 15, '10': 'longitudeI'},
     {'1': 'altitude', '3': 3, '4': 1, '5': 5, '10': 'altitude'},
     {'1': 'time', '3': 4, '4': 1, '5': 7, '10': 'time'},
-    {'1': 'location_source', '3': 5, '4': 1, '5': 14, '6': '.meshtastic.Position.LocSource', '10': 'locationSource'},
+    {
+      '1': 'location_source',
+      '3': 5,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.Position.LocSource',
+      '10': 'locationSource'
+    },
   ],
 };
 
@@ -52,11 +59,32 @@ const NodeInfoLite$json = {
   '1': 'NodeInfoLite',
   '2': [
     {'1': 'num', '3': 1, '4': 1, '5': 13, '10': 'num'},
-    {'1': 'user', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.User', '10': 'user'},
-    {'1': 'position', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.PositionLite', '10': 'position'},
+    {
+      '1': 'user',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.User',
+      '10': 'user'
+    },
+    {
+      '1': 'position',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.PositionLite',
+      '10': 'position'
+    },
     {'1': 'snr', '3': 4, '4': 1, '5': 2, '10': 'snr'},
     {'1': 'last_heard', '3': 5, '4': 1, '5': 7, '10': 'lastHeard'},
-    {'1': 'device_metrics', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.DeviceMetrics', '10': 'deviceMetrics'},
+    {
+      '1': 'device_metrics',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.DeviceMetrics',
+      '10': 'deviceMetrics'
+    },
     {'1': 'channel', '3': 7, '4': 1, '5': 13, '10': 'channel'},
     {'1': 'via_mqtt', '3': 8, '4': 1, '5': 8, '10': 'viaMqtt'},
     {'1': 'hops_away', '3': 9, '4': 1, '5': 13, '10': 'hopsAway'},
@@ -78,11 +106,39 @@ final $typed_data.Uint8List nodeInfoLiteDescriptor = $convert.base64Decode(
 const DeviceState$json = {
   '1': 'DeviceState',
   '2': [
-    {'1': 'my_node', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.MyNodeInfo', '10': 'myNode'},
-    {'1': 'owner', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.User', '10': 'owner'},
-    {'1': 'receive_queue', '3': 5, '4': 3, '5': 11, '6': '.meshtastic.MeshPacket', '10': 'receiveQueue'},
+    {
+      '1': 'my_node',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.MyNodeInfo',
+      '10': 'myNode'
+    },
+    {
+      '1': 'owner',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.User',
+      '10': 'owner'
+    },
+    {
+      '1': 'receive_queue',
+      '3': 5,
+      '4': 3,
+      '5': 11,
+      '6': '.meshtastic.MeshPacket',
+      '10': 'receiveQueue'
+    },
     {'1': 'version', '3': 8, '4': 1, '5': 13, '10': 'version'},
-    {'1': 'rx_text_message', '3': 7, '4': 1, '5': 11, '6': '.meshtastic.MeshPacket', '10': 'rxTextMessage'},
+    {
+      '1': 'rx_text_message',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.MeshPacket',
+      '10': 'rxTextMessage'
+    },
     {
       '1': 'no_save',
       '3': 9,
@@ -92,9 +148,31 @@ const DeviceState$json = {
       '10': 'noSave',
     },
     {'1': 'did_gps_reset', '3': 11, '4': 1, '5': 8, '10': 'didGpsReset'},
-    {'1': 'rx_waypoint', '3': 12, '4': 1, '5': 11, '6': '.meshtastic.MeshPacket', '10': 'rxWaypoint'},
-    {'1': 'node_remote_hardware_pins', '3': 13, '4': 3, '5': 11, '6': '.meshtastic.NodeRemoteHardwarePin', '10': 'nodeRemoteHardwarePins'},
-    {'1': 'node_db_lite', '3': 14, '4': 3, '5': 11, '6': '.meshtastic.NodeInfoLite', '8': {}, '10': 'nodeDbLite'},
+    {
+      '1': 'rx_waypoint',
+      '3': 12,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.MeshPacket',
+      '10': 'rxWaypoint'
+    },
+    {
+      '1': 'node_remote_hardware_pins',
+      '3': 13,
+      '4': 3,
+      '5': 11,
+      '6': '.meshtastic.NodeRemoteHardwarePin',
+      '10': 'nodeRemoteHardwarePins'
+    },
+    {
+      '1': 'node_db_lite',
+      '3': 14,
+      '4': 3,
+      '5': 11,
+      '6': '.meshtastic.NodeInfoLite',
+      '8': {},
+      '10': 'nodeDbLite'
+    },
   ],
 };
 
@@ -116,7 +194,14 @@ final $typed_data.Uint8List deviceStateDescriptor = $convert.base64Decode(
 const ChannelFile$json = {
   '1': 'ChannelFile',
   '2': [
-    {'1': 'channels', '3': 1, '4': 3, '5': 11, '6': '.meshtastic.Channel', '10': 'channels'},
+    {
+      '1': 'channels',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.meshtastic.Channel',
+      '10': 'channels'
+    },
     {'1': 'version', '3': 2, '4': 1, '5': 13, '10': 'version'},
   ],
 };
@@ -133,11 +218,32 @@ const OEMStore$json = {
     {'1': 'oem_icon_width', '3': 1, '4': 1, '5': 13, '10': 'oemIconWidth'},
     {'1': 'oem_icon_height', '3': 2, '4': 1, '5': 13, '10': 'oemIconHeight'},
     {'1': 'oem_icon_bits', '3': 3, '4': 1, '5': 12, '10': 'oemIconBits'},
-    {'1': 'oem_font', '3': 4, '4': 1, '5': 14, '6': '.meshtastic.ScreenFonts', '10': 'oemFont'},
+    {
+      '1': 'oem_font',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.ScreenFonts',
+      '10': 'oemFont'
+    },
     {'1': 'oem_text', '3': 5, '4': 1, '5': 9, '10': 'oemText'},
     {'1': 'oem_aes_key', '3': 6, '4': 1, '5': 12, '10': 'oemAesKey'},
-    {'1': 'oem_local_config', '3': 7, '4': 1, '5': 11, '6': '.meshtastic.LocalConfig', '10': 'oemLocalConfig'},
-    {'1': 'oem_local_module_config', '3': 8, '4': 1, '5': 11, '6': '.meshtastic.LocalModuleConfig', '10': 'oemLocalModuleConfig'},
+    {
+      '1': 'oem_local_config',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.LocalConfig',
+      '10': 'oemLocalConfig'
+    },
+    {
+      '1': 'oem_local_module_config',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.LocalModuleConfig',
+      '10': 'oemLocalModuleConfig'
+    },
   ],
 };
 
@@ -151,4 +257,3 @@ final $typed_data.Uint8List oEMStoreDescriptor = $convert.base64Decode(
     'NhbENvbmZpZ1IOb2VtTG9jYWxDb25maWcSVAoXb2VtX2xvY2FsX21vZHVsZV9jb25maWcYCCAB'
     'KAsyHS5tZXNodGFzdGljLkxvY2FsTW9kdWxlQ29uZmlnUhRvZW1Mb2NhbE1vZHVsZUNvbmZpZw'
     '==');
-

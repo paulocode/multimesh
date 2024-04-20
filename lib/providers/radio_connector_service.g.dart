@@ -7,7 +7,7 @@ part of 'radio_connector_service.dart';
 // **************************************************************************
 
 String _$radioConnectorServiceHash() =>
-    r'00ebd6498d44f0cefc8cc6ed47970845f4793992';
+    r'4af18c4b66bb783995a15427f26c88e42bd0587b';
 
 /// See also [RadioConnectorService].
 @ProviderFor(RadioConnectorService)

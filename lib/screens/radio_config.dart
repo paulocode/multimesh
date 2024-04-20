@@ -27,7 +27,7 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
   @override
   void initState() {
     getPrefs();
-    _telemetryEnabled = ref.read(telemetryLoggerProvider).isEnabled();
+    _telemetryEnabled = ref.read(breadcrumbLoggerProvider).isEnabled();
     _logger.i('telemetry enabled $_telemetryEnabled');
     super.initState();
   }
@@ -35,7 +35,7 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
   @override
   Widget build(BuildContext context) {
     final radioConfig = ref.watch(radioConfigServiceProvider);
-    final telemetryLogger = ref.watch(telemetryLoggerProvider);
+    final telemetryLogger = ref.watch(breadcrumbLoggerProvider);
     final radioConfigUploader = ref.watch(radioConfigUploaderServiceProvider);
     final longName = radioConfig.configDownloaded
         ? '${radioConfig.myNodeInfo.user.longName} ⚙️'

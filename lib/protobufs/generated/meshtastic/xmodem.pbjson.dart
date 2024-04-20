@@ -17,7 +17,14 @@ import 'dart:typed_data' as $typed_data;
 const XModem$json = {
   '1': 'XModem',
   '2': [
-    {'1': 'control', '3': 1, '4': 1, '5': 14, '6': '.meshtastic.XModem.Control', '10': 'control'},
+    {
+      '1': 'control',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.XModem.Control',
+      '10': 'control'
+    },
     {'1': 'seq', '3': 2, '4': 1, '5': 13, '10': 'seq'},
     {'1': 'crc16', '3': 3, '4': 1, '5': 13, '10': 'crc16'},
     {'1': 'buffer', '3': 4, '4': 1, '5': 12, '10': 'buffer'},
@@ -46,4 +53,3 @@ final $typed_data.Uint8List xModemDescriptor = $convert.base64Decode(
     'NvbnRyb2wSEAoDc2VxGAIgASgNUgNzZXESFAoFY3JjMTYYAyABKA1SBWNyYzE2EhYKBmJ1ZmZl'
     'chgEIAEoDFIGYnVmZmVyIlMKB0NvbnRyb2wSBwoDTlVMEAASBwoDU09IEAESBwoDU1RYEAISBw'
     'oDRU9UEAQSBwoDQUNLEAYSBwoDTkFLEBUSBwoDQ0FOEBgSCQoFQ1RSTFoQGg==');
-

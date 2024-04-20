@@ -17,13 +17,62 @@ import 'dart:typed_data' as $typed_data;
 const LocalConfig$json = {
   '1': 'LocalConfig',
   '2': [
-    {'1': 'device', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.Config.DeviceConfig', '10': 'device'},
-    {'1': 'position', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.Config.PositionConfig', '10': 'position'},
-    {'1': 'power', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.Config.PowerConfig', '10': 'power'},
-    {'1': 'network', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.Config.NetworkConfig', '10': 'network'},
-    {'1': 'display', '3': 5, '4': 1, '5': 11, '6': '.meshtastic.Config.DisplayConfig', '10': 'display'},
-    {'1': 'lora', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.Config.LoRaConfig', '10': 'lora'},
-    {'1': 'bluetooth', '3': 7, '4': 1, '5': 11, '6': '.meshtastic.Config.BluetoothConfig', '10': 'bluetooth'},
+    {
+      '1': 'device',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.DeviceConfig',
+      '10': 'device'
+    },
+    {
+      '1': 'position',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.PositionConfig',
+      '10': 'position'
+    },
+    {
+      '1': 'power',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.PowerConfig',
+      '10': 'power'
+    },
+    {
+      '1': 'network',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.NetworkConfig',
+      '10': 'network'
+    },
+    {
+      '1': 'display',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.DisplayConfig',
+      '10': 'display'
+    },
+    {
+      '1': 'lora',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.LoRaConfig',
+      '10': 'lora'
+    },
+    {
+      '1': 'bluetooth',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Config.BluetoothConfig',
+      '10': 'bluetooth'
+    },
     {'1': 'version', '3': 8, '4': 1, '5': 13, '10': 'version'},
   ],
 };
@@ -44,19 +93,110 @@ final $typed_data.Uint8List localConfigDescriptor = $convert.base64Decode(
 const LocalModuleConfig$json = {
   '1': 'LocalModuleConfig',
   '2': [
-    {'1': 'mqtt', '3': 1, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.MQTTConfig', '10': 'mqtt'},
-    {'1': 'serial', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.SerialConfig', '10': 'serial'},
-    {'1': 'external_notification', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.ExternalNotificationConfig', '10': 'externalNotification'},
-    {'1': 'store_forward', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.StoreForwardConfig', '10': 'storeForward'},
-    {'1': 'range_test', '3': 5, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.RangeTestConfig', '10': 'rangeTest'},
-    {'1': 'telemetry', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.TelemetryConfig', '10': 'telemetry'},
-    {'1': 'canned_message', '3': 7, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.CannedMessageConfig', '10': 'cannedMessage'},
-    {'1': 'audio', '3': 9, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.AudioConfig', '10': 'audio'},
-    {'1': 'remote_hardware', '3': 10, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.RemoteHardwareConfig', '10': 'remoteHardware'},
-    {'1': 'neighbor_info', '3': 11, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.NeighborInfoConfig', '10': 'neighborInfo'},
-    {'1': 'ambient_lighting', '3': 12, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.AmbientLightingConfig', '10': 'ambientLighting'},
-    {'1': 'detection_sensor', '3': 13, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.DetectionSensorConfig', '10': 'detectionSensor'},
-    {'1': 'paxcounter', '3': 14, '4': 1, '5': 11, '6': '.meshtastic.ModuleConfig.PaxcounterConfig', '10': 'paxcounter'},
+    {
+      '1': 'mqtt',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.MQTTConfig',
+      '10': 'mqtt'
+    },
+    {
+      '1': 'serial',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.SerialConfig',
+      '10': 'serial'
+    },
+    {
+      '1': 'external_notification',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.ExternalNotificationConfig',
+      '10': 'externalNotification'
+    },
+    {
+      '1': 'store_forward',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.StoreForwardConfig',
+      '10': 'storeForward'
+    },
+    {
+      '1': 'range_test',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.RangeTestConfig',
+      '10': 'rangeTest'
+    },
+    {
+      '1': 'telemetry',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.TelemetryConfig',
+      '10': 'telemetry'
+    },
+    {
+      '1': 'canned_message',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.CannedMessageConfig',
+      '10': 'cannedMessage'
+    },
+    {
+      '1': 'audio',
+      '3': 9,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.AudioConfig',
+      '10': 'audio'
+    },
+    {
+      '1': 'remote_hardware',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.RemoteHardwareConfig',
+      '10': 'remoteHardware'
+    },
+    {
+      '1': 'neighbor_info',
+      '3': 11,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.NeighborInfoConfig',
+      '10': 'neighborInfo'
+    },
+    {
+      '1': 'ambient_lighting',
+      '3': 12,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.AmbientLightingConfig',
+      '10': 'ambientLighting'
+    },
+    {
+      '1': 'detection_sensor',
+      '3': 13,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.DetectionSensorConfig',
+      '10': 'detectionSensor'
+    },
+    {
+      '1': 'paxcounter',
+      '3': 14,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.ModuleConfig.PaxcounterConfig',
+      '10': 'paxcounter'
+    },
     {'1': 'version', '3': 8, '4': 1, '5': 13, '10': 'version'},
   ],
 };
@@ -83,4 +223,3 @@ final $typed_data.Uint8List localModuleConfigDescriptor = $convert.base64Decode(
     'NvckNvbmZpZ1IPZGV0ZWN0aW9uU2Vuc29yEkkKCnBheGNvdW50ZXIYDiABKAsyKS5tZXNodGFz'
     'dGljLk1vZHVsZUNvbmZpZy5QYXhjb3VudGVyQ29uZmlnUgpwYXhjb3VudGVyEhgKB3ZlcnNpb2'
     '4YCCABKA1SB3ZlcnNpb24=');
-

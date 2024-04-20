@@ -38,35 +38,44 @@ class ServiceEnvelope extends $pb.GeneratedMessage {
     return $result;
   }
   ServiceEnvelope._() : super();
-  factory ServiceEnvelope.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ServiceEnvelope.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ServiceEnvelope.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory ServiceEnvelope.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ServiceEnvelope', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
-    ..aOM<$6.MeshPacket>(1, _omitFieldNames ? '' : 'packet', subBuilder: $6.MeshPacket.create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'ServiceEnvelope',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
+    ..aOM<$6.MeshPacket>(1, _omitFieldNames ? '' : 'packet',
+        subBuilder: $6.MeshPacket.create)
     ..aOS(2, _omitFieldNames ? '' : 'channelId')
     ..aOS(3, _omitFieldNames ? '' : 'gatewayId')
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   ServiceEnvelope clone() => ServiceEnvelope()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ServiceEnvelope copyWith(void Function(ServiceEnvelope) updates) => super.copyWith((message) => updates(message as ServiceEnvelope)) as ServiceEnvelope;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  ServiceEnvelope copyWith(void Function(ServiceEnvelope) updates) =>
+      super.copyWith((message) => updates(message as ServiceEnvelope))
+          as ServiceEnvelope;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static ServiceEnvelope create() => ServiceEnvelope._();
   ServiceEnvelope createEmptyInstance() => create();
-  static $pb.PbList<ServiceEnvelope> createRepeated() => $pb.PbList<ServiceEnvelope>();
+  static $pb.PbList<ServiceEnvelope> createRepeated() =>
+      $pb.PbList<ServiceEnvelope>();
   @$core.pragma('dart2js:noInline')
-  static ServiceEnvelope getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceEnvelope>(create);
+  static ServiceEnvelope getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ServiceEnvelope>(create);
   static ServiceEnvelope? _defaultInstance;
 
   ///
@@ -74,7 +83,10 @@ class ServiceEnvelope extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $6.MeshPacket get packet => $_getN(0);
   @$pb.TagNumber(1)
-  set packet($6.MeshPacket v) { setField(1, v); }
+  set packet($6.MeshPacket v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasPacket() => $_has(0);
   @$pb.TagNumber(1)
@@ -87,7 +99,10 @@ class ServiceEnvelope extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get channelId => $_getSZ(1);
   @$pb.TagNumber(2)
-  set channelId($core.String v) { $_setString(1, v); }
+  set channelId($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasChannelId() => $_has(1);
   @$pb.TagNumber(2)
@@ -100,7 +115,10 @@ class ServiceEnvelope extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get gatewayId => $_getSZ(2);
   @$pb.TagNumber(3)
-  set gatewayId($core.String v) { $_setString(2, v); }
+  set gatewayId($core.String v) {
+    $_setString(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasGatewayId() => $_has(2);
   @$pb.TagNumber(3)
@@ -168,36 +186,60 @@ class MapReport extends $pb.GeneratedMessage {
     return $result;
   }
   MapReport._() : super();
-  factory MapReport.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory MapReport.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory MapReport.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory MapReport.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'MapReport', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'MapReport',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'longName')
     ..aOS(2, _omitFieldNames ? '' : 'shortName')
-    ..e<$1.Config_DeviceConfig_Role>(3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: $1.Config_DeviceConfig_Role.CLIENT, valueOf: $1.Config_DeviceConfig_Role.valueOf, enumValues: $1.Config_DeviceConfig_Role.values)
-    ..e<$6.HardwareModel>(4, _omitFieldNames ? '' : 'hwModel', $pb.PbFieldType.OE, defaultOrMaker: $6.HardwareModel.UNSET, valueOf: $6.HardwareModel.valueOf, enumValues: $6.HardwareModel.values)
+    ..e<$1.Config_DeviceConfig_Role>(
+        3, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE,
+        defaultOrMaker: $1.Config_DeviceConfig_Role.CLIENT,
+        valueOf: $1.Config_DeviceConfig_Role.valueOf,
+        enumValues: $1.Config_DeviceConfig_Role.values)
+    ..e<$6.HardwareModel>(
+        4, _omitFieldNames ? '' : 'hwModel', $pb.PbFieldType.OE,
+        defaultOrMaker: $6.HardwareModel.UNSET,
+        valueOf: $6.HardwareModel.valueOf,
+        enumValues: $6.HardwareModel.values)
     ..aOS(5, _omitFieldNames ? '' : 'firmwareVersion')
-    ..e<$1.Config_LoRaConfig_RegionCode>(6, _omitFieldNames ? '' : 'region', $pb.PbFieldType.OE, defaultOrMaker: $1.Config_LoRaConfig_RegionCode.UNSET, valueOf: $1.Config_LoRaConfig_RegionCode.valueOf, enumValues: $1.Config_LoRaConfig_RegionCode.values)
-    ..e<$1.Config_LoRaConfig_ModemPreset>(7, _omitFieldNames ? '' : 'modemPreset', $pb.PbFieldType.OE, defaultOrMaker: $1.Config_LoRaConfig_ModemPreset.LONG_FAST, valueOf: $1.Config_LoRaConfig_ModemPreset.valueOf, enumValues: $1.Config_LoRaConfig_ModemPreset.values)
+    ..e<$1.Config_LoRaConfig_RegionCode>(
+        6, _omitFieldNames ? '' : 'region', $pb.PbFieldType.OE,
+        defaultOrMaker: $1.Config_LoRaConfig_RegionCode.UNSET,
+        valueOf: $1.Config_LoRaConfig_RegionCode.valueOf,
+        enumValues: $1.Config_LoRaConfig_RegionCode.values)
+    ..e<$1.Config_LoRaConfig_ModemPreset>(
+        7, _omitFieldNames ? '' : 'modemPreset', $pb.PbFieldType.OE,
+        defaultOrMaker: $1.Config_LoRaConfig_ModemPreset.LONG_FAST,
+        valueOf: $1.Config_LoRaConfig_ModemPreset.valueOf,
+        enumValues: $1.Config_LoRaConfig_ModemPreset.values)
     ..aOB(8, _omitFieldNames ? '' : 'hasDefaultChannel')
     ..a<$core.int>(9, _omitFieldNames ? '' : 'latitudeI', $pb.PbFieldType.OSF3)
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'longitudeI', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(
+        10, _omitFieldNames ? '' : 'longitudeI', $pb.PbFieldType.OSF3)
     ..a<$core.int>(11, _omitFieldNames ? '' : 'altitude', $pb.PbFieldType.O3)
-    ..a<$core.int>(12, _omitFieldNames ? '' : 'positionPrecision', $pb.PbFieldType.OU3)
-    ..a<$core.int>(13, _omitFieldNames ? '' : 'numOnlineLocalNodes', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
+    ..a<$core.int>(
+        12, _omitFieldNames ? '' : 'positionPrecision', $pb.PbFieldType.OU3)
+    ..a<$core.int>(
+        13, _omitFieldNames ? '' : 'numOnlineLocalNodes', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   MapReport clone() => MapReport()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  MapReport copyWith(void Function(MapReport) updates) => super.copyWith((message) => updates(message as MapReport)) as MapReport;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  MapReport copyWith(void Function(MapReport) updates) =>
+      super.copyWith((message) => updates(message as MapReport)) as MapReport;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -206,7 +248,8 @@ class MapReport extends $pb.GeneratedMessage {
   MapReport createEmptyInstance() => create();
   static $pb.PbList<MapReport> createRepeated() => $pb.PbList<MapReport>();
   @$core.pragma('dart2js:noInline')
-  static MapReport getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MapReport>(create);
+  static MapReport getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MapReport>(create);
   static MapReport? _defaultInstance;
 
   ///
@@ -214,7 +257,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get longName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set longName($core.String v) { $_setString(0, v); }
+  set longName($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasLongName() => $_has(0);
   @$pb.TagNumber(1)
@@ -226,7 +272,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get shortName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set shortName($core.String v) { $_setString(1, v); }
+  set shortName($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasShortName() => $_has(1);
   @$pb.TagNumber(2)
@@ -237,7 +286,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $1.Config_DeviceConfig_Role get role => $_getN(2);
   @$pb.TagNumber(3)
-  set role($1.Config_DeviceConfig_Role v) { setField(3, v); }
+  set role($1.Config_DeviceConfig_Role v) {
+    setField(3, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasRole() => $_has(2);
   @$pb.TagNumber(3)
@@ -248,7 +300,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $6.HardwareModel get hwModel => $_getN(3);
   @$pb.TagNumber(4)
-  set hwModel($6.HardwareModel v) { setField(4, v); }
+  set hwModel($6.HardwareModel v) {
+    setField(4, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasHwModel() => $_has(3);
   @$pb.TagNumber(4)
@@ -259,7 +314,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.String get firmwareVersion => $_getSZ(4);
   @$pb.TagNumber(5)
-  set firmwareVersion($core.String v) { $_setString(4, v); }
+  set firmwareVersion($core.String v) {
+    $_setString(4, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasFirmwareVersion() => $_has(4);
   @$pb.TagNumber(5)
@@ -270,7 +328,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   $1.Config_LoRaConfig_RegionCode get region => $_getN(5);
   @$pb.TagNumber(6)
-  set region($1.Config_LoRaConfig_RegionCode v) { setField(6, v); }
+  set region($1.Config_LoRaConfig_RegionCode v) {
+    setField(6, v);
+  }
+
   @$pb.TagNumber(6)
   $core.bool hasRegion() => $_has(5);
   @$pb.TagNumber(6)
@@ -281,7 +342,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   $1.Config_LoRaConfig_ModemPreset get modemPreset => $_getN(6);
   @$pb.TagNumber(7)
-  set modemPreset($1.Config_LoRaConfig_ModemPreset v) { setField(7, v); }
+  set modemPreset($1.Config_LoRaConfig_ModemPreset v) {
+    setField(7, v);
+  }
+
   @$pb.TagNumber(7)
   $core.bool hasModemPreset() => $_has(6);
   @$pb.TagNumber(7)
@@ -293,7 +357,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   $core.bool get hasDefaultChannel => $_getBF(7);
   @$pb.TagNumber(8)
-  set hasDefaultChannel($core.bool v) { $_setBool(7, v); }
+  set hasDefaultChannel($core.bool v) {
+    $_setBool(7, v);
+  }
+
   @$pb.TagNumber(8)
   $core.bool hasHasDefaultChannel() => $_has(7);
   @$pb.TagNumber(8)
@@ -304,7 +371,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   $core.int get latitudeI => $_getIZ(8);
   @$pb.TagNumber(9)
-  set latitudeI($core.int v) { $_setSignedInt32(8, v); }
+  set latitudeI($core.int v) {
+    $_setSignedInt32(8, v);
+  }
+
   @$pb.TagNumber(9)
   $core.bool hasLatitudeI() => $_has(8);
   @$pb.TagNumber(9)
@@ -315,7 +385,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   $core.int get longitudeI => $_getIZ(9);
   @$pb.TagNumber(10)
-  set longitudeI($core.int v) { $_setSignedInt32(9, v); }
+  set longitudeI($core.int v) {
+    $_setSignedInt32(9, v);
+  }
+
   @$pb.TagNumber(10)
   $core.bool hasLongitudeI() => $_has(9);
   @$pb.TagNumber(10)
@@ -326,7 +399,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   $core.int get altitude => $_getIZ(10);
   @$pb.TagNumber(11)
-  set altitude($core.int v) { $_setSignedInt32(10, v); }
+  set altitude($core.int v) {
+    $_setSignedInt32(10, v);
+  }
+
   @$pb.TagNumber(11)
   $core.bool hasAltitude() => $_has(10);
   @$pb.TagNumber(11)
@@ -337,7 +413,10 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(12)
   $core.int get positionPrecision => $_getIZ(11);
   @$pb.TagNumber(12)
-  set positionPrecision($core.int v) { $_setUnsignedInt32(11, v); }
+  set positionPrecision($core.int v) {
+    $_setUnsignedInt32(11, v);
+  }
+
   @$pb.TagNumber(12)
   $core.bool hasPositionPrecision() => $_has(11);
   @$pb.TagNumber(12)
@@ -348,13 +427,16 @@ class MapReport extends $pb.GeneratedMessage {
   @$pb.TagNumber(13)
   $core.int get numOnlineLocalNodes => $_getIZ(12);
   @$pb.TagNumber(13)
-  set numOnlineLocalNodes($core.int v) { $_setUnsignedInt32(12, v); }
+  set numOnlineLocalNodes($core.int v) {
+    $_setUnsignedInt32(12, v);
+  }
+
   @$pb.TagNumber(13)
   $core.bool hasNumOnlineLocalNodes() => $_has(12);
   @$pb.TagNumber(13)
   void clearNumOnlineLocalNodes() => clearField(13);
 }
 
-
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

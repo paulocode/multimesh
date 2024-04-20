@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/node/node_search.dart';
-import '../providers/radio_config/radio_config_service.dart';
 import '../widgets/node_card.dart';
 
 class NodesScreen extends ConsumerStatefulWidget {
@@ -18,8 +17,6 @@ class _NodesScreenState extends ConsumerState<NodesScreen> {
   @override
   Widget build(BuildContext context) {
     final nodes = ref.watch(nodeSearchProvider(_searchKey)).values.toList();
-    final myNodeNum = ref
-        .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nodes'),

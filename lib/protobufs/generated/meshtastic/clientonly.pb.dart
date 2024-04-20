@@ -45,37 +45,47 @@ class DeviceProfile extends $pb.GeneratedMessage {
     return $result;
   }
   DeviceProfile._() : super();
-  factory DeviceProfile.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory DeviceProfile.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory DeviceProfile.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory DeviceProfile.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeviceProfile', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'DeviceProfile',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'longName')
     ..aOS(2, _omitFieldNames ? '' : 'shortName')
     ..aOS(3, _omitFieldNames ? '' : 'channelUrl')
-    ..aOM<$8.LocalConfig>(4, _omitFieldNames ? '' : 'config', subBuilder: $8.LocalConfig.create)
-    ..aOM<$8.LocalModuleConfig>(5, _omitFieldNames ? '' : 'moduleConfig', subBuilder: $8.LocalModuleConfig.create)
-    ..hasRequiredFields = false
-  ;
+    ..aOM<$8.LocalConfig>(4, _omitFieldNames ? '' : 'config',
+        subBuilder: $8.LocalConfig.create)
+    ..aOM<$8.LocalModuleConfig>(5, _omitFieldNames ? '' : 'moduleConfig',
+        subBuilder: $8.LocalModuleConfig.create)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   DeviceProfile clone() => DeviceProfile()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  DeviceProfile copyWith(void Function(DeviceProfile) updates) => super.copyWith((message) => updates(message as DeviceProfile)) as DeviceProfile;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  DeviceProfile copyWith(void Function(DeviceProfile) updates) =>
+      super.copyWith((message) => updates(message as DeviceProfile))
+          as DeviceProfile;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
   static DeviceProfile create() => DeviceProfile._();
   DeviceProfile createEmptyInstance() => create();
-  static $pb.PbList<DeviceProfile> createRepeated() => $pb.PbList<DeviceProfile>();
+  static $pb.PbList<DeviceProfile> createRepeated() =>
+      $pb.PbList<DeviceProfile>();
   @$core.pragma('dart2js:noInline')
-  static DeviceProfile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeviceProfile>(create);
+  static DeviceProfile getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<DeviceProfile>(create);
   static DeviceProfile? _defaultInstance;
 
   ///
@@ -83,7 +93,10 @@ class DeviceProfile extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get longName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set longName($core.String v) { $_setString(0, v); }
+  set longName($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasLongName() => $_has(0);
   @$pb.TagNumber(1)
@@ -94,7 +107,10 @@ class DeviceProfile extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get shortName => $_getSZ(1);
   @$pb.TagNumber(2)
-  set shortName($core.String v) { $_setString(1, v); }
+  set shortName($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasShortName() => $_has(1);
   @$pb.TagNumber(2)
@@ -105,7 +121,10 @@ class DeviceProfile extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.String get channelUrl => $_getSZ(2);
   @$pb.TagNumber(3)
-  set channelUrl($core.String v) { $_setString(2, v); }
+  set channelUrl($core.String v) {
+    $_setString(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasChannelUrl() => $_has(2);
   @$pb.TagNumber(3)
@@ -116,7 +135,10 @@ class DeviceProfile extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $8.LocalConfig get config => $_getN(3);
   @$pb.TagNumber(4)
-  set config($8.LocalConfig v) { setField(4, v); }
+  set config($8.LocalConfig v) {
+    setField(4, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasConfig() => $_has(3);
   @$pb.TagNumber(4)
@@ -129,7 +151,10 @@ class DeviceProfile extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $8.LocalModuleConfig get moduleConfig => $_getN(4);
   @$pb.TagNumber(5)
-  set moduleConfig($8.LocalModuleConfig v) { setField(5, v); }
+  set moduleConfig($8.LocalModuleConfig v) {
+    setField(5, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasModuleConfig() => $_has(4);
   @$pb.TagNumber(5)
@@ -138,6 +163,6 @@ class DeviceProfile extends $pb.GeneratedMessage {
   $8.LocalModuleConfig ensureModuleConfig() => $_ensure(4);
 }
 
-
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

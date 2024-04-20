@@ -22,7 +22,8 @@ class NodeCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nodes = ref.watch(nodeServiceProvider);
-    final myNodeNum = ref.watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
+    final myNodeNum = ref
+        .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
     final telemetry = ref.watch(telemetryReceiverProvider(node.nodeNum));
     final textMessageStreamService = ref.watch(
       textMessageStreamServiceProvider(
@@ -123,33 +124,33 @@ class NodeCard extends ConsumerWidget {
                       children: [
                         if (myNodeNum != node.nodeNum)
                           IconButton(
-                          onPressed: () {
-                            context.push(
-                              Uri(
-                                path: '/chat',
-                                queryParameters: {
-                                  'channel': node.channel.toString(),
-                                  'dmNode': node.nodeNum.toString(),
-                                },
-                              ).toString(),
-                            );
-                          },
-                          icon: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              const Icon(Icons.mail),
-                              if (node.hasUnreadMessages)
-                                const Positioned(
-                                  right: -2,
-                                  child: Icon(
-                                    Icons.circle,
-                                    color: Colors.red,
-                                    size: 10,
+                            onPressed: () {
+                              context.push(
+                                Uri(
+                                  path: '/chat',
+                                  queryParameters: {
+                                    'channel': node.channel.toString(),
+                                    'dmNode': node.nodeNum.toString(),
+                                  },
+                                ).toString(),
+                              );
+                            },
+                            icon: Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                const Icon(Icons.mail),
+                                if (node.hasUnreadMessages)
+                                  const Positioned(
+                                    right: -2,
+                                    child: Icon(
+                                      Icons.circle,
+                                      color: Colors.red,
+                                      size: 10,
+                                    ),
                                   ),
-                                ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
                         if (showChevron && myNodeNum != node.nodeNum)
                           IconButton(
                             onPressed: () {

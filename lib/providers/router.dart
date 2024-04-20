@@ -22,7 +22,7 @@ part 'router.g.dart';
 GoRouter goRouter(GoRouterRef ref) {
   return GoRouter(
     observers: [
-      GoRouterObserver(logger: ref.watch(telemetryLoggerProvider)),
+      GoRouterObserver(logger: ref.watch(breadcrumbLoggerProvider)),
     ],
     initialLocation: '/',
     routes: <RouteBase>[
@@ -109,9 +109,9 @@ GoRouter goRouter(GoRouterRef ref) {
 }
 
 class GoRouterObserver extends NavigatorObserver {
-  GoRouterObserver({required TelemetryLogger logger}) : _logger = logger;
+  GoRouterObserver({required BreadcrumbLogger logger}) : _logger = logger;
 
-  final TelemetryLogger _logger;
+  final BreadcrumbLogger _logger;
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

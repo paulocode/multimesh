@@ -17,11 +17,7 @@ import 'atak.pbenum.dart';
 
 export 'atak.pbenum.dart';
 
-enum TAKPacket_PayloadVariant {
-  pli, 
-  chat, 
-  notSet
-}
+enum TAKPacket_PayloadVariant { pli, chat, notSet }
 
 ///
 ///  Packets for the official ATAK Plugin
@@ -56,35 +52,42 @@ class TAKPacket extends $pb.GeneratedMessage {
     return $result;
   }
   TAKPacket._() : super();
-  factory TAKPacket.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory TAKPacket.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory TAKPacket.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory TAKPacket.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static const $core.Map<$core.int, TAKPacket_PayloadVariant> _TAKPacket_PayloadVariantByTag = {
-    5 : TAKPacket_PayloadVariant.pli,
-    6 : TAKPacket_PayloadVariant.chat,
-    0 : TAKPacket_PayloadVariant.notSet
+  static const $core.Map<$core.int, TAKPacket_PayloadVariant>
+      _TAKPacket_PayloadVariantByTag = {
+    5: TAKPacket_PayloadVariant.pli,
+    6: TAKPacket_PayloadVariant.chat,
+    0: TAKPacket_PayloadVariant.notSet
   };
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'TAKPacket', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'TAKPacket',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..oo(0, [5, 6])
     ..aOB(1, _omitFieldNames ? '' : 'isCompressed')
-    ..aOM<Contact>(2, _omitFieldNames ? '' : 'contact', subBuilder: Contact.create)
+    ..aOM<Contact>(2, _omitFieldNames ? '' : 'contact',
+        subBuilder: Contact.create)
     ..aOM<Group>(3, _omitFieldNames ? '' : 'group', subBuilder: Group.create)
     ..aOM<Status>(4, _omitFieldNames ? '' : 'status', subBuilder: Status.create)
     ..aOM<PLI>(5, _omitFieldNames ? '' : 'pli', subBuilder: PLI.create)
     ..aOM<GeoChat>(6, _omitFieldNames ? '' : 'chat', subBuilder: GeoChat.create)
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   TAKPacket clone() => TAKPacket()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  TAKPacket copyWith(void Function(TAKPacket) updates) => super.copyWith((message) => updates(message as TAKPacket)) as TAKPacket;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  TAKPacket copyWith(void Function(TAKPacket) updates) =>
+      super.copyWith((message) => updates(message as TAKPacket)) as TAKPacket;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -93,10 +96,12 @@ class TAKPacket extends $pb.GeneratedMessage {
   TAKPacket createEmptyInstance() => create();
   static $pb.PbList<TAKPacket> createRepeated() => $pb.PbList<TAKPacket>();
   @$core.pragma('dart2js:noInline')
-  static TAKPacket getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TAKPacket>(create);
+  static TAKPacket getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<TAKPacket>(create);
   static TAKPacket? _defaultInstance;
 
-  TAKPacket_PayloadVariant whichPayloadVariant() => _TAKPacket_PayloadVariantByTag[$_whichOneof(0)]!;
+  TAKPacket_PayloadVariant whichPayloadVariant() =>
+      _TAKPacket_PayloadVariantByTag[$_whichOneof(0)]!;
   void clearPayloadVariant() => clearField($_whichOneof(0));
 
   ///
@@ -104,7 +109,10 @@ class TAKPacket extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.bool get isCompressed => $_getBF(0);
   @$pb.TagNumber(1)
-  set isCompressed($core.bool v) { $_setBool(0, v); }
+  set isCompressed($core.bool v) {
+    $_setBool(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasIsCompressed() => $_has(0);
   @$pb.TagNumber(1)
@@ -115,7 +123,10 @@ class TAKPacket extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   Contact get contact => $_getN(1);
   @$pb.TagNumber(2)
-  set contact(Contact v) { setField(2, v); }
+  set contact(Contact v) {
+    setField(2, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasContact() => $_has(1);
   @$pb.TagNumber(2)
@@ -128,7 +139,10 @@ class TAKPacket extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   Group get group => $_getN(2);
   @$pb.TagNumber(3)
-  set group(Group v) { setField(3, v); }
+  set group(Group v) {
+    setField(3, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasGroup() => $_has(2);
   @$pb.TagNumber(3)
@@ -141,7 +155,10 @@ class TAKPacket extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   Status get status => $_getN(3);
   @$pb.TagNumber(4)
-  set status(Status v) { setField(4, v); }
+  set status(Status v) {
+    setField(4, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasStatus() => $_has(3);
   @$pb.TagNumber(4)
@@ -154,7 +171,10 @@ class TAKPacket extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   PLI get pli => $_getN(4);
   @$pb.TagNumber(5)
-  set pli(PLI v) { setField(5, v); }
+  set pli(PLI v) {
+    setField(5, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasPli() => $_has(4);
   @$pb.TagNumber(5)
@@ -167,7 +187,10 @@ class TAKPacket extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   GeoChat get chat => $_getN(5);
   @$pb.TagNumber(6)
-  set chat(GeoChat v) { setField(6, v); }
+  set chat(GeoChat v) {
+    setField(6, v);
+  }
+
   @$pb.TagNumber(6)
   $core.bool hasChat() => $_has(5);
   @$pb.TagNumber(6)
@@ -193,25 +216,30 @@ class GeoChat extends $pb.GeneratedMessage {
     return $result;
   }
   GeoChat._() : super();
-  factory GeoChat.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GeoChat.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory GeoChat.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory GeoChat.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GeoChat', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'GeoChat',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'message')
     ..aOS(2, _omitFieldNames ? '' : 'to')
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   GeoChat clone() => GeoChat()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  GeoChat copyWith(void Function(GeoChat) updates) => super.copyWith((message) => updates(message as GeoChat)) as GeoChat;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  GeoChat copyWith(void Function(GeoChat) updates) =>
+      super.copyWith((message) => updates(message as GeoChat)) as GeoChat;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -220,7 +248,8 @@ class GeoChat extends $pb.GeneratedMessage {
   GeoChat createEmptyInstance() => create();
   static $pb.PbList<GeoChat> createRepeated() => $pb.PbList<GeoChat>();
   @$core.pragma('dart2js:noInline')
-  static GeoChat getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GeoChat>(create);
+  static GeoChat getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GeoChat>(create);
   static GeoChat? _defaultInstance;
 
   ///
@@ -228,7 +257,10 @@ class GeoChat extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get message => $_getSZ(0);
   @$pb.TagNumber(1)
-  set message($core.String v) { $_setString(0, v); }
+  set message($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasMessage() => $_has(0);
   @$pb.TagNumber(1)
@@ -239,7 +271,10 @@ class GeoChat extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get to => $_getSZ(1);
   @$pb.TagNumber(2)
-  set to($core.String v) { $_setString(1, v); }
+  set to($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasTo() => $_has(1);
   @$pb.TagNumber(2)
@@ -264,25 +299,36 @@ class Group extends $pb.GeneratedMessage {
     return $result;
   }
   Group._() : super();
-  factory Group.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Group.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Group.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Group.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Group', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
-    ..e<MemberRole>(1, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE, defaultOrMaker: MemberRole.Unspecifed, valueOf: MemberRole.valueOf, enumValues: MemberRole.values)
-    ..e<Team>(2, _omitFieldNames ? '' : 'team', $pb.PbFieldType.OE, defaultOrMaker: Team.Unspecifed_Color, valueOf: Team.valueOf, enumValues: Team.values)
-    ..hasRequiredFields = false
-  ;
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'Group',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
+    ..e<MemberRole>(1, _omitFieldNames ? '' : 'role', $pb.PbFieldType.OE,
+        defaultOrMaker: MemberRole.Unspecifed,
+        valueOf: MemberRole.valueOf,
+        enumValues: MemberRole.values)
+    ..e<Team>(2, _omitFieldNames ? '' : 'team', $pb.PbFieldType.OE,
+        defaultOrMaker: Team.Unspecifed_Color,
+        valueOf: Team.valueOf,
+        enumValues: Team.values)
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Group clone() => Group()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Group copyWith(void Function(Group) updates) => super.copyWith((message) => updates(message as Group)) as Group;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Group copyWith(void Function(Group) updates) =>
+      super.copyWith((message) => updates(message as Group)) as Group;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -291,7 +337,8 @@ class Group extends $pb.GeneratedMessage {
   Group createEmptyInstance() => create();
   static $pb.PbList<Group> createRepeated() => $pb.PbList<Group>();
   @$core.pragma('dart2js:noInline')
-  static Group getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Group>(create);
+  static Group getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Group>(create);
   static Group? _defaultInstance;
 
   ///
@@ -299,7 +346,10 @@ class Group extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   MemberRole get role => $_getN(0);
   @$pb.TagNumber(1)
-  set role(MemberRole v) { setField(1, v); }
+  set role(MemberRole v) {
+    setField(1, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasRole() => $_has(0);
   @$pb.TagNumber(1)
@@ -311,7 +361,10 @@ class Group extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   Team get team => $_getN(1);
   @$pb.TagNumber(2)
-  set team(Team v) { setField(2, v); }
+  set team(Team v) {
+    setField(2, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasTeam() => $_has(1);
   @$pb.TagNumber(2)
@@ -332,24 +385,29 @@ class Status extends $pb.GeneratedMessage {
     return $result;
   }
   Status._() : super();
-  factory Status.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Status.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Status.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Status.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Status', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'Status',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'battery', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Status clone() => Status()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Status copyWith(void Function(Status) updates) => super.copyWith((message) => updates(message as Status)) as Status;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Status copyWith(void Function(Status) updates) =>
+      super.copyWith((message) => updates(message as Status)) as Status;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -358,7 +416,8 @@ class Status extends $pb.GeneratedMessage {
   Status createEmptyInstance() => create();
   static $pb.PbList<Status> createRepeated() => $pb.PbList<Status>();
   @$core.pragma('dart2js:noInline')
-  static Status getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Status>(create);
+  static Status getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Status>(create);
   static Status? _defaultInstance;
 
   ///
@@ -366,7 +425,10 @@ class Status extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get battery => $_getIZ(0);
   @$pb.TagNumber(1)
-  set battery($core.int v) { $_setUnsignedInt32(0, v); }
+  set battery($core.int v) {
+    $_setUnsignedInt32(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasBattery() => $_has(0);
   @$pb.TagNumber(1)
@@ -391,25 +453,30 @@ class Contact extends $pb.GeneratedMessage {
     return $result;
   }
   Contact._() : super();
-  factory Contact.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Contact.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory Contact.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory Contact.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Contact', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'Contact',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'callsign')
     ..aOS(2, _omitFieldNames ? '' : 'deviceCallsign')
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   Contact clone() => Contact()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Contact copyWith(void Function(Contact) updates) => super.copyWith((message) => updates(message as Contact)) as Contact;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  Contact copyWith(void Function(Contact) updates) =>
+      super.copyWith((message) => updates(message as Contact)) as Contact;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -418,7 +485,8 @@ class Contact extends $pb.GeneratedMessage {
   Contact createEmptyInstance() => create();
   static $pb.PbList<Contact> createRepeated() => $pb.PbList<Contact>();
   @$core.pragma('dart2js:noInline')
-  static Contact getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Contact>(create);
+  static Contact getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Contact>(create);
   static Contact? _defaultInstance;
 
   ///
@@ -426,7 +494,10 @@ class Contact extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.String get callsign => $_getSZ(0);
   @$pb.TagNumber(1)
-  set callsign($core.String v) { $_setString(0, v); }
+  set callsign($core.String v) {
+    $_setString(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasCallsign() => $_has(0);
   @$pb.TagNumber(1)
@@ -437,7 +508,10 @@ class Contact extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.String get deviceCallsign => $_getSZ(1);
   @$pb.TagNumber(2)
-  set deviceCallsign($core.String v) { $_setString(1, v); }
+  set deviceCallsign($core.String v) {
+    $_setString(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasDeviceCallsign() => $_has(1);
   @$pb.TagNumber(2)
@@ -473,28 +547,33 @@ class PLI extends $pb.GeneratedMessage {
     return $result;
   }
   PLI._() : super();
-  factory PLI.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PLI.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory PLI.fromBuffer($core.List<$core.int> i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(i, r);
+  factory PLI.fromJson($core.String i,
+          [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PLI', package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'PLI',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'meshtastic'),
+      createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'latitudeI', $pb.PbFieldType.OSF3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'longitudeI', $pb.PbFieldType.OSF3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'altitude', $pb.PbFieldType.O3)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'speed', $pb.PbFieldType.OU3)
     ..a<$core.int>(5, _omitFieldNames ? '' : 'course', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
+    ..hasRequiredFields = false;
 
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+      'Will be removed in next major version')
   PLI clone() => PLI()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PLI copyWith(void Function(PLI) updates) => super.copyWith((message) => updates(message as PLI)) as PLI;
+  @$core.Deprecated('Using this can add significant overhead to your binary. '
+      'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+      'Will be removed in next major version')
+  PLI copyWith(void Function(PLI) updates) =>
+      super.copyWith((message) => updates(message as PLI)) as PLI;
 
   $pb.BuilderInfo get info_ => _i;
 
@@ -503,7 +582,8 @@ class PLI extends $pb.GeneratedMessage {
   PLI createEmptyInstance() => create();
   static $pb.PbList<PLI> createRepeated() => $pb.PbList<PLI>();
   @$core.pragma('dart2js:noInline')
-  static PLI getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PLI>(create);
+  static PLI getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PLI>(create);
   static PLI? _defaultInstance;
 
   ///
@@ -512,7 +592,10 @@ class PLI extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.int get latitudeI => $_getIZ(0);
   @$pb.TagNumber(1)
-  set latitudeI($core.int v) { $_setSignedInt32(0, v); }
+  set latitudeI($core.int v) {
+    $_setSignedInt32(0, v);
+  }
+
   @$pb.TagNumber(1)
   $core.bool hasLatitudeI() => $_has(0);
   @$pb.TagNumber(1)
@@ -524,7 +607,10 @@ class PLI extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   $core.int get longitudeI => $_getIZ(1);
   @$pb.TagNumber(2)
-  set longitudeI($core.int v) { $_setSignedInt32(1, v); }
+  set longitudeI($core.int v) {
+    $_setSignedInt32(1, v);
+  }
+
   @$pb.TagNumber(2)
   $core.bool hasLongitudeI() => $_has(1);
   @$pb.TagNumber(2)
@@ -535,7 +621,10 @@ class PLI extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $core.int get altitude => $_getIZ(2);
   @$pb.TagNumber(3)
-  set altitude($core.int v) { $_setSignedInt32(2, v); }
+  set altitude($core.int v) {
+    $_setSignedInt32(2, v);
+  }
+
   @$pb.TagNumber(3)
   $core.bool hasAltitude() => $_has(2);
   @$pb.TagNumber(3)
@@ -546,7 +635,10 @@ class PLI extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.int get speed => $_getIZ(3);
   @$pb.TagNumber(4)
-  set speed($core.int v) { $_setUnsignedInt32(3, v); }
+  set speed($core.int v) {
+    $_setUnsignedInt32(3, v);
+  }
+
   @$pb.TagNumber(4)
   $core.bool hasSpeed() => $_has(3);
   @$pb.TagNumber(4)
@@ -557,13 +649,16 @@ class PLI extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   $core.int get course => $_getIZ(4);
   @$pb.TagNumber(5)
-  set course($core.int v) { $_setUnsignedInt32(4, v); }
+  set course($core.int v) {
+    $_setUnsignedInt32(4, v);
+  }
+
   @$pb.TagNumber(5)
   $core.bool hasCourse() => $_has(4);
   @$pb.TagNumber(5)
   void clearCourse() => clearField(5);
 }
 
-
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
-const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
+const _omitMessageNames =
+    $core.bool.fromEnvironment('protobuf.omit_message_names');

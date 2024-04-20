@@ -6,8 +6,8 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart' as console;
 
-class TelemetryLogger {
-  TelemetryLogger() {
+class BreadcrumbLogger {
+  BreadcrumbLogger() {
     final random = Random();
     _nonce = List.generate(32, (index) => random.nextInt(0xff));
   }

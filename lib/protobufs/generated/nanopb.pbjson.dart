@@ -88,32 +88,170 @@ const NanoPBOptions$json = {
     {'1': 'max_size', '3': 1, '4': 1, '5': 5, '10': 'maxSize'},
     {'1': 'max_length', '3': 14, '4': 1, '5': 5, '10': 'maxLength'},
     {'1': 'max_count', '3': 2, '4': 1, '5': 5, '10': 'maxCount'},
-    {'1': 'int_size', '3': 7, '4': 1, '5': 14, '6': '.IntSize', '7': 'IS_DEFAULT', '10': 'intSize'},
-    {'1': 'type', '3': 3, '4': 1, '5': 14, '6': '.FieldType', '7': 'FT_DEFAULT', '10': 'type'},
+    {
+      '1': 'int_size',
+      '3': 7,
+      '4': 1,
+      '5': 14,
+      '6': '.IntSize',
+      '7': 'IS_DEFAULT',
+      '10': 'intSize'
+    },
+    {
+      '1': 'type',
+      '3': 3,
+      '4': 1,
+      '5': 14,
+      '6': '.FieldType',
+      '7': 'FT_DEFAULT',
+      '10': 'type'
+    },
     {'1': 'long_names', '3': 4, '4': 1, '5': 8, '7': 'true', '10': 'longNames'},
-    {'1': 'packed_struct', '3': 5, '4': 1, '5': 8, '7': 'false', '10': 'packedStruct'},
-    {'1': 'packed_enum', '3': 10, '4': 1, '5': 8, '7': 'false', '10': 'packedEnum'},
-    {'1': 'skip_message', '3': 6, '4': 1, '5': 8, '7': 'false', '10': 'skipMessage'},
+    {
+      '1': 'packed_struct',
+      '3': 5,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'packedStruct'
+    },
+    {
+      '1': 'packed_enum',
+      '3': 10,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'packedEnum'
+    },
+    {
+      '1': 'skip_message',
+      '3': 6,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'skipMessage'
+    },
     {'1': 'no_unions', '3': 8, '4': 1, '5': 8, '7': 'false', '10': 'noUnions'},
     {'1': 'msgid', '3': 9, '4': 1, '5': 13, '10': 'msgid'},
-    {'1': 'anonymous_oneof', '3': 11, '4': 1, '5': 8, '7': 'false', '10': 'anonymousOneof'},
+    {
+      '1': 'anonymous_oneof',
+      '3': 11,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'anonymousOneof'
+    },
     {'1': 'proto3', '3': 12, '4': 1, '5': 8, '7': 'false', '10': 'proto3'},
-    {'1': 'proto3_singular_msgs', '3': 21, '4': 1, '5': 8, '7': 'false', '10': 'proto3SingularMsgs'},
-    {'1': 'enum_to_string', '3': 13, '4': 1, '5': 8, '7': 'false', '10': 'enumToString'},
-    {'1': 'fixed_length', '3': 15, '4': 1, '5': 8, '7': 'false', '10': 'fixedLength'},
-    {'1': 'fixed_count', '3': 16, '4': 1, '5': 8, '7': 'false', '10': 'fixedCount'},
-    {'1': 'submsg_callback', '3': 22, '4': 1, '5': 8, '7': 'false', '10': 'submsgCallback'},
-    {'1': 'mangle_names', '3': 17, '4': 1, '5': 14, '6': '.TypenameMangling', '7': 'M_NONE', '10': 'mangleNames'},
-    {'1': 'callback_datatype', '3': 18, '4': 1, '5': 9, '7': 'pb_callback_t', '10': 'callbackDatatype'},
-    {'1': 'callback_function', '3': 19, '4': 1, '5': 9, '7': 'pb_default_field_callback', '10': 'callbackFunction'},
-    {'1': 'descriptorsize', '3': 20, '4': 1, '5': 14, '6': '.DescriptorSize', '7': 'DS_AUTO', '10': 'descriptorsize'},
-    {'1': 'default_has', '3': 23, '4': 1, '5': 8, '7': 'false', '10': 'defaultHas'},
+    {
+      '1': 'proto3_singular_msgs',
+      '3': 21,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'proto3SingularMsgs'
+    },
+    {
+      '1': 'enum_to_string',
+      '3': 13,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'enumToString'
+    },
+    {
+      '1': 'fixed_length',
+      '3': 15,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'fixedLength'
+    },
+    {
+      '1': 'fixed_count',
+      '3': 16,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'fixedCount'
+    },
+    {
+      '1': 'submsg_callback',
+      '3': 22,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'submsgCallback'
+    },
+    {
+      '1': 'mangle_names',
+      '3': 17,
+      '4': 1,
+      '5': 14,
+      '6': '.TypenameMangling',
+      '7': 'M_NONE',
+      '10': 'mangleNames'
+    },
+    {
+      '1': 'callback_datatype',
+      '3': 18,
+      '4': 1,
+      '5': 9,
+      '7': 'pb_callback_t',
+      '10': 'callbackDatatype'
+    },
+    {
+      '1': 'callback_function',
+      '3': 19,
+      '4': 1,
+      '5': 9,
+      '7': 'pb_default_field_callback',
+      '10': 'callbackFunction'
+    },
+    {
+      '1': 'descriptorsize',
+      '3': 20,
+      '4': 1,
+      '5': 14,
+      '6': '.DescriptorSize',
+      '7': 'DS_AUTO',
+      '10': 'descriptorsize'
+    },
+    {
+      '1': 'default_has',
+      '3': 23,
+      '4': 1,
+      '5': 8,
+      '7': 'false',
+      '10': 'defaultHas'
+    },
     {'1': 'include', '3': 24, '4': 3, '5': 9, '10': 'include'},
     {'1': 'exclude', '3': 26, '4': 3, '5': 9, '10': 'exclude'},
     {'1': 'package', '3': 25, '4': 1, '5': 9, '10': 'package'},
-    {'1': 'type_override', '3': 27, '4': 1, '5': 14, '6': '.google.protobuf.FieldDescriptorProto.Type', '10': 'typeOverride'},
-    {'1': 'sort_by_tag', '3': 28, '4': 1, '5': 8, '7': 'true', '10': 'sortByTag'},
-    {'1': 'fallback_type', '3': 29, '4': 1, '5': 14, '6': '.FieldType', '7': 'FT_CALLBACK', '10': 'fallbackType'},
+    {
+      '1': 'type_override',
+      '3': 27,
+      '4': 1,
+      '5': 14,
+      '6': '.google.protobuf.FieldDescriptorProto.Type',
+      '10': 'typeOverride'
+    },
+    {
+      '1': 'sort_by_tag',
+      '3': 28,
+      '4': 1,
+      '5': 8,
+      '7': 'true',
+      '10': 'sortByTag'
+    },
+    {
+      '1': 'fallback_type',
+      '3': 29,
+      '4': 1,
+      '5': 14,
+      '6': '.FieldType',
+      '7': 'FT_CALLBACK',
+      '10': 'fallbackType'
+    },
   ],
 };
 
@@ -143,4 +281,3 @@ final $typed_data.Uint8List nanoPBOptionsDescriptor = $convert.base64Decode(
     'RvLlR5cGVSDHR5cGVPdmVycmlkZRIkCgtzb3J0X2J5X3RhZxgcIAEoCDoEdHJ1ZVIJc29ydEJ5'
     'VGFnEjwKDWZhbGxiYWNrX3R5cGUYHSABKA4yCi5GaWVsZFR5cGU6C0ZUX0NBTExCQUNLUgxmYW'
     'xsYmFja1R5cGU=');
-

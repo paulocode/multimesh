@@ -69,11 +69,48 @@ const TAKPacket$json = {
   '1': 'TAKPacket',
   '2': [
     {'1': 'is_compressed', '3': 1, '4': 1, '5': 8, '10': 'isCompressed'},
-    {'1': 'contact', '3': 2, '4': 1, '5': 11, '6': '.meshtastic.Contact', '10': 'contact'},
-    {'1': 'group', '3': 3, '4': 1, '5': 11, '6': '.meshtastic.Group', '10': 'group'},
-    {'1': 'status', '3': 4, '4': 1, '5': 11, '6': '.meshtastic.Status', '10': 'status'},
-    {'1': 'pli', '3': 5, '4': 1, '5': 11, '6': '.meshtastic.PLI', '9': 0, '10': 'pli'},
-    {'1': 'chat', '3': 6, '4': 1, '5': 11, '6': '.meshtastic.GeoChat', '9': 0, '10': 'chat'},
+    {
+      '1': 'contact',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Contact',
+      '10': 'contact'
+    },
+    {
+      '1': 'group',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Group',
+      '10': 'group'
+    },
+    {
+      '1': 'status',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.Status',
+      '10': 'status'
+    },
+    {
+      '1': 'pli',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.PLI',
+      '9': 0,
+      '10': 'pli'
+    },
+    {
+      '1': 'chat',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.meshtastic.GeoChat',
+      '9': 0,
+      '10': 'chat'
+    },
   ],
   '8': [
     {'1': 'payload_variant'},
@@ -110,8 +147,22 @@ final $typed_data.Uint8List geoChatDescriptor = $convert.base64Decode(
 const Group$json = {
   '1': 'Group',
   '2': [
-    {'1': 'role', '3': 1, '4': 1, '5': 14, '6': '.meshtastic.MemberRole', '10': 'role'},
-    {'1': 'team', '3': 2, '4': 1, '5': 14, '6': '.meshtastic.Team', '10': 'team'},
+    {
+      '1': 'role',
+      '3': 1,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.MemberRole',
+      '10': 'role'
+    },
+    {
+      '1': 'team',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.meshtastic.Team',
+      '10': 'team'
+    },
   ],
 };
 
@@ -129,8 +180,8 @@ const Status$json = {
 };
 
 /// Descriptor for `Status`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List statusDescriptor = $convert.base64Decode(
-    'CgZTdGF0dXMSGAoHYmF0dGVyeRgBIAEoDVIHYmF0dGVyeQ==');
+final $typed_data.Uint8List statusDescriptor =
+    $convert.base64Decode('CgZTdGF0dXMSGAoHYmF0dGVyeRgBIAEoDVIHYmF0dGVyeQ==');
 
 @$core.Deprecated('Use contactDescriptor instead')
 const Contact$json = {
@@ -163,4 +214,3 @@ final $typed_data.Uint8List pLIDescriptor = $convert.base64Decode(
     'CgNQTEkSHQoKbGF0aXR1ZGVfaRgBIAEoD1IJbGF0aXR1ZGVJEh8KC2xvbmdpdHVkZV9pGAIgAS'
     'gPUgpsb25naXR1ZGVJEhoKCGFsdGl0dWRlGAMgASgFUghhbHRpdHVkZRIUCgVzcGVlZBgEIAEo'
     'DVIFc3BlZWQSFgoGY291cnNlGAUgASgNUgZjb3Vyc2U=');
-

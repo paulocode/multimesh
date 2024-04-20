@@ -27,4 +27,3 @@ const Paxcount$json = {
 final $typed_data.Uint8List paxcountDescriptor = $convert.base64Decode(
     'CghQYXhjb3VudBISCgR3aWZpGAEgASgNUgR3aWZpEhAKA2JsZRgCIAEoDVIDYmxlEhYKBnVwdG'
     'ltZRgDIAEoDVIGdXB0aW1l');
-

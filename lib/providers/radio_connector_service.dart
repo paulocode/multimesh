@@ -19,11 +19,11 @@ class RadioConnectorService extends _$RadioConnectorService
     implements RadioConnector {
   NotifierProvider<RadioConnector, RadioConnectorState>? _lastUsedConnector;
   String? _currentRadioId;
-  late TelemetryLogger _telemetryLogger;
+  late BreadcrumbLogger _telemetryLogger;
 
   @override
   RadioConnectorState build() {
-    _telemetryLogger = ref.watch(telemetryLoggerProvider);
+    _telemetryLogger = ref.watch(breadcrumbLoggerProvider);
 
     if (_lastUsedConnector == null) {
       return Disconnected();

@@ -6,7 +6,7 @@ part of 'telemetry.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetryReceiverHash() => r'c0355d641adbf7f6f13f7b3074c5a6bf2b0aabc1';
+String _$telemetryReceiverHash() => r'ff1e58d76409ff81d6f59d429642d9b7789de4db';
 
 /// Copied from Dart SDK
 class _SystemHash {

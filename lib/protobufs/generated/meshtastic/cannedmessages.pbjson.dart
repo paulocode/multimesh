@@ -22,7 +22,7 @@ const CannedMessageModuleConfig$json = {
 };
 
 /// Descriptor for `CannedMessageModuleConfig`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List cannedMessageModuleConfigDescriptor = $convert.base64Decode(
-    'ChlDYW5uZWRNZXNzYWdlTW9kdWxlQ29uZmlnEhoKCG1lc3NhZ2VzGAEgASgJUghtZXNzYWdlcw'
-    '==');
-
+final $typed_data.Uint8List cannedMessageModuleConfigDescriptor =
+    $convert.base64Decode(
+        'ChlDYW5uZWRNZXNzYWdlTW9kdWxlQ29uZmlnEhoKCG1lc3NhZ2VzGAEgASgJUghtZXNzYWdlcw'
+        '==');

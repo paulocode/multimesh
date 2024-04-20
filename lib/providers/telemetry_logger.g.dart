@@ -6,20 +6,20 @@ part of 'telemetry_logger.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetryLoggerHash() => r'738bf9e6814a8e30c3f0826e3fa9f4c7116f5b05';
+String _$breadcrumbLoggerHash() => r'199b6d508aca5021db85ba7954e5e8510e25ecc2';
 
-/// See also [telemetryLogger].
-@ProviderFor(telemetryLogger)
-final telemetryLoggerProvider = Provider<TelemetryLogger>.internal(
-  telemetryLogger,
-  name: r'telemetryLoggerProvider',
+/// See also [breadcrumbLogger].
+@ProviderFor(breadcrumbLogger)
+final breadcrumbLoggerProvider = Provider<BreadcrumbLogger>.internal(
+  breadcrumbLogger,
+  name: r'breadcrumbLoggerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$telemetryLoggerHash,
+      : _$breadcrumbLoggerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef TelemetryLoggerRef = ProviderRef<TelemetryLogger>;
+typedef BreadcrumbLoggerRef = ProviderRef<BreadcrumbLogger>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -36,7 +36,7 @@ class _TabParentState extends ConsumerState<TabParent> {
     if (prefs.containsKey('telemetryEnabled')) {
       final enabled = prefs.getBool('telemetryEnabled') ?? false;
       _logger.i('telemetry enabled $enabled');
-      await ref.read(telemetryLoggerProvider).setEnabled(enabled);
+      await ref.read(breadcrumbLoggerProvider).setEnabled(enabled);
     } else {
       SchedulerBinding.instance.addPostFrameCallback((_) async {
         final telemetryEnabled = await showConfirmationDialog(
@@ -46,7 +46,7 @@ class _TabParentState extends ConsumerState<TabParent> {
           positive: 'Enable',
         );
         await prefs.setBool('telemetryEnabled', telemetryEnabled);
-        await ref.read(telemetryLoggerProvider).setEnabled(telemetryEnabled);
+        await ref.read(breadcrumbLoggerProvider).setEnabled(telemetryEnabled);
       });
     }
   }

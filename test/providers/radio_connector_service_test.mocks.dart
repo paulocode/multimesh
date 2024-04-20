@@ -1247,11 +1247,11 @@ class MockSocket extends _i1.Mock implements _i4.Socket {
       ) as _i6.Future<dynamic>);
 }
 
-/// A class which mocks [TelemetryLogger].
+/// A class which mocks [BreadcrumbLogger].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTelemetryLogger extends _i1.Mock implements _i13.TelemetryLogger {
-  MockTelemetryLogger() {
+class MockBreadcrumbLogger extends _i1.Mock implements _i13.BreadcrumbLogger {
+  MockBreadcrumbLogger() {
     _i1.throwOnMissingStub(this);
   }
 
