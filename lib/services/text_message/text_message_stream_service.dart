@@ -34,7 +34,6 @@ class TextMessageStreamService {
   final void Function(void Function() cb) _onDispose;
   List<TextMessage> _currentStreamState = [];
   final _logger = Logger();
-  bool _needsFullDispose = false;
 
   Future<void> _loadInitialMessagesFromLocal() async {
     _currentStreamState = switch (_chatType) {
@@ -117,12 +116,6 @@ class TextMessageStreamService {
       textMessage,
     ];
     _streamController.add(_currentStreamState);
-    // because this class does not listen to status updates,
-    // we must clear the messages cache to not serve stale
-    // statuses.
-    if (textMessage.from == _myNodeNum) {
-      _needsFullDispose = true;
-    }
   }
 
   void _listenToRemoteMessages() {
@@ -136,10 +129,13 @@ class TextMessageStreamService {
   List<TextMessage> getMessages() => List.unmodifiable(_currentStreamState);
 
   void disposeOldMessages() {
-    if (_needsFullDispose) {
+    // because this class does not listen to status updates,
+    // we must clear the messages cache to not serve stale
+    // statuses for SENDING states.
+    final needsFullDispose = _currentStreamState
+        .any((element) => element.state == TextMessageStatus.SENDING);
+    if (needsFullDispose) {
       _loadInitialMessagesFromLocal();
-      _needsFullDispose = _currentStreamState
-          .any((element) => element.state == TextMessageStatus.SENDING);
     } else {
       final length = _currentStreamState.length;
       _currentStreamState = length < BATCH_NUM_MESSAGES_TO_LOAD
