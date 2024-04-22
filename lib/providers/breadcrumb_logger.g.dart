@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'telemetry_logger.dart';
+part of 'breadcrumb_logger.dart';
 
 // **************************************************************************
 // RiverpodGenerator

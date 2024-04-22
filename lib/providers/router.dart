@@ -12,9 +12,9 @@ import '../screens/config/user_config.dart';
 import '../screens/node_info.dart';
 import '../screens/radio_config.dart';
 import '../screens/tab_parent.dart';
-import '../services/telemetry_logger.dart';
+import '../services/breadcrumb_logger.dart';
 import '../widgets/traceroute_modal.dart';
-import 'telemetry_logger.dart';
+import 'breadcrumb_logger.dart';
 
 part 'router.g.dart';
 

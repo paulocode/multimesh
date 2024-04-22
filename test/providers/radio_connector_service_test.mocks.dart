@@ -15,7 +15,7 @@ import 'package:multimesh/models/mesh_radio.dart' as _i10;
 import 'package:multimesh/models/radio_connector_state.dart' as _i8;
 import 'package:multimesh/providers/ble/ble_radio_connector.dart' as _i11;
 import 'package:multimesh/providers/tcp/tcp_radio_connector.dart' as _i7;
-import 'package:multimesh/services/telemetry_logger.dart' as _i13;
+import 'package:multimesh/services/breadcrumb_logger.dart' as _i13;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
 
 // ignore_for_file: type=lint

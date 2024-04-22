@@ -5,10 +5,10 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/radio_connector_state.dart';
+import '../providers/breadcrumb_logger.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/radio_config/radio_config_uploader_service.dart';
 import '../providers/radio_connector_service.dart';
-import '../providers/telemetry_logger.dart';
 import '../widgets/app_bar_connection_indicator.dart';
 import 'config/confirmation_dialog.dart';
 
