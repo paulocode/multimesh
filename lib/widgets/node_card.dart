@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../models/chat_type.dart';
 import '../models/mesh_node.dart';
+import '../providers/node/hops_away.dart';
 import '../providers/node/node_service.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/telemetry.dart';
@@ -30,6 +31,7 @@ class NodeCard extends ConsumerWidget {
         chatType: DirectMessageChat(dmNode: node.nodeNum),
       ),
     );
+    final hopsAway = ref.watch(hopsAwayProvider(node.nodeNum));
     return StreamBuilder(
       stream: textMessageStreamService.stream,
       initialData: textMessageStreamService.getMessages(),
@@ -116,6 +118,7 @@ class NodeCard extends ConsumerWidget {
                                 Text(lastMessage.text),
                               ],
                             ),
+                          if (hopsAway != null && myNodeNum != node.nodeNum) Text('Hops: $hopsAway'),
                         ],
                       ),
                     ),
