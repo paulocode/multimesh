@@ -45,3 +45,5 @@ app.*.map.json
 # Sonar
 .scannerwork/
 tests.output
+
+coverage/lcov.info
