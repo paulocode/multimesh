@@ -9,6 +9,7 @@ import '../providers/breadcrumb_logger.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/radio_config/radio_config_uploader_service.dart';
 import '../providers/radio_connector_service.dart';
+import '../providers/wrap/local_platform.dart';
 import '../widgets/app_bar_connection_indicator.dart';
 import 'config/confirmation_dialog.dart';
 
@@ -37,6 +38,7 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
     final radioConfig = ref.watch(radioConfigServiceProvider);
     final telemetryLogger = ref.watch(breadcrumbLoggerProvider);
     final radioConfigUploader = ref.watch(radioConfigUploaderServiceProvider);
+    final localPlatform = ref.read(localPlatformProvider);
     final longName = radioConfig.configDownloaded
         ? '${radioConfig.myNodeInfo.user.longName} ⚙️'
         : 'Settings';
@@ -130,18 +132,19 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
                   ),
                 ],
               ),
-              SwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                title: const Text('Upload anonymized crash logs'),
-                value: _telemetryEnabled,
-                onChanged: (value) async {
-                  await prefs.setBool('telemetryEnabled', value);
-                  await telemetryLogger.setEnabled(_telemetryEnabled);
-                  setState(() {
-                    _telemetryEnabled = value;
-                  });
-                },
-              ),
+              if (!localPlatform.isWindows && !localPlatform.isLinux)
+                SwitchListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                  title: const Text('Upload anonymized crash logs'),
+                  value: _telemetryEnabled,
+                  onChanged: (value) async {
+                    await prefs.setBool('telemetryEnabled', value);
+                    await telemetryLogger.setEnabled(_telemetryEnabled);
+                    setState(() {
+                      _telemetryEnabled = value;
+                    });
+                  },
+                ),
               const SizedBox(
                 height: 15,
               ),
