@@ -10,6 +10,7 @@ import '../../models/radio_scan_state.dart';
 import '../../services/ble/ble_permissions_requester.dart';
 import '../../services/wrap/flutter_blue_plus_mockable.dart';
 import '../wrap/flutter_blue_plus_mockable.dart';
+import '../wrap/local_platform.dart';
 import 'ble_permissions_requester.dart';
 
 part 'ble_radio_scanner.g.dart';
@@ -28,6 +29,10 @@ class BleRadioScanner extends _$BleRadioScanner {
   }
 
   Future<void> scan() async {
+    if (ref.read(localPlatformProvider).isLinux ||
+        ref.read(localPlatformProvider).isWindows) {
+      return;
+    }
     state = state.copyWith(scanning: true);
     if (!await _blePermissionsRequester.request()) {
       state = state.copyWith(scanning: false);

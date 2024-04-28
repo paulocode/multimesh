@@ -17,6 +17,7 @@ Future<Database> sqflite(
   final logger = Logger();
   final localPlatform = ref.read(localPlatformProvider);
   if (localPlatform.isWindows || localPlatform.isLinux) {
+    databaseFactory = databaseFactoryFfi;
     sqfliteFfiInit();
   }
 
