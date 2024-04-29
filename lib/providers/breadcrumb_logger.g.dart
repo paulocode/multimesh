@@ -6,7 +6,7 @@ part of 'breadcrumb_logger.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$breadcrumbLoggerHash() => r'199b6d508aca5021db85ba7954e5e8510e25ecc2';
+String _$breadcrumbLoggerHash() => r'87a8cd98c3746dbaa490c4662d2022bd4ac0637e';
 
 /// See also [breadcrumbLogger].
 @ProviderFor(breadcrumbLogger)

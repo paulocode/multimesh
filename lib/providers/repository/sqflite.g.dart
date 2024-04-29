@@ -6,7 +6,7 @@ part of 'sqflite.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sqfliteHash() => r'f667e73468a9140f4c8c351d8e716c905b903cfb';
+String _$sqfliteHash() => r'cb57ea4e62f67c7a4e788483152540cdb87a6c04';
 
 /// See also [sqflite].
 @ProviderFor(sqflite)

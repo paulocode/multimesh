@@ -6,8 +6,8 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart' as console;
 
-class BreadcrumbLogger {
-  BreadcrumbLogger() {
+class FirebaseLogger implements BreadcrumbLogger {
+  FirebaseLogger() {
     final random = Random();
     _nonce = List.generate(32, (index) => random.nextInt(0xff));
   }
@@ -32,6 +32,7 @@ class BreadcrumbLogger {
     await _crashlytics.log(e.toString());
   }
 
+  @override
   int anonymizeInt(int value) {
     final digest = anonymizeBytes([
       (value & 0xFF000000) >> 24,
@@ -42,6 +43,7 @@ class BreadcrumbLogger {
     return digest[0] | digest[1] << 8 | digest[2] << 16 | digest[3] << 24;
   }
 
+  @override
   List<int> anonymizeBytes(List<int> bytes) {
     final output = AccumulatorSink<Digest>();
     final input = sha256.startChunkedConversion(output);
@@ -52,6 +54,7 @@ class BreadcrumbLogger {
     return digest;
   }
 
+  @override
   String anonymizeString(String value) {
     final digest = anonymizeBytes(utf8.encode(value));
     return hex.encode(digest);
@@ -67,9 +70,72 @@ class BreadcrumbLogger {
   }
 
   // ignore: avoid_positional_boolean_parameters
+  @override
   Future<void> setEnabled(bool telemetryEnabled) async {
     await _crashlytics.setCrashlyticsCollectionEnabled(telemetryEnabled);
   }
 
+  @override
   bool isEnabled() => _crashlytics.isCrashlyticsCollectionEnabled;
+}
+
+// TODO move to own file
+abstract class BreadcrumbLogger {
+  Future<void> i(String string);
+
+  Future<void> w(String string);
+
+  Future<void> e(Object e);
+
+  int anonymizeInt(int value);
+
+  List<int> anonymizeBytes(List<int> bytes);
+
+  String anonymizeString(String value);
+
+  // ignore: avoid_positional_boolean_parameters
+  Future<void> setEnabled(bool telemetryEnabled);
+
+  bool isEnabled();
+}
+
+// TODO move to own file
+class NullLogger implements BreadcrumbLogger {
+  Future<void> i(String string) async {
+    return;
+  }
+
+  Future<void> w(String string) async {
+    return;
+  }
+
+  Future<void> e(Object e) async {
+    return;
+  }
+
+  @override
+  List<int> anonymizeBytes(List<int> bytes) {
+    return bytes;
+  }
+
+  @override
+  int anonymizeInt(int value) {
+    return value;
+  }
+
+  @override
+  String anonymizeString(String value) {
+    return value;
+  }
+
+  @override
+  bool isEnabled() {
+    return false;
+  }
+
+  @override
+  Future<void> setEnabled(bool telemetryEnabled) async {
+    return;
+  }
+
 }
