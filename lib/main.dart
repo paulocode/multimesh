@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -35,10 +36,16 @@ Future<void> _initFirebase() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    if (errorDetails.exception is SocketException) {
+      return;
+    }
+    FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
   };
   PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    if (error is SocketException) {
+      return true;
+    }
+    FirebaseCrashlytics.instance.recordError(error, stack);
     return true;
   };
   final packageInfo = await PackageInfo.fromPlatform();
