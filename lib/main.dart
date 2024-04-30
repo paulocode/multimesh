@@ -5,6 +5,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform/platform.dart';
 
 import 'firebase_options.dart';
@@ -40,6 +41,14 @@ Future<void> _initFirebase() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+  final packageInfo = await PackageInfo.fromPlatform();
+  // ignore: do_not_use_environment
+  const hash = String.fromEnvironment('GIT_HASH');
+  await FirebaseCrashlytics.instance.setCustomKey('git-hash', hash);
+  await FirebaseCrashlytics.instance
+      .setCustomKey('version', packageInfo.version);
+  await FirebaseCrashlytics.instance
+      .setCustomKey('build-id', packageInfo.buildNumber);
 }
 
 class MyApp extends ConsumerStatefulWidget {

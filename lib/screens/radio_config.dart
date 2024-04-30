@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/radio_connector_state.dart';
@@ -23,11 +24,16 @@ class RadioConfigScreen extends ConsumerStatefulWidget {
 class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
   late SharedPreferences prefs;
   bool _telemetryEnabled = false;
+  String version = '';
+  String buildNumber = '';
+  // ignore: do_not_use_environment
+  final hash = const String.fromEnvironment('GIT_HASH');
   final _logger = Logger();
 
   @override
   void initState() {
     getPrefs();
+    getVersion();
     _telemetryEnabled = ref.read(breadcrumbLoggerProvider).isEnabled();
     _logger.i('telemetry enabled $_telemetryEnabled');
     super.initState();
@@ -197,8 +203,7 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
                   'is provided - use at your own risk.',
                 ),
               ),
-              // ignore: do_not_use_environment
-              const Text(String.fromEnvironment('GIT_HASH')),
+              Text('$version-$buildNumber-$hash'),
             ],
           ),
         ),
@@ -208,5 +213,13 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
 
   Future<void> getPrefs() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<void> getVersion() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      version = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
+    });
   }
 }

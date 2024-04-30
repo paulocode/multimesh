@@ -17,16 +17,19 @@ class FirebaseLogger implements BreadcrumbLogger {
   final _toHashRegex = RegExp(r'#\{([^}]*)\}');
   final _crashlytics = FirebaseCrashlytics.instance;
 
+  @override
   Future<void> i(String string) async {
     _logger.i(string);
     await _crashlytics.log(_replaceHashedString(string));
   }
 
+  @override
   Future<void> w(String string) async {
     _logger.w(string);
     await _crashlytics.log(_replaceHashedString(string));
   }
 
+  @override
   Future<void> e(Object e) async {
     _logger.e(e);
     await _crashlytics.log(e.toString());
@@ -101,14 +104,17 @@ abstract class BreadcrumbLogger {
 
 // TODO move to own file
 class NullLogger implements BreadcrumbLogger {
+  @override
   Future<void> i(String string) async {
     return;
   }
 
+  @override
   Future<void> w(String string) async {
     return;
   }
 
+  @override
   Future<void> e(Object e) async {
     return;
   }
@@ -137,5 +143,4 @@ class NullLogger implements BreadcrumbLogger {
   Future<void> setEnabled(bool telemetryEnabled) async {
     return;
   }
-
 }

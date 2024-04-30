@@ -118,7 +118,8 @@ class NodeCard extends ConsumerWidget {
                                 Text(lastMessage.text),
                               ],
                             ),
-                          if (hopsAway != null && myNodeNum != node.nodeNum) Text('Hops: $hopsAway'),
+                          if (hopsAway != null && myNodeNum != node.nodeNum)
+                            Text('Hops: $hopsAway'),
                         ],
                       ),
                     ),

@@ -3,7 +3,7 @@ description: "A cross-platform Meshtastic client based on Flutter"
 
 publish_to: 'none'
 
-version: 0.2.1+16
+version: 0.2.1+17
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -32,6 +32,7 @@ dependencies:
   logger: ^2.0.2+1
   mobile_scanner: ^4.0.1
   mockito: ^5.4.4
+  package_info_plus: ^8.0.0
   path: ^1.9.0
   permission_handler: ^11.1.0
   platform: ^3.1.4
