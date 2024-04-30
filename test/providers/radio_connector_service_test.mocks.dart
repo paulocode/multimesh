@@ -1336,4 +1336,13 @@ class MockBreadcrumbLogger extends _i1.Mock implements _i13.BreadcrumbLogger {
         ),
         returnValue: false,
       ) as bool);
+
+  @override
+  bool canUploadLogs() => (super.noSuchMethod(
+        Invocation.method(
+          #canUploadLogs,
+          [],
+        ),
+        returnValue: false,
+      ) as bool);
 }

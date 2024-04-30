@@ -80,6 +80,11 @@ class FirebaseLogger implements BreadcrumbLogger {
 
   @override
   bool isEnabled() => _crashlytics.isCrashlyticsCollectionEnabled;
+
+  @override
+  bool canUploadLogs() {
+    return true;
+  }
 }
 
 // TODO move to own file
@@ -100,6 +105,8 @@ abstract class BreadcrumbLogger {
   Future<void> setEnabled(bool telemetryEnabled);
 
   bool isEnabled();
+
+  bool canUploadLogs();
 }
 
 // TODO move to own file
@@ -142,5 +149,10 @@ class NullLogger implements BreadcrumbLogger {
   @override
   Future<void> setEnabled(bool telemetryEnabled) async {
     return;
+  }
+
+  @override
+  bool canUploadLogs() {
+    return false;
   }
 }

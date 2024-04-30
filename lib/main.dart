@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:platform/platform.dart';
 
+import 'constants/app_constants.dart';
 import 'firebase_options.dart';
 import 'providers/channel_service.dart';
 import 'providers/node/node_service.dart';
@@ -24,8 +24,7 @@ import 'theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  const platform = LocalPlatform();
-  if (!platform.isWindows && !platform.isLinux) {
+  if (CAN_UPLOAD_LOGS) {
     await _initFirebase();
   }
   runApp(const ProviderScope(child: MyApp()));
