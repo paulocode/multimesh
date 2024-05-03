@@ -17,6 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TelemetryState {
   double? get temp => throw _privateConstructorUsedError;
+  double? get relativeHumidity => throw _privateConstructorUsedError;
+  double? get barometricPressure => throw _privateConstructorUsedError;
+  double? get gasResistance => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TelemetryStateCopyWith<TelemetryState> get copyWith =>
@@ -29,7 +32,11 @@ abstract class $TelemetryStateCopyWith<$Res> {
           TelemetryState value, $Res Function(TelemetryState) then) =
       _$TelemetryStateCopyWithImpl<$Res, TelemetryState>;
   @useResult
-  $Res call({double? temp});
+  $Res call(
+      {double? temp,
+      double? relativeHumidity,
+      double? barometricPressure,
+      double? gasResistance});
 }
 
 /// @nodoc
@@ -46,11 +53,26 @@ class _$TelemetryStateCopyWithImpl<$Res, $Val extends TelemetryState>
   @override
   $Res call({
     Object? temp = freezed,
+    Object? relativeHumidity = freezed,
+    Object? barometricPressure = freezed,
+    Object? gasResistance = freezed,
   }) {
     return _then(_value.copyWith(
       temp: freezed == temp
           ? _value.temp
           : temp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      relativeHumidity: freezed == relativeHumidity
+          ? _value.relativeHumidity
+          : relativeHumidity // ignore: cast_nullable_to_non_nullable
+              as double?,
+      barometricPressure: freezed == barometricPressure
+          ? _value.barometricPressure
+          : barometricPressure // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gasResistance: freezed == gasResistance
+          ? _value.gasResistance
+          : gasResistance // ignore: cast_nullable_to_non_nullable
               as double?,
     ) as $Val);
   }
@@ -64,7 +86,11 @@ abstract class _$$TelemetryStateImplCopyWith<$Res>
       __$$TelemetryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double? temp});
+  $Res call(
+      {double? temp,
+      double? relativeHumidity,
+      double? barometricPressure,
+      double? gasResistance});
 }
 
 /// @nodoc
@@ -79,11 +105,26 @@ class __$$TelemetryStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? temp = freezed,
+    Object? relativeHumidity = freezed,
+    Object? barometricPressure = freezed,
+    Object? gasResistance = freezed,
   }) {
     return _then(_$TelemetryStateImpl(
       temp: freezed == temp
           ? _value.temp
           : temp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      relativeHumidity: freezed == relativeHumidity
+          ? _value.relativeHumidity
+          : relativeHumidity // ignore: cast_nullable_to_non_nullable
+              as double?,
+      barometricPressure: freezed == barometricPressure
+          ? _value.barometricPressure
+          : barometricPressure // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gasResistance: freezed == gasResistance
+          ? _value.gasResistance
+          : gasResistance // ignore: cast_nullable_to_non_nullable
               as double?,
     ));
   }
@@ -92,14 +133,25 @@ class __$$TelemetryStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TelemetryStateImpl extends _TelemetryState {
-  const _$TelemetryStateImpl({this.temp}) : super._();
+  const _$TelemetryStateImpl(
+      {this.temp,
+      this.relativeHumidity,
+      this.barometricPressure,
+      this.gasResistance})
+      : super._();
 
   @override
   final double? temp;
+  @override
+  final double? relativeHumidity;
+  @override
+  final double? barometricPressure;
+  @override
+  final double? gasResistance;
 
   @override
   String toString() {
-    return 'TelemetryState(temp: $temp)';
+    return 'TelemetryState(temp: $temp, relativeHumidity: $relativeHumidity, barometricPressure: $barometricPressure, gasResistance: $gasResistance)';
   }
 
   @override
@@ -107,11 +159,18 @@ class _$TelemetryStateImpl extends _TelemetryState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TelemetryStateImpl &&
-            (identical(other.temp, temp) || other.temp == temp));
+            (identical(other.temp, temp) || other.temp == temp) &&
+            (identical(other.relativeHumidity, relativeHumidity) ||
+                other.relativeHumidity == relativeHumidity) &&
+            (identical(other.barometricPressure, barometricPressure) ||
+                other.barometricPressure == barometricPressure) &&
+            (identical(other.gasResistance, gasResistance) ||
+                other.gasResistance == gasResistance));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, temp);
+  int get hashCode => Object.hash(
+      runtimeType, temp, relativeHumidity, barometricPressure, gasResistance);
 
   @JsonKey(ignore: true)
   @override
@@ -122,11 +181,21 @@ class _$TelemetryStateImpl extends _TelemetryState {
 }
 
 abstract class _TelemetryState extends TelemetryState {
-  const factory _TelemetryState({final double? temp}) = _$TelemetryStateImpl;
+  const factory _TelemetryState(
+      {final double? temp,
+      final double? relativeHumidity,
+      final double? barometricPressure,
+      final double? gasResistance}) = _$TelemetryStateImpl;
   const _TelemetryState._() : super._();
 
   @override
   double? get temp;
+  @override
+  double? get relativeHumidity;
+  @override
+  double? get barometricPressure;
+  @override
+  double? get gasResistance;
   @override
   @JsonKey(ignore: true)
   _$$TelemetryStateImplCopyWith<_$TelemetryStateImpl> get copyWith =>

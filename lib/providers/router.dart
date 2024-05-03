@@ -12,6 +12,7 @@ import '../screens/config/user_config.dart';
 import '../screens/node_info.dart';
 import '../screens/radio_config.dart';
 import '../screens/tab_parent.dart';
+import '../screens/telemetry_log.dart';
 import '../services/breadcrumb_logger.dart';
 import '../widgets/traceroute_modal.dart';
 import 'breadcrumb_logger.dart';
@@ -94,6 +95,16 @@ GoRouter goRouter(GoRouterRef ref) {
           final id =
               int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
           return NodeInfoScreen(id);
+        },
+      ),
+      GoRoute(
+        path: '/telemetryLog',
+        builder: (context, state) {
+          final id =
+              int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
+          return TelemetryLogScreen(
+            nodeNum: id,
+          );
         },
       ),
       GoRoute(

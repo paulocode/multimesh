@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'telemetry.dart';
+part of 'telemetry_streamer.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetryReceiverHash() => r'ff1e58d76409ff81d6f59d429642d9b7789de4db';
+String _$telemetryStreamerHash() => r'506e01d29687c0f09ff1cbb653033a239f86a2c5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,38 +29,39 @@ class _SystemHash {
   }
 }
 
-abstract class _$TelemetryReceiver extends BuildlessNotifier<TelemetryState> {
+abstract class _$TelemetryStreamer
+    extends BuildlessAutoDisposeStreamNotifier<List<Telemetry>> {
   late final int nodeNum;
 
-  TelemetryState build(
-    int nodeNum,
-  );
+  Stream<List<Telemetry>> build({
+    required int nodeNum,
+  });
 }
 
-/// See also [TelemetryReceiver].
-@ProviderFor(TelemetryReceiver)
-const telemetryReceiverProvider = TelemetryReceiverFamily();
+/// See also [TelemetryStreamer].
+@ProviderFor(TelemetryStreamer)
+const telemetryStreamerProvider = TelemetryStreamerFamily();
 
-/// See also [TelemetryReceiver].
-class TelemetryReceiverFamily extends Family<TelemetryState> {
-  /// See also [TelemetryReceiver].
-  const TelemetryReceiverFamily();
+/// See also [TelemetryStreamer].
+class TelemetryStreamerFamily extends Family<AsyncValue<List<Telemetry>>> {
+  /// See also [TelemetryStreamer].
+  const TelemetryStreamerFamily();
 
-  /// See also [TelemetryReceiver].
-  TelemetryReceiverProvider call(
-    int nodeNum,
-  ) {
-    return TelemetryReceiverProvider(
-      nodeNum,
+  /// See also [TelemetryStreamer].
+  TelemetryStreamerProvider call({
+    required int nodeNum,
+  }) {
+    return TelemetryStreamerProvider(
+      nodeNum: nodeNum,
     );
   }
 
   @override
-  TelemetryReceiverProvider getProviderOverride(
-    covariant TelemetryReceiverProvider provider,
+  TelemetryStreamerProvider getProviderOverride(
+    covariant TelemetryStreamerProvider provider,
   ) {
     return call(
-      provider.nodeNum,
+      nodeNum: provider.nodeNum,
     );
   }
 
@@ -76,30 +77,30 @@ class TelemetryReceiverFamily extends Family<TelemetryState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'telemetryReceiverProvider';
+  String? get name => r'telemetryStreamerProvider';
 }
 
-/// See also [TelemetryReceiver].
-class TelemetryReceiverProvider
-    extends NotifierProviderImpl<TelemetryReceiver, TelemetryState> {
-  /// See also [TelemetryReceiver].
-  TelemetryReceiverProvider(
-    int nodeNum,
-  ) : this._internal(
-          () => TelemetryReceiver()..nodeNum = nodeNum,
-          from: telemetryReceiverProvider,
-          name: r'telemetryReceiverProvider',
+/// See also [TelemetryStreamer].
+class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
+    TelemetryStreamer, List<Telemetry>> {
+  /// See also [TelemetryStreamer].
+  TelemetryStreamerProvider({
+    required int nodeNum,
+  }) : this._internal(
+          () => TelemetryStreamer()..nodeNum = nodeNum,
+          from: telemetryStreamerProvider,
+          name: r'telemetryStreamerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$telemetryReceiverHash,
-          dependencies: TelemetryReceiverFamily._dependencies,
+                  : _$telemetryStreamerHash,
+          dependencies: TelemetryStreamerFamily._dependencies,
           allTransitiveDependencies:
-              TelemetryReceiverFamily._allTransitiveDependencies,
+              TelemetryStreamerFamily._allTransitiveDependencies,
           nodeNum: nodeNum,
         );
 
-  TelemetryReceiverProvider._internal(
+  TelemetryStreamerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -112,19 +113,19 @@ class TelemetryReceiverProvider
   final int nodeNum;
 
   @override
-  TelemetryState runNotifierBuild(
-    covariant TelemetryReceiver notifier,
+  Stream<List<Telemetry>> runNotifierBuild(
+    covariant TelemetryStreamer notifier,
   ) {
     return notifier.build(
-      nodeNum,
+      nodeNum: nodeNum,
     );
   }
 
   @override
-  Override overrideWith(TelemetryReceiver Function() create) {
+  Override overrideWith(TelemetryStreamer Function() create) {
     return ProviderOverride(
       origin: this,
-      override: TelemetryReceiverProvider._internal(
+      override: TelemetryStreamerProvider._internal(
         () => create()..nodeNum = nodeNum,
         from: from,
         name: null,
@@ -137,13 +138,14 @@ class TelemetryReceiverProvider
   }
 
   @override
-  NotifierProviderElement<TelemetryReceiver, TelemetryState> createElement() {
-    return _TelemetryReceiverProviderElement(this);
+  AutoDisposeStreamNotifierProviderElement<TelemetryStreamer, List<Telemetry>>
+      createElement() {
+    return _TelemetryStreamerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is TelemetryReceiverProvider && other.nodeNum == nodeNum;
+    return other is TelemetryStreamerProvider && other.nodeNum == nodeNum;
   }
 
   @override
@@ -155,18 +157,19 @@ class TelemetryReceiverProvider
   }
 }
 
-mixin TelemetryReceiverRef on NotifierProviderRef<TelemetryState> {
+mixin TelemetryStreamerRef
+    on AutoDisposeStreamNotifierProviderRef<List<Telemetry>> {
   /// The parameter `nodeNum` of this provider.
   int get nodeNum;
 }
 
-class _TelemetryReceiverProviderElement
-    extends NotifierProviderElement<TelemetryReceiver, TelemetryState>
-    with TelemetryReceiverRef {
-  _TelemetryReceiverProviderElement(super.provider);
+class _TelemetryStreamerProviderElement
+    extends AutoDisposeStreamNotifierProviderElement<TelemetryStreamer,
+        List<Telemetry>> with TelemetryStreamerRef {
+  _TelemetryStreamerProviderElement(super.provider);
 
   @override
-  int get nodeNum => (origin as TelemetryReceiverProvider).nodeNum;
+  int get nodeNum => (origin as TelemetryStreamerProvider).nodeNum;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

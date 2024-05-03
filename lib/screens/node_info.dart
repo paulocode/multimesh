@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../models/mesh_node.dart';
 import '../providers/node/node_service.dart';
+import '../widgets/app_bar_connection_indicator.dart';
 import '../widgets/node_card.dart';
 
 class NodeInfoScreen extends ConsumerStatefulWidget {
@@ -21,8 +22,8 @@ class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
     final nodes = ref.watch(nodeServiceProvider);
     final node = nodes[widget.nodeNum] ?? _defaultNode;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(node.longName),
+      appBar: AppBarWithConnectionIndicator(
+        title: node.longName,
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -32,9 +33,12 @@ class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
                 node: node,
                 showChevron: false,
               ),
-              const Text('<more node info...>'),
-              const Text('<more node info...>'),
-              const Text('<more node info...>'),
+              OutlinedButton(
+                onPressed: () {
+                  context.push('/telemetryLog?nodeNum=${widget.nodeNum}');
+                },
+                child: const Text('Telemetry'),
+              ),
               OutlinedButton(
                 onPressed: () {
                   context.push('/traceroute?nodeNum=${widget.nodeNum}');

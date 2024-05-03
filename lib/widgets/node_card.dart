@@ -7,7 +7,7 @@ import '../models/mesh_node.dart';
 import '../providers/node/hops_away.dart';
 import '../providers/node/node_service.dart';
 import '../providers/radio_config/radio_config_service.dart';
-import '../providers/telemetry.dart';
+import '../providers/telemetry/telemetry_receiver.dart';
 import '../providers/text_message/text_message_stream_service.dart';
 
 class NodeCard extends ConsumerWidget {
@@ -25,7 +25,8 @@ class NodeCard extends ConsumerWidget {
     final nodes = ref.watch(nodeServiceProvider);
     final myNodeNum = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
-    final telemetry = ref.watch(telemetryReceiverProvider(node.nodeNum));
+    final telemetry =
+        ref.watch(telemetryLatestStreamerProvider(nodeNum: node.nodeNum));
     final textMessageStreamService = ref.watch(
       textMessageStreamServiceProvider(
         chatType: DirectMessageChat(dmNode: node.nodeNum),
@@ -89,7 +90,7 @@ class NodeCard extends ConsumerWidget {
                                   Icons.thermostat,
                                   size: 20,
                                 ),
-                                Text('${telemetry.temp?.toStringAsFixed(2)} C'),
+                                Text('${telemetry.temp?.toStringAsFixed(2)}°'),
                               ],
                             ),
                           if (node.hwModel != null)
@@ -155,7 +156,7 @@ class NodeCard extends ConsumerWidget {
                               ],
                             ),
                           ),
-                        if (showChevron && myNodeNum != node.nodeNum)
+                        if (showChevron)
                           IconButton(
                             onPressed: () {
                               context.push('/nodeInfo?nodeNum=${node.nodeNum}');

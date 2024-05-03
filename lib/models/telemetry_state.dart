@@ -5,6 +5,9 @@ part 'telemetry_state.freezed.dart';
 class TelemetryState with _$TelemetryState {
   const factory TelemetryState({
     double? temp,
+    double? relativeHumidity,
+    double? barometricPressure,
+    double? gasResistance,
   }) = _TelemetryState;
 
   const TelemetryState._();

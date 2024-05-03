@@ -17,6 +17,7 @@ import 'providers/radio_config/radio_config_downloader_service.dart';
 import 'providers/reconnector.dart';
 import 'providers/repository/sqflite.dart';
 import 'providers/router.dart';
+import 'providers/telemetry/telemetry_receiver.dart';
 import 'providers/text_message/text_message_receiver_service.dart';
 import 'providers/wrap/flutter_blue_plus_mockable.dart';
 import 'providers/wrap/local_platform.dart';
@@ -130,6 +131,7 @@ class _EagerInitialization extends ConsumerWidget {
       ref.watch(channelServiceProvider);
       ref.watch(nodeServiceProvider);
       ref.watch(radioConfigDownloaderServiceProvider);
+      ref.watch(telemetryReceiverProvider);
 
       // make sure autoreconnect is ready
       ref.watch(reconnectorServiceProvider());

@@ -33,6 +33,13 @@ Future<Database> sqflite(
         'ALTER TABLE text_messages ADD COLUMN routingError INTEGER;',
       );
     }
+    if (oldVersion < 4) {
+      logger.i('DB Updating to version 4');
+      await db.execute(
+        'CREATE TABLE telemetry (id INTEGER PRIMARY KEY AUTOINCREMENT, owner INTEGER, fromNode INTEGER, '
+        'temp REAL, relativeHumidity REAL, barometricPressure REAL, gasResistance REAL, time INTEGER);',
+      );
+    }
   }
 
   return openDatabase(
@@ -41,7 +48,7 @@ Future<Database> sqflite(
       await db.execute(
         'CREATE TABLE text_messages (id INTEGER PRIMARY KEY AUTOINCREMENT, '
         'text TEXT, toNode INTEGER, fromNode INTEGER, channel INTEGER, '
-        'time INTEGER, state INTEGER, packetId INTEGER)',
+        'time INTEGER, state INTEGER, packetId INTEGER);',
       );
       _onUpgrade(db, 1, version);
     },
@@ -50,4 +57,4 @@ Future<Database> sqflite(
   );
 }
 
-const DATABASE_VERSION = 3;
+const DATABASE_VERSION = 4;
