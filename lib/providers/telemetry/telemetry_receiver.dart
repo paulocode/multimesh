@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/telemetry_state.dart';
+import '../../models/timed_telemetry.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../../protobufs/generated/meshtastic/telemetry.pb.dart';
@@ -51,12 +52,11 @@ class TelemetryReceiver {
     final decoded = packet.decoded;
     if (decoded.portnum == PortNum.TELEMETRY_APP) {
       final telemetry = Telemetry.fromBuffer(decoded.payload);
-      telemetry.time = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-      packet.decoded.payload = telemetry.writeToBuffer();
       _logger.i(telemetry.toString());
       _streamController.add(packet);
       _telemetryRepository.add(
-        telemetry: telemetry,
+        timedTelemetry:
+            TimedTelemetry(timeReceived: DateTime.now(), telemetry: telemetry),
         fromNode: packet.from,
         owner: _myNodeNum,
       );
@@ -65,12 +65,17 @@ class TelemetryReceiver {
 
   StreamSubscription<MeshPacket> addTelemetryListener({
     required int nodeNum,
-    required void Function(Telemetry) listener,
+    required void Function(TimedTelemetry) listener,
   }) {
     return _streamController.stream
         .where((event) => event.from == nodeNum)
         .listen((event) {
-      listener(Telemetry.fromBuffer(event.decoded.payload));
+      listener(
+        TimedTelemetry(
+          timeReceived: DateTime.now(),
+          telemetry: Telemetry.fromBuffer(event.decoded.payload),
+        ),
+      );
     });
   }
 }
@@ -95,7 +100,8 @@ class TelemetryLatestStreamer extends _$TelemetryLatestStreamer {
     return const TelemetryState();
   }
 
-  void _processTelemetry(Telemetry telemetry) {
+  void _processTelemetry(TimedTelemetry timedTelemetry) {
+    final telemetry = timedTelemetry.telemetry;
     final environmentMetrics = telemetry.environmentMetrics;
     if (environmentMetrics.hasTemperature()) {
       state = state.copyWith(temp: telemetry.environmentMetrics.temperature);

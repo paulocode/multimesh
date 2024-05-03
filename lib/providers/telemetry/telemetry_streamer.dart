@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../constants/app_constants.dart';
-import '../../protobufs/generated/meshtastic/telemetry.pb.dart';
+import '../../models/timed_telemetry.dart';
 import '../../repository/telemetry_repository.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/telemetry_repository.dart';
@@ -14,17 +13,16 @@ part 'telemetry_streamer.g.dart';
 
 @riverpod
 class TelemetryStreamer extends _$TelemetryStreamer {
-  List<Telemetry> _currentStreamState = [];
-  final _streamController = StreamController<List<Telemetry>>.broadcast();
+  List<TimedTelemetry> _currentStreamState = [];
+  final _streamController = StreamController<List<TimedTelemetry>>.broadcast();
   late int _nodeNum;
   late int _myNodeNum;
   late TelemetryRepository _telemetryRepository;
   late TelemetryReceiver _telemetryReceiver;
-  final _logger = Logger();
   int _count = 0;
 
   @override
-  Stream<List<Telemetry>> build({
+  Stream<List<TimedTelemetry>> build({
     required int nodeNum,
   }) {
     _nodeNum = nodeNum;
@@ -44,8 +42,8 @@ class TelemetryStreamer extends _$TelemetryStreamer {
     return _streamController.stream;
   }
 
-  void _processTelemetry(Telemetry telemetry) {
-    _currentStreamState = [telemetry, ..._currentStreamState];
+  void _processTelemetry(TimedTelemetry timedTelemetry) {
+    _currentStreamState = [timedTelemetry, ..._currentStreamState];
     _count++;
     _streamController.add(_currentStreamState);
   }
@@ -56,7 +54,8 @@ class TelemetryStreamer extends _$TelemetryStreamer {
       owner: _myNodeNum,
       limit: BATCH_NUM_MESSAGES_TO_LOAD,
     );
-    _count = await _telemetryRepository.count(fromNode: _nodeNum, owner: _myNodeNum);
+    _count =
+        await _telemetryRepository.count(fromNode: _nodeNum, owner: _myNodeNum);
     _streamController.add(_currentStreamState);
   }
 
@@ -72,5 +71,6 @@ class TelemetryStreamer extends _$TelemetryStreamer {
     _streamController.add(_currentStreamState);
   }
 
+  // ignore: avoid_public_notifier_properties
   int get count => _count;
 }

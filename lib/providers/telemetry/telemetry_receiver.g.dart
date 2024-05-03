@@ -22,7 +22,7 @@ final telemetryReceiverProvider = Provider<TelemetryReceiver>.internal(
 
 typedef TelemetryReceiverRef = ProviderRef<TelemetryReceiver>;
 String _$telemetryLatestStreamerHash() =>
-    r'864151e2348bb7d1a097b5d77e8d2342b5a4d0f9';
+    r'70e05cad7f44f3498464a29cb90c0a875e55f18d';
 
 /// Copied from Dart SDK
 class _SystemHash {

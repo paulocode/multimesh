@@ -6,7 +6,7 @@ part of 'telemetry_streamer.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetryStreamerHash() => r'506e01d29687c0f09ff1cbb653033a239f86a2c5';
+String _$telemetryStreamerHash() => r'e0ba0b07f7c860f8b5fcb780e080135310cc22be';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$TelemetryStreamer
-    extends BuildlessAutoDisposeStreamNotifier<List<Telemetry>> {
+    extends BuildlessAutoDisposeStreamNotifier<List<TimedTelemetry>> {
   late final int nodeNum;
 
-  Stream<List<Telemetry>> build({
+  Stream<List<TimedTelemetry>> build({
     required int nodeNum,
   });
 }
@@ -43,7 +43,7 @@ abstract class _$TelemetryStreamer
 const telemetryStreamerProvider = TelemetryStreamerFamily();
 
 /// See also [TelemetryStreamer].
-class TelemetryStreamerFamily extends Family<AsyncValue<List<Telemetry>>> {
+class TelemetryStreamerFamily extends Family<AsyncValue<List<TimedTelemetry>>> {
   /// See also [TelemetryStreamer].
   const TelemetryStreamerFamily();
 
@@ -82,7 +82,7 @@ class TelemetryStreamerFamily extends Family<AsyncValue<List<Telemetry>>> {
 
 /// See also [TelemetryStreamer].
 class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
-    TelemetryStreamer, List<Telemetry>> {
+    TelemetryStreamer, List<TimedTelemetry>> {
   /// See also [TelemetryStreamer].
   TelemetryStreamerProvider({
     required int nodeNum,
@@ -113,7 +113,7 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
   final int nodeNum;
 
   @override
-  Stream<List<Telemetry>> runNotifierBuild(
+  Stream<List<TimedTelemetry>> runNotifierBuild(
     covariant TelemetryStreamer notifier,
   ) {
     return notifier.build(
@@ -138,8 +138,8 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeStreamNotifierProviderElement<TelemetryStreamer, List<Telemetry>>
-      createElement() {
+  AutoDisposeStreamNotifierProviderElement<TelemetryStreamer,
+      List<TimedTelemetry>> createElement() {
     return _TelemetryStreamerProviderElement(this);
   }
 
@@ -158,14 +158,14 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
 }
 
 mixin TelemetryStreamerRef
-    on AutoDisposeStreamNotifierProviderRef<List<Telemetry>> {
+    on AutoDisposeStreamNotifierProviderRef<List<TimedTelemetry>> {
   /// The parameter `nodeNum` of this provider.
   int get nodeNum;
 }
 
 class _TelemetryStreamerProviderElement
     extends AutoDisposeStreamNotifierProviderElement<TelemetryStreamer,
-        List<Telemetry>> with TelemetryStreamerRef {
+        List<TimedTelemetry>> with TelemetryStreamerRef {
   _TelemetryStreamerProviderElement(super.provider);
 
   @override

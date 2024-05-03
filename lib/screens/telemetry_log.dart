@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
 import '../constants/app_constants.dart';
+import '../providers/telemetry/telemetry_saver.dart';
 import '../providers/telemetry/telemetry_streamer.dart';
 
 class TelemetryLogScreen extends ConsumerWidget {
@@ -32,7 +33,9 @@ class TelemetryLogScreen extends ConsumerWidget {
             children: [
               const SizedBox(height: 8),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await ref.read(telemetrySaverProvider(nodeNum));
+                },
                 child: const Text('Export data'),
               ),
               const SizedBox(height: 8),
@@ -49,18 +52,30 @@ class TelemetryLogScreen extends ConsumerWidget {
                       Expanded(
                         child: ListViewObserver(
                           onObserve: (resultModel) => _onListViewObserve(
-                              resultModel,
-                              telemetryListService,
-                              telemetryList.length),
+                            resultModel,
+                            telemetryListService,
+                            telemetryList.length,
+                          ),
                           child: ListView.builder(
                             itemCount: telemetryList.length,
                             itemBuilder: (context, index) {
-                              final telemetry = telemetryList[index];
+                              final timedTelemetry = telemetryList[index];
                               final environmentMetrics =
-                                  telemetry.environmentMetrics;
+                                  timedTelemetry.telemetry.environmentMetrics;
+                              final recordTime =
+                                  DateTime.fromMillisecondsSinceEpoch(
+                                timedTelemetry.telemetry.time * 1000,
+                              );
+                              final recordTimeString = recordTime.year < 2000
+                                  ? DateFormat.yMd()
+                                      .add_Hms()
+                                      .format(timedTelemetry.timeReceived)
+                                  : DateFormat.yMd()
+                                      .add_Hms()
+                                      .format(recordTime);
                               return ListTile(
                                 title: Text(
-                                  '${count - index} ${DateFormat.yMd().add_Hms().format(DateTime.fromMillisecondsSinceEpoch(telemetry.time * 1000))}: '
+                                  '${count - index} $recordTimeString: '
                                   '${environmentMetrics.temperature.toStringAsFixed(2)}° C, '
                                   '${environmentMetrics.relativeHumidity.toStringAsFixed(2)} RH, '
                                   '${environmentMetrics.barometricPressure.toStringAsFixed(2)} mbar, '
@@ -83,8 +98,11 @@ class TelemetryLogScreen extends ConsumerWidget {
     }
   }
 
-  void _onListViewObserve(ListViewObserveModel resultModel,
-      TelemetryStreamer telemetryListService, int currentDisplayedLength) {
+  void _onListViewObserve(
+    ListViewObserveModel resultModel,
+    TelemetryStreamer telemetryListService,
+    int currentDisplayedLength,
+  ) {
     final offsetToLoadNextChunk =
         ((currentDisplayedLength / BATCH_NUM_MESSAGES_TO_LOAD) - 1) *
                 BATCH_NUM_MESSAGES_TO_LOAD +

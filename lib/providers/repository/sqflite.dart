@@ -37,7 +37,8 @@ Future<Database> sqflite(
       logger.i('DB Updating to version 4');
       await db.execute(
         'CREATE TABLE telemetry (id INTEGER PRIMARY KEY AUTOINCREMENT, owner INTEGER, fromNode INTEGER, '
-        'temp REAL, relativeHumidity REAL, barometricPressure REAL, gasResistance REAL, time INTEGER);',
+        'temp REAL, relativeHumidity REAL, barometricPressure REAL, gasResistance REAL, receivedTime INTEGER, '
+        'recordedTime INTEGER);',
       );
     }
   }

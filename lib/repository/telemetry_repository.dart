@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../models/timed_telemetry.dart';
 import '../protobufs/generated/meshtastic/telemetry.pb.dart';
 
 class TelemetryRepository {
@@ -8,11 +9,11 @@ class TelemetryRepository {
   final Database _database;
 
   Future<int> add({
-    required Telemetry telemetry,
+    required TimedTelemetry timedTelemetry,
     required int fromNode,
     required int owner,
   }) async {
-    final environmentMetrics = telemetry.environmentMetrics;
+    final environmentMetrics = timedTelemetry.telemetry.environmentMetrics;
     return _database.insert(
       'telemetry',
       {
@@ -22,7 +23,9 @@ class TelemetryRepository {
         'temp': environmentMetrics.temperature,
         'gasResistance': environmentMetrics.gasResistance,
         'barometricPressure': environmentMetrics.barometricPressure,
-        'time': telemetry.time,
+        'receivedTime':
+            timedTelemetry.timeReceived.millisecondsSinceEpoch ~/ 1000,
+        'recordedTime': timedTelemetry.telemetry.time,
       },
     );
   }
@@ -39,7 +42,7 @@ class TelemetryRepository {
     return Sqflite.firstIntValue(result) ?? 0;
   }
 
-  Future<Telemetry?> getOne({
+  Future<TimedTelemetry?> getOne({
     required int index,
     required int fromNode,
     required int owner,
@@ -49,7 +52,7 @@ class TelemetryRepository {
       where: 'fromNode = ? AND owner = ?',
       whereArgs: [fromNode, owner],
       offset: index,
-      orderBy: 'time DESC',
+      orderBy: 'id ASC',
       limit: 1,
     );
 
@@ -60,28 +63,33 @@ class TelemetryRepository {
     }
   }
 
-  List<Telemetry> _mapResult(List<Map<String, Object?>> result) {
+  List<TimedTelemetry> _mapResult(List<Map<String, Object?>> result) {
     return [
       for (final {
             'relativeHumidity': relativeHumidity as double?,
             'temp': temp as double?,
             'barometricPressure': barometricPressure as double?,
             'gasResistance': gasResistance as double?,
-            'time': time as int,
+            'receivedTime': receivedTime as int,
+            'recordedTime': recordedTime as int,
           } in result)
-        Telemetry(
-          time: time,
-          environmentMetrics: EnvironmentMetrics(
-            relativeHumidity: relativeHumidity,
-            temperature: temp,
-            barometricPressure: barometricPressure,
-            gasResistance: gasResistance,
+        TimedTelemetry(
+          timeReceived:
+              DateTime.fromMillisecondsSinceEpoch(receivedTime * 1000),
+          telemetry: Telemetry(
+            time: recordedTime,
+            environmentMetrics: EnvironmentMetrics(
+              relativeHumidity: relativeHumidity,
+              temperature: temp,
+              barometricPressure: barometricPressure,
+              gasResistance: gasResistance,
+            ),
           ),
         ),
     ];
   }
 
-  Future<List<Telemetry>> get({
+  Future<List<TimedTelemetry>> get({
     required int fromNode,
     required int owner,
     int offset = 0,
@@ -91,7 +99,7 @@ class TelemetryRepository {
       'telemetry',
       where: 'fromNode = ? AND owner = ?',
       whereArgs: [fromNode, owner],
-      orderBy: 'time DESC',
+      orderBy: 'id ASC',
       offset: offset,
       limit: limit,
     );
