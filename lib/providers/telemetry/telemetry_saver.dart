@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:to_csv/to_csv.dart';
 
+import '../../extensions.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/telemetry_repository.dart';
 part 'telemetry_saver.g.dart';
@@ -11,6 +12,9 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final telemetryRepository = ref.watch(telemetryRepositoryProvider);
   final myNodeNum =
       ref.watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
+  final displayFahrenheit = ref.watch(radioConfigServiceProvider
+      .select((value) => value.telemetryConfig.environmentDisplayFahrenheit));
+
   final data =
       await telemetryRepository.get(fromNode: nodeNum, owner: myNodeNum);
 
@@ -22,10 +26,13 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
     final recordedTimeString = recordedTime.year < 2000
         ? 'Unknown'
         : DateFormat.yMd().add_Hms().format(recordedTime);
+    final temp = displayFahrenheit
+        ? environmentalMetrics.temperature.cToF()
+        : environmentalMetrics.temperature;
     return [
       DateFormat.yMd().add_Hms().format(it.timeReceived),
       recordedTimeString,
-      environmentalMetrics.temperature.toString(),
+      temp.toString(),
       environmentalMetrics.relativeHumidity.toString(),
       environmentalMetrics.barometricPressure.toString(),
       environmentalMetrics.gasResistance.toString(),
@@ -42,7 +49,7 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
     [
       'Time received',
       'Time recorded',
-      'Temperature',
+      'Temperature ${displayFahrenheit ? 'F' : 'C'}',
       'Relative Humidity',
       'Barometric Pressure',
       'Gas Resistance',
