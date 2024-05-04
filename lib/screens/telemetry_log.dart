@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -140,8 +141,13 @@ class TelemetryLogScreen extends ConsumerWidget {
                 BATCH_NUM_MESSAGES_TO_LOAD +
             BATCH_NUM_MESSAGES_TO_LOAD * 0.75;
     final currentViewedOffset = resultModel.firstChild?.index ?? 0;
-    if (currentViewedOffset > offsetToLoadNextChunk) {
-      telemetryListService.loadNextChunk();
+    if (currentViewedOffset > offsetToLoadNextChunk &&
+        telemetryListService.count > currentDisplayedLength) {
+      EasyThrottle.throttle(
+        'load-older-telemetry-throttler',
+        const Duration(milliseconds: 200),
+        telemetryListService.loadNextChunk,
+      );
     }
   }
 }

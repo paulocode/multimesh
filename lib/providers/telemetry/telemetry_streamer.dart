@@ -14,7 +14,7 @@ part 'telemetry_streamer.g.dart';
 @riverpod
 class TelemetryStreamer extends _$TelemetryStreamer {
   List<TimedTelemetry> _currentStreamState = [];
-  final _streamController = StreamController<List<TimedTelemetry>>.broadcast();
+  late StreamController<List<TimedTelemetry>> _streamController;
   late int _nodeNum;
   late int _myNodeNum;
   late TelemetryRepository _telemetryRepository;
@@ -31,13 +31,15 @@ class TelemetryStreamer extends _$TelemetryStreamer {
     _telemetryRepository = ref.watch(telemetryRepositoryProvider);
     _telemetryReceiver = ref.watch(telemetryReceiverProvider);
 
+    _streamController = StreamController.broadcast();
+    ref.onDispose(_streamController.close);
+
     final sub = _telemetryReceiver.addTelemetryListener(
       nodeNum: nodeNum,
       listener: _processTelemetry,
     );
-
     ref.onDispose(sub.cancel);
-    ref.onDispose(_streamController.close);
+
     _loadInitial();
     return _streamController.stream;
   }

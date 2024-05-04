@@ -37,14 +37,16 @@ class TelemetryReceiver {
         _radioReader = radioReader,
         _onDispose = onDispose {
     final sub = _radioReader.onPacketReceived().listen(_processPacket);
+    _streamController = StreamController<MeshPacket>.broadcast();
     _onDispose(sub.cancel);
+    _onDispose(_streamController.close);
   }
 
   final int _myNodeNum;
   final TelemetryRepository _telemetryRepository;
   final void Function(void Function() cb) _onDispose;
   final RadioReader _radioReader;
-  final _streamController = StreamController<MeshPacket>.broadcast();
+  late StreamController<MeshPacket> _streamController;
   final _logger = Logger();
 
   void _processPacket(FromRadio event) {
