@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'telemetry_streamer.dart';
+part of 'telemetry_latest_streamer.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetryStreamerHash() => r'0a7a2bf17b6421eedb023d743dfa4078ae7d2ae2';
+String _$telemetryLatestStreamerHash() =>
+    r'70e05cad7f44f3498464a29cb90c0a875e55f18d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,36 +30,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$TelemetryStreamer
-    extends BuildlessAutoDisposeStreamNotifier<List<TimedTelemetry>> {
+abstract class _$TelemetryLatestStreamer
+    extends BuildlessNotifier<TelemetryState> {
   late final int nodeNum;
 
-  Stream<List<TimedTelemetry>> build({
+  TelemetryState build({
     required int nodeNum,
   });
 }
 
-/// See also [TelemetryStreamer].
-@ProviderFor(TelemetryStreamer)
-const telemetryStreamerProvider = TelemetryStreamerFamily();
+/// See also [TelemetryLatestStreamer].
+@ProviderFor(TelemetryLatestStreamer)
+const telemetryLatestStreamerProvider = TelemetryLatestStreamerFamily();
 
-/// See also [TelemetryStreamer].
-class TelemetryStreamerFamily extends Family<AsyncValue<List<TimedTelemetry>>> {
-  /// See also [TelemetryStreamer].
-  const TelemetryStreamerFamily();
+/// See also [TelemetryLatestStreamer].
+class TelemetryLatestStreamerFamily extends Family<TelemetryState> {
+  /// See also [TelemetryLatestStreamer].
+  const TelemetryLatestStreamerFamily();
 
-  /// See also [TelemetryStreamer].
-  TelemetryStreamerProvider call({
+  /// See also [TelemetryLatestStreamer].
+  TelemetryLatestStreamerProvider call({
     required int nodeNum,
   }) {
-    return TelemetryStreamerProvider(
+    return TelemetryLatestStreamerProvider(
       nodeNum: nodeNum,
     );
   }
 
   @override
-  TelemetryStreamerProvider getProviderOverride(
-    covariant TelemetryStreamerProvider provider,
+  TelemetryLatestStreamerProvider getProviderOverride(
+    covariant TelemetryLatestStreamerProvider provider,
   ) {
     return call(
       nodeNum: provider.nodeNum,
@@ -77,30 +78,30 @@ class TelemetryStreamerFamily extends Family<AsyncValue<List<TimedTelemetry>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'telemetryStreamerProvider';
+  String? get name => r'telemetryLatestStreamerProvider';
 }
 
-/// See also [TelemetryStreamer].
-class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
-    TelemetryStreamer, List<TimedTelemetry>> {
-  /// See also [TelemetryStreamer].
-  TelemetryStreamerProvider({
+/// See also [TelemetryLatestStreamer].
+class TelemetryLatestStreamerProvider
+    extends NotifierProviderImpl<TelemetryLatestStreamer, TelemetryState> {
+  /// See also [TelemetryLatestStreamer].
+  TelemetryLatestStreamerProvider({
     required int nodeNum,
   }) : this._internal(
-          () => TelemetryStreamer()..nodeNum = nodeNum,
-          from: telemetryStreamerProvider,
-          name: r'telemetryStreamerProvider',
+          () => TelemetryLatestStreamer()..nodeNum = nodeNum,
+          from: telemetryLatestStreamerProvider,
+          name: r'telemetryLatestStreamerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$telemetryStreamerHash,
-          dependencies: TelemetryStreamerFamily._dependencies,
+                  : _$telemetryLatestStreamerHash,
+          dependencies: TelemetryLatestStreamerFamily._dependencies,
           allTransitiveDependencies:
-              TelemetryStreamerFamily._allTransitiveDependencies,
+              TelemetryLatestStreamerFamily._allTransitiveDependencies,
           nodeNum: nodeNum,
         );
 
-  TelemetryStreamerProvider._internal(
+  TelemetryLatestStreamerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -113,8 +114,8 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
   final int nodeNum;
 
   @override
-  Stream<List<TimedTelemetry>> runNotifierBuild(
-    covariant TelemetryStreamer notifier,
+  TelemetryState runNotifierBuild(
+    covariant TelemetryLatestStreamer notifier,
   ) {
     return notifier.build(
       nodeNum: nodeNum,
@@ -122,10 +123,10 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 
   @override
-  Override overrideWith(TelemetryStreamer Function() create) {
+  Override overrideWith(TelemetryLatestStreamer Function() create) {
     return ProviderOverride(
       origin: this,
-      override: TelemetryStreamerProvider._internal(
+      override: TelemetryLatestStreamerProvider._internal(
         () => create()..nodeNum = nodeNum,
         from: from,
         name: null,
@@ -138,14 +139,14 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeStreamNotifierProviderElement<TelemetryStreamer,
-      List<TimedTelemetry>> createElement() {
-    return _TelemetryStreamerProviderElement(this);
+  NotifierProviderElement<TelemetryLatestStreamer, TelemetryState>
+      createElement() {
+    return _TelemetryLatestStreamerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is TelemetryStreamerProvider && other.nodeNum == nodeNum;
+    return other is TelemetryLatestStreamerProvider && other.nodeNum == nodeNum;
   }
 
   @override
@@ -157,19 +158,18 @@ class TelemetryStreamerProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 }
 
-mixin TelemetryStreamerRef
-    on AutoDisposeStreamNotifierProviderRef<List<TimedTelemetry>> {
+mixin TelemetryLatestStreamerRef on NotifierProviderRef<TelemetryState> {
   /// The parameter `nodeNum` of this provider.
   int get nodeNum;
 }
 
-class _TelemetryStreamerProviderElement
-    extends AutoDisposeStreamNotifierProviderElement<TelemetryStreamer,
-        List<TimedTelemetry>> with TelemetryStreamerRef {
-  _TelemetryStreamerProviderElement(super.provider);
+class _TelemetryLatestStreamerProviderElement
+    extends NotifierProviderElement<TelemetryLatestStreamer, TelemetryState>
+    with TelemetryLatestStreamerRef {
+  _TelemetryLatestStreamerProviderElement(super.provider);
 
   @override
-  int get nodeNum => (origin as TelemetryStreamerProvider).nodeNum;
+  int get nodeNum => (origin as TelemetryLatestStreamerProvider).nodeNum;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

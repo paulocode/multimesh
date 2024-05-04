@@ -7,7 +7,7 @@ import '../models/mesh_node.dart';
 import '../providers/node/hops_away.dart';
 import '../providers/node/node_service.dart';
 import '../providers/radio_config/radio_config_service.dart';
-import '../providers/telemetry/telemetry_receiver.dart';
+import '../providers/telemetry/telemetry_latest_streamer.dart';
 import '../providers/text_message/text_message_stream_service.dart';
 
 class NodeCard extends ConsumerWidget {

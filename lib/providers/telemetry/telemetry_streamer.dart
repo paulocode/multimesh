@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../constants/app_constants.dart';
 import '../../models/timed_telemetry.dart';
 import '../../repository/telemetry_repository.dart';
+import '../../services/telemetry/telemetry_receiver.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/telemetry_repository.dart';
 import 'telemetry_receiver.dart';
