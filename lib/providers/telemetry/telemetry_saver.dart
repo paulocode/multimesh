@@ -12,8 +12,10 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final telemetryRepository = ref.watch(telemetryRepositoryProvider);
   final myNodeNum =
       ref.watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
-  final displayFahrenheit = ref.watch(radioConfigServiceProvider
-      .select((value) => value.telemetryConfig.environmentDisplayFahrenheit));
+  final displayFahrenheit = ref.watch(
+    radioConfigServiceProvider
+        .select((value) => value.telemetryConfig.environmentDisplayFahrenheit),
+  );
 
   final data =
       await telemetryRepository.get(fromNode: nodeNum, owner: myNodeNum);
