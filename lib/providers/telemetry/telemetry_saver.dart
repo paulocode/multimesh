@@ -1,13 +1,19 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:csv/csv.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:to_csv/to_csv.dart';
 
 import '../../extensions.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/telemetry_repository.dart';
+
 part 'telemetry_saver.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final telemetryRepository = ref.watch(telemetryRepositoryProvider);
   final myNodeNum =
@@ -20,7 +26,7 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final data =
       await telemetryRepository.get(fromNode: nodeNum, owner: myNodeNum);
 
-  final parsedData = data.map((it) {
+  final csvBodyData = data.map((it) {
     final telemetry = it.telemetry;
     final environmentalMetrics = it.telemetry.environmentMetrics;
     final recordedTime =
@@ -46,18 +52,22 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final nodeNumHexLastFour = nodeNumHex.substring(nodeNumHex.length - 4);
   final formattedDate =
       DateFormat('MM-dd-yyyy-HH-mm-ss').format(DateTime.now());
+  final filename = 'Telemetry-$nodeNumHexLastFour-$formattedDate';
 
-  await myCSV(
-    [
-      'Time received',
-      'Time recorded',
-      'Temperature ${displayFahrenheit ? 'F' : 'C'}',
-      'Relative Humidity',
-      'Barometric Pressure',
-      'Gas Resistance',
-      'IAQ',
-    ],
-    parsedData,
-    fileName: 'Telemetry-$nodeNumHexLastFour-$formattedDate',
-  );
+  final headerRow = [
+    'Time received',
+    'Time recorded',
+    'Temperature ${displayFahrenheit ? 'F' : 'C'}',
+    'Relative Humidity',
+    'Barometric Pressure',
+    'Gas Resistance',
+    'IAQ',
+  ];
+
+  final csvData =
+      const ListToCsvConverter().convert([headerRow, ...csvBodyData]);
+  final bytes = Uint8List.fromList(utf8.encode(csvData));
+  const type = MimeType.csv;
+  await FileSaver.instance
+      .saveAs(name: filename, bytes: bytes, ext: 'csv', mimeType: type);
 }

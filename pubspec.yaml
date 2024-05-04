@@ -12,7 +12,9 @@ dependencies:
   chat_bubbles: ^1.6.0
   convert: ^3.1.1
   crypto: ^3.0.3
+  csv: ^5.1.1
   easy_debounce: ^2.0.3
+  file_saver: ^0.2.12
   firebase_analytics: ^10.10.1
   firebase_core: ^2.29.0
   firebase_crashlytics: ^3.5.1
@@ -44,7 +46,6 @@ dependencies:
   shimmer: ^3.0.0
   sqflite: ^2.3.2
   sqflite_common_ffi: ^2.3.3
-  to_csv: ^2.2.1
   tuple: ^2.0.2
 
 dev_dependencies:
@@ -59,10 +60,6 @@ dev_dependencies:
   riverpod_generator: ^2.3.9
   riverpod_lint: ^2.3.8
   test: ^1.24.9
-
-dependency_overrides:
-  flutter_lints: ^3.0.1
-  intl: ^0.19.0
 
 flutter:
   uses-material-design: true

@@ -6,7 +6,7 @@ part of 'telemetry_saver.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetrySaverHash() => r'1c6a56faf5dbdef8b1bf07c39f256553bde65e69';
+String _$telemetrySaverHash() => r'eb9cd9881cf38aec00ecf484a85c3a8ae747f0af';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -72,7 +72,7 @@ class TelemetrySaverFamily extends Family<Raw<Future<void>>> {
 }
 
 /// See also [telemetrySaver].
-class TelemetrySaverProvider extends Provider<Raw<Future<void>>> {
+class TelemetrySaverProvider extends AutoDisposeProvider<Raw<Future<void>>> {
   /// See also [telemetrySaver].
   TelemetrySaverProvider(
     int nodeNum,
@@ -124,7 +124,7 @@ class TelemetrySaverProvider extends Provider<Raw<Future<void>>> {
   }
 
   @override
-  ProviderElement<Raw<Future<void>>> createElement() {
+  AutoDisposeProviderElement<Raw<Future<void>>> createElement() {
     return _TelemetrySaverProviderElement(this);
   }
 
@@ -142,12 +142,13 @@ class TelemetrySaverProvider extends Provider<Raw<Future<void>>> {
   }
 }
 
-mixin TelemetrySaverRef on ProviderRef<Raw<Future<void>>> {
+mixin TelemetrySaverRef on AutoDisposeProviderRef<Raw<Future<void>>> {
   /// The parameter `nodeNum` of this provider.
   int get nodeNum;
 }
 
-class _TelemetrySaverProviderElement extends ProviderElement<Raw<Future<void>>>
+class _TelemetrySaverProviderElement
+    extends AutoDisposeProviderElement<Raw<Future<void>>>
     with TelemetrySaverRef {
   _TelemetrySaverProviderElement(super.provider);
 
