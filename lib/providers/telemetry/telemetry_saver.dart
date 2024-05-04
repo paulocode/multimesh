@@ -32,6 +32,11 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
     ];
   }).toList();
 
+  final nodeNumHex = nodeNum.toRadixString(16).padLeft(4, '0');
+  final nodeNumHexLastFour = nodeNumHex.substring(nodeNumHex.length - 4);
+  final formattedDate =
+      DateFormat('MM-dd-yyyy-HH-mm-ss').format(DateTime.now());
+
   await myCSV(
     [
       'Time received',
@@ -42,5 +47,6 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
       'Gas Resistance',
     ],
     parsedData,
+    fileName: 'Telemetry-$nodeNumHexLastFour-$formattedDate',
   );
 }

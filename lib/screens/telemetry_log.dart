@@ -6,6 +6,7 @@ import 'package:scrollview_observer/scrollview_observer.dart';
 import '../constants/app_constants.dart';
 import '../providers/telemetry/telemetry_saver.dart';
 import '../providers/telemetry/telemetry_streamer.dart';
+import 'config/confirmation_dialog.dart';
 
 class TelemetryLogScreen extends ConsumerWidget {
   const TelemetryLogScreen({
@@ -32,11 +33,26 @@ class TelemetryLogScreen extends ConsumerWidget {
           body: Column(
             children: [
               const SizedBox(height: 8),
-              OutlinedButton(
-                onPressed: () async {
-                  await ref.read(telemetrySaverProvider(nodeNum));
-                },
-                child: const Text('Export data'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton(
+                    onPressed: () async {
+                      await ref.read(telemetrySaverProvider(nodeNum));
+                    },
+                    child: const Text('Export data'),
+                  ),
+                  OutlinedButton(
+                    onPressed: () async {
+                      final response = await showConfirmationDialog(
+                          context, 'Delete telemetry data?');
+                      if (response) {
+                        await telemetryListService.clear();
+                      }
+                    },
+                    child: const Text('Clear data'),
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
               Expanded(
@@ -45,7 +61,7 @@ class TelemetryLogScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        '$count telemetry records',
+                        '$count telemetry record(s)',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 8),

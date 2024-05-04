@@ -106,4 +106,12 @@ class TelemetryRepository {
 
     return _mapResult(result);
   }
+
+  Future<void> delete({required int fromNode, required int owner}) async {
+    await _database.delete(
+      'telemetry',
+      where: 'fromNode = ? AND owner = ?',
+      whereArgs: [fromNode, owner],
+    );
+  }
 }

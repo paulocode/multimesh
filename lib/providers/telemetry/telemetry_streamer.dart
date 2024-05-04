@@ -73,4 +73,14 @@ class TelemetryStreamer extends _$TelemetryStreamer {
 
   // ignore: avoid_public_notifier_properties
   int get count => _count;
+
+  Future<void> clear() async {
+    await _telemetryRepository.delete(
+      fromNode: _nodeNum,
+      owner: _myNodeNum,
+    );
+    _count = 0;
+    _currentStreamState.clear();
+    _streamController.add(_currentStreamState);
+  }
 }

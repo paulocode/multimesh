@@ -6,7 +6,7 @@ part of 'telemetry_saver.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$telemetrySaverHash() => r'77a1279e5521ccf48a60be4658eb1acc7c0ddd5e';
+String _$telemetrySaverHash() => r'44d278798a8fe2172541133b15e7eea9ef660e0e';
 
 /// Copied from Dart SDK
 class _SystemHash {
