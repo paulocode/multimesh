@@ -8,6 +8,7 @@ import '../screens/config/bt_config.dart';
 import '../screens/config/channel_qr_scanner.dart';
 import '../screens/config/channels_config.dart';
 import '../screens/config/lora_config.dart';
+import '../screens/config/telemetry_config.dart';
 import '../screens/config/user_config.dart';
 import '../screens/node_info.dart';
 import '../screens/radio_config.dart';
@@ -113,6 +114,12 @@ GoRouter goRouter(GoRouterRef ref) {
           final id =
               int.tryParse(state.uri.queryParameters['nodeNum'] ?? '') ?? 0;
           return TracerouteModal(id);
+        },
+      ),
+      GoRoute(
+        path: '/telemetryConfig',
+        builder: (context, state) {
+          return const TelemetryConfigScreen();
         },
       ),
     ],

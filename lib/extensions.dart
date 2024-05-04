@@ -9,3 +9,9 @@ extension StringExtensions on String {
     return parts.map((part) => part.capitalize()).join();
   }
 }
+
+extension TempConversion on double {
+  double cToF() {
+    return (1.8 * this) + 32;
+  }
+}

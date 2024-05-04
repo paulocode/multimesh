@@ -29,6 +29,7 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
       environmentalMetrics.relativeHumidity.toString(),
       environmentalMetrics.barometricPressure.toString(),
       environmentalMetrics.gasResistance.toString(),
+      environmentalMetrics.iaq.toString(),
     ];
   }).toList();
 
@@ -45,6 +46,7 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
       'Relative Humidity',
       'Barometric Pressure',
       'Gas Resistance',
+      'IAQ',
     ],
     parsedData,
     fileName: 'Telemetry-$nodeNumHexLastFour-$formattedDate',

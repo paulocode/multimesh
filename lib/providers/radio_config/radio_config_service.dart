@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../models/radio_configuration.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
+import '../../protobufs/generated/meshtastic/module_config.pb.dart';
 
 part 'radio_config_service.g.dart';
 
@@ -17,6 +18,7 @@ class RadioConfigService extends _$RadioConfigService {
       loraConfig: Config_LoRaConfig(),
       myNodeInfo: NodeInfo(),
       bluetoothConfig: Config_BluetoothConfig(),
+      telemetryConfig: ModuleConfig_TelemetryConfig(),
     );
   }
 
@@ -44,6 +46,10 @@ class RadioConfigService extends _$RadioConfigService {
 
   void setBluetoothConfig(Config_BluetoothConfig bluetoothConfig) {
     state = state.copyWith(bluetoothConfig: bluetoothConfig);
+  }
+
+  void setTelemetryConfig(ModuleConfig_TelemetryConfig telemetryConfig) {
+    state = state.copyWith(telemetryConfig: telemetryConfig);
   }
 
   void clear() {

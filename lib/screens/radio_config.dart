@@ -56,6 +56,11 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
             children: [
               Column(
                 children: [
+                  Text(
+                    'Configuration',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 8),
                   Card(
                     child: ListTile(
                       style: ListTileStyle.list,
@@ -129,6 +134,23 @@ class _RadioConfigScreenState extends ConsumerState<RadioConfigScreen> {
                     child: ListTile(
                       title: Text('Power'),
                       trailing: Icon(Icons.chevron_right),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Modules',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 8),
+                  Card(
+                    child: ListTile(
+                      onTap: radioConnectorState is Connected
+                          ? () {
+                              context.push('/telemetryConfig');
+                            }
+                          : null,
+                      title: const Text('Telemetry'),
+                      trailing: const Icon(Icons.chevron_right),
                     ),
                   ),
                   const SizedBox(

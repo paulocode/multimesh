@@ -8,6 +8,7 @@ import 'package:multimesh/models/radio_configuration.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/admin.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart';
+import 'package:multimesh/protobufs/generated/meshtastic/module_config.pb.dart';
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart';
 import 'package:multimesh/providers/ack_waiting_radio_writer.dart';
 import 'package:multimesh/providers/radio_config/radio_config_service.dart';
@@ -35,6 +36,7 @@ void main() {
       loraConfig: Config_LoRaConfig(),
       myNodeInfo: NodeInfo(),
       bluetoothConfig: Config_BluetoothConfig(),
+      telemetryConfig: ModuleConfig_TelemetryConfig(),
     ).copyWith(myNodeNum: 123);
   });
 

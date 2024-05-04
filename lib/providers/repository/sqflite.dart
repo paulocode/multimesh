@@ -38,7 +38,7 @@ Future<Database> sqflite(
       await db.execute(
         'CREATE TABLE telemetry (id INTEGER PRIMARY KEY AUTOINCREMENT, owner INTEGER, fromNode INTEGER, '
         'temp REAL, relativeHumidity REAL, barometricPressure REAL, gasResistance REAL, receivedTime INTEGER, '
-        'recordedTime INTEGER);',
+        'recordedTime INTEGER, iaq INTEGER);',
       );
     }
   }

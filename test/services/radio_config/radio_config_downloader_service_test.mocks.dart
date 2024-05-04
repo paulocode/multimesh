@@ -8,19 +8,21 @@ import 'dart:typed_data' as _i11;
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i16;
+import 'package:mockito/src/dummies.dart' as _i17;
 import 'package:multimesh/models/ble_characteristics.dart' as _i5;
 import 'package:multimesh/models/mesh_radio.dart' as _i6;
 import 'package:multimesh/models/radio_configuration.dart' as _i3;
-import 'package:multimesh/models/radio_connector_state.dart' as _i17;
+import 'package:multimesh/models/radio_connector_state.dart' as _i18;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
     as _i15;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i10;
+import 'package:multimesh/protobufs/generated/meshtastic/module_config.pb.dart'
+    as _i16;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i9;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i14;
-import 'package:multimesh/providers/radio_connector_service.dart' as _i18;
+import 'package:multimesh/providers/radio_connector_service.dart' as _i19;
 import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i7;
 import 'package:multimesh/services/interfaces/radio_reader.dart' as _i12;
 import 'package:multimesh/services/radio_config/radio_config_downloader_service.dart'
@@ -333,6 +335,16 @@ class MockRadioConfigService extends _i1.Mock
       );
 
   @override
+  void setTelemetryConfig(_i16.ModuleConfig_TelemetryConfig? telemetryConfig) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setTelemetryConfig,
+          [telemetryConfig],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void clear() => super.noSuchMethod(
         Invocation.method(
           #clear,
@@ -542,7 +554,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get platformName => (super.noSuchMethod(
         Invocation.getter(#platformName),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#platformName),
         ),
@@ -551,7 +563,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get advName => (super.noSuchMethod(
         Invocation.getter(#advName),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#advName),
         ),
@@ -630,7 +642,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get localName => (super.noSuchMethod(
         Invocation.getter(#localName),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#localName),
         ),
@@ -639,7 +651,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
   @override
   String get name => (super.noSuchMethod(
         Invocation.getter(#name),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#name),
         ),
@@ -846,7 +858,7 @@ class MockBluetoothDevice extends _i1.Mock implements _i4.BluetoothDevice {
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockBleConnected extends _i1.Mock implements _i17.BleConnected {
+class MockBleConnected extends _i1.Mock implements _i18.BleConnected {
   MockBleConnected() {
     _i1.throwOnMissingStub(this);
   }
@@ -887,14 +899,14 @@ class MockBleConnected extends _i1.Mock implements _i17.BleConnected {
   @override
   String get radioId => (super.noSuchMethod(
         Invocation.getter(#radioId),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i17.dummyValue<String>(
           this,
           Invocation.getter(#radioId),
         ),
       ) as String);
 
   @override
-  _i17.Connected<_i6.MeshRadio> copyWith({
+  _i18.Connected<_i6.MeshRadio> copyWith({
     bool? isNewRadio,
     _i6.BleMeshRadio? radio,
   }) =>
@@ -907,7 +919,7 @@ class MockBleConnected extends _i1.Mock implements _i17.BleConnected {
             #radio: radio,
           },
         ),
-        returnValue: _i16.dummyValue<_i17.Connected<_i6.MeshRadio>>(
+        returnValue: _i17.dummyValue<_i18.Connected<_i6.MeshRadio>>(
           this,
           Invocation.method(
             #copyWith,
@@ -918,14 +930,14 @@ class MockBleConnected extends _i1.Mock implements _i17.BleConnected {
             },
           ),
         ),
-      ) as _i17.Connected<_i6.MeshRadio>);
+      ) as _i18.Connected<_i6.MeshRadio>);
 }
 
 /// A class which mocks [Disconnected].
 ///
 /// See the documentation for Mockito's code generation for more information.
 // ignore: must_be_immutable
-class MockDisconnected extends _i1.Mock implements _i17.Disconnected {
+class MockDisconnected extends _i1.Mock implements _i18.Disconnected {
   MockDisconnected() {
     _i1.throwOnMissingStub(this);
   }
@@ -935,32 +947,32 @@ class MockDisconnected extends _i1.Mock implements _i17.Disconnected {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRadioConnectorService extends _i1.Mock
-    implements _i18.RadioConnectorService {
+    implements _i19.RadioConnectorService {
   MockRadioConnectorService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.NotifierProviderRef<_i17.RadioConnectorState> get ref =>
+  _i2.NotifierProviderRef<_i18.RadioConnectorState> get ref =>
       (super.noSuchMethod(
         Invocation.getter(#ref),
-        returnValue: _FakeNotifierProviderRef_0<_i17.RadioConnectorState>(
+        returnValue: _FakeNotifierProviderRef_0<_i18.RadioConnectorState>(
           this,
           Invocation.getter(#ref),
         ),
-      ) as _i2.NotifierProviderRef<_i17.RadioConnectorState>);
+      ) as _i2.NotifierProviderRef<_i18.RadioConnectorState>);
 
   @override
-  _i17.RadioConnectorState get state => (super.noSuchMethod(
+  _i18.RadioConnectorState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i16.dummyValue<_i17.RadioConnectorState>(
+        returnValue: _i17.dummyValue<_i18.RadioConnectorState>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i17.RadioConnectorState);
+      ) as _i18.RadioConnectorState);
 
   @override
-  set state(_i17.RadioConnectorState? value) => super.noSuchMethod(
+  set state(_i18.RadioConnectorState? value) => super.noSuchMethod(
         Invocation.setter(
           #state,
           value,
@@ -969,19 +981,19 @@ class MockRadioConnectorService extends _i1.Mock
       );
 
   @override
-  _i17.RadioConnectorState build() => (super.noSuchMethod(
+  _i18.RadioConnectorState build() => (super.noSuchMethod(
         Invocation.method(
           #build,
           [],
         ),
-        returnValue: _i16.dummyValue<_i17.RadioConnectorState>(
+        returnValue: _i17.dummyValue<_i18.RadioConnectorState>(
           this,
           Invocation.method(
             #build,
             [],
           ),
         ),
-      ) as _i17.RadioConnectorState);
+      ) as _i18.RadioConnectorState);
 
   @override
   _i8.Future<void> disconnect({String? errorMsg}) => (super.noSuchMethod(
@@ -1006,8 +1018,8 @@ class MockRadioConnectorService extends _i1.Mock
 
   @override
   bool updateShouldNotify(
-    _i17.RadioConnectorState? previous,
-    _i17.RadioConnectorState? next,
+    _i18.RadioConnectorState? previous,
+    _i18.RadioConnectorState? next,
   ) =>
       (super.noSuchMethod(
         Invocation.method(

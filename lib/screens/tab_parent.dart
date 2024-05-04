@@ -46,7 +46,7 @@ class _TabParentState extends ConsumerState<TabParent> {
         final telemetryEnabled = await showConfirmationDialog(
           context,
           'Upload anonymized crash data?\nThis can be later changed in settings.',
-          title: 'Telemetry Uploader',
+          title: 'Logs Uploader',
           positive: 'Enable',
         );
         await prefs.setBool('telemetryEnabled', telemetryEnabled);

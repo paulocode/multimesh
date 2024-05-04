@@ -20,6 +20,8 @@ mixin _$RadioConfiguration {
   Config_LoRaConfig get loraConfig => throw _privateConstructorUsedError;
   Config_BluetoothConfig get bluetoothConfig =>
       throw _privateConstructorUsedError;
+  ModuleConfig_TelemetryConfig get telemetryConfig =>
+      throw _privateConstructorUsedError;
   NodeInfo get myNodeInfo => throw _privateConstructorUsedError;
   bool get hasOwnNodeInfo => throw _privateConstructorUsedError;
   bool get configDownloaded => throw _privateConstructorUsedError;
@@ -39,6 +41,7 @@ abstract class $RadioConfigurationCopyWith<$Res> {
       {int myNodeNum,
       Config_LoRaConfig loraConfig,
       Config_BluetoothConfig bluetoothConfig,
+      ModuleConfig_TelemetryConfig telemetryConfig,
       NodeInfo myNodeInfo,
       bool hasOwnNodeInfo,
       bool configDownloaded});
@@ -60,6 +63,7 @@ class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
     Object? myNodeNum = null,
     Object? loraConfig = null,
     Object? bluetoothConfig = null,
+    Object? telemetryConfig = null,
     Object? myNodeInfo = null,
     Object? hasOwnNodeInfo = null,
     Object? configDownloaded = null,
@@ -77,6 +81,10 @@ class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
           ? _value.bluetoothConfig
           : bluetoothConfig // ignore: cast_nullable_to_non_nullable
               as Config_BluetoothConfig,
+      telemetryConfig: null == telemetryConfig
+          ? _value.telemetryConfig
+          : telemetryConfig // ignore: cast_nullable_to_non_nullable
+              as ModuleConfig_TelemetryConfig,
       myNodeInfo: null == myNodeInfo
           ? _value.myNodeInfo
           : myNodeInfo // ignore: cast_nullable_to_non_nullable
@@ -105,6 +113,7 @@ abstract class _$$RadioConfigurationImplCopyWith<$Res>
       {int myNodeNum,
       Config_LoRaConfig loraConfig,
       Config_BluetoothConfig bluetoothConfig,
+      ModuleConfig_TelemetryConfig telemetryConfig,
       NodeInfo myNodeInfo,
       bool hasOwnNodeInfo,
       bool configDownloaded});
@@ -124,6 +133,7 @@ class __$$RadioConfigurationImplCopyWithImpl<$Res>
     Object? myNodeNum = null,
     Object? loraConfig = null,
     Object? bluetoothConfig = null,
+    Object? telemetryConfig = null,
     Object? myNodeInfo = null,
     Object? hasOwnNodeInfo = null,
     Object? configDownloaded = null,
@@ -141,6 +151,10 @@ class __$$RadioConfigurationImplCopyWithImpl<$Res>
           ? _value.bluetoothConfig
           : bluetoothConfig // ignore: cast_nullable_to_non_nullable
               as Config_BluetoothConfig,
+      telemetryConfig: null == telemetryConfig
+          ? _value.telemetryConfig
+          : telemetryConfig // ignore: cast_nullable_to_non_nullable
+              as ModuleConfig_TelemetryConfig,
       myNodeInfo: null == myNodeInfo
           ? _value.myNodeInfo
           : myNodeInfo // ignore: cast_nullable_to_non_nullable
@@ -164,6 +178,7 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
       {this.myNodeNum = 0,
       required this.loraConfig,
       required this.bluetoothConfig,
+      required this.telemetryConfig,
       required this.myNodeInfo,
       this.hasOwnNodeInfo = false,
       this.configDownloaded = false})
@@ -177,6 +192,8 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
   @override
   final Config_BluetoothConfig bluetoothConfig;
   @override
+  final ModuleConfig_TelemetryConfig telemetryConfig;
+  @override
   final NodeInfo myNodeInfo;
   @override
   @JsonKey()
@@ -187,7 +204,7 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
 
   @override
   String toString() {
-    return 'RadioConfiguration(myNodeNum: $myNodeNum, loraConfig: $loraConfig, bluetoothConfig: $bluetoothConfig, myNodeInfo: $myNodeInfo, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
+    return 'RadioConfiguration(myNodeNum: $myNodeNum, loraConfig: $loraConfig, bluetoothConfig: $bluetoothConfig, telemetryConfig: $telemetryConfig, myNodeInfo: $myNodeInfo, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
   }
 
   @override
@@ -201,6 +218,8 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
                 other.loraConfig == loraConfig) &&
             (identical(other.bluetoothConfig, bluetoothConfig) ||
                 other.bluetoothConfig == bluetoothConfig) &&
+            (identical(other.telemetryConfig, telemetryConfig) ||
+                other.telemetryConfig == telemetryConfig) &&
             (identical(other.myNodeInfo, myNodeInfo) ||
                 other.myNodeInfo == myNodeInfo) &&
             (identical(other.hasOwnNodeInfo, hasOwnNodeInfo) ||
@@ -210,8 +229,15 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, myNodeNum, loraConfig,
-      bluetoothConfig, myNodeInfo, hasOwnNodeInfo, configDownloaded);
+  int get hashCode => Object.hash(
+      runtimeType,
+      myNodeNum,
+      loraConfig,
+      bluetoothConfig,
+      telemetryConfig,
+      myNodeInfo,
+      hasOwnNodeInfo,
+      configDownloaded);
 
   @JsonKey(ignore: true)
   @override
@@ -226,6 +252,7 @@ abstract class _RadioConfiguration extends RadioConfiguration {
       {final int myNodeNum,
       required final Config_LoRaConfig loraConfig,
       required final Config_BluetoothConfig bluetoothConfig,
+      required final ModuleConfig_TelemetryConfig telemetryConfig,
       required final NodeInfo myNodeInfo,
       final bool hasOwnNodeInfo,
       final bool configDownloaded}) = _$RadioConfigurationImpl;
@@ -237,6 +264,8 @@ abstract class _RadioConfiguration extends RadioConfiguration {
   Config_LoRaConfig get loraConfig;
   @override
   Config_BluetoothConfig get bluetoothConfig;
+  @override
+  ModuleConfig_TelemetryConfig get telemetryConfig;
   @override
   NodeInfo get myNodeInfo;
   @override

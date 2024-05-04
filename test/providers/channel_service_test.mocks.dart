@@ -11,6 +11,8 @@ import 'package:multimesh/models/radio_configuration.dart' as _i3;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
     as _i11;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i6;
+import 'package:multimesh/protobufs/generated/meshtastic/module_config.pb.dart'
+    as _i12;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i8;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
@@ -246,6 +248,16 @@ class MockRadioConfigService extends _i1.Mock
         Invocation.method(
           #setBluetoothConfig,
           [bluetoothConfig],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setTelemetryConfig(_i12.ModuleConfig_TelemetryConfig? telemetryConfig) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setTelemetryConfig,
+          [telemetryConfig],
         ),
         returnValueForMissingStub: null,
       );

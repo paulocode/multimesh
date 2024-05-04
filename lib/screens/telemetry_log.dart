@@ -4,8 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
 import '../constants/app_constants.dart';
+import '../extensions.dart';
+import '../providers/radio_config/radio_config_service.dart';
 import '../providers/telemetry/telemetry_saver.dart';
 import '../providers/telemetry/telemetry_streamer.dart';
+import '../widgets/app_bar_connection_indicator.dart';
 import 'config/confirmation_dialog.dart';
 
 class TelemetryLogScreen extends ConsumerWidget {
@@ -22,13 +25,18 @@ class TelemetryLogScreen extends ConsumerWidget {
         ref.watch(telemetryStreamerProvider(nodeNum: nodeNum));
     final telemetryListService =
         ref.watch(telemetryStreamerProvider(nodeNum: nodeNum).notifier);
+    final displayFahrenheit = ref.watch(
+      radioConfigServiceProvider.select(
+        (value) => value.telemetryConfig.environmentDisplayFahrenheit,
+      ),
+    );
     final count = telemetryListService.count;
     switch (telemetryListAsync) {
       case AsyncValue(:final valueOrNull?):
         final telemetryList = valueOrNull;
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Telemetry Log'),
+          appBar: const AppBarWithConnectionIndicator(
+            title: 'Telemetry Log',
           ),
           body: Column(
             children: [
@@ -45,7 +53,9 @@ class TelemetryLogScreen extends ConsumerWidget {
                   OutlinedButton(
                     onPressed: () async {
                       final response = await showConfirmationDialog(
-                          context, 'Delete telemetry data?');
+                        context,
+                        'Delete telemetry data?',
+                      );
                       if (response) {
                         await telemetryListService.clear();
                       }
@@ -89,13 +99,19 @@ class TelemetryLogScreen extends ConsumerWidget {
                                   : DateFormat.yMd()
                                       .add_Hms()
                                       .format(recordTime);
+
+                              final temp = displayFahrenheit
+                                  ? '${environmentMetrics.temperature.cToF().toStringAsFixed(2)}° F'
+                                  : '${environmentMetrics.temperature.toStringAsFixed(2)}° C';
+
                               return ListTile(
                                 title: Text(
                                   '${count - index} $recordTimeString: '
-                                  '${environmentMetrics.temperature.toStringAsFixed(2)}° C, '
+                                  '$temp, '
                                   '${environmentMetrics.relativeHumidity.toStringAsFixed(2)} RH, '
                                   '${environmentMetrics.barometricPressure.toStringAsFixed(2)} mbar, '
-                                  '${environmentMetrics.gasResistance.toStringAsFixed(2)} Ω, ',
+                                  '${environmentMetrics.gasResistance.toStringAsFixed(2)} Ω, '
+                                  '${environmentMetrics.iaq} iaq',
                                 ),
                               );
                             },

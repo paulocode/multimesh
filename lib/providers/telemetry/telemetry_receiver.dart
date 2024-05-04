@@ -50,17 +50,23 @@ class TelemetryReceiver {
   void _processPacket(FromRadio event) {
     final packet = event.packet;
     final decoded = packet.decoded;
-    if (decoded.portnum == PortNum.TELEMETRY_APP) {
-      final telemetry = Telemetry.fromBuffer(decoded.payload);
-      _logger.i(telemetry.toString());
-      _streamController.add(packet);
-      _telemetryRepository.add(
-        timedTelemetry:
-            TimedTelemetry(timeReceived: DateTime.now(), telemetry: telemetry),
-        fromNode: packet.from,
-        owner: _myNodeNum,
-      );
+    if (decoded.portnum != PortNum.TELEMETRY_APP) {
+      return;
     }
+    final telemetry = Telemetry.fromBuffer(decoded.payload);
+    if (!telemetry.hasEnvironmentMetrics()) {
+      // TODO: handle deviceMetrics
+      return;
+    }
+
+    _logger.i(telemetry.toString());
+    _streamController.add(packet);
+    _telemetryRepository.add(
+      timedTelemetry:
+          TimedTelemetry(timeReceived: DateTime.now(), telemetry: telemetry),
+      fromNode: packet.from,
+      owner: _myNodeNum,
+    );
   }
 
   StreamSubscription<MeshPacket> addTelemetryListener({

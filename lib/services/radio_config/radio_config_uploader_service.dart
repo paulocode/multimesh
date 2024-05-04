@@ -3,6 +3,7 @@ import 'package:logger/logger.dart';
 import '../../protobufs/generated/meshtastic/admin.pb.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
+import '../../protobufs/generated/meshtastic/module_config.pb.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../ack_waiting_radio_writer.dart';
 
@@ -76,6 +77,22 @@ class RadioConfigUploaderService {
 
   Future<void> sendReboot() async {
     final adminMessage = AdminMessage(rebootSeconds: 5);
+    await _radioWriter.sendMeshPacket(
+      to: _myNodeNum,
+      portNum: PortNum.ADMIN_APP,
+      payload: adminMessage.writeToBuffer(),
+    );
+  }
+
+  Future<void> uploadTelemetryConfig({
+    required ModuleConfig_TelemetryConfig telemetryConfig,
+  }) async {
+    _logger.i('Setting telemetry config: \n$telemetryConfig');
+    final adminMessage = AdminMessage(
+      setModuleConfig: ModuleConfig(
+        telemetry: telemetryConfig,
+      ),
+    );
     await _radioWriter.sendMeshPacket(
       to: _myNodeNum,
       portNum: PortNum.ADMIN_APP,

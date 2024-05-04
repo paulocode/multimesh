@@ -9,18 +9,20 @@ import 'dart:typed_data' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/models/radio_configuration.dart' as _i3;
 import 'package:multimesh/models/text_message.dart' as _i4;
-import 'package:multimesh/models/text_message_status.dart' as _i13;
+import 'package:multimesh/models/text_message_status.dart' as _i14;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart'
     as _i11;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i8;
+import 'package:multimesh/protobufs/generated/meshtastic/module_config.pb.dart'
+    as _i12;
 import 'package:multimesh/protobufs/generated/meshtastic/portnums.pb.dart'
     as _i7;
 import 'package:multimesh/providers/radio_config/radio_config_service.dart'
     as _i10;
-import 'package:multimesh/repository/text_message_repository.dart' as _i12;
+import 'package:multimesh/repository/text_message_repository.dart' as _i13;
 import 'package:multimesh/services/ack_waiting_radio_writer.dart' as _i5;
 import 'package:multimesh/services/text_message/text_message_stream_service.dart'
-    as _i14;
+    as _i15;
 import 'package:riverpod_annotation/riverpod_annotation.dart' as _i2;
 
 // ignore_for_file: type=lint
@@ -247,6 +249,16 @@ class MockRadioConfigService extends _i1.Mock
       );
 
   @override
+  void setTelemetryConfig(_i12.ModuleConfig_TelemetryConfig? telemetryConfig) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setTelemetryConfig,
+          [telemetryConfig],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void clear() => super.noSuchMethod(
         Invocation.method(
           #clear,
@@ -276,7 +288,7 @@ class MockRadioConfigService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTextMessageRepository extends _i1.Mock
-    implements _i12.TextMessageRepository {
+    implements _i13.TextMessageRepository {
   MockTextMessageRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -304,7 +316,7 @@ class MockTextMessageRepository extends _i1.Mock
 
   @override
   _i6.Future<void> updateStatusByPacketId({
-    required _i13.TextMessageStatus? status,
+    required _i14.TextMessageStatus? status,
     required int? packetId,
     _i8.Routing_Error? routingError = _i8.Routing_Error.NONE,
   }) =>
@@ -431,7 +443,7 @@ class MockTextMessageRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTextMessageStreamService extends _i1.Mock
-    implements _i14.TextMessageStreamService {
+    implements _i15.TextMessageStreamService {
   MockTextMessageStreamService() {
     _i1.throwOnMissingStub(this);
   }

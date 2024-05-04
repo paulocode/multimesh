@@ -8,6 +8,8 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:multimesh/protobufs/generated/meshtastic/config.pb.dart' as _i4;
 import 'package:multimesh/protobufs/generated/meshtastic/mesh.pb.dart' as _i5;
+import 'package:multimesh/protobufs/generated/meshtastic/module_config.pb.dart'
+    as _i6;
 import 'package:multimesh/services/radio_config/radio_config_uploader_service.dart'
     as _i2;
 
@@ -85,6 +87,19 @@ class MockRadioConfigUploaderService extends _i1.Mock
         Invocation.method(
           #sendReboot,
           [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> uploadTelemetryConfig(
+          {required _i6.ModuleConfig_TelemetryConfig? telemetryConfig}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadTelemetryConfig,
+          [],
+          {#telemetryConfig: telemetryConfig},
         ),
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),

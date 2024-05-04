@@ -6,6 +6,7 @@ import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/radio_connector_state.dart';
 import '../../protobufs/generated/meshtastic/config.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pb.dart';
+import '../../protobufs/generated/meshtastic/module_config.pb.dart';
 import '../../providers/radio_config/radio_config_service.dart';
 import '../ack_waiting_radio_writer.dart';
 import '../interfaces/radio_reader.dart';
@@ -74,6 +75,8 @@ class RadioConfigDownloaderService {
         _processNodeInfo(packet.nodeInfo);
       case FromRadio_PayloadVariant.config:
         _processConfigPacket(packet.config);
+      case FromRadio_PayloadVariant.moduleConfig:
+        _processModuleConfigPacket(packet.moduleConfig);
       case FromRadio_PayloadVariant.configCompleteId:
         await _processConfigCompleteId(packet.configCompleteId);
 
@@ -127,6 +130,15 @@ class RadioConfigDownloaderService {
       _logger.i('Stale configCompleteId');
       _radioConfigServiceProvider().clear();
       await _requestConfig();
+    }
+  }
+
+  void _processModuleConfigPacket(ModuleConfig moduleConfig) {
+    switch (moduleConfig.whichPayloadVariant()) {
+      case ModuleConfig_PayloadVariant.telemetry:
+        _radioConfigService.setTelemetryConfig(moduleConfig.telemetry);
+      case _:
+        break;
     }
   }
 }

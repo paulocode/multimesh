@@ -26,6 +26,7 @@ class TelemetryRepository {
         'receivedTime':
             timedTelemetry.timeReceived.millisecondsSinceEpoch ~/ 1000,
         'recordedTime': timedTelemetry.telemetry.time,
+        'iaq': environmentMetrics.iaq,
       },
     );
   }
@@ -52,7 +53,7 @@ class TelemetryRepository {
       where: 'fromNode = ? AND owner = ?',
       whereArgs: [fromNode, owner],
       offset: index,
-      orderBy: 'id ASC',
+      orderBy: 'id DESC',
       limit: 1,
     );
 
@@ -70,6 +71,7 @@ class TelemetryRepository {
             'temp': temp as double?,
             'barometricPressure': barometricPressure as double?,
             'gasResistance': gasResistance as double?,
+            'iaq': iaq as int?,
             'receivedTime': receivedTime as int,
             'recordedTime': recordedTime as int,
           } in result)
@@ -83,6 +85,7 @@ class TelemetryRepository {
               temperature: temp,
               barometricPressure: barometricPressure,
               gasResistance: gasResistance,
+              iaq: iaq,
             ),
           ),
         ),
@@ -99,7 +102,7 @@ class TelemetryRepository {
       'telemetry',
       where: 'fromNode = ? AND owner = ?',
       whereArgs: [fromNode, owner],
-      orderBy: 'id ASC',
+      orderBy: 'id DESC',
       offset: offset,
       limit: limit,
     );
