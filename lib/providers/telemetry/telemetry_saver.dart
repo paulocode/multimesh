@@ -10,6 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../extensions.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/telemetry_repository.dart';
+import '../wrap/local_platform.dart';
 
 part 'telemetry_saver.g.dart';
 
@@ -52,7 +53,11 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final nodeNumHexLastFour = nodeNumHex.substring(nodeNumHex.length - 4);
   final formattedDate =
       DateFormat('MM-dd-yyyy-HH-mm-ss').format(DateTime.now());
-  final filename = 'Telemetry-$nodeNumHexLastFour-$formattedDate';
+  var filename = 'Telemetry-$nodeNumHexLastFour-$formattedDate';
+
+  if (ref.read(localPlatformProvider).isWindows) {
+    filename += '.';
+  }
 
   final headerRow = [
     'Time received',
