@@ -62,6 +62,7 @@ class NodeCard extends ConsumerWidget {
                     ),
                     const SizedBox(width: 16),
                     Flexible(
+                      fit: FlexFit.tight,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
