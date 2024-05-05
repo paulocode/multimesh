@@ -33,14 +33,14 @@ class _NodeInfoScreenState extends ConsumerState<NodeInfoScreen> {
                 node: node,
                 showChevron: false,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               OutlinedButton(
                 onPressed: () {
                   context.push('/telemetryLog?nodeNum=${widget.nodeNum}');
                 },
                 child: const Text('Telemetry'),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               OutlinedButton(
                 onPressed: () {
                   context.push('/traceroute?nodeNum=${widget.nodeNum}');

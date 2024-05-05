@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../extensions.dart';
 import '../models/chat_type.dart';
 import '../models/mesh_node.dart';
 import '../providers/node/hops_away.dart';
@@ -25,6 +26,11 @@ class NodeCard extends ConsumerWidget {
     final nodes = ref.watch(nodeServiceProvider);
     final myNodeNum = ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
+    final displayFahrenheit = ref.watch(
+      radioConfigServiceProvider.select(
+        (value) => value.telemetryConfig.environmentDisplayFahrenheit,
+      ),
+    );
     final telemetry =
         ref.watch(telemetryLatestStreamerProvider(nodeNum: node.nodeNum));
     final textMessageStreamService = ref.watch(
@@ -91,7 +97,14 @@ class NodeCard extends ConsumerWidget {
                                   Icons.thermostat,
                                   size: 20,
                                 ),
-                                Text('${telemetry.temp?.toStringAsFixed(2)}°'),
+                                if (displayFahrenheit)
+                                  Text(
+                                    '${telemetry.temp?.cToF().toStringAsFixed(2)}° F',
+                                  )
+                                else
+                                  Text(
+                                    '${telemetry.temp?.toStringAsFixed(2)}° C',
+                                  ),
                               ],
                             ),
                           if (node.hwModel != null)
