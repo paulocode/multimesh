@@ -198,7 +198,6 @@ class _MessageListState extends ConsumerState<MessageList> {
     final showSenderBubble =
         isFirstMessage || textMessage.from != textMessages[index + 1].from;
     final needDate = isFirstMessage ||
-        showSenderBubble ||
         textMessages[index + 1].time.day != textMessages[index].time.day;
     return MessageBubble(
       textMessage: textMessage,
