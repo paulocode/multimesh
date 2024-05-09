@@ -4,6 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../constants/ble_constants.dart';
 import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/mesh_radio.dart';
 import '../../models/radio_scan_state.dart';
@@ -48,7 +49,7 @@ class BleRadioScanner extends _$BleRadioScanner {
     state = state.copyWith(meshRadios: devices);
     final subscription = _flutterBluePlus.scanResults.listen(
       (results) async {
-        _addUniqueResults(devices, results);
+        await _addUniqueResults(devices, results);
       },
       onError: (dynamic e) {
         _logger.e(e.toString());
@@ -62,12 +63,20 @@ class BleRadioScanner extends _$BleRadioScanner {
     );
   }
 
-  void _addUniqueResults(List<BleMeshRadio> devices, List<ScanResult> results) {
+  Future<void> _addUniqueResults(
+    List<BleMeshRadio> devices,
+    List<ScanResult> results,
+  ) async {
     final newDevices = results
         .where(
           (e) => e.advertisementData.advName.trim().isNotEmpty,
         )
+        .where(
+          (e) => e.advertisementData.serviceUuids
+              .any((element) => element.str == MESHTASTIC_BLE_SERVICE),
+        )
         .map((e) => BleMeshRadio(device: e.device));
+
     final uniqueNewDevices = newDevices.where(
       (newDevice) => devices
           .where(

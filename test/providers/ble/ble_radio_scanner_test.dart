@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:multimesh/constants/ble_constants.dart';
 import 'package:multimesh/providers/ble/ble_permissions_requester.dart';
 import 'package:multimesh/providers/ble/ble_radio_scanner.dart';
 import 'package:multimesh/providers/wrap/flutter_blue_plus_mockable.dart';
@@ -142,6 +143,8 @@ void main() {
     when(scanResult.device).thenReturn(scannedDevice);
     when(advertisementData.advName).thenReturn('scannedDevice');
     when(scanResult.advertisementData).thenReturn(advertisementData);
+    when(advertisementData.serviceUuids)
+        .thenReturn([Guid(MESHTASTIC_BLE_SERVICE)]);
     when(flutterBluePlus.systemDevices).thenAnswer((_) => Future.value([]));
     when(flutterBluePlus.scanResults)
         .thenAnswer((_) => Future.value(<ScanResult>[scanResult]).asStream());
@@ -153,6 +156,35 @@ void main() {
     expect(
       container.read(bleRadioScannerProvider).meshRadios[0].remoteId,
       equals('scannedDevice'),
+    );
+  });
+
+  test('must skip non-meshtastic bluetooth devices', () async {
+    final scannedDevice = MockBluetoothDevice();
+    final scanResult = MockScanResult();
+    final advertisementData = MockAdvertisementData();
+
+    when(blePermissionsRequester.request())
+        .thenAnswer((_) => Future.value(true));
+    when(scannedDevice.remoteId)
+        .thenReturn(const DeviceIdentifier('scannedDevice'));
+    when(scannedDevice.advName).thenReturn('scannedDevice');
+    when(scanResult.device).thenReturn(scannedDevice);
+    when(advertisementData.advName).thenReturn('scannedDevice');
+    when(scanResult.advertisementData).thenReturn(advertisementData);
+    when(advertisementData.serviceUuids)
+        .thenReturn([Guid('11111111-1111-1111-1111-111111111111')]);
+    when(flutterBluePlus.systemDevices).thenAnswer((_) => Future.value([]));
+    when(flutterBluePlus.scanResults)
+        .thenAnswer((_) => Future.value(<ScanResult>[scanResult]).asStream());
+    when(flutterBluePlus.isScanning)
+        .thenAnswer((_) => Future<bool>.value(false).asStream());
+
+    await container.read(bleRadioScannerProvider.notifier).scan();
+
+    expect(
+      container.read(bleRadioScannerProvider).meshRadios.length,
+      0,
     );
   });
 
@@ -171,6 +203,8 @@ void main() {
     when(scanResult.device).thenReturn(scannedDevice);
     when(advertisementData.advName).thenReturn('scannedDevice');
     when(scanResult.advertisementData).thenReturn(advertisementData);
+    when(advertisementData.serviceUuids)
+        .thenReturn([Guid(MESHTASTIC_BLE_SERVICE)]);
     when(flutterBluePlus.systemDevices).thenAnswer((_) => Future.value([]));
     when(flutterBluePlus.scanResults).thenAnswer((_) => scanResultStream);
     when(flutterBluePlus.isScanning).thenAnswer((_) => isScanningStream);
