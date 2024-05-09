@@ -119,7 +119,7 @@ class _BtConfigScreenState extends ConsumerState<BtConfigScreen> {
                           // so we do not have to update local config here.
                           final confirmed = await showConfirmationDialog(
                             context,
-                            'Save will reboot device. Continue?',
+                            'Save may reboot device. Continue?',
                           );
                           if (!confirmed) {
                             return;
@@ -130,6 +130,9 @@ class _BtConfigScreenState extends ConsumerState<BtConfigScreen> {
                               .uploadBluetoothConfig(
                                 bluetoothConfig: _bluetoothConfig,
                               );
+                          ref
+                              .read(radioConfigServiceProvider.notifier)
+                              .setBluetoothConfig(_bluetoothConfig);
                           if (context.mounted) {
                             context.go('/');
                           }

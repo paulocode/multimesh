@@ -121,7 +121,7 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                         // so we do not have to update local config here.
                         final confirmed = await showConfirmationDialog(
                           context,
-                          'Save will reboot device. Continue?',
+                          'Save may reboot device. Continue?',
                         );
                         if (!confirmed) {
                           return;
@@ -132,6 +132,9 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                             .uploadLoraConfig(
                               loraConfig: _loraConfig,
                             );
+                        ref
+                            .read(radioConfigServiceProvider.notifier)
+                            .setLoraConfig(_loraConfig);
                         if (context.mounted) {
                           context.go('/');
                         }

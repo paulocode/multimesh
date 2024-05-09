@@ -135,7 +135,7 @@ class _TelemetryConfigScreenState extends ConsumerState<TelemetryConfigScreen> {
                           // so we do not have to update local config here.
                           final confirmed = await showConfirmationDialog(
                             context,
-                            'Save will reboot device. Continue?',
+                            'Save may reboot device. Continue?',
                           );
                           if (!confirmed) {
                             return;
@@ -146,6 +146,9 @@ class _TelemetryConfigScreenState extends ConsumerState<TelemetryConfigScreen> {
                               .uploadTelemetryConfig(
                                 telemetryConfig: _telemetryConfig,
                               );
+                          ref
+                              .read(radioConfigServiceProvider.notifier)
+                              .setTelemetryConfig(_telemetryConfig);
                           if (context.mounted) {
                             context.go('/');
                           }

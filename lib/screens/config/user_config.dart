@@ -117,7 +117,7 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                               // so we do not have to update local config here.
                               final confirmed = await showConfirmationDialog(
                                 context,
-                                'Save will reboot device. Continue?',
+                                'Save may reboot device. Continue?',
                               );
                               if (!confirmed) {
                                 return;
@@ -128,6 +128,11 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                                   .uploadUser(
                                     user: _user,
                                   );
+                              await ref
+                                  .read(
+                                    radioConnectorServiceProvider.notifier,
+                                  )
+                                  .disconnect();
                               if (context.mounted) {
                                 context.go('/');
                               }
