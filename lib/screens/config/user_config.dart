@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:protobuf/protobuf.dart';
 
 import '../../models/radio_connector_state.dart';
@@ -9,7 +8,8 @@ import '../../providers/radio_config/radio_config_service.dart';
 import '../../providers/radio_config/radio_config_uploader_service.dart';
 import '../../providers/radio_connector_service.dart';
 import '../../widgets/app_bar_connection_indicator.dart';
-import 'confirmation_dialog.dart';
+import '../utils/confirmation_dialog.dart';
+import '../utils/snackbar_message.dart';
 
 class UserConfigScreen extends ConsumerStatefulWidget {
   const UserConfigScreen({super.key});
@@ -126,16 +126,12 @@ class _UserConfigState extends ConsumerState<UserConfigScreen> {
                               await ref
                                   .read(radioConfigUploaderServiceProvider)
                                   .uploadUser(
-                                    user: _user,
+                                    user: _user.deepCopy(),
                                   );
-                              await ref
-                                  .read(
-                                    radioConnectorServiceProvider.notifier,
-                                  )
-                                  .disconnect();
-                              if (context.mounted) {
-                                context.go('/');
-                              }
+                              showSnackBarMessage(
+                                context, // ignore: use_build_context_synchronously
+                                'Saved',
+                              );
                             }
                           : null,
                   label: const Text('Save'),

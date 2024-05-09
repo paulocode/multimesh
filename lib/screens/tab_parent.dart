@@ -8,10 +8,10 @@ import '../models/radio_connector_state.dart';
 import '../providers/breadcrumb_logger.dart';
 import '../providers/radio_connector_service.dart';
 import 'channel_list.dart';
-import 'config/confirmation_dialog.dart';
 import 'map.dart';
 import 'nodes.dart';
 import 'radio_connection.dart';
+import 'utils/confirmation_dialog.dart';
 
 class TabParent extends ConsumerStatefulWidget {
   const TabParent({

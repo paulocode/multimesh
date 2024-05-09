@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:protobuf/protobuf.dart';
 
 import '../../constants/meshtastic_constants.dart';
@@ -10,7 +9,8 @@ import '../../providers/radio_config/radio_config_service.dart';
 import '../../providers/radio_config/radio_config_uploader_service.dart';
 import '../../providers/radio_connector_service.dart';
 import '../../widgets/app_bar_connection_indicator.dart';
-import 'confirmation_dialog.dart';
+import '../utils/confirmation_dialog.dart';
+import '../utils/snackbar_message.dart';
 
 class LoraConfigScreen extends ConsumerStatefulWidget {
   const LoraConfigScreen({super.key});
@@ -134,10 +134,11 @@ class _LoraConfigScreenState extends ConsumerState<LoraConfigScreen> {
                             );
                         ref
                             .read(radioConfigServiceProvider.notifier)
-                            .setLoraConfig(_loraConfig);
-                        if (context.mounted) {
-                          context.go('/');
-                        }
+                            .setLoraConfig(_loraConfig.deepCopy());
+                        showSnackBarMessage(
+                          context, // ignore: use_build_context_synchronously
+                          'Saved',
+                        );
                       }
                     : null,
                 label: const Text('Save'),

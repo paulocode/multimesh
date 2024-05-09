@@ -7,7 +7,6 @@ import 'package:logger/logger.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../providers/channel_service.dart';
-import '../../providers/radio_connector_service.dart';
 
 class ChannelQrScanner extends ConsumerStatefulWidget {
   const ChannelQrScanner({super.key});
@@ -73,13 +72,8 @@ class _ChannelQrScannerState extends ConsumerState<ChannelQrScanner> {
                       'Unknown error. Reconnect and try again.',
                     );
                   }
-                  await ref
-                      .read(
-                        radioConnectorServiceProvider.notifier,
-                      )
-                      .disconnect();
                   if (context.mounted) {
-                    context.go('/');
+                    context.pop(true);
                   }
                 }
               },

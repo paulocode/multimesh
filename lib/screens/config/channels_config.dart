@@ -5,12 +5,12 @@ import 'package:go_router/go_router.dart';
 import '../../models/mesh_channel.dart';
 import '../../protobufs/generated/meshtastic/channel.pb.dart';
 import '../../providers/channel_service.dart';
-import '../../providers/radio_connector_service.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/app_bar_connection_indicator.dart';
 import '../../widgets/channel_input_form.dart';
 import '../../widgets/channel_qr_show.dart';
-import 'confirmation_dialog.dart';
+import '../utils/confirmation_dialog.dart';
+import '../utils/snackbar_message.dart';
 
 class ChannelsConfigScreen extends ConsumerStatefulWidget {
   const ChannelsConfigScreen({super.key});
@@ -110,8 +110,16 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             OutlinedButton.icon(
-                              onPressed: () {
-                                context.push('/channelQrScanner');
+                              onPressed: () async {
+                                final result = await context
+                                        .push<bool>('/channelQrScanner') ??
+                                    false;
+                                if (result) {
+                                  showSnackBarMessage(
+                                    context, // ignore: use_build_context_synchronously
+                                    'Saved',
+                                  );
+                                }
                               },
                               label: const Text('Scan QR'),
                               icon: const Icon(Icons.camera),
@@ -138,14 +146,13 @@ class _ChannelsConfigScreenState extends ConsumerState<ChannelsConfigScreen> {
                                     _uploading = true;
                                   });
                                   await channelService.processQr(channelUrl);
-                                  await ref
-                                      .read(
-                                        radioConnectorServiceProvider.notifier,
-                                      )
-                                      .disconnect();
-                                  if (context.mounted) {
-                                    context.go('/');
-                                  }
+                                  showSnackBarMessage(
+                                    context, // ignore: use_build_context_synchronously
+                                    'Saved',
+                                  );
+                                  setState(() {
+                                    _uploading = false;
+                                  });
                                 }
                               },
                               label: const Text('Input QR'),
