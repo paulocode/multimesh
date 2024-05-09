@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../extensions.dart';
 import '../models/chat_type.dart';
 import '../models/mesh_node.dart';
 import '../providers/node/hops_away.dart';
@@ -10,6 +9,7 @@ import '../providers/node/node_service.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/telemetry/telemetry_latest_streamer.dart';
 import '../providers/text_message/text_message_stream_service.dart';
+import '../utils/extensions.dart';
 
 class NodeCard extends ConsumerWidget {
   const NodeCard({

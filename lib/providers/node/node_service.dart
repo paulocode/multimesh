@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,6 +6,7 @@ import '../../protobufs/generated/meshtastic/mesh.pb.dart';
 import '../../protobufs/generated/meshtastic/mesh.pbserver.dart';
 import '../../protobufs/generated/meshtastic/portnums.pb.dart';
 import '../../services/interfaces/radio_reader.dart';
+import '../../utils/splay_tree_map_with_default.dart';
 import '../radio_reader.dart';
 
 part 'node_service.g.dart';
@@ -22,7 +21,9 @@ class NodeService extends _$NodeService {
     _radioReader = ref.watch(radioReaderProvider);
     final subscription = _radioReader.onPacketReceived().listen(_processPacket);
     ref.onDispose(subscription.cancel);
-    return SplayTreeMap<int, MeshNode>();
+    return SplayTreeMapWithDefault<int, MeshNode>(
+      defaultCreator: _createDefaultNode,
+    );
   }
 
   void _processPacket(FromRadio fromRadio) {
@@ -61,16 +62,7 @@ class NodeService extends _$NodeService {
     required int? batteryLevel,
   }) {
     if (user.id.trim().isEmpty) {
-      final nodeNumHex = nodeNum.toRadixString(16).padLeft(4, '0');
-      final shortName = nodeNumHex.substring(nodeNumHex.length - 4);
-      return MeshNode(
-        nodeNum: nodeNum,
-        longName: '???? $shortName',
-        shortName: shortName,
-        channel: channel,
-        id: user.id,
-        lastSeen: DateTime.now(),
-      );
+      return _createDefaultNode(nodeNum, channel: channel);
     } else {
       return MeshNode(
         nodeNum: nodeNum,
@@ -97,5 +89,18 @@ class NodeService extends _$NodeService {
     if (node != null) {
       state = {...state, nodeNum: node.copyWith(hasUnreadMessages: false)};
     }
+  }
+
+  MeshNode _createDefaultNode(int nodeNum, {int channel = 0}) {
+    final nodeNumHex = nodeNum.toRadixString(16).padLeft(4, '0');
+    final shortName = nodeNumHex.substring(nodeNumHex.length - 4);
+    return MeshNode(
+      nodeNum: nodeNum,
+      longName: '???? $shortName',
+      shortName: shortName,
+      channel: channel,
+      id: '',
+      lastSeen: DateTime.now(),
+    );
   }
 }

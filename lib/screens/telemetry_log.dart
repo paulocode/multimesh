@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
 import '../constants/app_constants.dart';
-import '../extensions.dart';
 import '../providers/radio_config/radio_config_service.dart';
 import '../providers/telemetry/telemetry_saver.dart';
 import '../providers/telemetry/telemetry_streamer.dart';
+import '../utils/extensions.dart';
 import '../widgets/app_bar_connection_indicator.dart';
 import 'config/confirmation_dialog.dart';
 

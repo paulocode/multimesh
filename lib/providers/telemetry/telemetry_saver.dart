@@ -7,7 +7,7 @@ import 'package:file_saver/file_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../extensions.dart';
+import '../../utils/extensions.dart';
 import '../radio_config/radio_config_service.dart';
 import '../repository/telemetry_repository.dart';
 import '../wrap/local_platform.dart';

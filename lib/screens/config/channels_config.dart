@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../extensions.dart';
 import '../../models/mesh_channel.dart';
 import '../../protobufs/generated/meshtastic/channel.pb.dart';
 import '../../providers/channel_service.dart';
+import '../../utils/extensions.dart';
 import '../../widgets/app_bar_connection_indicator.dart';
 import '../../widgets/channel_input_form.dart';
 import '../../widgets/channel_qr_show.dart';
