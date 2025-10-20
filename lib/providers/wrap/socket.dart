@@ -5,6 +5,6 @@ import '../../services/wrap/socket_mockable.dart';
 part 'socket.g.dart';
 
 @Riverpod(keepAlive: true)
-SocketMockable socket(SocketRef ref) {
+SocketMockable socket(Ref ref) {
   return SocketMockable();
 }

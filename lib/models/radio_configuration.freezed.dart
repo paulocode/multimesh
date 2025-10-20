@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,209 +9,32 @@ part of 'radio_configuration.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RadioConfiguration {
-  int get myNodeNum => throw _privateConstructorUsedError;
-  Config_LoRaConfig get loraConfig => throw _privateConstructorUsedError;
-  Config_BluetoothConfig get bluetoothConfig =>
-      throw _privateConstructorUsedError;
-  ModuleConfig_TelemetryConfig get telemetryConfig =>
-      throw _privateConstructorUsedError;
-  NodeInfo get myNodeInfo => throw _privateConstructorUsedError;
-  bool get hasOwnNodeInfo => throw _privateConstructorUsedError;
-  bool get configDownloaded => throw _privateConstructorUsedError;
+  int get myNodeNum;
+  Config_LoRaConfig get loraConfig;
+  Config_BluetoothConfig get bluetoothConfig;
+  ModuleConfig_TelemetryConfig get telemetryConfig;
+  NodeInfo get myNodeInfo;
+  bool get hasOwnNodeInfo;
+  bool get configDownloaded;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RadioConfiguration
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $RadioConfigurationCopyWith<RadioConfiguration> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RadioConfigurationCopyWith<$Res> {
-  factory $RadioConfigurationCopyWith(
-          RadioConfiguration value, $Res Function(RadioConfiguration) then) =
-      _$RadioConfigurationCopyWithImpl<$Res, RadioConfiguration>;
-  @useResult
-  $Res call(
-      {int myNodeNum,
-      Config_LoRaConfig loraConfig,
-      Config_BluetoothConfig bluetoothConfig,
-      ModuleConfig_TelemetryConfig telemetryConfig,
-      NodeInfo myNodeInfo,
-      bool hasOwnNodeInfo,
-      bool configDownloaded});
-}
-
-/// @nodoc
-class _$RadioConfigurationCopyWithImpl<$Res, $Val extends RadioConfiguration>
-    implements $RadioConfigurationCopyWith<$Res> {
-  _$RadioConfigurationCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? myNodeNum = null,
-    Object? loraConfig = null,
-    Object? bluetoothConfig = null,
-    Object? telemetryConfig = null,
-    Object? myNodeInfo = null,
-    Object? hasOwnNodeInfo = null,
-    Object? configDownloaded = null,
-  }) {
-    return _then(_value.copyWith(
-      myNodeNum: null == myNodeNum
-          ? _value.myNodeNum
-          : myNodeNum // ignore: cast_nullable_to_non_nullable
-              as int,
-      loraConfig: null == loraConfig
-          ? _value.loraConfig
-          : loraConfig // ignore: cast_nullable_to_non_nullable
-              as Config_LoRaConfig,
-      bluetoothConfig: null == bluetoothConfig
-          ? _value.bluetoothConfig
-          : bluetoothConfig // ignore: cast_nullable_to_non_nullable
-              as Config_BluetoothConfig,
-      telemetryConfig: null == telemetryConfig
-          ? _value.telemetryConfig
-          : telemetryConfig // ignore: cast_nullable_to_non_nullable
-              as ModuleConfig_TelemetryConfig,
-      myNodeInfo: null == myNodeInfo
-          ? _value.myNodeInfo
-          : myNodeInfo // ignore: cast_nullable_to_non_nullable
-              as NodeInfo,
-      hasOwnNodeInfo: null == hasOwnNodeInfo
-          ? _value.hasOwnNodeInfo
-          : hasOwnNodeInfo // ignore: cast_nullable_to_non_nullable
-              as bool,
-      configDownloaded: null == configDownloaded
-          ? _value.configDownloaded
-          : configDownloaded // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$RadioConfigurationImplCopyWith<$Res>
-    implements $RadioConfigurationCopyWith<$Res> {
-  factory _$$RadioConfigurationImplCopyWith(_$RadioConfigurationImpl value,
-          $Res Function(_$RadioConfigurationImpl) then) =
-      __$$RadioConfigurationImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int myNodeNum,
-      Config_LoRaConfig loraConfig,
-      Config_BluetoothConfig bluetoothConfig,
-      ModuleConfig_TelemetryConfig telemetryConfig,
-      NodeInfo myNodeInfo,
-      bool hasOwnNodeInfo,
-      bool configDownloaded});
-}
-
-/// @nodoc
-class __$$RadioConfigurationImplCopyWithImpl<$Res>
-    extends _$RadioConfigurationCopyWithImpl<$Res, _$RadioConfigurationImpl>
-    implements _$$RadioConfigurationImplCopyWith<$Res> {
-  __$$RadioConfigurationImplCopyWithImpl(_$RadioConfigurationImpl _value,
-      $Res Function(_$RadioConfigurationImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? myNodeNum = null,
-    Object? loraConfig = null,
-    Object? bluetoothConfig = null,
-    Object? telemetryConfig = null,
-    Object? myNodeInfo = null,
-    Object? hasOwnNodeInfo = null,
-    Object? configDownloaded = null,
-  }) {
-    return _then(_$RadioConfigurationImpl(
-      myNodeNum: null == myNodeNum
-          ? _value.myNodeNum
-          : myNodeNum // ignore: cast_nullable_to_non_nullable
-              as int,
-      loraConfig: null == loraConfig
-          ? _value.loraConfig
-          : loraConfig // ignore: cast_nullable_to_non_nullable
-              as Config_LoRaConfig,
-      bluetoothConfig: null == bluetoothConfig
-          ? _value.bluetoothConfig
-          : bluetoothConfig // ignore: cast_nullable_to_non_nullable
-              as Config_BluetoothConfig,
-      telemetryConfig: null == telemetryConfig
-          ? _value.telemetryConfig
-          : telemetryConfig // ignore: cast_nullable_to_non_nullable
-              as ModuleConfig_TelemetryConfig,
-      myNodeInfo: null == myNodeInfo
-          ? _value.myNodeInfo
-          : myNodeInfo // ignore: cast_nullable_to_non_nullable
-              as NodeInfo,
-      hasOwnNodeInfo: null == hasOwnNodeInfo
-          ? _value.hasOwnNodeInfo
-          : hasOwnNodeInfo // ignore: cast_nullable_to_non_nullable
-              as bool,
-      configDownloaded: null == configDownloaded
-          ? _value.configDownloaded
-          : configDownloaded // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$RadioConfigurationImpl extends _RadioConfiguration {
-  const _$RadioConfigurationImpl(
-      {this.myNodeNum = 0,
-      required this.loraConfig,
-      required this.bluetoothConfig,
-      required this.telemetryConfig,
-      required this.myNodeInfo,
-      this.hasOwnNodeInfo = false,
-      this.configDownloaded = false})
-      : super._();
-
-  @override
-  @JsonKey()
-  final int myNodeNum;
-  @override
-  final Config_LoRaConfig loraConfig;
-  @override
-  final Config_BluetoothConfig bluetoothConfig;
-  @override
-  final ModuleConfig_TelemetryConfig telemetryConfig;
-  @override
-  final NodeInfo myNodeInfo;
-  @override
-  @JsonKey()
-  final bool hasOwnNodeInfo;
-  @override
-  @JsonKey()
-  final bool configDownloaded;
-
-  @override
-  String toString() {
-    return 'RadioConfiguration(myNodeNum: $myNodeNum, loraConfig: $loraConfig, bluetoothConfig: $bluetoothConfig, telemetryConfig: $telemetryConfig, myNodeInfo: $myNodeInfo, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
-  }
+      _$RadioConfigurationCopyWithImpl<RadioConfiguration>(
+          this as RadioConfiguration, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RadioConfigurationImpl &&
+            other is RadioConfiguration &&
             (identical(other.myNodeNum, myNodeNum) ||
                 other.myNodeNum == myNodeNum) &&
             (identical(other.loraConfig, loraConfig) ||
@@ -239,41 +62,431 @@ class _$RadioConfigurationImpl extends _RadioConfiguration {
       hasOwnNodeInfo,
       configDownloaded);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'RadioConfiguration(myNodeNum: $myNodeNum, loraConfig: $loraConfig, bluetoothConfig: $bluetoothConfig, telemetryConfig: $telemetryConfig, myNodeInfo: $myNodeInfo, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $RadioConfigurationCopyWith<$Res> {
+  factory $RadioConfigurationCopyWith(
+          RadioConfiguration value, $Res Function(RadioConfiguration) _then) =
+      _$RadioConfigurationCopyWithImpl;
+  @useResult
+  $Res call(
+      {int myNodeNum,
+      Config_LoRaConfig loraConfig,
+      Config_BluetoothConfig bluetoothConfig,
+      ModuleConfig_TelemetryConfig telemetryConfig,
+      NodeInfo myNodeInfo,
+      bool hasOwnNodeInfo,
+      bool configDownloaded});
+}
+
+/// @nodoc
+class _$RadioConfigurationCopyWithImpl<$Res>
+    implements $RadioConfigurationCopyWith<$Res> {
+  _$RadioConfigurationCopyWithImpl(this._self, this._then);
+
+  final RadioConfiguration _self;
+  final $Res Function(RadioConfiguration) _then;
+
+  /// Create a copy of RadioConfiguration
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? myNodeNum = null,
+    Object? loraConfig = null,
+    Object? bluetoothConfig = null,
+    Object? telemetryConfig = null,
+    Object? myNodeInfo = null,
+    Object? hasOwnNodeInfo = null,
+    Object? configDownloaded = null,
+  }) {
+    return _then(_self.copyWith(
+      myNodeNum: null == myNodeNum
+          ? _self.myNodeNum
+          : myNodeNum // ignore: cast_nullable_to_non_nullable
+              as int,
+      loraConfig: null == loraConfig
+          ? _self.loraConfig
+          : loraConfig // ignore: cast_nullable_to_non_nullable
+              as Config_LoRaConfig,
+      bluetoothConfig: null == bluetoothConfig
+          ? _self.bluetoothConfig
+          : bluetoothConfig // ignore: cast_nullable_to_non_nullable
+              as Config_BluetoothConfig,
+      telemetryConfig: null == telemetryConfig
+          ? _self.telemetryConfig
+          : telemetryConfig // ignore: cast_nullable_to_non_nullable
+              as ModuleConfig_TelemetryConfig,
+      myNodeInfo: null == myNodeInfo
+          ? _self.myNodeInfo
+          : myNodeInfo // ignore: cast_nullable_to_non_nullable
+              as NodeInfo,
+      hasOwnNodeInfo: null == hasOwnNodeInfo
+          ? _self.hasOwnNodeInfo
+          : hasOwnNodeInfo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      configDownloaded: null == configDownloaded
+          ? _self.configDownloaded
+          : configDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [RadioConfiguration].
+extension RadioConfigurationPatterns on RadioConfiguration {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_RadioConfiguration value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _RadioConfiguration() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_RadioConfiguration value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioConfiguration():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_RadioConfiguration value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioConfiguration() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            int myNodeNum,
+            Config_LoRaConfig loraConfig,
+            Config_BluetoothConfig bluetoothConfig,
+            ModuleConfig_TelemetryConfig telemetryConfig,
+            NodeInfo myNodeInfo,
+            bool hasOwnNodeInfo,
+            bool configDownloaded)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _RadioConfiguration() when $default != null:
+        return $default(
+            _that.myNodeNum,
+            _that.loraConfig,
+            _that.bluetoothConfig,
+            _that.telemetryConfig,
+            _that.myNodeInfo,
+            _that.hasOwnNodeInfo,
+            _that.configDownloaded);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            int myNodeNum,
+            Config_LoRaConfig loraConfig,
+            Config_BluetoothConfig bluetoothConfig,
+            ModuleConfig_TelemetryConfig telemetryConfig,
+            NodeInfo myNodeInfo,
+            bool hasOwnNodeInfo,
+            bool configDownloaded)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioConfiguration():
+        return $default(
+            _that.myNodeNum,
+            _that.loraConfig,
+            _that.bluetoothConfig,
+            _that.telemetryConfig,
+            _that.myNodeInfo,
+            _that.hasOwnNodeInfo,
+            _that.configDownloaded);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            int myNodeNum,
+            Config_LoRaConfig loraConfig,
+            Config_BluetoothConfig bluetoothConfig,
+            ModuleConfig_TelemetryConfig telemetryConfig,
+            NodeInfo myNodeInfo,
+            bool hasOwnNodeInfo,
+            bool configDownloaded)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioConfiguration() when $default != null:
+        return $default(
+            _that.myNodeNum,
+            _that.loraConfig,
+            _that.bluetoothConfig,
+            _that.telemetryConfig,
+            _that.myNodeInfo,
+            _that.hasOwnNodeInfo,
+            _that.configDownloaded);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+
+class _RadioConfiguration extends RadioConfiguration {
+  const _RadioConfiguration(
+      {this.myNodeNum = 0,
+      required this.loraConfig,
+      required this.bluetoothConfig,
+      required this.telemetryConfig,
+      required this.myNodeInfo,
+      this.hasOwnNodeInfo = false,
+      this.configDownloaded = false})
+      : super._();
+
+  @override
+  @JsonKey()
+  final int myNodeNum;
+  @override
+  final Config_LoRaConfig loraConfig;
+  @override
+  final Config_BluetoothConfig bluetoothConfig;
+  @override
+  final ModuleConfig_TelemetryConfig telemetryConfig;
+  @override
+  final NodeInfo myNodeInfo;
+  @override
+  @JsonKey()
+  final bool hasOwnNodeInfo;
+  @override
+  @JsonKey()
+  final bool configDownloaded;
+
+  /// Create a copy of RadioConfiguration
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RadioConfigurationCopyWith<_RadioConfiguration> get copyWith =>
+      __$RadioConfigurationCopyWithImpl<_RadioConfiguration>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RadioConfiguration &&
+            (identical(other.myNodeNum, myNodeNum) ||
+                other.myNodeNum == myNodeNum) &&
+            (identical(other.loraConfig, loraConfig) ||
+                other.loraConfig == loraConfig) &&
+            (identical(other.bluetoothConfig, bluetoothConfig) ||
+                other.bluetoothConfig == bluetoothConfig) &&
+            (identical(other.telemetryConfig, telemetryConfig) ||
+                other.telemetryConfig == telemetryConfig) &&
+            (identical(other.myNodeInfo, myNodeInfo) ||
+                other.myNodeInfo == myNodeInfo) &&
+            (identical(other.hasOwnNodeInfo, hasOwnNodeInfo) ||
+                other.hasOwnNodeInfo == hasOwnNodeInfo) &&
+            (identical(other.configDownloaded, configDownloaded) ||
+                other.configDownloaded == configDownloaded));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      myNodeNum,
+      loraConfig,
+      bluetoothConfig,
+      telemetryConfig,
+      myNodeInfo,
+      hasOwnNodeInfo,
+      configDownloaded);
+
+  @override
+  String toString() {
+    return 'RadioConfiguration(myNodeNum: $myNodeNum, loraConfig: $loraConfig, bluetoothConfig: $bluetoothConfig, telemetryConfig: $telemetryConfig, myNodeInfo: $myNodeInfo, hasOwnNodeInfo: $hasOwnNodeInfo, configDownloaded: $configDownloaded)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RadioConfigurationCopyWith<$Res>
+    implements $RadioConfigurationCopyWith<$Res> {
+  factory _$RadioConfigurationCopyWith(
+          _RadioConfiguration value, $Res Function(_RadioConfiguration) _then) =
+      __$RadioConfigurationCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int myNodeNum,
+      Config_LoRaConfig loraConfig,
+      Config_BluetoothConfig bluetoothConfig,
+      ModuleConfig_TelemetryConfig telemetryConfig,
+      NodeInfo myNodeInfo,
+      bool hasOwnNodeInfo,
+      bool configDownloaded});
+}
+
+/// @nodoc
+class __$RadioConfigurationCopyWithImpl<$Res>
+    implements _$RadioConfigurationCopyWith<$Res> {
+  __$RadioConfigurationCopyWithImpl(this._self, this._then);
+
+  final _RadioConfiguration _self;
+  final $Res Function(_RadioConfiguration) _then;
+
+  /// Create a copy of RadioConfiguration
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$RadioConfigurationImplCopyWith<_$RadioConfigurationImpl> get copyWith =>
-      __$$RadioConfigurationImplCopyWithImpl<_$RadioConfigurationImpl>(
-          this, _$identity);
+  $Res call({
+    Object? myNodeNum = null,
+    Object? loraConfig = null,
+    Object? bluetoothConfig = null,
+    Object? telemetryConfig = null,
+    Object? myNodeInfo = null,
+    Object? hasOwnNodeInfo = null,
+    Object? configDownloaded = null,
+  }) {
+    return _then(_RadioConfiguration(
+      myNodeNum: null == myNodeNum
+          ? _self.myNodeNum
+          : myNodeNum // ignore: cast_nullable_to_non_nullable
+              as int,
+      loraConfig: null == loraConfig
+          ? _self.loraConfig
+          : loraConfig // ignore: cast_nullable_to_non_nullable
+              as Config_LoRaConfig,
+      bluetoothConfig: null == bluetoothConfig
+          ? _self.bluetoothConfig
+          : bluetoothConfig // ignore: cast_nullable_to_non_nullable
+              as Config_BluetoothConfig,
+      telemetryConfig: null == telemetryConfig
+          ? _self.telemetryConfig
+          : telemetryConfig // ignore: cast_nullable_to_non_nullable
+              as ModuleConfig_TelemetryConfig,
+      myNodeInfo: null == myNodeInfo
+          ? _self.myNodeInfo
+          : myNodeInfo // ignore: cast_nullable_to_non_nullable
+              as NodeInfo,
+      hasOwnNodeInfo: null == hasOwnNodeInfo
+          ? _self.hasOwnNodeInfo
+          : hasOwnNodeInfo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      configDownloaded: null == configDownloaded
+          ? _self.configDownloaded
+          : configDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _RadioConfiguration extends RadioConfiguration {
-  const factory _RadioConfiguration(
-      {final int myNodeNum,
-      required final Config_LoRaConfig loraConfig,
-      required final Config_BluetoothConfig bluetoothConfig,
-      required final ModuleConfig_TelemetryConfig telemetryConfig,
-      required final NodeInfo myNodeInfo,
-      final bool hasOwnNodeInfo,
-      final bool configDownloaded}) = _$RadioConfigurationImpl;
-  const _RadioConfiguration._() : super._();
-
-  @override
-  int get myNodeNum;
-  @override
-  Config_LoRaConfig get loraConfig;
-  @override
-  Config_BluetoothConfig get bluetoothConfig;
-  @override
-  ModuleConfig_TelemetryConfig get telemetryConfig;
-  @override
-  NodeInfo get myNodeInfo;
-  @override
-  bool get hasOwnNodeInfo;
-  @override
-  bool get configDownloaded;
-  @override
-  @JsonKey(ignore: true)
-  _$$RadioConfigurationImplCopyWith<_$RadioConfigurationImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

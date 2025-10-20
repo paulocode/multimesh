@@ -6,22 +6,49 @@ part of 'ble_permissions_requester.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(blePermissionsRequester)
+const blePermissionsRequesterProvider = BlePermissionsRequesterProvider._();
+
+final class BlePermissionsRequesterProvider extends $FunctionalProvider<
+    BlePermissionsRequester,
+    BlePermissionsRequester,
+    BlePermissionsRequester> with $Provider<BlePermissionsRequester> {
+  const BlePermissionsRequesterProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'blePermissionsRequesterProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$blePermissionsRequesterHash();
+
+  @$internal
+  @override
+  $ProviderElement<BlePermissionsRequester> $createElement(
+          $ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  BlePermissionsRequester create(Ref ref) {
+    return blePermissionsRequester(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BlePermissionsRequester value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<BlePermissionsRequester>(value),
+    );
+  }
+}
+
 String _$blePermissionsRequesterHash() =>
     r'07fc3cc08fa359caf4ae3df64729884778ef06fe';
-
-/// See also [blePermissionsRequester].
-@ProviderFor(blePermissionsRequester)
-final blePermissionsRequesterProvider =
-    Provider<BlePermissionsRequester>.internal(
-  blePermissionsRequester,
-  name: r'blePermissionsRequesterProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$blePermissionsRequesterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef BlePermissionsRequesterRef = ProviderRef<BlePermissionsRequester>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

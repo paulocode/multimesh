@@ -6,22 +6,56 @@ part of 'radio_config_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(RadioConfigService)
+const radioConfigServiceProvider = RadioConfigServiceProvider._();
+
+final class RadioConfigServiceProvider
+    extends $NotifierProvider<RadioConfigService, RadioConfiguration> {
+  const RadioConfigServiceProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'radioConfigServiceProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$radioConfigServiceHash();
+
+  @$internal
+  @override
+  RadioConfigService create() => RadioConfigService();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RadioConfiguration value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RadioConfiguration>(value),
+    );
+  }
+}
+
 String _$radioConfigServiceHash() =>
     r'8be8b8fe641b5fe6ef626b0ccebba2f2e05c4d4b';
 
-/// See also [RadioConfigService].
-@ProviderFor(RadioConfigService)
-final radioConfigServiceProvider =
-    NotifierProvider<RadioConfigService, RadioConfiguration>.internal(
-  RadioConfigService.new,
-  name: r'radioConfigServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$radioConfigServiceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$RadioConfigService = Notifier<RadioConfiguration>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+abstract class _$RadioConfigService extends $Notifier<RadioConfiguration> {
+  RadioConfiguration build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<RadioConfiguration, RadioConfiguration>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<RadioConfiguration, RadioConfiguration>,
+        RadioConfiguration,
+        Object?,
+        Object?>;
+    element.handleValue(ref, created);
+  }
+}

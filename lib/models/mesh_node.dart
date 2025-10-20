@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'mesh_node.freezed.dart';
 
 @freezed
-class MeshNode with _$MeshNode {
+abstract class MeshNode with _$MeshNode {
   const factory MeshNode({
     required int nodeNum,
     required String longName,

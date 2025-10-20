@@ -5,7 +5,7 @@ package meshtastic;
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
 option java_outer_classname = "ATAKProtos";
-option java_package = "com.geeksville.mesh";
+option java_package = "org.meshtastic.proto";
 option swift_prefix = "";
 
 /*
@@ -40,6 +40,12 @@ message TAKPacket {
      * ATAK GeoChat message
      */
     GeoChat chat = 6;
+
+    /*
+     * Generic CoT detail XML
+     * May be compressed / truncated by the sender (EUD)
+     */
+    bytes detail = 7;
   }
 }
 
@@ -56,6 +62,11 @@ message GeoChat {
    * Uid recipient of the message
    */
   optional string to = 2;
+
+  /*
+   * Callsign of the recipient for the message
+   */
+  optional string to_callsign = 3;
 }
 
 /*

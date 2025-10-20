@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_manual_providers_as_generated_provider_dependency
 import 'dart:async';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,7 +18,7 @@ part 'radio_connector_service.g.dart';
 @Riverpod(keepAlive: true)
 class RadioConnectorService extends _$RadioConnectorService
     implements RadioConnector {
-  NotifierProvider<RadioConnector, RadioConnectorState>? _lastUsedConnector;
+  $NotifierProvider<RadioConnector, RadioConnectorState>? _lastUsedConnector;
   String? _currentRadioId;
   late BreadcrumbLogger _telemetryLogger;
 

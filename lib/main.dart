@@ -28,7 +28,12 @@ void main() async {
   if (CAN_UPLOAD_LOGS) {
     await _initFirebase();
   }
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+      ProviderScope(
+          child: const MyApp(),
+          retry: (retryCount, error) => null,
+      ),
+  );
 }
 
 Future<void> _initFirebase() async {
@@ -147,22 +152,24 @@ class _EagerInitialization extends ConsumerWidget {
 }
 
 void _initForegroundTask() {
-  FlutterForegroundTask.init(
-    androidNotificationOptions: AndroidNotificationOptions(
-      channelId: 'foreground_service',
-      channelName: 'Foreground Service Notification',
-      channelDescription:
-          'This notification appears when the foreground service is running.',
-      channelImportance: NotificationChannelImportance.LOW,
-      priority: NotificationPriority.LOW,
-      iconData: const NotificationIconData(
-        resType: ResourceType.mipmap,
-        resPrefix: ResourcePrefix.ic,
-        name: 'launcher',
-      ),
-    ),
-    iosNotificationOptions:
-        const IOSNotificationOptions(showNotification: false),
-    foregroundTaskOptions: const ForegroundTaskOptions(),
-  );
+
+  // TODO: fix foreground task for mobile platforms
+  // FlutterForegroundTask.init(
+  //   androidNotificationOptions: AndroidNotificationOptions(
+  //     channelId: 'foreground_service',
+  //     channelName: 'Foreground Service Notification',
+  //     channelDescription:
+  //         'This notification appears when the foreground service is running.',
+  //     channelImportance: NotificationChannelImportance.LOW,
+  //     priority: NotificationPriority.LOW,
+  //     iconData: const NotificationIconData(
+  //       resType: ResourceType.mipmap,
+  //       resPrefix: ResourcePrefix.ic,
+  //       name: 'launcher',
+  //     ),
+  //   ),
+  //   iosNotificationOptions:
+  //       const IOSNotificationOptions(showNotification: false),
+  //   foregroundTaskOptions: const ForegroundTaskOptions(),
+  // );
 }

@@ -3,19 +3,18 @@ syntax = "proto3";
 package meshtastic;
 
 import "meshtastic/channel.proto";
+import "meshtastic/config.proto";
 import "meshtastic/localonly.proto";
 import "meshtastic/mesh.proto";
-import "meshtastic/module_config.proto";
 import "meshtastic/telemetry.proto";
 import "nanopb.proto";
 
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
 option java_outer_classname = "DeviceOnly";
-option java_package = "com.geeksville.mesh";
+option java_package = "org.meshtastic.proto";
 option swift_prefix = "";
 option (nanopb_fileopt).include = "<vector>";
-
 
 /*
  * Position with static location information only for NodeDBLite
@@ -52,6 +51,55 @@ message PositionLite {
   Position.LocSource location_source = 5;
 }
 
+message UserLite {
+  /*
+   * This is the addr of the radio.
+   */
+  bytes macaddr = 1 [deprecated = true];
+
+  /*
+   * A full name for this user, i.e. "Kevin Hester"
+   */
+  string long_name = 2;
+
+  /*
+   * A VERY short name, ideally two characters.
+   * Suitable for a tiny OLED screen
+   */
+  string short_name = 3;
+
+  /*
+   * TBEAM, HELTEC, etc...
+   * Starting in 1.2.11 moved to hw_model enum in the NodeInfo object.
+   * Apps will still need the string here for older builds
+   * (so OTA update can find the right image), but if the enum is available it will be used instead.
+   */
+  HardwareModel hw_model = 4;
+
+  /*
+   * In some regions Ham radio operators have different bandwidth limitations than others.
+   * If this user is a licensed operator, set this flag.
+   * Also, "long_name" should be their licence number.
+   */
+  bool is_licensed = 5;
+
+  /*
+   * Indicates that the user's role in the mesh
+   */
+  Config.DeviceConfig.Role role = 6;
+
+  /*
+   * The public key of the user's device.
+   * This is sent out to other nodes on the mesh to allow them to compute a shared secret key.
+   */
+  bytes public_key = 7;
+
+  /*
+   * Whether or not the node can be messaged
+   */
+  optional bool is_unmessagable = 9;
+}
+
 message NodeInfoLite {
   /*
    * The node number
@@ -61,7 +109,7 @@ message NodeInfoLite {
   /*
    * The user info for this node
    */
-  User user = 2;
+  UserLite user = 2;
 
   /*
    * This position data. Note: before 1.2.14 we would also store the last time we've heard from this node in position.time, that is no longer true.
@@ -95,37 +143,33 @@ message NodeInfoLite {
   bool via_mqtt = 8;
 
   /*
-   * Number of hops away from us this node is (0 if adjacent)
+   * Number of hops away from us this node is (0 if direct neighbor)
    */
-  uint32 hops_away = 9;
+  optional uint32 hops_away = 9;
 
   /*
    * True if node is in our favorites list
    * Persists between NodeDB internal clean ups
    */
   bool is_favorite = 10;
+
+  /*
+   * True if node is in our ignored list
+   * Persists between NodeDB internal clean ups
+   */
+  bool is_ignored = 11;
+
+  /*
+   * Last byte of the node number of the node that should be used as the next hop to reach this node.
+   */
+  uint32 next_hop = 12;
+
+  /*
+   * Bitfield for storing booleans.
+   * LSB 0 is_key_manually_verified
+   */
+  uint32 bitfield = 13;
 }
-
-/*
- * Font sizes for the device screen
- */
-enum ScreenFonts {
-  /*
-   * TODO: REPLACE
-   */
-  FONT_SMALL = 0;
-
-  /*
-   * TODO: REPLACE
-   */
-  FONT_MEDIUM = 1;
-
-  /*
-   * TODO: REPLACE
-   */
-  FONT_LARGE = 2;
-}
-
 
 /*
  * This message is never sent over the wire, but it is used for serializing DB
@@ -172,9 +216,10 @@ message DeviceState {
   bool no_save = 9 [deprecated = true];
 
   /*
-   * Some GPS receivers seem to have bogus settings from the factory, so we always do one factory reset.
+   * Previously used to manage GPS factory resets.
+   * Deprecated in 2.5.23
    */
-  bool did_gps_reset = 11;
+  bool did_gps_reset = 11 [deprecated = true];
 
   /*
    * We keep the last received waypoint stored in the device flash,
@@ -187,11 +232,20 @@ message DeviceState {
    * The mesh's nodes with their available gpio pins for RemoteHardware module
    */
   repeated NodeRemoteHardwarePin node_remote_hardware_pins = 13;
+}
+
+message NodeDatabase {
+  /*
+   * A version integer used to invalidate old save files when we make
+   * incompatible changes This integer is set at build time and is private to
+   * NodeDB.cpp in the device code.
+   */
+  uint32 version = 1;
 
   /*
    * New lite version of NodeDB to decrease memory footprint
    */
-  repeated NodeInfoLite node_db_lite = 14 [(nanopb).callback_datatype = "std::vector<meshtastic_NodeInfoLite>"];
+  repeated NodeInfoLite nodes = 2 [(nanopb).callback_datatype = "std::vector<meshtastic_NodeInfoLite>"];
 }
 
 /*
@@ -212,47 +266,36 @@ message ChannelFile {
 }
 
 /*
- * This can be used for customizing the firmware distribution. If populated,
- * show a secondary bootup screen with custom logo and text for 2.5 seconds.
+ * The on-disk backup of the node's preferences
  */
-message OEMStore {
+message BackupPreferences {
   /*
-   * The Logo width in Px
+   * The version of the backup
    */
-  uint32 oem_icon_width = 1;
+  uint32 version = 1;
 
   /*
-   * The Logo height in Px
+   * The timestamp of the backup (if node has time)
    */
-  uint32 oem_icon_height = 2;
+  fixed32 timestamp = 2;
 
   /*
-   * The Logo in XBM bytechar format
+   * The node's configuration
    */
-  bytes oem_icon_bits = 3;
+  LocalConfig config = 3;
 
   /*
-   * Use this font for the OEM text.
+   * The node's module configuration
    */
-  ScreenFonts oem_font = 4;
+  LocalModuleConfig module_config = 4;
 
   /*
-   * Use this font for the OEM text.
+   * The node's channels
    */
-  string oem_text = 5;
+  ChannelFile channels = 5;
 
   /*
-   * The default device encryption key, 16 or 32 byte
+   * The node's user (owner) information
    */
-  bytes oem_aes_key = 6;
-
-  /*
-   * A Preset LocalConfig to apply during factory reset
-   */
-  LocalConfig oem_local_config = 7;
-
-  /*
-   * A Preset LocalModuleConfig to apply during factory reset
-   */
-  LocalModuleConfig oem_local_module_config = 8;
+  User owner = 6;
 }

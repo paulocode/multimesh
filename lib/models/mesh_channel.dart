@@ -4,7 +4,7 @@ import '../protobufs/generated/meshtastic/channel.pb.dart';
 part 'mesh_channel.freezed.dart';
 
 @freezed
-class MeshChannel with _$MeshChannel {
+abstract class MeshChannel with _$MeshChannel {
   const factory MeshChannel({
     required String name,
     @Default(false) bool hasBlankActualName,

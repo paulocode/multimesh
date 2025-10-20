@@ -6,7 +6,7 @@ import 'text_message_status.dart';
 part 'text_message.freezed.dart';
 
 @freezed
-class TextMessage with _$TextMessage {
+abstract class TextMessage with _$TextMessage {
   const factory TextMessage({
     @Default(0) int packetId,
     required String text,

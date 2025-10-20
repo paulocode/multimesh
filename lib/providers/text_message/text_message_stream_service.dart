@@ -1,4 +1,5 @@
 // coverage:ignore-file
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/chat_type.dart';
@@ -11,7 +12,7 @@ part 'text_message_stream_service.g.dart';
 
 @Riverpod(keepAlive: true)
 TextMessageStreamService textMessageStreamService(
-  TextMessageStreamServiceRef ref, {
+  Ref ref, {
   required ChatType chatType,
 }) {
   return TextMessageStreamService(

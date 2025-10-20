@@ -10,7 +10,7 @@ import 'radio_connector_service.dart';
 part 'radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
-RadioWriter radioWriter(RadioWriterRef ref) {
+RadioWriter radioWriter(Ref ref) {
   // it is safe to rebuild for every connector state
   // since this provider is abstracted by queuedRadioWriterProvider,
   // preserving offline view mode

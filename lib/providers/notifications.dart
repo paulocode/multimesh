@@ -7,7 +7,7 @@ part 'notifications.g.dart';
 // coverage:ignore-start
 @Riverpod(keepAlive: true)
 Future<FlutterLocalNotificationsPlugin> flutterLocalNotificationsPlugin(
-  FlutterLocalNotificationsPluginRef ref,
+  Ref ref,
 ) async {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   await flutterLocalNotificationsPlugin
@@ -54,7 +54,7 @@ class NotificationsCallback extends _$NotificationsCallback {
 
 @Riverpod(keepAlive: true)
 Future<void> showNotification(
-  ShowNotificationRef ref, {
+  Ref ref, {
   required String title,
   required String text,
   required String callbackValue,

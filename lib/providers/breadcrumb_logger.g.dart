@@ -6,20 +6,47 @@ part of 'breadcrumb_logger.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$breadcrumbLoggerHash() => r'87a8cd98c3746dbaa490c4662d2022bd4ac0637e';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [breadcrumbLogger].
 @ProviderFor(breadcrumbLogger)
-final breadcrumbLoggerProvider = Provider<BreadcrumbLogger>.internal(
-  breadcrumbLogger,
-  name: r'breadcrumbLoggerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$breadcrumbLoggerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const breadcrumbLoggerProvider = BreadcrumbLoggerProvider._();
 
-typedef BreadcrumbLoggerRef = ProviderRef<BreadcrumbLogger>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class BreadcrumbLoggerProvider extends $FunctionalProvider<
+    BreadcrumbLogger,
+    BreadcrumbLogger,
+    BreadcrumbLogger> with $Provider<BreadcrumbLogger> {
+  const BreadcrumbLoggerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'breadcrumbLoggerProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$breadcrumbLoggerHash();
+
+  @$internal
+  @override
+  $ProviderElement<BreadcrumbLogger> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  BreadcrumbLogger create(Ref ref) {
+    return breadcrumbLogger(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BreadcrumbLogger value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<BreadcrumbLogger>(value),
+    );
+  }
+}
+
+String _$breadcrumbLoggerHash() => r'87a8cd98c3746dbaa490c4662d2022bd4ac0637e';

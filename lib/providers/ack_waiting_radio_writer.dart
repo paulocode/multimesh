@@ -9,7 +9,7 @@ import 'radio_writer.dart';
 part 'ack_waiting_radio_writer.g.dart';
 
 @Riverpod(keepAlive: true)
-AckWaitingRadioWriter ackWaitingRadioWriter(AckWaitingRadioWriterRef ref) {
+AckWaitingRadioWriter ackWaitingRadioWriter(Ref ref) {
   return AckWaitingRadioWriter(
     hopLimitProvider: () =>
         ref.read(radioConfigServiceProvider).loraConfig.hopLimit,

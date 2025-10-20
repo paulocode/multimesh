@@ -1,4 +1,5 @@
 // coverage:ignore-file
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../services/text_message/text_message_receiver_service.dart';
@@ -12,7 +13,7 @@ part 'text_message_receiver_service.g.dart';
 
 @Riverpod(keepAlive: true)
 TextMessageReceiverService textMessageReceiverService(
-  TextMessageReceiverServiceRef ref,
+  Ref ref,
 ) {
   return TextMessageReceiverService(
     textMessageRepository: ref.watch(textMessageRepositoryProvider),

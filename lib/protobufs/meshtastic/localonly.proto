@@ -8,7 +8,7 @@ import "meshtastic/module_config.proto";
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
 option java_outer_classname = "LocalOnlyProtos";
-option java_package = "com.geeksville.mesh";
+option java_package = "org.meshtastic.proto";
 option swift_prefix = "";
 
 /*
@@ -58,6 +58,11 @@ message LocalConfig {
    * NodeDB.cpp in the device code.
    */
   uint32 version = 8;
+
+  /*
+   * The part of the config that is specific to Security settings
+   */
+  Config.SecurityConfig security = 9;
 }
 
 message LocalModuleConfig {

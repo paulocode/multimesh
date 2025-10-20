@@ -12,7 +12,7 @@ part 'radio_config_downloader_service.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioConfigDownloaderService radioConfigDownloaderService(
-  RadioConfigDownloaderServiceRef ref,
+  Ref ref,
 ) {
   final sub = ref.listen(radioConnectorServiceProvider, (_, next) {
     if (next is Connected) {

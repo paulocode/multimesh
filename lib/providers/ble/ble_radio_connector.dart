@@ -58,7 +58,9 @@ class BleRadioConnector extends _$BleRadioConnector
     );
 
     try {
-      await device.connect();
+      await device.connect(
+        license: License.free,
+      );
       if (_localPlatform.isAndroid) {
         await device.createBond();
       }

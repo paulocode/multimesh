@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/chat_type.dart';
@@ -15,7 +16,7 @@ part 'text_message_sender_service.g.dart';
 
 @riverpod
 Future<void> sendTextMessage(
-  SendTextMessageRef ref, {
+  Ref ref, {
   required ChatType chatType,
   required String text,
 }) async {

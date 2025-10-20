@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,103 +9,65 @@ part of 'mesh_channel.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MeshChannel {
-  String get name => throw _privateConstructorUsedError;
-  bool get hasBlankActualName => throw _privateConstructorUsedError;
-  Channel_Role get role => throw _privateConstructorUsedError;
-  List<int> get key => throw _privateConstructorUsedError;
-  int get index => throw _privateConstructorUsedError;
-  bool get uplinkEnabled => throw _privateConstructorUsedError;
-  bool get downlinkEnabled => throw _privateConstructorUsedError;
+  String get name;
+  bool get hasBlankActualName;
+  Channel_Role get role;
+  List<int> get key;
+  int get index;
+  bool get uplinkEnabled;
+  bool get downlinkEnabled;
 
-  @JsonKey(ignore: true)
-  $MeshChannelCopyWith<MeshChannel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MeshChannelCopyWith<$Res> {
-  factory $MeshChannelCopyWith(
-          MeshChannel value, $Res Function(MeshChannel) then) =
-      _$MeshChannelCopyWithImpl<$Res, MeshChannel>;
-  @useResult
-  $Res call(
-      {String name,
-      bool hasBlankActualName,
-      Channel_Role role,
-      List<int> key,
-      int index,
-      bool uplinkEnabled,
-      bool downlinkEnabled});
-}
-
-/// @nodoc
-class _$MeshChannelCopyWithImpl<$Res, $Val extends MeshChannel>
-    implements $MeshChannelCopyWith<$Res> {
-  _$MeshChannelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of MeshChannel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $MeshChannelCopyWith<MeshChannel> get copyWith =>
+      _$MeshChannelCopyWithImpl<MeshChannel>(this as MeshChannel, _$identity);
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? hasBlankActualName = null,
-    Object? role = null,
-    Object? key = null,
-    Object? index = null,
-    Object? uplinkEnabled = null,
-    Object? downlinkEnabled = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      hasBlankActualName: null == hasBlankActualName
-          ? _value.hasBlankActualName
-          : hasBlankActualName // ignore: cast_nullable_to_non_nullable
-              as bool,
-      role: null == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as Channel_Role,
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      uplinkEnabled: null == uplinkEnabled
-          ? _value.uplinkEnabled
-          : uplinkEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      downlinkEnabled: null == downlinkEnabled
-          ? _value.downlinkEnabled
-          : downlinkEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is MeshChannel &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.hasBlankActualName, hasBlankActualName) ||
+                other.hasBlankActualName == hasBlankActualName) &&
+            (identical(other.role, role) || other.role == role) &&
+            const DeepCollectionEquality().equals(other.key, key) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.uplinkEnabled, uplinkEnabled) ||
+                other.uplinkEnabled == uplinkEnabled) &&
+            (identical(other.downlinkEnabled, downlinkEnabled) ||
+                other.downlinkEnabled == downlinkEnabled));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      hasBlankActualName,
+      role,
+      const DeepCollectionEquality().hash(key),
+      index,
+      uplinkEnabled,
+      downlinkEnabled);
+
+  @override
+  String toString() {
+    return 'MeshChannel(name: $name, hasBlankActualName: $hasBlankActualName, role: $role, key: $key, index: $index, uplinkEnabled: $uplinkEnabled, downlinkEnabled: $downlinkEnabled)';
   }
 }
 
 /// @nodoc
-abstract class _$$MeshChannelImplCopyWith<$Res>
-    implements $MeshChannelCopyWith<$Res> {
-  factory _$$MeshChannelImplCopyWith(
-          _$MeshChannelImpl value, $Res Function(_$MeshChannelImpl) then) =
-      __$$MeshChannelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $MeshChannelCopyWith<$Res> {
+  factory $MeshChannelCopyWith(
+          MeshChannel value, $Res Function(MeshChannel) _then) =
+      _$MeshChannelCopyWithImpl;
   @useResult
   $Res call(
       {String name,
@@ -118,13 +80,14 @@ abstract class _$$MeshChannelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$MeshChannelImplCopyWithImpl<$Res>
-    extends _$MeshChannelCopyWithImpl<$Res, _$MeshChannelImpl>
-    implements _$$MeshChannelImplCopyWith<$Res> {
-  __$$MeshChannelImplCopyWithImpl(
-      _$MeshChannelImpl _value, $Res Function(_$MeshChannelImpl) _then)
-      : super(_value, _then);
+class _$MeshChannelCopyWithImpl<$Res> implements $MeshChannelCopyWith<$Res> {
+  _$MeshChannelCopyWithImpl(this._self, this._then);
 
+  final MeshChannel _self;
+  final $Res Function(MeshChannel) _then;
+
+  /// Create a copy of MeshChannel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,43 +99,209 @@ class __$$MeshChannelImplCopyWithImpl<$Res>
     Object? uplinkEnabled = null,
     Object? downlinkEnabled = null,
   }) {
-    return _then(_$MeshChannelImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       hasBlankActualName: null == hasBlankActualName
-          ? _value.hasBlankActualName
+          ? _self.hasBlankActualName
           : hasBlankActualName // ignore: cast_nullable_to_non_nullable
               as bool,
       role: null == role
-          ? _value.role
+          ? _self.role
           : role // ignore: cast_nullable_to_non_nullable
               as Channel_Role,
       key: null == key
-          ? _value._key
+          ? _self.key
           : key // ignore: cast_nullable_to_non_nullable
               as List<int>,
       index: null == index
-          ? _value.index
+          ? _self.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
       uplinkEnabled: null == uplinkEnabled
-          ? _value.uplinkEnabled
+          ? _self.uplinkEnabled
           : uplinkEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       downlinkEnabled: null == downlinkEnabled
-          ? _value.downlinkEnabled
+          ? _self.downlinkEnabled
           : downlinkEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [MeshChannel].
+extension MeshChannelPatterns on MeshChannel {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_MeshChannel value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MeshChannel() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_MeshChannel value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MeshChannel():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_MeshChannel value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MeshChannel() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String name, bool hasBlankActualName, Channel_Role role,
+            List<int> key, int index, bool uplinkEnabled, bool downlinkEnabled)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MeshChannel() when $default != null:
+        return $default(_that.name, _that.hasBlankActualName, _that.role,
+            _that.key, _that.index, _that.uplinkEnabled, _that.downlinkEnabled);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String name, bool hasBlankActualName, Channel_Role role,
+            List<int> key, int index, bool uplinkEnabled, bool downlinkEnabled)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MeshChannel():
+        return $default(_that.name, _that.hasBlankActualName, _that.role,
+            _that.key, _that.index, _that.uplinkEnabled, _that.downlinkEnabled);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String name, bool hasBlankActualName, Channel_Role role,
+            List<int> key, int index, bool uplinkEnabled, bool downlinkEnabled)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MeshChannel() when $default != null:
+        return $default(_that.name, _that.hasBlankActualName, _that.role,
+            _that.key, _that.index, _that.uplinkEnabled, _that.downlinkEnabled);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$MeshChannelImpl extends _MeshChannel {
-  const _$MeshChannelImpl(
+class _MeshChannel extends MeshChannel {
+  const _MeshChannel(
       {required this.name,
       this.hasBlankActualName = false,
       required this.role,
@@ -205,16 +334,19 @@ class _$MeshChannelImpl extends _MeshChannel {
   @override
   final bool downlinkEnabled;
 
+  /// Create a copy of MeshChannel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'MeshChannel(name: $name, hasBlankActualName: $hasBlankActualName, role: $role, key: $key, index: $index, uplinkEnabled: $uplinkEnabled, downlinkEnabled: $downlinkEnabled)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MeshChannelCopyWith<_MeshChannel> get copyWith =>
+      __$MeshChannelCopyWithImpl<_MeshChannel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MeshChannelImpl &&
+            other is _MeshChannel &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.hasBlankActualName, hasBlankActualName) ||
                 other.hasBlankActualName == hasBlankActualName) &&
@@ -238,40 +370,81 @@ class _$MeshChannelImpl extends _MeshChannel {
       uplinkEnabled,
       downlinkEnabled);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'MeshChannel(name: $name, hasBlankActualName: $hasBlankActualName, role: $role, key: $key, index: $index, uplinkEnabled: $uplinkEnabled, downlinkEnabled: $downlinkEnabled)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$MeshChannelCopyWith<$Res>
+    implements $MeshChannelCopyWith<$Res> {
+  factory _$MeshChannelCopyWith(
+          _MeshChannel value, $Res Function(_MeshChannel) _then) =
+      __$MeshChannelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String name,
+      bool hasBlankActualName,
+      Channel_Role role,
+      List<int> key,
+      int index,
+      bool uplinkEnabled,
+      bool downlinkEnabled});
+}
+
+/// @nodoc
+class __$MeshChannelCopyWithImpl<$Res> implements _$MeshChannelCopyWith<$Res> {
+  __$MeshChannelCopyWithImpl(this._self, this._then);
+
+  final _MeshChannel _self;
+  final $Res Function(_MeshChannel) _then;
+
+  /// Create a copy of MeshChannel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$MeshChannelImplCopyWith<_$MeshChannelImpl> get copyWith =>
-      __$$MeshChannelImplCopyWithImpl<_$MeshChannelImpl>(this, _$identity);
+  $Res call({
+    Object? name = null,
+    Object? hasBlankActualName = null,
+    Object? role = null,
+    Object? key = null,
+    Object? index = null,
+    Object? uplinkEnabled = null,
+    Object? downlinkEnabled = null,
+  }) {
+    return _then(_MeshChannel(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      hasBlankActualName: null == hasBlankActualName
+          ? _self.hasBlankActualName
+          : hasBlankActualName // ignore: cast_nullable_to_non_nullable
+              as bool,
+      role: null == role
+          ? _self.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Channel_Role,
+      key: null == key
+          ? _self._key
+          : key // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      index: null == index
+          ? _self.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      uplinkEnabled: null == uplinkEnabled
+          ? _self.uplinkEnabled
+          : uplinkEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      downlinkEnabled: null == downlinkEnabled
+          ? _self.downlinkEnabled
+          : downlinkEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
-abstract class _MeshChannel extends MeshChannel {
-  const factory _MeshChannel(
-      {required final String name,
-      final bool hasBlankActualName,
-      required final Channel_Role role,
-      required final List<int> key,
-      required final int index,
-      required final bool uplinkEnabled,
-      required final bool downlinkEnabled}) = _$MeshChannelImpl;
-  const _MeshChannel._() : super._();
-
-  @override
-  String get name;
-  @override
-  bool get hasBlankActualName;
-  @override
-  Channel_Role get role;
-  @override
-  List<int> get key;
-  @override
-  int get index;
-  @override
-  bool get uplinkEnabled;
-  @override
-  bool get downlinkEnabled;
-  @override
-  @JsonKey(ignore: true)
-  _$$MeshChannelImplCopyWith<_$MeshChannelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

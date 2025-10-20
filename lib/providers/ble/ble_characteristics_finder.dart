@@ -6,8 +6,6 @@ import '../../services/ble/ble_characteristics_finder.dart';
 part 'ble_characteristics_finder.g.dart';
 
 @Riverpod(keepAlive: true)
-BleCharacteristicsFinder bleCharacteristicsFinder(
-  BleCharacteristicsFinderRef ref,
-) {
+BleCharacteristicsFinder bleCharacteristicsFinder(Ref ref) {
   return BleCharacteristicsFinder();
 }

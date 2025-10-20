@@ -7,7 +7,7 @@ part 'telemetry_repository.g.dart';
 
 @Riverpod(keepAlive: true)
 TelemetryRepository telemetryRepository(
-  TelemetryRepositoryRef ref,
+  Ref ref,
 ) {
   return TelemetryRepository(
     database: ref.watch(sqfliteProvider).requireValue,

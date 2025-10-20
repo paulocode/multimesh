@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,117 +9,61 @@ part of 'text_message.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TextMessage {
-  int get packetId => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-  int get from => throw _privateConstructorUsedError;
-  int get to => throw _privateConstructorUsedError;
-  int get channel => throw _privateConstructorUsedError;
-  DateTime get time => throw _privateConstructorUsedError;
-  TextMessageStatus get state => throw _privateConstructorUsedError;
-  int get owner => throw _privateConstructorUsedError;
-  Routing_Error get routingError => throw _privateConstructorUsedError;
+  int get packetId;
+  String get text;
+  int get from;
+  int get to;
+  int get channel;
+  DateTime get time;
+  TextMessageStatus get state;
+  int get owner;
+  Routing_Error get routingError;
 
-  @JsonKey(ignore: true)
-  $TextMessageCopyWith<TextMessage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TextMessageCopyWith<$Res> {
-  factory $TextMessageCopyWith(
-          TextMessage value, $Res Function(TextMessage) then) =
-      _$TextMessageCopyWithImpl<$Res, TextMessage>;
-  @useResult
-  $Res call(
-      {int packetId,
-      String text,
-      int from,
-      int to,
-      int channel,
-      DateTime time,
-      TextMessageStatus state,
-      int owner,
-      Routing_Error routingError});
-}
-
-/// @nodoc
-class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
-    implements $TextMessageCopyWith<$Res> {
-  _$TextMessageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $TextMessageCopyWith<TextMessage> get copyWith =>
+      _$TextMessageCopyWithImpl<TextMessage>(this as TextMessage, _$identity);
+
   @override
-  $Res call({
-    Object? packetId = null,
-    Object? text = null,
-    Object? from = null,
-    Object? to = null,
-    Object? channel = null,
-    Object? time = null,
-    Object? state = null,
-    Object? owner = null,
-    Object? routingError = null,
-  }) {
-    return _then(_value.copyWith(
-      packetId: null == packetId
-          ? _value.packetId
-          : packetId // ignore: cast_nullable_to_non_nullable
-              as int,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-      from: null == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as int,
-      to: null == to
-          ? _value.to
-          : to // ignore: cast_nullable_to_non_nullable
-              as int,
-      channel: null == channel
-          ? _value.channel
-          : channel // ignore: cast_nullable_to_non_nullable
-              as int,
-      time: null == time
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as TextMessageStatus,
-      owner: null == owner
-          ? _value.owner
-          : owner // ignore: cast_nullable_to_non_nullable
-              as int,
-      routingError: null == routingError
-          ? _value.routingError
-          : routingError // ignore: cast_nullable_to_non_nullable
-              as Routing_Error,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TextMessage &&
+            (identical(other.packetId, packetId) ||
+                other.packetId == packetId) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.from, from) || other.from == from) &&
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.channel, channel) || other.channel == channel) &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.routingError, routingError) ||
+                other.routingError == routingError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, packetId, text, from, to,
+      channel, time, state, owner, routingError);
+
+  @override
+  String toString() {
+    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state, owner: $owner, routingError: $routingError)';
   }
 }
 
 /// @nodoc
-abstract class _$$TextMessageImplCopyWith<$Res>
-    implements $TextMessageCopyWith<$Res> {
-  factory _$$TextMessageImplCopyWith(
-          _$TextMessageImpl value, $Res Function(_$TextMessageImpl) then) =
-      __$$TextMessageImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TextMessageCopyWith<$Res> {
+  factory $TextMessageCopyWith(
+          TextMessage value, $Res Function(TextMessage) _then) =
+      _$TextMessageCopyWithImpl;
   @useResult
   $Res call(
       {int packetId,
@@ -134,13 +78,14 @@ abstract class _$$TextMessageImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TextMessageImplCopyWithImpl<$Res>
-    extends _$TextMessageCopyWithImpl<$Res, _$TextMessageImpl>
-    implements _$$TextMessageImplCopyWith<$Res> {
-  __$$TextMessageImplCopyWithImpl(
-      _$TextMessageImpl _value, $Res Function(_$TextMessageImpl) _then)
-      : super(_value, _then);
+class _$TextMessageCopyWithImpl<$Res> implements $TextMessageCopyWith<$Res> {
+  _$TextMessageCopyWithImpl(this._self, this._then);
 
+  final TextMessage _self;
+  final $Res Function(TextMessage) _then;
+
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,51 +99,265 @@ class __$$TextMessageImplCopyWithImpl<$Res>
     Object? owner = null,
     Object? routingError = null,
   }) {
-    return _then(_$TextMessageImpl(
+    return _then(_self.copyWith(
       packetId: null == packetId
-          ? _value.packetId
+          ? _self.packetId
           : packetId // ignore: cast_nullable_to_non_nullable
               as int,
       text: null == text
-          ? _value.text
+          ? _self.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
       from: null == from
-          ? _value.from
+          ? _self.from
           : from // ignore: cast_nullable_to_non_nullable
               as int,
       to: null == to
-          ? _value.to
+          ? _self.to
           : to // ignore: cast_nullable_to_non_nullable
               as int,
       channel: null == channel
-          ? _value.channel
+          ? _self.channel
           : channel // ignore: cast_nullable_to_non_nullable
               as int,
       time: null == time
-          ? _value.time
+          ? _self.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
       state: null == state
-          ? _value.state
+          ? _self.state
           : state // ignore: cast_nullable_to_non_nullable
               as TextMessageStatus,
       owner: null == owner
-          ? _value.owner
+          ? _self.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as int,
       routingError: null == routingError
-          ? _value.routingError
+          ? _self.routingError
           : routingError // ignore: cast_nullable_to_non_nullable
               as Routing_Error,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [TextMessage].
+extension TextMessagePatterns on TextMessage {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_TextMessage value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TextMessage() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_TextMessage value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TextMessage():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_TextMessage value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TextMessage() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            int packetId,
+            String text,
+            int from,
+            int to,
+            int channel,
+            DateTime time,
+            TextMessageStatus state,
+            int owner,
+            Routing_Error routingError)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TextMessage() when $default != null:
+        return $default(
+            _that.packetId,
+            _that.text,
+            _that.from,
+            _that.to,
+            _that.channel,
+            _that.time,
+            _that.state,
+            _that.owner,
+            _that.routingError);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            int packetId,
+            String text,
+            int from,
+            int to,
+            int channel,
+            DateTime time,
+            TextMessageStatus state,
+            int owner,
+            Routing_Error routingError)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TextMessage():
+        return $default(
+            _that.packetId,
+            _that.text,
+            _that.from,
+            _that.to,
+            _that.channel,
+            _that.time,
+            _that.state,
+            _that.owner,
+            _that.routingError);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            int packetId,
+            String text,
+            int from,
+            int to,
+            int channel,
+            DateTime time,
+            TextMessageStatus state,
+            int owner,
+            Routing_Error routingError)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TextMessage() when $default != null:
+        return $default(
+            _that.packetId,
+            _that.text,
+            _that.from,
+            _that.to,
+            _that.channel,
+            _that.time,
+            _that.state,
+            _that.owner,
+            _that.routingError);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$TextMessageImpl extends _TextMessage {
-  const _$TextMessageImpl(
+class _TextMessage extends TextMessage {
+  const _TextMessage(
       {this.packetId = 0,
       required this.text,
       required this.from,
@@ -232,16 +391,19 @@ class _$TextMessageImpl extends _TextMessage {
   @JsonKey()
   final Routing_Error routingError;
 
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state, owner: $owner, routingError: $routingError)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TextMessageCopyWith<_TextMessage> get copyWith =>
+      __$TextMessageCopyWithImpl<_TextMessage>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TextMessageImpl &&
+            other is _TextMessage &&
             (identical(other.packetId, packetId) ||
                 other.packetId == packetId) &&
             (identical(other.text, text) || other.text == text) &&
@@ -259,46 +421,93 @@ class _$TextMessageImpl extends _TextMessage {
   int get hashCode => Object.hash(runtimeType, packetId, text, from, to,
       channel, time, state, owner, routingError);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'TextMessage(packetId: $packetId, text: $text, from: $from, to: $to, channel: $channel, time: $time, state: $state, owner: $owner, routingError: $routingError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TextMessageCopyWith<$Res>
+    implements $TextMessageCopyWith<$Res> {
+  factory _$TextMessageCopyWith(
+          _TextMessage value, $Res Function(_TextMessage) _then) =
+      __$TextMessageCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int packetId,
+      String text,
+      int from,
+      int to,
+      int channel,
+      DateTime time,
+      TextMessageStatus state,
+      int owner,
+      Routing_Error routingError});
+}
+
+/// @nodoc
+class __$TextMessageCopyWithImpl<$Res> implements _$TextMessageCopyWith<$Res> {
+  __$TextMessageCopyWithImpl(this._self, this._then);
+
+  final _TextMessage _self;
+  final $Res Function(_TextMessage) _then;
+
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
-      __$$TextMessageImplCopyWithImpl<_$TextMessageImpl>(this, _$identity);
+  $Res call({
+    Object? packetId = null,
+    Object? text = null,
+    Object? from = null,
+    Object? to = null,
+    Object? channel = null,
+    Object? time = null,
+    Object? state = null,
+    Object? owner = null,
+    Object? routingError = null,
+  }) {
+    return _then(_TextMessage(
+      packetId: null == packetId
+          ? _self.packetId
+          : packetId // ignore: cast_nullable_to_non_nullable
+              as int,
+      text: null == text
+          ? _self.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      from: null == from
+          ? _self.from
+          : from // ignore: cast_nullable_to_non_nullable
+              as int,
+      to: null == to
+          ? _self.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as int,
+      channel: null == channel
+          ? _self.channel
+          : channel // ignore: cast_nullable_to_non_nullable
+              as int,
+      time: null == time
+          ? _self.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      state: null == state
+          ? _self.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as TextMessageStatus,
+      owner: null == owner
+          ? _self.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as int,
+      routingError: null == routingError
+          ? _self.routingError
+          : routingError // ignore: cast_nullable_to_non_nullable
+              as Routing_Error,
+    ));
+  }
 }
 
-abstract class _TextMessage extends TextMessage {
-  const factory _TextMessage(
-      {final int packetId,
-      required final String text,
-      required final int from,
-      required final int to,
-      required final int channel,
-      required final DateTime time,
-      final TextMessageStatus state,
-      required final int owner,
-      final Routing_Error routingError}) = _$TextMessageImpl;
-  const _TextMessage._() : super._();
-
-  @override
-  int get packetId;
-  @override
-  String get text;
-  @override
-  int get from;
-  @override
-  int get to;
-  @override
-  int get channel;
-  @override
-  DateTime get time;
-  @override
-  TextMessageStatus get state;
-  @override
-  int get owner;
-  @override
-  Routing_Error get routingError;
-  @override
-  @JsonKey(ignore: true)
-  _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

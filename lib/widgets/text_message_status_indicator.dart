@@ -23,7 +23,7 @@ class TextMessageStatusIndicator extends ConsumerWidget {
         textMessageStatusServiceProvider(packetId: _textMessage.packetId),
       );
       state = switch (statusUpdate) {
-        AsyncValue(:final valueOrNull?) => valueOrNull.state,
+        AsyncValue(:final value?) => value.state,
         _ => null
       };
     }

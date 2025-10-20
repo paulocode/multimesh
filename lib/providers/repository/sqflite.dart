@@ -12,7 +12,7 @@ part 'sqflite.g.dart';
 
 @Riverpod(keepAlive: true)
 Future<Database> sqflite(
-  SqfliteRef ref,
+  Ref ref,
 ) async {
   final logger = Logger();
   final localPlatform = ref.read(localPlatformProvider);

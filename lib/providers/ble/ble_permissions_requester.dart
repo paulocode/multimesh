@@ -10,7 +10,7 @@ part 'ble_permissions_requester.g.dart';
 
 @Riverpod(keepAlive: true)
 BlePermissionsRequester blePermissionsRequester(
-  BlePermissionsRequesterRef ref,
+  Ref ref,
 ) {
   return BlePermissionsRequester(
     localPlatform: ref.watch(localPlatformProvider),

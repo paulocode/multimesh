@@ -7,6 +7,6 @@ import 'local_platform.dart';
 part 'permissions.g.dart';
 
 @Riverpod(keepAlive: true)
-Permissions permissions(PermissionsRef ref) {
+Permissions permissions(Ref ref) {
   return Permissions(localPlatform: ref.watch(localPlatformProvider));
 }

@@ -6,21 +6,55 @@ part of 'ble_radio_scanner.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(BleRadioScanner)
+const bleRadioScannerProvider = BleRadioScannerProvider._();
+
+final class BleRadioScannerProvider
+    extends $NotifierProvider<BleRadioScanner, RadioScanState> {
+  const BleRadioScannerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'bleRadioScannerProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$bleRadioScannerHash();
+
+  @$internal
+  @override
+  BleRadioScanner create() => BleRadioScanner();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RadioScanState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RadioScanState>(value),
+    );
+  }
+}
+
 String _$bleRadioScannerHash() => r'fc430734b236a903c4b282041ba5b16eaa671e10';
 
-/// See also [BleRadioScanner].
-@ProviderFor(BleRadioScanner)
-final bleRadioScannerProvider =
-    NotifierProvider<BleRadioScanner, RadioScanState>.internal(
-  BleRadioScanner.new,
-  name: r'bleRadioScannerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$bleRadioScannerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$BleRadioScanner = Notifier<RadioScanState>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+abstract class _$BleRadioScanner extends $Notifier<RadioScanState> {
+  RadioScanState build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<RadioScanState, RadioScanState>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<RadioScanState, RadioScanState>,
+        RadioScanState,
+        Object?,
+        Object?>;
+    element.handleValue(ref, created);
+  }
+}

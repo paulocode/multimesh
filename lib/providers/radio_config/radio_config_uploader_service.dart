@@ -1,4 +1,5 @@
 // coverage:ignore-file
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../services/radio_config/radio_config_uploader_service.dart';
@@ -9,7 +10,7 @@ part 'radio_config_uploader_service.g.dart';
 
 @Riverpod(keepAlive: true)
 RadioConfigUploaderService radioConfigUploaderService(
-  RadioConfigUploaderServiceRef ref,
+  Ref ref,
 ) {
   return RadioConfigUploaderService(
     radioWriter: ref.watch(ackWaitingRadioWriterProvider),

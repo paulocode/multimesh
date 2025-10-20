@@ -8,7 +8,7 @@ part 'text_message_repository.g.dart';
 
 @Riverpod(keepAlive: true)
 TextMessageRepository textMessageRepository(
-  TextMessageRepositoryRef ref,
+  Ref ref,
 ) {
   return TextMessageRepository(
     database: ref.watch(sqfliteProvider).requireValue,

@@ -42,7 +42,7 @@ class FlutterBluePlusMockable {
     return FlutterBluePlus.stopScan();
   }
 
-  void setLogLevel(LogLevel level, {bool color = true}) {
+  Future<void> setLogLevel(LogLevel level, {bool color = true}) {
     return FlutterBluePlus.setLogLevel(level, color: color);
   }
 
@@ -67,7 +67,8 @@ class FlutterBluePlusMockable {
   }
 
   Future<List<BluetoothDevice>> get systemDevices {
-    return FlutterBluePlus.systemDevices;
+    // TODO: implement GUID list for ios
+    return FlutterBluePlus.systemDevices(List.empty());
   }
 
   Future<PhySupport> getPhySupport() {

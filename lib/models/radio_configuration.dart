@@ -8,7 +8,7 @@ import '../protobufs/generated/meshtastic/module_config.pb.dart';
 part 'radio_configuration.freezed.dart';
 
 @freezed
-class RadioConfiguration with _$RadioConfiguration {
+abstract class RadioConfiguration with _$RadioConfiguration {
   const factory RadioConfiguration({
     @Default(0) int myNodeNum,
     required Config_LoRaConfig loraConfig,

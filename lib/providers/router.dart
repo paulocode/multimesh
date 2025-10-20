@@ -21,7 +21,7 @@ import 'breadcrumb_logger.dart';
 part 'router.g.dart';
 
 @riverpod
-GoRouter goRouter(GoRouterRef ref) {
+GoRouter goRouter(Ref ref) {
   return GoRouter(
     observers: [
       GoRouterObserver(logger: ref.watch(breadcrumbLoggerProvider)),

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,82 +9,53 @@ part of 'telemetry_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TelemetryState {
-  double? get temp => throw _privateConstructorUsedError;
-  double? get relativeHumidity => throw _privateConstructorUsedError;
-  double? get barometricPressure => throw _privateConstructorUsedError;
-  double? get gasResistance => throw _privateConstructorUsedError;
+  double? get temp;
+  double? get relativeHumidity;
+  double? get barometricPressure;
+  double? get gasResistance;
 
-  @JsonKey(ignore: true)
-  $TelemetryStateCopyWith<TelemetryState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TelemetryStateCopyWith<$Res> {
-  factory $TelemetryStateCopyWith(
-          TelemetryState value, $Res Function(TelemetryState) then) =
-      _$TelemetryStateCopyWithImpl<$Res, TelemetryState>;
-  @useResult
-  $Res call(
-      {double? temp,
-      double? relativeHumidity,
-      double? barometricPressure,
-      double? gasResistance});
-}
-
-/// @nodoc
-class _$TelemetryStateCopyWithImpl<$Res, $Val extends TelemetryState>
-    implements $TelemetryStateCopyWith<$Res> {
-  _$TelemetryStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of TelemetryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $TelemetryStateCopyWith<TelemetryState> get copyWith =>
+      _$TelemetryStateCopyWithImpl<TelemetryState>(
+          this as TelemetryState, _$identity);
+
   @override
-  $Res call({
-    Object? temp = freezed,
-    Object? relativeHumidity = freezed,
-    Object? barometricPressure = freezed,
-    Object? gasResistance = freezed,
-  }) {
-    return _then(_value.copyWith(
-      temp: freezed == temp
-          ? _value.temp
-          : temp // ignore: cast_nullable_to_non_nullable
-              as double?,
-      relativeHumidity: freezed == relativeHumidity
-          ? _value.relativeHumidity
-          : relativeHumidity // ignore: cast_nullable_to_non_nullable
-              as double?,
-      barometricPressure: freezed == barometricPressure
-          ? _value.barometricPressure
-          : barometricPressure // ignore: cast_nullable_to_non_nullable
-              as double?,
-      gasResistance: freezed == gasResistance
-          ? _value.gasResistance
-          : gasResistance // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TelemetryState &&
+            (identical(other.temp, temp) || other.temp == temp) &&
+            (identical(other.relativeHumidity, relativeHumidity) ||
+                other.relativeHumidity == relativeHumidity) &&
+            (identical(other.barometricPressure, barometricPressure) ||
+                other.barometricPressure == barometricPressure) &&
+            (identical(other.gasResistance, gasResistance) ||
+                other.gasResistance == gasResistance));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, temp, relativeHumidity, barometricPressure, gasResistance);
+
+  @override
+  String toString() {
+    return 'TelemetryState(temp: $temp, relativeHumidity: $relativeHumidity, barometricPressure: $barometricPressure, gasResistance: $gasResistance)';
   }
 }
 
 /// @nodoc
-abstract class _$$TelemetryStateImplCopyWith<$Res>
-    implements $TelemetryStateCopyWith<$Res> {
-  factory _$$TelemetryStateImplCopyWith(_$TelemetryStateImpl value,
-          $Res Function(_$TelemetryStateImpl) then) =
-      __$$TelemetryStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TelemetryStateCopyWith<$Res> {
+  factory $TelemetryStateCopyWith(
+          TelemetryState value, $Res Function(TelemetryState) _then) =
+      _$TelemetryStateCopyWithImpl;
   @useResult
   $Res call(
       {double? temp,
@@ -94,13 +65,15 @@ abstract class _$$TelemetryStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TelemetryStateImplCopyWithImpl<$Res>
-    extends _$TelemetryStateCopyWithImpl<$Res, _$TelemetryStateImpl>
-    implements _$$TelemetryStateImplCopyWith<$Res> {
-  __$$TelemetryStateImplCopyWithImpl(
-      _$TelemetryStateImpl _value, $Res Function(_$TelemetryStateImpl) _then)
-      : super(_value, _then);
+class _$TelemetryStateCopyWithImpl<$Res>
+    implements $TelemetryStateCopyWith<$Res> {
+  _$TelemetryStateCopyWithImpl(this._self, this._then);
 
+  final TelemetryState _self;
+  final $Res Function(TelemetryState) _then;
+
+  /// Create a copy of TelemetryState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,31 +82,197 @@ class __$$TelemetryStateImplCopyWithImpl<$Res>
     Object? barometricPressure = freezed,
     Object? gasResistance = freezed,
   }) {
-    return _then(_$TelemetryStateImpl(
+    return _then(_self.copyWith(
       temp: freezed == temp
-          ? _value.temp
+          ? _self.temp
           : temp // ignore: cast_nullable_to_non_nullable
               as double?,
       relativeHumidity: freezed == relativeHumidity
-          ? _value.relativeHumidity
+          ? _self.relativeHumidity
           : relativeHumidity // ignore: cast_nullable_to_non_nullable
               as double?,
       barometricPressure: freezed == barometricPressure
-          ? _value.barometricPressure
+          ? _self.barometricPressure
           : barometricPressure // ignore: cast_nullable_to_non_nullable
               as double?,
       gasResistance: freezed == gasResistance
-          ? _value.gasResistance
+          ? _self.gasResistance
           : gasResistance // ignore: cast_nullable_to_non_nullable
               as double?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [TelemetryState].
+extension TelemetryStatePatterns on TelemetryState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_TelemetryState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TelemetryState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_TelemetryState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TelemetryState():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_TelemetryState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TelemetryState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(double? temp, double? relativeHumidity,
+            double? barometricPressure, double? gasResistance)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TelemetryState() when $default != null:
+        return $default(_that.temp, _that.relativeHumidity,
+            _that.barometricPressure, _that.gasResistance);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(double? temp, double? relativeHumidity,
+            double? barometricPressure, double? gasResistance)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TelemetryState():
+        return $default(_that.temp, _that.relativeHumidity,
+            _that.barometricPressure, _that.gasResistance);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(double? temp, double? relativeHumidity,
+            double? barometricPressure, double? gasResistance)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TelemetryState() when $default != null:
+        return $default(_that.temp, _that.relativeHumidity,
+            _that.barometricPressure, _that.gasResistance);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$TelemetryStateImpl extends _TelemetryState {
-  const _$TelemetryStateImpl(
+class _TelemetryState extends TelemetryState {
+  const _TelemetryState(
       {this.temp,
       this.relativeHumidity,
       this.barometricPressure,
@@ -149,16 +288,19 @@ class _$TelemetryStateImpl extends _TelemetryState {
   @override
   final double? gasResistance;
 
+  /// Create a copy of TelemetryState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TelemetryState(temp: $temp, relativeHumidity: $relativeHumidity, barometricPressure: $barometricPressure, gasResistance: $gasResistance)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TelemetryStateCopyWith<_TelemetryState> get copyWith =>
+      __$TelemetryStateCopyWithImpl<_TelemetryState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TelemetryStateImpl &&
+            other is _TelemetryState &&
             (identical(other.temp, temp) || other.temp == temp) &&
             (identical(other.relativeHumidity, relativeHumidity) ||
                 other.relativeHumidity == relativeHumidity) &&
@@ -172,32 +314,64 @@ class _$TelemetryStateImpl extends _TelemetryState {
   int get hashCode => Object.hash(
       runtimeType, temp, relativeHumidity, barometricPressure, gasResistance);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'TelemetryState(temp: $temp, relativeHumidity: $relativeHumidity, barometricPressure: $barometricPressure, gasResistance: $gasResistance)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TelemetryStateCopyWith<$Res>
+    implements $TelemetryStateCopyWith<$Res> {
+  factory _$TelemetryStateCopyWith(
+          _TelemetryState value, $Res Function(_TelemetryState) _then) =
+      __$TelemetryStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {double? temp,
+      double? relativeHumidity,
+      double? barometricPressure,
+      double? gasResistance});
+}
+
+/// @nodoc
+class __$TelemetryStateCopyWithImpl<$Res>
+    implements _$TelemetryStateCopyWith<$Res> {
+  __$TelemetryStateCopyWithImpl(this._self, this._then);
+
+  final _TelemetryState _self;
+  final $Res Function(_TelemetryState) _then;
+
+  /// Create a copy of TelemetryState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$TelemetryStateImplCopyWith<_$TelemetryStateImpl> get copyWith =>
-      __$$TelemetryStateImplCopyWithImpl<_$TelemetryStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? temp = freezed,
+    Object? relativeHumidity = freezed,
+    Object? barometricPressure = freezed,
+    Object? gasResistance = freezed,
+  }) {
+    return _then(_TelemetryState(
+      temp: freezed == temp
+          ? _self.temp
+          : temp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      relativeHumidity: freezed == relativeHumidity
+          ? _self.relativeHumidity
+          : relativeHumidity // ignore: cast_nullable_to_non_nullable
+              as double?,
+      barometricPressure: freezed == barometricPressure
+          ? _self.barometricPressure
+          : barometricPressure // ignore: cast_nullable_to_non_nullable
+              as double?,
+      gasResistance: freezed == gasResistance
+          ? _self.gasResistance
+          : gasResistance // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
 }
 
-abstract class _TelemetryState extends TelemetryState {
-  const factory _TelemetryState(
-      {final double? temp,
-      final double? relativeHumidity,
-      final double? barometricPressure,
-      final double? gasResistance}) = _$TelemetryStateImpl;
-  const _TelemetryState._() : super._();
-
-  @override
-  double? get temp;
-  @override
-  double? get relativeHumidity;
-  @override
-  double? get barometricPressure;
-  @override
-  double? get gasResistance;
-  @override
-  @JsonKey(ignore: true)
-  _$$TelemetryStateImplCopyWith<_$TelemetryStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

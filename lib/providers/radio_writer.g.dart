@@ -6,19 +6,46 @@ part of 'radio_writer.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$radioWriterHash() => r'6f86a219c59566fc6b66e1358840ada981791602';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [radioWriter].
 @ProviderFor(radioWriter)
-final radioWriterProvider = Provider<RadioWriter>.internal(
-  radioWriter,
-  name: r'radioWriterProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$radioWriterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const radioWriterProvider = RadioWriterProvider._();
 
-typedef RadioWriterRef = ProviderRef<RadioWriter>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class RadioWriterProvider
+    extends $FunctionalProvider<RadioWriter, RadioWriter, RadioWriter>
+    with $Provider<RadioWriter> {
+  const RadioWriterProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'radioWriterProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$radioWriterHash();
+
+  @$internal
+  @override
+  $ProviderElement<RadioWriter> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  RadioWriter create(Ref ref) {
+    return radioWriter(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RadioWriter value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RadioWriter>(value),
+    );
+  }
+}
+
+String _$radioWriterHash() => r'6f86a219c59566fc6b66e1358840ada981791602';

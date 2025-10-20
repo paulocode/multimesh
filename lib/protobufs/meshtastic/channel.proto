@@ -5,7 +5,7 @@ package meshtastic;
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
 option java_outer_classname = "ChannelProtos";
-option java_package = "com.geeksville.mesh";
+option java_package = "org.meshtastic.proto";
 option swift_prefix = "";
 
 /*
@@ -96,6 +96,12 @@ message ModuleSettings {
    * Bits of precision for the location sent in position packets.
    */
   uint32 position_precision = 1;
+
+  /*
+   * Controls whether or not the client / device should mute the current channel
+   * Useful for noisy public channels you don't necessarily want to disable
+   */
+  bool is_muted = 2;
 }
 
 /*

@@ -6,21 +6,55 @@ part of 'tcp_radio_connector.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(TcpRadioConnector)
+const tcpRadioConnectorProvider = TcpRadioConnectorProvider._();
+
+final class TcpRadioConnectorProvider
+    extends $NotifierProvider<TcpRadioConnector, RadioConnectorState> {
+  const TcpRadioConnectorProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'tcpRadioConnectorProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$tcpRadioConnectorHash();
+
+  @$internal
+  @override
+  TcpRadioConnector create() => TcpRadioConnector();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RadioConnectorState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RadioConnectorState>(value),
+    );
+  }
+}
+
 String _$tcpRadioConnectorHash() => r'ddf2eb2df9cac3537f279ac281ba51b1c82b57ea';
 
-/// See also [TcpRadioConnector].
-@ProviderFor(TcpRadioConnector)
-final tcpRadioConnectorProvider =
-    NotifierProvider<TcpRadioConnector, RadioConnectorState>.internal(
-  TcpRadioConnector.new,
-  name: r'tcpRadioConnectorProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$tcpRadioConnectorHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$TcpRadioConnector = Notifier<RadioConnectorState>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+abstract class _$TcpRadioConnector extends $Notifier<RadioConnectorState> {
+  RadioConnectorState build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<RadioConnectorState, RadioConnectorState>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<RadioConnectorState, RadioConnectorState>,
+        RadioConnectorState,
+        Object?,
+        Object?>;
+    element.handleValue(ref, created);
+  }
+}

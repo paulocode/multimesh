@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,101 +9,242 @@ part of 'radio_scan_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RadioScanState {
-  bool get scanning => throw _privateConstructorUsedError;
-  List<MeshRadio> get meshRadios => throw _privateConstructorUsedError;
+  bool get scanning;
+  List<MeshRadio> get meshRadios;
 
-  @JsonKey(ignore: true)
-  $RadioScanStateCopyWith<RadioScanState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RadioScanStateCopyWith<$Res> {
-  factory $RadioScanStateCopyWith(
-          RadioScanState value, $Res Function(RadioScanState) then) =
-      _$RadioScanStateCopyWithImpl<$Res, RadioScanState>;
-  @useResult
-  $Res call({bool scanning, List<MeshRadio> meshRadios});
-}
-
-/// @nodoc
-class _$RadioScanStateCopyWithImpl<$Res, $Val extends RadioScanState>
-    implements $RadioScanStateCopyWith<$Res> {
-  _$RadioScanStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of RadioScanState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $RadioScanStateCopyWith<RadioScanState> get copyWith =>
+      _$RadioScanStateCopyWithImpl<RadioScanState>(
+          this as RadioScanState, _$identity);
+
   @override
-  $Res call({
-    Object? scanning = null,
-    Object? meshRadios = null,
-  }) {
-    return _then(_value.copyWith(
-      scanning: null == scanning
-          ? _value.scanning
-          : scanning // ignore: cast_nullable_to_non_nullable
-              as bool,
-      meshRadios: null == meshRadios
-          ? _value.meshRadios
-          : meshRadios // ignore: cast_nullable_to_non_nullable
-              as List<MeshRadio>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is RadioScanState &&
+            (identical(other.scanning, scanning) ||
+                other.scanning == scanning) &&
+            const DeepCollectionEquality()
+                .equals(other.meshRadios, meshRadios));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, scanning, const DeepCollectionEquality().hash(meshRadios));
+
+  @override
+  String toString() {
+    return 'RadioScanState(scanning: $scanning, meshRadios: $meshRadios)';
   }
 }
 
 /// @nodoc
-abstract class _$$RadioScanStateImplCopyWith<$Res>
-    implements $RadioScanStateCopyWith<$Res> {
-  factory _$$RadioScanStateImplCopyWith(_$RadioScanStateImpl value,
-          $Res Function(_$RadioScanStateImpl) then) =
-      __$$RadioScanStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $RadioScanStateCopyWith<$Res> {
+  factory $RadioScanStateCopyWith(
+          RadioScanState value, $Res Function(RadioScanState) _then) =
+      _$RadioScanStateCopyWithImpl;
   @useResult
   $Res call({bool scanning, List<MeshRadio> meshRadios});
 }
 
 /// @nodoc
-class __$$RadioScanStateImplCopyWithImpl<$Res>
-    extends _$RadioScanStateCopyWithImpl<$Res, _$RadioScanStateImpl>
-    implements _$$RadioScanStateImplCopyWith<$Res> {
-  __$$RadioScanStateImplCopyWithImpl(
-      _$RadioScanStateImpl _value, $Res Function(_$RadioScanStateImpl) _then)
-      : super(_value, _then);
+class _$RadioScanStateCopyWithImpl<$Res>
+    implements $RadioScanStateCopyWith<$Res> {
+  _$RadioScanStateCopyWithImpl(this._self, this._then);
 
+  final RadioScanState _self;
+  final $Res Function(RadioScanState) _then;
+
+  /// Create a copy of RadioScanState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? scanning = null,
     Object? meshRadios = null,
   }) {
-    return _then(_$RadioScanStateImpl(
+    return _then(_self.copyWith(
       scanning: null == scanning
-          ? _value.scanning
+          ? _self.scanning
           : scanning // ignore: cast_nullable_to_non_nullable
               as bool,
       meshRadios: null == meshRadios
-          ? _value._meshRadios
+          ? _self.meshRadios
           : meshRadios // ignore: cast_nullable_to_non_nullable
               as List<MeshRadio>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [RadioScanState].
+extension RadioScanStatePatterns on RadioScanState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_RadioScanState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _RadioScanState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_RadioScanState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioScanState():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_RadioScanState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioScanState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(bool scanning, List<MeshRadio> meshRadios)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _RadioScanState() when $default != null:
+        return $default(_that.scanning, _that.meshRadios);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(bool scanning, List<MeshRadio> meshRadios) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioScanState():
+        return $default(_that.scanning, _that.meshRadios);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(bool scanning, List<MeshRadio> meshRadios)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RadioScanState() when $default != null:
+        return $default(_that.scanning, _that.meshRadios);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$RadioScanStateImpl extends _RadioScanState {
-  const _$RadioScanStateImpl(
+class _RadioScanState extends RadioScanState {
+  const _RadioScanState(
       {this.scanning = false, final List<MeshRadio> meshRadios = const []})
       : _meshRadios = meshRadios,
         super._();
@@ -120,16 +261,19 @@ class _$RadioScanStateImpl extends _RadioScanState {
     return EqualUnmodifiableListView(_meshRadios);
   }
 
+  /// Create a copy of RadioScanState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'RadioScanState(scanning: $scanning, meshRadios: $meshRadios)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RadioScanStateCopyWith<_RadioScanState> get copyWith =>
+      __$RadioScanStateCopyWithImpl<_RadioScanState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RadioScanStateImpl &&
+            other is _RadioScanState &&
             (identical(other.scanning, scanning) ||
                 other.scanning == scanning) &&
             const DeepCollectionEquality()
@@ -140,26 +284,50 @@ class _$RadioScanStateImpl extends _RadioScanState {
   int get hashCode => Object.hash(
       runtimeType, scanning, const DeepCollectionEquality().hash(_meshRadios));
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'RadioScanState(scanning: $scanning, meshRadios: $meshRadios)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RadioScanStateCopyWith<$Res>
+    implements $RadioScanStateCopyWith<$Res> {
+  factory _$RadioScanStateCopyWith(
+          _RadioScanState value, $Res Function(_RadioScanState) _then) =
+      __$RadioScanStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({bool scanning, List<MeshRadio> meshRadios});
+}
+
+/// @nodoc
+class __$RadioScanStateCopyWithImpl<$Res>
+    implements _$RadioScanStateCopyWith<$Res> {
+  __$RadioScanStateCopyWithImpl(this._self, this._then);
+
+  final _RadioScanState _self;
+  final $Res Function(_RadioScanState) _then;
+
+  /// Create a copy of RadioScanState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$RadioScanStateImplCopyWith<_$RadioScanStateImpl> get copyWith =>
-      __$$RadioScanStateImplCopyWithImpl<_$RadioScanStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? scanning = null,
+    Object? meshRadios = null,
+  }) {
+    return _then(_RadioScanState(
+      scanning: null == scanning
+          ? _self.scanning
+          : scanning // ignore: cast_nullable_to_non_nullable
+              as bool,
+      meshRadios: null == meshRadios
+          ? _self._meshRadios
+          : meshRadios // ignore: cast_nullable_to_non_nullable
+              as List<MeshRadio>,
+    ));
+  }
 }
 
-abstract class _RadioScanState extends RadioScanState {
-  const factory _RadioScanState(
-      {final bool scanning,
-      final List<MeshRadio> meshRadios}) = _$RadioScanStateImpl;
-  const _RadioScanState._() : super._();
-
-  @override
-  bool get scanning;
-  @override
-  List<MeshRadio> get meshRadios;
-  @override
-  @JsonKey(ignore: true)
-  _$$RadioScanStateImplCopyWith<_$RadioScanStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

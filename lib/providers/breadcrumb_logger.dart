@@ -5,7 +5,7 @@ import 'wrap/local_platform.dart';
 part 'breadcrumb_logger.g.dart';
 
 @Riverpod(keepAlive: true)
-BreadcrumbLogger breadcrumbLogger(BreadcrumbLoggerRef ref) {
+BreadcrumbLogger breadcrumbLogger(Ref ref) {
   final localPlatform = ref.read(localPlatformProvider);
   if (!localPlatform.isWindows && !localPlatform.isLinux) {
     return FirebaseLogger();

@@ -10,7 +10,7 @@ import 'radio_connector_service.dart';
 part 'radio_reader.g.dart';
 
 @Riverpod(keepAlive: true)
-RadioReader radioReader(RadioReaderRef ref) {
+RadioReader radioReader(Ref ref) {
   // we can not ref.watch radioConnectorServiceProvider
   // because for offline view mode, we want to cache
   // states of providers that depend on radioReader

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../services/telemetry/telemetry_receiver.dart';
@@ -7,7 +8,7 @@ import '../repository/telemetry_repository.dart';
 part 'telemetry_receiver.g.dart';
 
 @Riverpod(keepAlive: true)
-TelemetryReceiver telemetryReceiver(TelemetryReceiverRef ref) {
+TelemetryReceiver telemetryReceiver(Ref ref) {
   return TelemetryReceiver(
     myNodeNum: ref
         .watch(radioConfigServiceProvider.select((value) => value.myNodeNum)),

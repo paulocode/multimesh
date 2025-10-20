@@ -33,8 +33,8 @@ class TelemetryLogScreen extends ConsumerWidget {
     );
     final count = telemetryListService.count;
     switch (telemetryListAsync) {
-      case AsyncValue(:final valueOrNull?):
-        final telemetryList = valueOrNull;
+      case AsyncValue(:final value?):
+        final telemetryList = value;
         return Scaffold(
           appBar: const AppBarWithConnectionIndicator(
             title: 'Telemetry Log',

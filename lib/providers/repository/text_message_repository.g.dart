@@ -6,21 +6,49 @@ part of 'text_message_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(textMessageRepository)
+const textMessageRepositoryProvider = TextMessageRepositoryProvider._();
+
+final class TextMessageRepositoryProvider extends $FunctionalProvider<
+    TextMessageRepository,
+    TextMessageRepository,
+    TextMessageRepository> with $Provider<TextMessageRepository> {
+  const TextMessageRepositoryProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'textMessageRepositoryProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$textMessageRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<TextMessageRepository> $createElement(
+          $ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  TextMessageRepository create(Ref ref) {
+    return textMessageRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TextMessageRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TextMessageRepository>(value),
+    );
+  }
+}
+
 String _$textMessageRepositoryHash() =>
     r'a577d47df342beb955e88fb9c3295ccf2f283379';
-
-/// See also [textMessageRepository].
-@ProviderFor(textMessageRepository)
-final textMessageRepositoryProvider = Provider<TextMessageRepository>.internal(
-  textMessageRepository,
-  name: r'textMessageRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$textMessageRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef TextMessageRepositoryRef = ProviderRef<TextMessageRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

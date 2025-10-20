@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:csv/csv.dart';
 import 'package:file_saver/file_saver.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,7 +16,7 @@ import '../wrap/local_platform.dart';
 part 'telemetry_saver.g.dart';
 
 @riverpod
-Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
+Raw<Future<void>> telemetrySaver(Ref ref, int nodeNum) async {
   final telemetryRepository = ref.watch(telemetryRepositoryProvider);
   final myNodeNum =
       ref.watch(radioConfigServiceProvider.select((value) => value.myNodeNum));
@@ -74,5 +75,5 @@ Raw<Future<void>> telemetrySaver(TelemetrySaverRef ref, int nodeNum) async {
   final bytes = Uint8List.fromList(utf8.encode(csvData));
   const type = MimeType.csv;
   await FileSaver.instance
-      .saveAs(name: filename, bytes: bytes, ext: 'csv', mimeType: type);
+      .saveAs(name: filename, bytes: bytes, fileExtension: 'csv', mimeType: type);
 }

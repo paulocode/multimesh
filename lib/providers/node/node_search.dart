@@ -6,7 +6,7 @@ import 'node_service.dart';
 part 'node_search.g.dart';
 
 @riverpod
-Map<int, MeshNode> nodeSearch(NodeSearchRef ref, String searchKey) {
+Map<int, MeshNode> nodeSearch(Ref ref, String searchKey) {
   final searchKeyLowercase = searchKey.toLowerCase();
   final nodes = ref.watch(nodeServiceProvider);
   if (searchKey.trim().isEmpty) {
