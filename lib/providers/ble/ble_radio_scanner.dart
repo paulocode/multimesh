@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' hide Logger;
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -65,17 +65,19 @@ class BleRadioScanner extends _$BleRadioScanner {
 
   Future<void> _addUniqueResults(
     List<BleMeshRadio> devices,
-    List<ScanResult> results,
+    List<DiscoveredDevice> results,
   ) async {
     final newDevices = results
         .where(
-          (e) => e.advertisementData.advName.trim().isNotEmpty,
+          (e) => e.name.trim().isNotEmpty,
         )
         .where(
-          (e) => e.advertisementData.serviceUuids
-              .any((element) => element.str == MESHTASTIC_BLE_SERVICE),
+          (e) => e.serviceUuids.any(
+              (element) =>
+                  element.toString().toLowerCase() ==
+                  MESHTASTIC_BLE_SERVICE.toLowerCase()),
         )
-        .map((e) => BleMeshRadio(device: e.device));
+        .map((e) => BleMeshRadio(device: e));
 
     final uniqueNewDevices = newDevices.where(
       (newDevice) => devices
@@ -86,7 +88,7 @@ class BleRadioScanner extends _$BleRadioScanner {
     );
 
     for (final element in uniqueNewDevices) {
-      _logger.i('scanned BLE ${element.device.advName}');
+      _logger.i('scanned BLE ${element.device.name}');
     }
 
     devices.addAll(uniqueNewDevices);
@@ -98,7 +100,7 @@ class BleRadioScanner extends _$BleRadioScanner {
     final systemDevices = await _flutterBluePlus.systemDevices;
     return List<BleMeshRadio>.from(
       systemDevices
-          .where((element) => element.advName.trim().isNotEmpty)
+          .where((element) => element.name.trim().isNotEmpty)
           .map((e) => BleMeshRadio(device: e)),
     );
   }

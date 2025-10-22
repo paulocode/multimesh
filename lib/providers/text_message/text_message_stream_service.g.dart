@@ -73,7 +73,7 @@ final class TextMessageStreamServiceProvider extends $FunctionalProvider<
 }
 
 String _$textMessageStreamServiceHash() =>
-    r'f78f29b2b13adbf3fae2a634277506d44d9d57e8';
+    r'4b59706f8527fcecd46617a0c6d447dc19c169db';
 
 final class TextMessageStreamServiceFamily extends $Family
     with $FunctionalFamilyOverride<TextMessageStreamService, ChatType> {

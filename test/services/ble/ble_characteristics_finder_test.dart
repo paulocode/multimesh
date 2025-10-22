@@ -1,4 +1,4 @@
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,55 +10,81 @@ import 'ble_characteristics_finder_test.mocks.dart';
 
 @GenerateMocks(
   [
-    BluetoothDevice,
-    BluetoothService,
-    BluetoothCharacteristic,
+    FlutterReactiveBle,
   ],
 )
 void main() {
   late BleCharacteristicsFinder bleCharsFinder;
+  late MockFlutterReactiveBle mockBle;
 
-  setUp(() => bleCharsFinder = BleCharacteristicsFinder());
+  setUp(() {
+    mockBle = MockFlutterReactiveBle();
+    bleCharsFinder = BleCharacteristicsFinder(mockBle);
+  });
 
   test('must return right characteristics', () async {
-    final device = MockBluetoothDevice();
-    final service = MockBluetoothService();
-    final toRadio = MockBluetoothCharacteristic();
-    final fromRadio = MockBluetoothCharacteristic();
-    final fromNum = MockBluetoothCharacteristic();
+    const deviceId = 'test-device-id';
+    final serviceUuid = Uuid.parse(MESHTASTIC_BLE_SERVICE);
+    final toRadioUuid = Uuid.parse(MESHTASTIC_TORADIO_CHARACTERISTIC);
+    final fromRadioUuid = Uuid.parse(MESHTASTIC_FROMRADIO_CHARACTERISTIC);
+    final fromNumUuid = Uuid.parse(MESHTASTIC_FROMNUM_CHARACTERISTIC);
 
-    when(device.discoverServices()).thenAnswer(
-      (_) => Future.value([
-        service,
-      ]),
+    final service = DiscoveredService(
+      serviceId: serviceUuid,
+      characteristicIds: [toRadioUuid, fromRadioUuid, fromNumUuid],
+      characteristics: [
+        CharacteristicInstance(
+          characteristicId: toRadioUuid,
+          serviceId: serviceUuid,
+          isReadable: false,
+          isWritableWithResponse: true,
+          isWritableWithoutResponse: false,
+          isNotifiable: false,
+          isIndicatable: false,
+        ),
+        CharacteristicInstance(
+          characteristicId: fromRadioUuid,
+          serviceId: serviceUuid,
+          isReadable: true,
+          isWritableWithResponse: false,
+          isWritableWithoutResponse: false,
+          isNotifiable: false,
+          isIndicatable: false,
+        ),
+        CharacteristicInstance(
+          characteristicId: fromNumUuid,
+          serviceId: serviceUuid,
+          isReadable: false,
+          isWritableWithResponse: false,
+          isWritableWithoutResponse: false,
+          isNotifiable: true,
+          isIndicatable: false,
+        ),
+      ],
+      includedServices: [],
     );
-    when(service.uuid).thenReturn(Guid(MESHTASTIC_BLE_SERVICE));
-    when(toRadio.uuid).thenReturn(Guid(MESHTASTIC_TORADIO_CHARACTERISTIC));
-    when(fromRadio.uuid).thenReturn(Guid(MESHTASTIC_FROMRADIO_CHARACTERISTIC));
-    when(fromNum.uuid).thenReturn(Guid(MESHTASTIC_FROMNUM_CHARACTERISTIC));
-    when(service.characteristics).thenReturn([
-      toRadio,
-      fromRadio,
-      fromNum,
-    ]);
 
-    final bleChars = await bleCharsFinder.findCharacteristics(device);
+    when(mockBle.discoverServices(deviceId)).thenAnswer(
+      (_) => Future.value([service]),
+    );
 
-    expect(bleChars.toRadio, toRadio);
-    expect(bleChars.fromRadio, fromRadio);
-    expect(bleChars.fromNum, fromNum);
+    final bleChars = await bleCharsFinder.findCharacteristics(deviceId);
+
+    expect(bleChars.toRadio.characteristicId, toRadioUuid);
+    expect(bleChars.fromRadio.characteristicId, fromRadioUuid);
+    expect(bleChars.fromNum.characteristicId, fromNumUuid);
   });
 
   test('must throw MeshRadioException if meshtastic service does not exist',
       () async {
-    final device = MockBluetoothDevice();
+    const deviceId = 'test-device-id';
 
-    when(device.discoverServices()).thenAnswer(
+    when(mockBle.discoverServices(deviceId)).thenAnswer(
       (_) => Future.value([]),
     );
 
     try {
-      await bleCharsFinder.findCharacteristics(device);
+      await bleCharsFinder.findCharacteristics(deviceId);
     } catch (e) {
       expect(e, isA<MeshRadioException>());
       expect((e as MeshRadioException).msg, 'Not a Meshtastic device');
@@ -70,14 +96,14 @@ void main() {
 
   test('must throw exception if meshtastic characteristic does not exist',
       () async {
-    final device = MockBluetoothDevice();
+    const deviceId = 'test-device-id';
 
-    when(device.discoverServices()).thenAnswer(
+    when(mockBle.discoverServices(deviceId)).thenAnswer(
       (_) => Future.value([]),
     );
 
     expect(
-      () => bleCharsFinder.findCharacteristics(device),
+      () => bleCharsFinder.findCharacteristics(deviceId),
       throwsA(anything),
     );
   });

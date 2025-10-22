@@ -48,4 +48,4 @@ final class RadioReaderProvider
   }
 }
 
-String _$radioReaderHash() => r'e6fc0666c9234c8657e2be1473f57ce407510bab';
+String _$radioReaderHash() => r'5172b78a0662e75c094b8d2863d7df97f409a456';

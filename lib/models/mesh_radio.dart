@@ -1,4 +1,4 @@
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 sealed class MeshRadio {
   String get name;
@@ -8,13 +8,13 @@ sealed class MeshRadio {
 class BleMeshRadio extends MeshRadio {
   BleMeshRadio({required this.device}) : super();
 
-  final BluetoothDevice device;
+  final DiscoveredDevice device;
 
   @override
-  String get name => device.advName;
+  String get name => device.name;
 
   @override
-  String get remoteId => device.remoteId.str;
+  String get remoteId => device.id;
 }
 
 class TcpMeshRadio extends MeshRadio {

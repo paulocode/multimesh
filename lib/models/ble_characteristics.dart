@@ -1,4 +1,4 @@
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 class BleCharacteristics {
   BleCharacteristics({
@@ -7,7 +7,7 @@ class BleCharacteristics {
     required this.fromNum,
   });
 
-  final BluetoothCharacteristic toRadio;
-  final BluetoothCharacteristic fromRadio;
-  final BluetoothCharacteristic fromNum;
+  final QualifiedCharacteristic toRadio;
+  final QualifiedCharacteristic fromRadio;
+  final QualifiedCharacteristic fromNum;
 }

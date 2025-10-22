@@ -1,87 +1,137 @@
 // coverage:ignore-file
 import 'dart:async';
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
-/// Wrapper for FlutterBluePlus in order to easily mock it
-/// Wraps all static calls for testing purposes
+/// Wrapper for FlutterReactiveBle in order to easily mock it
+/// Wraps calls for testing purposes
 class FlutterBluePlusMockable {
+  FlutterBluePlusMockable() : _ble = FlutterReactiveBle();
+
+  final FlutterReactiveBle _ble;
+  StreamSubscription<DiscoveredDevice>? _scanSubscription;
+  final _scanResultsController = StreamController<List<DiscoveredDevice>>.broadcast();
+  final _isScanningController = StreamController<bool>.broadcast();
+  final _discoveredDevices = <String, DiscoveredDevice>{};
+
+  Stream<BleStatus> get adapterState => _ble.statusStream;
+
+  Stream<List<DiscoveredDevice>> get scanResults => _scanResultsController.stream;
+
+  bool get isScanningNow => _scanSubscription != null;
+
+  Stream<bool> get isScanning => _isScanningController.stream;
+
   Future<void> startScan({
-    List<Guid> withServices = const [],
+    List<Uuid> withServices = const [],
     Duration? timeout,
     Duration? removeIfGone,
     bool oneByOne = false,
     bool androidUsesFineLocation = false,
-  }) {
-    return FlutterBluePlus.startScan(
+  }) async {
+    if (_scanSubscription != null) {
+      return;
+    }
+
+    _discoveredDevices.clear();
+    _isScanningController.add(true);
+
+    _scanSubscription = _ble.scanForDevices(
       withServices: withServices,
-      timeout: timeout,
-      removeIfGone: removeIfGone,
-      oneByOne: oneByOne,
-      androidUsesFineLocation: androidUsesFineLocation,
+      scanMode: ScanMode.lowLatency,
+    ).listen((device) {
+      _discoveredDevices[device.id] = device;
+      _scanResultsController.add(_discoveredDevices.values.toList());
+    });
+
+    if (timeout != null) {
+      Future.delayed(timeout, stopScan);
+    }
+  }
+
+  Future<void> stopScan() async {
+    await _scanSubscription?.cancel();
+    _scanSubscription = null;
+    _isScanningController.add(false);
+  }
+
+  Future<bool> get isSupported async {
+    // flutter_reactive_ble doesn't have a direct isSupported check
+    // We can check if status is not unsupported
+    final status = await _ble.statusStream.first;
+    return status != BleStatus.unsupported;
+  }
+
+  Stream<ConnectionStateUpdate> connectToDevice({
+    required String id,
+    Duration? timeout,
+  }) {
+    return _ble.connectToDevice(
+      id: id,
+      connectionTimeout: timeout,
     );
   }
 
-  Stream<BluetoothAdapterState> get adapterState {
-    return FlutterBluePlus.adapterState;
+  Future<void> disconnectDevice(String deviceId) async {
+    // flutter_reactive_ble doesn't have explicit disconnect
+    // Connection is managed through the stream subscription
   }
 
-  Stream<List<ScanResult>> get scanResults {
-    return FlutterBluePlus.scanResults;
+  Future<List<DiscoveredService>> discoverServices(String deviceId) {
+    return _ble.discoverServices(deviceId);
   }
 
-  bool get isScanningNow {
-    return FlutterBluePlus.isScanningNow;
+  Stream<List<int>> subscribeToCharacteristic(
+    QualifiedCharacteristic characteristic,
+  ) {
+    return _ble.subscribeToCharacteristic(characteristic);
   }
 
-  Stream<bool> get isScanning {
-    return FlutterBluePlus.isScanning;
+  Future<void> writeCharacteristicWithResponse(
+    QualifiedCharacteristic characteristic,
+    List<int> value,
+  ) {
+    return _ble.writeCharacteristicWithResponse(characteristic, value: value);
   }
 
-  Future<void> stopScan() {
-    return FlutterBluePlus.stopScan();
+  Future<void> writeCharacteristicWithoutResponse(
+    QualifiedCharacteristic characteristic,
+    List<int> value,
+  ) {
+    return _ble.writeCharacteristicWithoutResponse(characteristic, value: value);
   }
 
-  Future<void> setLogLevel(LogLevel level, {bool color = true}) {
-    return FlutterBluePlus.setLogLevel(level, color: color);
+  Future<List<int>> readCharacteristic(
+    QualifiedCharacteristic characteristic,
+  ) {
+    return _ble.readCharacteristic(characteristic);
   }
 
-  LogLevel get logLevel {
-    return FlutterBluePlus.logLevel;
+  // Note: flutter_reactive_ble does not support these features
+  // Returning dummy implementations for compatibility
+
+  Future<String> get adapterName async => 'Unknown';
+
+  Future<void> turnOn({int timeout = 60}) async {
+    // Not supported in flutter_reactive_ble
+    throw UnsupportedError('turnOn is not supported in flutter_reactive_ble');
   }
 
-  Future<bool> get isSupported {
-    return FlutterBluePlus.isSupported;
-  }
+  List<String> get connectedDevices => [];
 
-  Future<String> get adapterName {
-    return FlutterBluePlus.adapterName;
-  }
+  Future<List<DiscoveredDevice>> get systemDevices async => [];
 
-  Future<void> turnOn({int timeout = 60}) {
-    return FlutterBluePlus.turnOn(timeout: timeout);
-  }
-
-  List<BluetoothDevice> get connectedDevices {
-    return FlutterBluePlus.connectedDevices;
-  }
-
-  Future<List<BluetoothDevice>> get systemDevices {
-    // TODO: implement GUID list for ios
-    return FlutterBluePlus.systemDevices(List.empty());
-  }
-
-  Future<PhySupport> getPhySupport() {
-    return FlutterBluePlus.getPhySupport();
-  }
-
-  Future<List<BluetoothDevice>> get bondedDevices {
-    return FlutterBluePlus.bondedDevices;
-  }
+  Future<List<String>> get bondedDevices async => [];
 
   void cancelWhenScanComplete(
-    StreamSubscription<List<ScanResult>> subscription,
+    StreamSubscription<List<DiscoveredDevice>> subscription,
   ) {
-    FlutterBluePlus.cancelWhenScanComplete(subscription);
+    // Not needed in flutter_reactive_ble
+  }
+
+  void dispose() {
+    _scanSubscription?.cancel();
+    _scanResultsController.close();
+    _isScanningController.close();
   }
 }

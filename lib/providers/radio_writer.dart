@@ -1,3 +1,4 @@
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/radio_connector_state.dart';
@@ -18,7 +19,7 @@ RadioWriter radioWriter(Ref ref) {
   late final RadioWriter radioWriter;
   switch (connectorState) {
     case BleConnected():
-      radioWriter = BleRadioWriter(connectorState);
+      radioWriter = BleRadioWriter(connectorState, FlutterReactiveBle());
     case TcpConnected():
       radioWriter = TcpRadioWriter(connectorState);
     case _:

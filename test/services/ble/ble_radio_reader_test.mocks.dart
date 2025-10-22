@@ -4,13 +4,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:typed_data' as _i6;
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i3;
-import 'package:flutter_blue_plus_platform_interface/flutter_blue_plus_platform_interface.dart'
+import 'package:flutter_reactive_ble/src/discovered_devices_registry.dart'
     as _i2;
+import 'package:flutter_reactive_ble/src/reactive_ble.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i5;
+import 'package:reactive_ble_platform_interface/reactive_ble_platform_interface.dart'
+    as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -26,9 +26,9 @@ import 'package:mockito/src/dummies.dart' as _i5;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDeviceIdentifier_0 extends _i1.SmartFake
-    implements _i2.DeviceIdentifier {
-  _FakeDeviceIdentifier_0(
+class _FakeDiscoveredDevicesRegistryImpl_0 extends _i1.SmartFake
+    implements _i2.DiscoveredDevicesRegistryImpl {
+  _FakeDiscoveredDevicesRegistryImpl_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -37,8 +37,9 @@ class _FakeDeviceIdentifier_0 extends _i1.SmartFake
         );
 }
 
-class _FakeGuid_1 extends _i1.SmartFake implements _i2.Guid {
-  _FakeGuid_1(
+class _FakeCharacteristic_1 extends _i1.SmartFake
+    implements _i3.Characteristic {
+  _FakeCharacteristic_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -47,473 +48,155 @@ class _FakeGuid_1 extends _i1.SmartFake implements _i2.Guid {
         );
 }
 
-class _FakeBluetoothDevice_2 extends _i1.SmartFake
-    implements _i3.BluetoothDevice {
-  _FakeBluetoothDevice_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeCharacteristicProperties_3 extends _i1.SmartFake
-    implements _i3.CharacteristicProperties {
-  _FakeCharacteristicProperties_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-/// A class which mocks [BluetoothCharacteristic].
+/// A class which mocks [FlutterReactiveBle].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBluetoothCharacteristic extends _i1.Mock
-    implements _i3.BluetoothCharacteristic {
-  MockBluetoothCharacteristic() {
+class MockFlutterReactiveBle extends _i1.Mock
+    implements _i3.FlutterReactiveBle {
+  MockFlutterReactiveBle() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.DeviceIdentifier get remoteId => (super.noSuchMethod(
-        Invocation.getter(#remoteId),
-        returnValue: _FakeDeviceIdentifier_0(
+  _i2.DiscoveredDevicesRegistryImpl get scanRegistry => (super.noSuchMethod(
+        Invocation.getter(#scanRegistry),
+        returnValue: _FakeDiscoveredDevicesRegistryImpl_0(
           this,
-          Invocation.getter(#remoteId),
+          Invocation.getter(#scanRegistry),
         ),
-      ) as _i2.DeviceIdentifier);
+      ) as _i2.DiscoveredDevicesRegistryImpl);
 
   @override
-  _i2.Guid get serviceUuid => (super.noSuchMethod(
-        Invocation.getter(#serviceUuid),
-        returnValue: _FakeGuid_1(
-          this,
-          Invocation.getter(#serviceUuid),
-        ),
-      ) as _i2.Guid);
+  _i4.Stream<_i5.BleStatus> get statusStream => (super.noSuchMethod(
+        Invocation.getter(#statusStream),
+        returnValue: _i4.Stream<_i5.BleStatus>.empty(),
+      ) as _i4.Stream<_i5.BleStatus>);
 
   @override
-  _i2.Guid get characteristicUuid => (super.noSuchMethod(
-        Invocation.getter(#characteristicUuid),
-        returnValue: _FakeGuid_1(
-          this,
-          Invocation.getter(#characteristicUuid),
-        ),
-      ) as _i2.Guid);
+  _i5.BleStatus get status => (super.noSuchMethod(
+        Invocation.getter(#status),
+        returnValue: _i5.BleStatus.unknown,
+      ) as _i5.BleStatus);
 
   @override
-  int get instanceId => (super.noSuchMethod(
-        Invocation.getter(#instanceId),
-        returnValue: 0,
-      ) as int);
-
-  @override
-  _i2.Guid get uuid => (super.noSuchMethod(
-        Invocation.getter(#uuid),
-        returnValue: _FakeGuid_1(
-          this,
-          Invocation.getter(#uuid),
-        ),
-      ) as _i2.Guid);
-
-  @override
-  _i3.BluetoothDevice get device => (super.noSuchMethod(
-        Invocation.getter(#device),
-        returnValue: _FakeBluetoothDevice_2(
-          this,
-          Invocation.getter(#device),
-        ),
-      ) as _i3.BluetoothDevice);
-
-  @override
-  _i3.CharacteristicProperties get properties => (super.noSuchMethod(
-        Invocation.getter(#properties),
-        returnValue: _FakeCharacteristicProperties_3(
-          this,
-          Invocation.getter(#properties),
-        ),
-      ) as _i3.CharacteristicProperties);
-
-  @override
-  List<_i3.BluetoothDescriptor> get descriptors => (super.noSuchMethod(
-        Invocation.getter(#descriptors),
-        returnValue: <_i3.BluetoothDescriptor>[],
-      ) as List<_i3.BluetoothDescriptor>);
-
-  @override
-  List<int> get lastValue => (super.noSuchMethod(
-        Invocation.getter(#lastValue),
-        returnValue: <int>[],
-      ) as List<int>);
-
-  @override
-  _i4.Stream<List<int>> get lastValueStream => (super.noSuchMethod(
-        Invocation.getter(#lastValueStream),
-        returnValue: _i4.Stream<List<int>>.empty(),
-      ) as _i4.Stream<List<int>>);
-
-  @override
-  _i4.Stream<List<int>> get onValueReceived => (super.noSuchMethod(
-        Invocation.getter(#onValueReceived),
-        returnValue: _i4.Stream<List<int>>.empty(),
-      ) as _i4.Stream<List<int>>);
-
-  @override
-  bool get isNotifying => (super.noSuchMethod(
-        Invocation.getter(#isNotifying),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  _i2.DeviceIdentifier get deviceId => (super.noSuchMethod(
-        Invocation.getter(#deviceId),
-        returnValue: _FakeDeviceIdentifier_0(
-          this,
-          Invocation.getter(#deviceId),
-        ),
-      ) as _i2.DeviceIdentifier);
-
-  @override
-  _i4.Stream<List<int>> get value => (super.noSuchMethod(
-        Invocation.getter(#value),
-        returnValue: _i4.Stream<List<int>>.empty(),
-      ) as _i4.Stream<List<int>>);
-
-  @override
-  _i4.Stream<List<int>> get onValueChangedStream => (super.noSuchMethod(
-        Invocation.getter(#onValueChangedStream),
-        returnValue: _i4.Stream<List<int>>.empty(),
-      ) as _i4.Stream<List<int>>);
-
-  @override
-  _i4.Future<List<int>> read({int? timeout = 15}) => (super.noSuchMethod(
-        Invocation.method(
-          #read,
-          [],
-          {#timeout: timeout},
-        ),
-        returnValue: _i4.Future<List<int>>.value(<int>[]),
-      ) as _i4.Future<List<int>>);
-
-  @override
-  _i4.Future<void> write(
-    List<int>? value, {
-    bool? withoutResponse = false,
-    bool? allowLongWrite = false,
-    int? timeout = 15,
-  }) =>
+  _i4.Stream<_i5.ConnectionStateUpdate> get connectedDeviceStream =>
       (super.noSuchMethod(
-        Invocation.method(
-          #write,
-          [value],
-          {
-            #withoutResponse: withoutResponse,
-            #allowLongWrite: allowLongWrite,
-            #timeout: timeout,
-          },
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        Invocation.getter(#connectedDeviceStream),
+        returnValue: _i4.Stream<_i5.ConnectionStateUpdate>.empty(),
+      ) as _i4.Stream<_i5.ConnectionStateUpdate>);
 
   @override
-  _i4.Future<bool> setNotifyValue(
-    bool? notify, {
-    int? timeout = 15,
-    bool? forceIndications = false,
-  }) =>
+  _i4.Stream<_i5.CharacteristicValue> get characteristicValueStream =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setNotifyValue,
-          [notify],
-          {
-            #timeout: timeout,
-            #forceIndications: forceIndications,
-          },
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-}
-
-/// A class which mocks [BluetoothDevice].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockBluetoothDevice extends _i1.Mock implements _i3.BluetoothDevice {
-  MockBluetoothDevice() {
-    _i1.throwOnMissingStub(this);
-  }
+        Invocation.getter(#characteristicValueStream),
+        returnValue: _i4.Stream<_i5.CharacteristicValue>.empty(),
+      ) as _i4.Stream<_i5.CharacteristicValue>);
 
   @override
-  _i2.DeviceIdentifier get remoteId => (super.noSuchMethod(
-        Invocation.getter(#remoteId),
-        returnValue: _FakeDeviceIdentifier_0(
-          this,
-          Invocation.getter(#remoteId),
-        ),
-      ) as _i2.DeviceIdentifier);
+  _i5.LogLevel get logLevel => (super.noSuchMethod(
+        Invocation.getter(#logLevel),
+        returnValue: _i5.LogLevel.none,
+      ) as _i5.LogLevel);
 
   @override
-  String get platformName => (super.noSuchMethod(
-        Invocation.getter(#platformName),
-        returnValue: _i5.dummyValue<String>(
-          this,
-          Invocation.getter(#platformName),
-        ),
-      ) as String);
-
-  @override
-  String get advName => (super.noSuchMethod(
-        Invocation.getter(#advName),
-        returnValue: _i5.dummyValue<String>(
-          this,
-          Invocation.getter(#advName),
-        ),
-      ) as String);
-
-  @override
-  List<_i3.BluetoothService> get servicesList => (super.noSuchMethod(
-        Invocation.getter(#servicesList),
-        returnValue: <_i3.BluetoothService>[],
-      ) as List<_i3.BluetoothService>);
-
-  @override
-  bool get isAutoConnectEnabled => (super.noSuchMethod(
-        Invocation.getter(#isAutoConnectEnabled),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  bool get isConnected => (super.noSuchMethod(
-        Invocation.getter(#isConnected),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  bool get isDisconnected => (super.noSuchMethod(
-        Invocation.getter(#isDisconnected),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  _i4.Stream<_i3.BluetoothConnectionState> get connectionState =>
-      (super.noSuchMethod(
-        Invocation.getter(#connectionState),
-        returnValue: _i4.Stream<_i3.BluetoothConnectionState>.empty(),
-      ) as _i4.Stream<_i3.BluetoothConnectionState>);
-
-  @override
-  int get mtuNow => (super.noSuchMethod(
-        Invocation.getter(#mtuNow),
-        returnValue: 0,
-      ) as int);
-
-  @override
-  _i4.Stream<int> get mtu => (super.noSuchMethod(
-        Invocation.getter(#mtu),
-        returnValue: _i4.Stream<int>.empty(),
-      ) as _i4.Stream<int>);
-
-  @override
-  _i4.Stream<void> get onServicesReset => (super.noSuchMethod(
-        Invocation.getter(#onServicesReset),
-        returnValue: _i4.Stream<void>.empty(),
-      ) as _i4.Stream<void>);
-
-  @override
-  _i4.Stream<_i3.BluetoothBondState> get bondState => (super.noSuchMethod(
-        Invocation.getter(#bondState),
-        returnValue: _i4.Stream<_i3.BluetoothBondState>.empty(),
-      ) as _i4.Stream<_i3.BluetoothBondState>);
-
-  @override
-  _i4.Stream<bool> get isDiscoveringServices => (super.noSuchMethod(
-        Invocation.getter(#isDiscoveringServices),
-        returnValue: _i4.Stream<bool>.empty(),
-      ) as _i4.Stream<bool>);
-
-  @override
-  _i2.DeviceIdentifier get id => (super.noSuchMethod(
-        Invocation.getter(#id),
-        returnValue: _FakeDeviceIdentifier_0(
-          this,
-          Invocation.getter(#id),
-        ),
-      ) as _i2.DeviceIdentifier);
-
-  @override
-  String get localName => (super.noSuchMethod(
-        Invocation.getter(#localName),
-        returnValue: _i5.dummyValue<String>(
-          this,
-          Invocation.getter(#localName),
-        ),
-      ) as String);
-
-  @override
-  String get name => (super.noSuchMethod(
-        Invocation.getter(#name),
-        returnValue: _i5.dummyValue<String>(
-          this,
-          Invocation.getter(#name),
-        ),
-      ) as String);
-
-  @override
-  _i4.Stream<_i3.BluetoothConnectionState> get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i4.Stream<_i3.BluetoothConnectionState>.empty(),
-      ) as _i4.Stream<_i3.BluetoothConnectionState>);
-
-  @override
-  _i4.Stream<List<_i3.BluetoothService>> get servicesStream =>
-      (super.noSuchMethod(
-        Invocation.getter(#servicesStream),
-        returnValue: _i4.Stream<List<_i3.BluetoothService>>.empty(),
-      ) as _i4.Stream<List<_i3.BluetoothService>>);
-
-  @override
-  _i4.Stream<List<_i3.BluetoothService>> get services => (super.noSuchMethod(
-        Invocation.getter(#services),
-        returnValue: _i4.Stream<List<_i3.BluetoothService>>.empty(),
-      ) as _i4.Stream<List<_i3.BluetoothService>>);
-
-  @override
-  void cancelWhenDisconnected(
-    _i4.StreamSubscription<dynamic>? subscription, {
-    bool? next = false,
-    bool? delayed = false,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #cancelWhenDisconnected,
-          [subscription],
-          {
-            #next: next,
-            #delayed: delayed,
-          },
+  set logLevel(_i5.LogLevel? logLevel) => super.noSuchMethod(
+        Invocation.setter(
+          #logLevel,
+          logLevel,
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  _i4.Future<void> connect({
-    required _i3.License? license,
-    Duration? timeout = const Duration(seconds: 35),
-    int? mtu = 512,
-    bool? autoConnect = false,
-  }) =>
-      (super.noSuchMethod(
+  _i4.Future<void> initialize() => (super.noSuchMethod(
         Invocation.method(
-          #connect,
+          #initialize,
           [],
-          {
-            #license: license,
-            #timeout: timeout,
-            #mtu: mtu,
-            #autoConnect: autoConnect,
-          },
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> disconnect({
-    int? timeout = 35,
-    bool? queue = true,
-    int? androidDelay = 2000,
-  }) =>
-      (super.noSuchMethod(
+  _i4.Future<void> deinitialize() => (super.noSuchMethod(
         Invocation.method(
-          #disconnect,
+          #deinitialize,
           [],
-          {
-            #timeout: timeout,
-            #queue: queue,
-            #androidDelay: androidDelay,
-          },
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<List<_i3.BluetoothService>> discoverServices({
-    bool? subscribeToServicesChanged = true,
-    int? timeout = 15,
+  _i4.Future<List<int>> readCharacteristic(
+          _i5.QualifiedCharacteristic? characteristic) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readCharacteristic,
+          [characteristic],
+        ),
+        returnValue: _i4.Future<List<int>>.value(<int>[]),
+      ) as _i4.Future<List<int>>);
+
+  @override
+  _i4.Future<void> writeCharacteristicWithResponse(
+    _i5.QualifiedCharacteristic? characteristic, {
+    required List<int>? value,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #discoverServices,
-          [],
-          {
-            #subscribeToServicesChanged: subscribeToServicesChanged,
-            #timeout: timeout,
-          },
+          #writeCharacteristicWithResponse,
+          [characteristic],
+          {#value: value},
         ),
-        returnValue: _i4.Future<List<_i3.BluetoothService>>.value(
-            <_i3.BluetoothService>[]),
-      ) as _i4.Future<List<_i3.BluetoothService>>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i4.Future<int> readRssi({int? timeout = 15}) => (super.noSuchMethod(
+  _i4.Future<void> writeCharacteristicWithoutResponse(
+    _i5.QualifiedCharacteristic? characteristic, {
+    required List<int>? value,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #readRssi,
-          [],
-          {#timeout: timeout},
+          #writeCharacteristicWithoutResponse,
+          [characteristic],
+          {#value: value},
         ),
-        returnValue: _i4.Future<int>.value(0),
-      ) as _i4.Future<int>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i4.Future<int> requestMtu(
-    int? desiredMtu, {
-    double? predelay = 0.35,
-    int? timeout = 15,
+  _i4.Future<int> requestMtu({
+    required String? deviceId,
+    required int? mtu,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #requestMtu,
-          [desiredMtu],
+          [],
           {
-            #predelay: predelay,
-            #timeout: timeout,
+            #deviceId: deviceId,
+            #mtu: mtu,
           },
         ),
         returnValue: _i4.Future<int>.value(0),
       ) as _i4.Future<int>);
 
   @override
-  _i4.Future<void> requestConnectionPriority(
-          {required _i3.ConnectionPriority? connectionPriorityRequest}) =>
+  _i4.Future<void> requestConnectionPriority({
+    required String? deviceId,
+    required _i5.ConnectionPriority? priority,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #requestConnectionPriority,
           [],
-          {#connectionPriorityRequest: connectionPriorityRequest},
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-
-  @override
-  _i4.Future<void> setPreferredPhy({
-    required int? txPhy,
-    required int? rxPhy,
-    required _i3.PhyCoding? option,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setPreferredPhy,
-          [],
           {
-            #txPhy: txPhy,
-            #rxPhy: rxPhy,
-            #option: option,
+            #deviceId: deviceId,
+            #priority: priority,
           },
         ),
         returnValue: _i4.Future<void>.value(),
@@ -521,51 +204,155 @@ class MockBluetoothDevice extends _i1.Mock implements _i3.BluetoothDevice {
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> createBond({
-    int? timeout = 90,
-    _i6.Uint8List? pin,
+  _i4.Stream<_i5.DiscoveredDevice> scanForDevices({
+    required List<_i5.Uuid>? withServices,
+    _i5.ScanMode? scanMode = _i5.ScanMode.balanced,
+    bool? requireLocationServicesEnabled = true,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #createBond,
+          #scanForDevices,
           [],
           {
-            #timeout: timeout,
-            #pin: pin,
+            #withServices: withServices,
+            #scanMode: scanMode,
+            #requireLocationServicesEnabled: requireLocationServicesEnabled,
           },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Stream<_i5.DiscoveredDevice>.empty(),
+      ) as _i4.Stream<_i5.DiscoveredDevice>);
 
   @override
-  _i4.Future<void> removeBond({int? timeout = 30}) => (super.noSuchMethod(
+  _i4.Stream<_i5.ConnectionStateUpdate> connectToDevice({
+    required String? id,
+    Map<_i5.Uuid, List<_i5.Uuid>>? servicesWithCharacteristicsToDiscover,
+    Duration? connectionTimeout,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #removeBond,
+          #connectToDevice,
           [],
-          {#timeout: timeout},
+          {
+            #id: id,
+            #servicesWithCharacteristicsToDiscover:
+                servicesWithCharacteristicsToDiscover,
+            #connectionTimeout: connectionTimeout,
+          },
+        ),
+        returnValue: _i4.Stream<_i5.ConnectionStateUpdate>.empty(),
+      ) as _i4.Stream<_i5.ConnectionStateUpdate>);
+
+  @override
+  _i4.Stream<_i5.ConnectionStateUpdate> connectToAdvertisingDevice({
+    required String? id,
+    required List<_i5.Uuid>? withServices,
+    required Duration? prescanDuration,
+    Map<_i5.Uuid, List<_i5.Uuid>>? servicesWithCharacteristicsToDiscover,
+    Duration? connectionTimeout,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #connectToAdvertisingDevice,
+          [],
+          {
+            #id: id,
+            #withServices: withServices,
+            #prescanDuration: prescanDuration,
+            #servicesWithCharacteristicsToDiscover:
+                servicesWithCharacteristicsToDiscover,
+            #connectionTimeout: connectionTimeout,
+          },
+        ),
+        returnValue: _i4.Stream<_i5.ConnectionStateUpdate>.empty(),
+      ) as _i4.Stream<_i5.ConnectionStateUpdate>);
+
+  @override
+  _i4.Future<List<_i5.DiscoveredService>> discoverServices(String? deviceId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #discoverServices,
+          [deviceId],
+        ),
+        returnValue: _i4.Future<List<_i5.DiscoveredService>>.value(
+            <_i5.DiscoveredService>[]),
+      ) as _i4.Future<List<_i5.DiscoveredService>>);
+
+  @override
+  _i4.Future<void> discoverAllServices(String? deviceId) => (super.noSuchMethod(
+        Invocation.method(
+          #discoverAllServices,
+          [deviceId],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> clearGattCache() => (super.noSuchMethod(
+  _i4.Future<List<_i3.Service>> getDiscoveredServices(String? deviceId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDiscoveredServices,
+          [deviceId],
+        ),
+        returnValue: _i4.Future<List<_i3.Service>>.value(<_i3.Service>[]),
+      ) as _i4.Future<List<_i3.Service>>);
+
+  @override
+  _i4.Future<void> clearGattCache(String? deviceId) => (super.noSuchMethod(
         Invocation.method(
           #clearGattCache,
-          [],
+          [deviceId],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> pair() => (super.noSuchMethod(
+  _i4.Future<int> readRssi(String? deviceId) => (super.noSuchMethod(
         Invocation.method(
-          #pair,
-          [],
+          #readRssi,
+          [deviceId],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
+
+  @override
+  _i4.Stream<List<int>> subscribeToCharacteristic(
+          _i5.QualifiedCharacteristic? characteristic) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #subscribeToCharacteristic,
+          [characteristic],
+        ),
+        returnValue: _i4.Stream<List<int>>.empty(),
+      ) as _i4.Stream<List<int>>);
+
+  @override
+  _i4.Future<Iterable<_i3.Characteristic>> resolve(
+          _i5.QualifiedCharacteristic? characteristic) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #resolve,
+          [characteristic],
+        ),
+        returnValue: _i4.Future<Iterable<_i3.Characteristic>>.value(
+            <_i3.Characteristic>[]),
+      ) as _i4.Future<Iterable<_i3.Characteristic>>);
+
+  @override
+  _i4.Future<_i3.Characteristic> resolveSingle(
+          _i5.QualifiedCharacteristic? characteristic) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #resolveSingle,
+          [characteristic],
+        ),
+        returnValue: _i4.Future<_i3.Characteristic>.value(_FakeCharacteristic_1(
+          this,
+          Invocation.method(
+            #resolveSingle,
+            [characteristic],
+          ),
+        )),
+      ) as _i4.Future<_i3.Characteristic>);
 }

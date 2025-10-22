@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'ble_characteristics.dart';
 import 'mesh_radio.dart';
@@ -67,11 +66,10 @@ class BleConnected extends Connected<BleMeshRadio> {
   });
 
   final BleCharacteristics bleCharacteristics;
-  BluetoothDevice get device => radio.device;
 
   @override
   String toString() {
-    return 'BleConnected{${device.advName} $radioId}';
+    return 'BleConnected{${radio.device.name} $radioId}';
   }
 }
 

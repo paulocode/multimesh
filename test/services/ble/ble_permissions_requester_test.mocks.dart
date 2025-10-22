@@ -3,14 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i5;
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart' as _i2;
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
-import 'package:multimesh/services/wrap/flutter_blue_plus_mockable.dart' as _i5;
+import 'package:mockito/src/dummies.dart' as _i3;
+import 'package:multimesh/services/wrap/flutter_blue_plus_mockable.dart' as _i4;
 import 'package:multimesh/services/wrap/permissions.dart' as _i7;
-import 'package:platform/platform.dart' as _i3;
+import 'package:platform/platform.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,20 +36,10 @@ class _FakeUri_0 extends _i1.SmartFake implements Uri {
         );
 }
 
-class _FakePhySupport_1 extends _i1.SmartFake implements _i2.PhySupport {
-  _FakePhySupport_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [LocalPlatform].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
+class MockLocalPlatform extends _i1.Mock implements _i2.LocalPlatform {
   MockLocalPlatform() {
     _i1.throwOnMissingStub(this);
   }
@@ -63,7 +53,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get pathSeparator => (super.noSuchMethod(
         Invocation.getter(#pathSeparator),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#pathSeparator),
         ),
@@ -72,7 +62,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get operatingSystem => (super.noSuchMethod(
         Invocation.getter(#operatingSystem),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#operatingSystem),
         ),
@@ -81,7 +71,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get operatingSystemVersion => (super.noSuchMethod(
         Invocation.getter(#operatingSystemVersion),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#operatingSystemVersion),
         ),
@@ -90,7 +80,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get localHostname => (super.noSuchMethod(
         Invocation.getter(#localHostname),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#localHostname),
         ),
@@ -105,7 +95,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get executable => (super.noSuchMethod(
         Invocation.getter(#executable),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#executable),
         ),
@@ -114,7 +104,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get resolvedExecutable => (super.noSuchMethod(
         Invocation.getter(#resolvedExecutable),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#resolvedExecutable),
         ),
@@ -138,7 +128,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get version => (super.noSuchMethod(
         Invocation.getter(#version),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#version),
         ),
@@ -159,7 +149,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
   @override
   String get localeName => (super.noSuchMethod(
         Invocation.getter(#localeName),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.getter(#localeName),
         ),
@@ -207,7 +197,7 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
           #toJson,
           [],
         ),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i3.dummyValue<String>(
           this,
           Invocation.method(
             #toJson,
@@ -221,22 +211,22 @@ class MockLocalPlatform extends _i1.Mock implements _i3.LocalPlatform {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFlutterBluePlusMockable extends _i1.Mock
-    implements _i5.FlutterBluePlusMockable {
+    implements _i4.FlutterBluePlusMockable {
   MockFlutterBluePlusMockable() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Stream<_i2.BluetoothAdapterState> get adapterState => (super.noSuchMethod(
+  _i5.Stream<_i6.BleStatus> get adapterState => (super.noSuchMethod(
         Invocation.getter(#adapterState),
-        returnValue: _i6.Stream<_i2.BluetoothAdapterState>.empty(),
-      ) as _i6.Stream<_i2.BluetoothAdapterState>);
+        returnValue: _i5.Stream<_i6.BleStatus>.empty(),
+      ) as _i5.Stream<_i6.BleStatus>);
 
   @override
-  _i6.Stream<List<_i2.ScanResult>> get scanResults => (super.noSuchMethod(
+  _i5.Stream<List<_i6.DiscoveredDevice>> get scanResults => (super.noSuchMethod(
         Invocation.getter(#scanResults),
-        returnValue: _i6.Stream<List<_i2.ScanResult>>.empty(),
-      ) as _i6.Stream<List<_i2.ScanResult>>);
+        returnValue: _i5.Stream<List<_i6.DiscoveredDevice>>.empty(),
+      ) as _i5.Stream<List<_i6.DiscoveredDevice>>);
 
   @override
   bool get isScanningNow => (super.noSuchMethod(
@@ -245,57 +235,49 @@ class MockFlutterBluePlusMockable extends _i1.Mock
       ) as bool);
 
   @override
-  _i6.Stream<bool> get isScanning => (super.noSuchMethod(
+  _i5.Stream<bool> get isScanning => (super.noSuchMethod(
         Invocation.getter(#isScanning),
-        returnValue: _i6.Stream<bool>.empty(),
-      ) as _i6.Stream<bool>);
+        returnValue: _i5.Stream<bool>.empty(),
+      ) as _i5.Stream<bool>);
 
   @override
-  _i2.LogLevel get logLevel => (super.noSuchMethod(
-        Invocation.getter(#logLevel),
-        returnValue: _i2.LogLevel.none,
-      ) as _i2.LogLevel);
-
-  @override
-  _i6.Future<bool> get isSupported => (super.noSuchMethod(
+  _i5.Future<bool> get isSupported => (super.noSuchMethod(
         Invocation.getter(#isSupported),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
-  _i6.Future<String> get adapterName => (super.noSuchMethod(
+  _i5.Future<String> get adapterName => (super.noSuchMethod(
         Invocation.getter(#adapterName),
-        returnValue: _i6.Future<String>.value(_i4.dummyValue<String>(
+        returnValue: _i5.Future<String>.value(_i3.dummyValue<String>(
           this,
           Invocation.getter(#adapterName),
         )),
-      ) as _i6.Future<String>);
+      ) as _i5.Future<String>);
 
   @override
-  List<_i2.BluetoothDevice> get connectedDevices => (super.noSuchMethod(
+  List<String> get connectedDevices => (super.noSuchMethod(
         Invocation.getter(#connectedDevices),
-        returnValue: <_i2.BluetoothDevice>[],
-      ) as List<_i2.BluetoothDevice>);
+        returnValue: <String>[],
+      ) as List<String>);
 
   @override
-  _i6.Future<List<_i2.BluetoothDevice>> get systemDevices =>
+  _i5.Future<List<_i6.DiscoveredDevice>> get systemDevices =>
       (super.noSuchMethod(
         Invocation.getter(#systemDevices),
-        returnValue: _i6.Future<List<_i2.BluetoothDevice>>.value(
-            <_i2.BluetoothDevice>[]),
-      ) as _i6.Future<List<_i2.BluetoothDevice>>);
+        returnValue: _i5.Future<List<_i6.DiscoveredDevice>>.value(
+            <_i6.DiscoveredDevice>[]),
+      ) as _i5.Future<List<_i6.DiscoveredDevice>>);
 
   @override
-  _i6.Future<List<_i2.BluetoothDevice>> get bondedDevices =>
-      (super.noSuchMethod(
+  _i5.Future<List<String>> get bondedDevices => (super.noSuchMethod(
         Invocation.getter(#bondedDevices),
-        returnValue: _i6.Future<List<_i2.BluetoothDevice>>.value(
-            <_i2.BluetoothDevice>[]),
-      ) as _i6.Future<List<_i2.BluetoothDevice>>);
+        returnValue: _i5.Future<List<String>>.value(<String>[]),
+      ) as _i5.Future<List<String>>);
 
   @override
-  _i6.Future<void> startScan({
-    List<_i2.Guid>? withServices = const [],
+  _i5.Future<void> startScan({
+    List<_i6.Uuid>? withServices = const [],
     Duration? timeout,
     Duration? removeIfGone,
     bool? oneByOne = false,
@@ -313,67 +295,141 @@ class MockFlutterBluePlusMockable extends _i1.Mock
             #androidUsesFineLocation: androidUsesFineLocation,
           },
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i6.Future<void> stopScan() => (super.noSuchMethod(
+  _i5.Future<void> stopScan() => (super.noSuchMethod(
         Invocation.method(
           #stopScan,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void setLogLevel(
-    _i2.LogLevel? level, {
-    bool? color = true,
+  _i5.Stream<_i6.ConnectionStateUpdate> connectToDevice({
+    required String? id,
+    Duration? timeout,
   }) =>
-      super.noSuchMethod(
+      (super.noSuchMethod(
         Invocation.method(
-          #setLogLevel,
-          [level],
-          {#color: color},
+          #connectToDevice,
+          [],
+          {
+            #id: id,
+            #timeout: timeout,
+          },
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i5.Stream<_i6.ConnectionStateUpdate>.empty(),
+      ) as _i5.Stream<_i6.ConnectionStateUpdate>);
 
   @override
-  _i6.Future<void> turnOn({int? timeout = 60}) => (super.noSuchMethod(
+  _i5.Future<void> disconnectDevice(String? deviceId) => (super.noSuchMethod(
+        Invocation.method(
+          #disconnectDevice,
+          [deviceId],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<List<_i6.DiscoveredService>> discoverServices(String? deviceId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #discoverServices,
+          [deviceId],
+        ),
+        returnValue: _i5.Future<List<_i6.DiscoveredService>>.value(
+            <_i6.DiscoveredService>[]),
+      ) as _i5.Future<List<_i6.DiscoveredService>>);
+
+  @override
+  _i5.Stream<List<int>> subscribeToCharacteristic(
+          _i6.QualifiedCharacteristic? characteristic) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #subscribeToCharacteristic,
+          [characteristic],
+        ),
+        returnValue: _i5.Stream<List<int>>.empty(),
+      ) as _i5.Stream<List<int>>);
+
+  @override
+  _i5.Future<void> writeCharacteristicWithResponse(
+    _i6.QualifiedCharacteristic? characteristic,
+    List<int>? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeCharacteristicWithResponse,
+          [
+            characteristic,
+            value,
+          ],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> writeCharacteristicWithoutResponse(
+    _i6.QualifiedCharacteristic? characteristic,
+    List<int>? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeCharacteristicWithoutResponse,
+          [
+            characteristic,
+            value,
+          ],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<List<int>> readCharacteristic(
+          _i6.QualifiedCharacteristic? characteristic) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #readCharacteristic,
+          [characteristic],
+        ),
+        returnValue: _i5.Future<List<int>>.value(<int>[]),
+      ) as _i5.Future<List<int>>);
+
+  @override
+  _i5.Future<void> turnOn({int? timeout = 60}) => (super.noSuchMethod(
         Invocation.method(
           #turnOn,
           [],
           {#timeout: timeout},
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
-
-  @override
-  _i6.Future<_i2.PhySupport> getPhySupport() => (super.noSuchMethod(
-        Invocation.method(
-          #getPhySupport,
-          [],
-        ),
-        returnValue: _i6.Future<_i2.PhySupport>.value(_FakePhySupport_1(
-          this,
-          Invocation.method(
-            #getPhySupport,
-            [],
-          ),
-        )),
-      ) as _i6.Future<_i2.PhySupport>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   void cancelWhenScanComplete(
-          _i6.StreamSubscription<List<_i2.ScanResult>>? subscription) =>
+          _i5.StreamSubscription<List<_i6.DiscoveredDevice>>? subscription) =>
       super.noSuchMethod(
         Invocation.method(
           #cancelWhenScanComplete,
           [subscription],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
         ),
         returnValueForMissingStub: null,
       );
@@ -388,12 +444,12 @@ class MockPermissions extends _i1.Mock implements _i7.Permissions {
   }
 
   @override
-  _i6.Future<void> locationWhenInUseRequest() => (super.noSuchMethod(
+  _i5.Future<void> locationWhenInUseRequest() => (super.noSuchMethod(
         Invocation.method(
           #locationWhenInUseRequest,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

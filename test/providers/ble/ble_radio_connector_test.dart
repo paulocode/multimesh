@@ -18,14 +18,14 @@ import 'package:test/test.dart';
 import '../../common.dart';
 import 'ble_radio_connector_test.mocks.dart';
 
-@GenerateMocks(
-  [
-    BluetoothDevice,
-    LocalPlatform,
-    BleCharacteristicsFinder,
-    BleCharacteristics,
-  ],
-)
+// @GenerateMocks(
+//   [
+//     BluetoothDevice,
+//     LocalPlatform,
+//     BleCharacteristicsFinder,
+//     BleCharacteristics,
+//   ],
+// )
 void main() {
   late ProviderContainer container;
   late MockBluetoothDevice device;

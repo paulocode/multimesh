@@ -52,4 +52,4 @@ final class RadioConfigUploaderServiceProvider extends $FunctionalProvider<
 }
 
 String _$radioConfigUploaderServiceHash() =>
-    r'0745fcd74b46bcb69844809cdd7ea3eb6af36762';
+    r'b8754f0b61f8f9c642b31f152bb3d5a8d5651aeb';

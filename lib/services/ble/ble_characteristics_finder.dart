@@ -1,32 +1,52 @@
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 
 import '../../constants/ble_constants.dart';
 import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/ble_characteristics.dart';
 
 class BleCharacteristicsFinder {
-  Future<BleCharacteristics> findCharacteristics(BluetoothDevice device) async {
-    final services = await device.discoverServices();
+  BleCharacteristicsFinder(this._ble);
+
+  final FlutterReactiveBle _ble;
+
+  Future<BleCharacteristics> findCharacteristics(String deviceId) async {
+    final services = await _ble.discoverServices(deviceId);
     final service = services.firstWhere(
-      (element) => element.uuid.str == MESHTASTIC_BLE_SERVICE,
+      (element) => element.serviceId.toString().toLowerCase() ==
+          MESHTASTIC_BLE_SERVICE.toLowerCase(),
       orElse: () =>
           throw const MeshRadioException(msg: 'Not a Meshtastic device'),
     );
 
-    final toRadio = service.characteristics.firstWhere(
-      (element) => element.uuid.str == MESHTASTIC_TORADIO_CHARACTERISTIC,
+    final toRadioId = service.characteristics.firstWhere(
+      (element) => element.characteristicId.toString().toLowerCase() ==
+          MESHTASTIC_TORADIO_CHARACTERISTIC.toLowerCase(),
     );
-    final fromRadio = service.characteristics.firstWhere(
-      (element) => element.uuid.str == MESHTASTIC_FROMRADIO_CHARACTERISTIC,
+    final fromRadioId = service.characteristics.firstWhere(
+      (element) => element.characteristicId.toString().toLowerCase() ==
+          MESHTASTIC_FROMRADIO_CHARACTERISTIC.toLowerCase(),
     );
-    final fromNum = service.characteristics.firstWhere(
-      (element) => element.uuid.str == MESHTASTIC_FROMNUM_CHARACTERISTIC,
+    final fromNumId = service.characteristics.firstWhere(
+      (element) => element.characteristicId.toString().toLowerCase() ==
+          MESHTASTIC_FROMNUM_CHARACTERISTIC.toLowerCase(),
     );
 
     return BleCharacteristics(
-      toRadio: toRadio,
-      fromRadio: fromRadio,
-      fromNum: fromNum,
+      toRadio: QualifiedCharacteristic(
+        serviceId: service.serviceId,
+        characteristicId: toRadioId.characteristicId,
+        deviceId: deviceId,
+      ),
+      fromRadio: QualifiedCharacteristic(
+        serviceId: service.serviceId,
+        characteristicId: fromRadioId.characteristicId,
+        deviceId: deviceId,
+      ),
+      fromNum: QualifiedCharacteristic(
+        serviceId: service.serviceId,
+        characteristicId: fromNumId.characteristicId,
+        deviceId: deviceId,
+      ),
     );
   }
 }

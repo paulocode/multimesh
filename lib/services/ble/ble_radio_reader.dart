@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' hide Logger;
 import 'package:logger/logger.dart';
 
 import '../../models/radio_connector_state.dart';
@@ -10,23 +11,25 @@ class BleRadioReader implements RadioReader, ForceReadableRadioReader {
   BleRadioReader({
     required RadioConnectorState radioConnectorState,
     required void Function(void Function() cb) onDispose,
-  }) : _radioConnectorState = radioConnectorState {
+    required FlutterReactiveBle ble,
+  })  : _radioConnectorState = radioConnectorState,
+        _ble = ble {
     if (_radioConnectorState is! BleConnected) {
       return;
     }
 
     final fromNum = _radioConnectorState.bleCharacteristics.fromNum;
-    final subscription = fromNum.onValueReceived.listen((event) async {
+    final subscription = _ble.subscribeToCharacteristic(fromNum).listen((event) async {
       await _readUntilEmpty();
     });
 
     onDispose(subscription.cancel);
     onDispose(_packetStreamController.close);
-    fromNum.setNotifyValue(true);
   }
 
   var _isRunningReadLoop = false;
   final RadioConnectorState _radioConnectorState;
+  final FlutterReactiveBle _ble;
   final _logger = Logger();
   final _packetStreamController = StreamController<FromRadio>.broadcast();
 
@@ -49,7 +52,9 @@ class BleRadioReader implements RadioReader, ForceReadableRadioReader {
     try {
       var read = <int>[];
       do {
-        read = await _radioConnectorState.bleCharacteristics.fromRadio.read();
+        read = await _ble.readCharacteristic(
+          _radioConnectorState.bleCharacteristics.fromRadio,
+        );
         final fromRadioPacket = FromRadio.fromBuffer(read);
         _logger.i(fromRadioPacket);
         if (read.isNotEmpty) {

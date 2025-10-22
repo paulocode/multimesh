@@ -68,7 +68,7 @@ final class NodeSearchProvider extends $FunctionalProvider<Map<int, MeshNode>,
   }
 }
 
-String _$nodeSearchHash() => r'573a10d5de2179f9f95b0c4cb1993b7610c14009';
+String _$nodeSearchHash() => r'5d851582d1291bc2e9bcec48a2c4625fb703dd61';
 
 final class NodeSearchFamily extends $Family
     with $FunctionalFamilyOverride<Map<int, MeshNode>, String> {

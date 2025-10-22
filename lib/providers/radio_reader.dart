@@ -1,3 +1,4 @@
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/radio_connector_state.dart';
@@ -26,6 +27,7 @@ RadioReader radioReader(Ref ref) {
       return BleRadioReader(
         radioConnectorState: sub.read(),
         onDispose: ref.onDispose,
+        ble: FlutterReactiveBle(),
       );
     case TcpConnected():
       return TcpRadioReader(

@@ -42,7 +42,7 @@ final class RadioConnectorServiceProvider
 }
 
 String _$radioConnectorServiceHash() =>
-    r'4af18c4b66bb783995a15427f26c88e42bd0587b';
+    r'ecb9046da3a7733c515399ac8691afb6d869d108';
 
 abstract class _$RadioConnectorService extends $Notifier<RadioConnectorState> {
   RadioConnectorState build();

@@ -51,4 +51,4 @@ final class BlePermissionsRequesterProvider extends $FunctionalProvider<
 }
 
 String _$blePermissionsRequesterHash() =>
-    r'07fc3cc08fa359caf4ae3df64729884778ef06fe';
+    r'47744d8d652dd8d241b82d59d6fd4838c6555ed1';

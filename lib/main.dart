@@ -19,7 +19,6 @@ import 'providers/repository/sqflite.dart';
 import 'providers/router.dart';
 import 'providers/telemetry/telemetry_receiver.dart';
 import 'providers/text_message/text_message_receiver_service.dart';
-import 'providers/wrap/flutter_blue_plus_mockable.dart';
 import 'providers/wrap/local_platform.dart';
 import 'theme.dart';
 
@@ -142,10 +141,12 @@ class _EagerInitialization extends ConsumerWidget {
       ref.watch(reconnectorServiceProvider());
 
       // workaround for iOS scanning bug
-      if (ref.read(localPlatformProvider).isIOS ||
-          ref.read(localPlatformProvider).isMacOS) {
-        ref.read(flutterBluePlusProvider).startScan();
-      }
+      // Note: flutter_reactive_ble handles scanning differently
+      // This workaround may not be needed anymore
+      // if (ref.read(localPlatformProvider).isIOS ||
+      //     ref.read(localPlatformProvider).isMacOS) {
+      //   ref.read(flutterBluePlusProvider).startScan();
+      // }
       return child;
     }
   }

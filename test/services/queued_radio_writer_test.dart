@@ -15,12 +15,12 @@ import 'package:multimesh/services/interfaces/radio_writer.dart';
 import '../mock_stream.dart';
 import 'queued_radio_writer_test.mocks.dart';
 
-@GenerateMocks([
-  BluetoothCharacteristic,
-  BluetoothDevice,
-  RadioReader,
-  RadioWriter,
-])
+// @GenerateMocks([
+//   BluetoothCharacteristic,
+//   BluetoothDevice,
+//   RadioReader,
+//   RadioWriter,
+// ])
 void main() {
   late MockRadioWriter radioWriter;
   late AckWaitingRadioWriter queuedRadioWriter;

@@ -41,7 +41,7 @@ final class BleRadioScannerProvider
   }
 }
 
-String _$bleRadioScannerHash() => r'fc430734b236a903c4b282041ba5b16eaa671e10';
+String _$bleRadioScannerHash() => r'16c55192d2eff776bcbad6f699f4c457987f8e72';
 
 abstract class _$BleRadioScanner extends $Notifier<RadioScanState> {
   RadioScanState build();

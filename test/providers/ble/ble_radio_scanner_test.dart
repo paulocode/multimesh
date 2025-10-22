@@ -16,13 +16,13 @@ import '../../common.dart';
 import '../../mock_stream.dart';
 import 'ble_radio_scanner_test.mocks.dart';
 
-@GenerateMocks([
-  FlutterBluePlusMockable,
-  BlePermissionsRequester,
-  BluetoothDevice,
-  ScanResult,
-  AdvertisementData,
-])
+// @GenerateMocks([
+//   FlutterBluePlusMockable,
+//   BlePermissionsRequester,
+//   BluetoothDevice,
+//   ScanResult,
+//   AdvertisementData,
+// ])
 void main() {
   late ProviderContainer container;
   late MockFlutterBluePlusMockable flutterBluePlus;

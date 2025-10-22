@@ -6,12 +6,12 @@
 import 'dart:async' as _i5;
 import 'dart:io' as _i2;
 
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:multimesh/models/mesh_radio.dart' as _i3;
 import 'package:multimesh/models/radio_connector_state.dart' as _i4;
 import 'package:multimesh/providers/radio_connector_service.dart' as _i7;
-import 'package:riverpod_annotation/riverpod_annotation.dart' as _i8;
 import 'package:state_notifier/state_notifier.dart' as _i9;
 
 // ignore_for_file: type=lint

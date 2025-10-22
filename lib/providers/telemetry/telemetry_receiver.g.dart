@@ -50,4 +50,4 @@ final class TelemetryReceiverProvider extends $FunctionalProvider<
   }
 }
 
-String _$telemetryReceiverHash() => r'18e77b76782e4912d8927572eae3e3b6950c8c6e';
+String _$telemetryReceiverHash() => r'b0676085a3c318a2d361c54d7c2dcbe6a223bee5';

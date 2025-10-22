@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart' hide ConnectionError, Logger;
 import 'package:logger/logger.dart';
 import 'package:mockito/mockito.dart';
 import 'package:platform/platform.dart';
@@ -8,9 +8,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../exceptions/mesh_radio_exception.dart';
 import '../../models/mesh_radio.dart';
-import '../../models/radio_connector_state.dart';
+import '../../models/radio_connector_state.dart' as connector_state;
 import '../../services/ble/ble_characteristics_finder.dart';
 import '../../services/interfaces/radio_connector.dart';
+import '../../services/wrap/flutter_blue_plus_mockable.dart';
+import '../wrap/flutter_blue_plus_mockable.dart';
 import '../wrap/local_platform.dart';
 import 'ble_characteristics_finder.dart';
 
@@ -22,13 +24,15 @@ class BleRadioConnector extends _$BleRadioConnector
   final _logger = Logger();
   late BleCharacteristicsFinder _bleCharacteristicsFinder;
   late LocalPlatform _localPlatform;
-  StreamSubscription<BluetoothConnectionState>? _bleConnectSubscription;
+  late FlutterBluePlusMockable _flutterBluePlus;
+  StreamSubscription<ConnectionStateUpdate>? _bleConnectSubscription;
 
   @override
-  RadioConnectorState build() {
+  connector_state.RadioConnectorState build() {
     _bleCharacteristicsFinder = ref.watch(bleCharacteristicsFinderProvider);
     _localPlatform = ref.watch(localPlatformProvider);
-    return Disconnected();
+    _flutterBluePlus = ref.watch(flutterBluePlusProvider);
+    return connector_state.Disconnected();
   }
 
   @override
@@ -36,56 +40,63 @@ class BleRadioConnector extends _$BleRadioConnector
     if (errorMsg != null) {
       _logger.e(errorMsg);
     }
-    if (state is! BleConnected) {
+    if (state is! connector_state.BleConnected) {
       return;
     }
-    final device = (state as BleConnected).device;
-    await device.disconnect();
-    state = Disconnected(errorMsg: errorMsg);
+    final deviceId = (state as connector_state.BleConnected).radio.remoteId;
+    await _flutterBluePlus.disconnectDevice(deviceId);
+    state = connector_state.Disconnected(errorMsg: errorMsg);
     await _bleConnectSubscription?.cancel();
   }
 
   @override
   Future<void> connect(BleMeshRadio radio) async {
-    if (state is Connecting) {
+    if (state is connector_state.Connecting) {
       return;
     }
 
     final device = radio.device;
 
-    state = Connecting(
+    state = connector_state.Connecting(
       radio: radio,
     );
 
     try {
-      await device.connect(
-        license: License.free,
+      final connectionStream = _flutterBluePlus.connectToDevice(
+        id: device.id,
+        timeout: const Duration(seconds: 30),
       );
-      if (_localPlatform.isAndroid) {
-        await device.createBond();
+
+      await for (final connectionState in connectionStream) {
+        if (connectionState.connectionState == DeviceConnectionState.connected) {
+          state = connector_state.BleConnected(
+            radio: radio,
+            bleCharacteristics:
+                await _bleCharacteristicsFinder.findCharacteristics(device.id),
+          );
+
+          await _subscribeConnectionState(device.id);
+          break;
+        } else if (connectionState.connectionState == DeviceConnectionState.disconnected) {
+          if (connectionState.failure != null) {
+            throw MeshRadioException(msg: connectionState.failure.toString());
+          }
+        }
       }
-
-      state = BleConnected(
-        radio: radio,
-        bleCharacteristics:
-            await _bleCharacteristicsFinder.findCharacteristics(device),
-      );
-
-      await _subscribeConnectionState(device);
     } on MeshRadioException catch (e) {
-      state = ConnectionError(msg: e.msg, radio: radio);
-    } on FlutterBluePlusException catch (e) {
-      state = ConnectionError(msg: e.description, radio: radio);
+      state = connector_state.ConnectionError(msg: e.msg, radio: radio);
     } catch (e) {
-      state = ConnectionError(msg: 'Unknown error', radio: radio);
+      state = connector_state.ConnectionError(msg: e.toString(), radio: radio);
     }
   }
 
-  Future<void> _subscribeConnectionState(BluetoothDevice device) async {
+  Future<void> _subscribeConnectionState(String deviceId) async {
     await _bleConnectSubscription?.cancel();
-    _bleConnectSubscription = device.connectionState.listen((event) {
-      if (event == BluetoothConnectionState.disconnected) {
-        state = Disconnected();
+    _bleConnectSubscription = _flutterBluePlus.connectToDevice(
+      id: deviceId,
+    ).listen((event) {
+      if (event.connectionState == DeviceConnectionState.disconnected) {
+        state = connector_state.Disconnected();
         _bleConnectSubscription?.cancel();
       }
     });

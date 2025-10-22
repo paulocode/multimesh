@@ -1,33 +1,26 @@
 import 'package:logger/logger.dart';
-import 'package:platform/platform.dart';
 
-import '../wrap/flutter_blue_plus_mockable.dart';
 import '../wrap/permissions.dart';
 
 class BlePermissionsRequester {
   BlePermissionsRequester({
-    required LocalPlatform localPlatform,
-    required FlutterBluePlusMockable flutterBluePlus,
     required Permissions permissions,
-  })  : _localPlatform = localPlatform,
-        _flutterBluePlus = flutterBluePlus,
-        _permissions = permissions;
+  })  : _permissions = permissions;
 
-  final LocalPlatform _localPlatform;
-  final FlutterBluePlusMockable _flutterBluePlus;
   final Permissions _permissions;
   final _logger = Logger();
 
   Future<bool> request() async {
-    await _permissions.locationWhenInUseRequest();
-    if (_localPlatform.isAndroid) {
-      try {
-        await _flutterBluePlus.turnOn();
-      } catch (e) {
-        _logger.e(e);
-        return false;
-      }
+    // Request all necessary Bluetooth and location permissions
+    final granted = await _permissions.requestBluetoothPermissions();
+    
+    if (!granted) {
+      _logger.w('Bluetooth permissions not granted');
+      return false;
     }
+    
+    // Note: flutter_reactive_ble doesn't support programmatic BLE turnOn
+    // User must enable Bluetooth manually from device settings
     return true;
   }
 }

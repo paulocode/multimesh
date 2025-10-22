@@ -50,4 +50,4 @@ final class FlutterBluePlusProvider extends $FunctionalProvider<
   }
 }
 
-String _$flutterBluePlusHash() => r'1226eabf0f75127e6a49ca2b2c15529146b1a1bd';
+String _$flutterBluePlusHash() => r'915f90c442a65155d1ddcf3e4ad5a0974dd26713';

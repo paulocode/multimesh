@@ -51,4 +51,4 @@ final class BleCharacteristicsFinderProvider extends $FunctionalProvider<
 }
 
 String _$bleCharacteristicsFinderHash() =>
-    r'd59818a8ba370f3968e470d134bd16671f8f4a81';
+    r'fb5b43b9141198dfd279c95e5611a096cb636c3c';

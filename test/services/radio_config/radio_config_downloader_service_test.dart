@@ -17,17 +17,17 @@ import 'package:multimesh/services/radio_config/radio_config_downloader_service.
 import '../../mock_stream.dart';
 import 'radio_config_downloader_service_test.mocks.dart';
 
-@GenerateMocks([
-  AckWaitingRadioWriter,
-  RadioReader,
-  RadioConfigDownloaderService,
-  RadioConfigService,
-  BluetoothCharacteristic,
-  BluetoothDevice,
-  BleConnected,
-  Disconnected,
-  RadioConnectorService,
-])
+// @GenerateMocks([
+//   AckWaitingRadioWriter,
+//   RadioReader,
+//   RadioConfigDownloaderService,
+//   RadioConfigService,
+//   BluetoothCharacteristic,
+//   BluetoothDevice,
+//   BleConnected,
+//   Disconnected,
+//   RadioConnectorService,
+// ])
 void main() {
   late MockRadioConfigService radioConfigService;
   late MockAckWaitingRadioWriter radioWriter;

@@ -17,15 +17,15 @@ import '../common.dart';
 import '../mock_stream.dart';
 import 'radio_connector_service_test.mocks.dart';
 
-@GenerateMocks(
-  [
-    TcpRadioConnector,
-    BleRadioConnector,
-    BluetoothDevice,
-    Socket,
-    BreadcrumbLogger,
-  ],
-)
+// @GenerateMocks(
+//   [
+//     TcpRadioConnector,
+//     BleRadioConnector,
+//     BluetoothDevice,
+//     Socket,
+//     BreadcrumbLogger,
+//   ],
+// )
 void main() {
   late ProviderContainer container;
   late RadioConnectorService radioConnectorService;

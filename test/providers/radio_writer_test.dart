@@ -18,9 +18,9 @@ import '../common.dart';
 import '../mock_stream.dart';
 import 'radio_writer_test.mocks.dart';
 
-@GenerateMocks(
-  [BluetoothCharacteristic, Socket, BleConnected, BleCharacteristics],
-)
+// @GenerateMocks(
+//   [BluetoothCharacteristic, Socket, BleConnected, BleCharacteristics],
+// )
 void main() {
   late ProviderContainer container;
 
