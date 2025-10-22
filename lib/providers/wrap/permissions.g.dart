@@ -48,4 +48,4 @@ final class PermissionsProvider
   }
 }
 
-String _$permissionsHash() => r'5f3f178de6159d8a7a8398d1ac3cfa20ca128d6c';
+String _$permissionsHash() => r'd3f02da0ee55d03d5f8801da7384495f14dda1b1';

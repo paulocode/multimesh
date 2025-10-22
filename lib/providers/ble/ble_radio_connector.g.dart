@@ -42,7 +42,7 @@ final class BleRadioConnectorProvider extends $NotifierProvider<
   }
 }
 
-String _$bleRadioConnectorHash() => r'2200d59ce3892a57b24f0845c59df6e5bb221bef';
+String _$bleRadioConnectorHash() => r'cef96578125e56138afa4195c865e40f7dead194';
 
 abstract class _$BleRadioConnector
     extends $Notifier<connector_state.RadioConnectorState> {

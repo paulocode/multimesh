@@ -444,12 +444,20 @@ class MockPermissions extends _i1.Mock implements _i7.Permissions {
   }
 
   @override
-  _i5.Future<void> locationWhenInUseRequest() => (super.noSuchMethod(
+  _i5.Future<bool> locationWhenInUseRequest() => (super.noSuchMethod(
         Invocation.method(
           #locationWhenInUseRequest,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> requestBluetoothPermissions() => (super.noSuchMethod(
+        Invocation.method(
+          #requestBluetoothPermissions,
+          [],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 }
